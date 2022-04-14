@@ -7,18 +7,18 @@
     "start": "node index.js",
     "test": "mocha tests/*.spec.js --color",
     "dev": "npm start",
-    "lint": "npx eslint . --ext .js --color"
+    "lint": "npm eslint . --ext .js --color"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Mikhadi/BikesStore.git"
+    "url": "git+https://github.com/dagidagi1/bikeApp.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Mikhadi/BikesStore/issues"
+    "url": "https://github.com/dagidagi1/bikeApp/issues"
   },
-  "homepage": "https://github.com/Mikhadi/BikesStore#readme",
+  "homepage": "https://github.com/dagidagi1/bikeApp#readme",
   "dependencies": {
     "@types/mocha": "github:types/mocha",
     "bootstrap": "^5.1.3",
