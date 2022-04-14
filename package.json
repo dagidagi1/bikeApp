@@ -7,7 +7,7 @@
     "start": "node index.js",
     "test": "mocha tests/*.spec.js --color",
     "dev": "npm start",
-    "lint": "npm eslint . --ext .js --color"
+    "lint": "eslint . --ext .js --color"
   },
   "repository": {
     "type": "git",
