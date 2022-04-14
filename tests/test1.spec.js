@@ -1,5 +1,5 @@
 /* eslint-disable */
-const expect = require('chai').expect;
+import { expect } from 'chai';
 
 describe('Array', () => {
   describe('#sort', () => {
