@@ -20,16 +20,16 @@
   },
   "homepage": "https://github.com/dagidagi1/bikeApp#readme",
   "dependencies": {
-    "@types/mocha": "github:types/mocha",
     "bootstrap": "^5.1.3",
-    "chai": "^4.3.6",
     "colors": "^1.4.0",
     "esm": "^3.2.25",
     "express": "^4.17.3",
-    "mocha": "^9.2.2",
     "nodemon": "^2.0.15"
   },
   "devDependencies": {
+    "mocha": "^9.2.2",
+    "@types/mocha": "github:types/mocha",
+    "chai": "^4.3.6",
     "@typescript-eslint/eslint-plugin": "^5.19.0",
     "@typescript-eslint/parser": "^5.19.0",
     "eslint": "^8.13.0",
