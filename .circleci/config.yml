@@ -1,0 +1,25 @@
+version: 2.1
+
+orbs:
+  node: circleci/node@4.7
+executors:
+  my-custom-executor:
+    docker:
+      - image: cimg/node:17.6.0
+        auth:
+          username: $DOCKER_HUB_USER
+          password: $DOCKER_HUB_PASSWORD
+jobs:
+  build-and-test:
+    executor: my-custom-executor
+    steps:
+      - checkout
+      - run: npm install
+      - run: npm run lint
+      - run: npm run test
+
+
+workflows:
+  my-custom-workflow:
+    jobs:
+      - build-and-test
