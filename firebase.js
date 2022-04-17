@@ -1,3 +1,4 @@
+/* eslint-disable */
 // Your web app's Firebase configuration
 var firebaseConfig = {
     apiKey: "AIzaSyCavKsAEr_YoIpryJGDElMoS_gje0y4YCQ",
