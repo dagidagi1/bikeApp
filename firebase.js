@@ -13,7 +13,7 @@ var firebaseConfig = {
   // Set database variable
   var database = firebase.database()
   function ssave() {
-    //saves user at db
+    //saves user at db.
     var email = document.querySelector("#reg_email").value;
     var password = document.getElementById('reg_password').value
     var name = document.getElementById('reg_name').value
