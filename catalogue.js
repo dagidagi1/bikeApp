@@ -1,5 +1,6 @@
 import { data } from "./data.js";
 const MAX_IN_ROW = 4;
+const serachType = ["Bike", "bicycle", "scooter", "BMX"];
 let col;
 const dropdownChoiceAll = document.getElementById("ct_all");
 const dropdownChoiceBicycle = document.getElementById("ct_bic");
@@ -18,10 +19,17 @@ function Search(input) {
     }
   });
 }
-
+searchInput.addEventListener("input", () => {
+  serachType.forEach((st) => {
+    if (
+      searchInput.value.toLocaleLowerCase().includes(st.toLocaleLowerCase())
+    ) {
+      searchInput.value = st;
+    }
+  });
+});
 searchBtn.addEventListener("click", () => {
   const d = Search(searchInput.value);
-  console.log(d);
   init(d);
 });
 function productElment(d) {
