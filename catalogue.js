@@ -1,5 +1,4 @@
 import { data } from "./data.js";
-
 const MAX_IN_ROW = 4;
 let col;
 const dropdownChoiceAll = document.getElementById("ct_all");
@@ -47,7 +46,7 @@ const init = (data) => {
     col = document.getElementById(`col_${i}`);
     col.innerHTML = "";
     for (let j = 0; j < MAX_IN_ROW; j++) {
-      col.innerHTML += productElment(data[j + i * MAX_IN_ROW]);
+      col.innerHTML += productElment(data[j + i * MAX_IN_ROW], j);
     }
   }
 };
