@@ -12,22 +12,8 @@ var firebaseConfig = {
   firebase.initializeApp(firebaseConfig);
   // Set database variable
   var database = firebase.database()
-  function ssave() {
-    //saves user at db.
-    var email = document.querySelector("#reg_email").value;
-    var password = document.getElementById('reg_password').value
-    var name = document.getElementById('reg_name').value
-    var phone = document.getElementById('reg_phone').value
-    console.log(email,password,name,phone)
-    database.ref('users/' + email).set({
-      email : email,
-      password : password,
-      name : name,
-      phone : phone,
-    })
-  
-    alert('Saved')
-  }
+
+
   function save(){
       //saves user only in auth
     var email = document.querySelector("#reg_email").value;
@@ -37,8 +23,13 @@ var firebaseConfig = {
     firebase.auth().createUserWithEmailAndPassword(email, password).then((userCredential) => {
     // Signed in 
     var user = userCredential.user;
-    console.log(user)
-    // ...
+    database.ref('users/' + user.uid).set({
+      email : email,
+      password : password,
+      name : name,
+      phone : phone,
+    });
+    location.replace('/registered_home.html');
   })
   .catch((error) => {
     var errorCode = error.code;
@@ -48,6 +39,9 @@ var firebaseConfig = {
   });
 
   }
+
+
+
   function get() {
     var username = document.getElementById('username').value
   
@@ -89,8 +83,7 @@ var firebaseConfig = {
     firebase.auth().signInWithEmailAndPassword(email, password).then((userCredential) => {
         // Signed in 
         var user = userCredential.user;
-        console.log(user)
-        // ...
+        location.replace('/registered_home.html');
       })
       .catch((error) => {
         var errorCode = error.code;
@@ -101,3 +94,13 @@ var firebaseConfig = {
   }
   document.getElementById("reg_btn").addEventListener("click", save, false)
   document.getElementById("login_btn").addEventListener("click", login, false)
+  document.getElementById("email_ver_btn").addEventListener("click", function(){
+    firebase.auth().sendPasswordResetEmail(document.getElementById('forg_email').value)
+  .then(() => {
+  })
+  .catch((error) => {
+    var errorCode = error.code;
+    var errorMessage = error.message;
+    // ..
+  });
+  })
