@@ -11,8 +11,8 @@ var firebaseConfig = {
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
   // Set database variable
-  var database = firebase.database()
-
+  //import "firebase/firestore";
+  var database = firebase.firestore()
 
   function save(){
       //saves user only in auth
@@ -23,23 +23,25 @@ var firebaseConfig = {
     firebase.auth().createUserWithEmailAndPassword(email, password).then((userCredential) => {
     // Signed in 
     var user = userCredential.user;
-    database.ref('users/' + user.uid).set({
-      email : email,
-      password : password,
-      name : name,
-      phone : phone,
-    });
-    location.replace('/registered_home.html');
-  })
-  .catch((error) => {
+    }).catch((error) => {
     var errorCode = error.code;
     var errorMessage = error.message;
     alert(errorCode)
     // ..
-  });
-
-  }
-
+  })
+  database.collection('users').add({
+    email : email,
+    password : password,
+    name : name,
+    phone : phone,
+    store : false
+  }).then((docRef) => {
+  alert("Document written with ID: ", docRef.id);
+  location.replace('/registered_home.html');
+  }).catch((error) => {
+    console.error("Error adding document: ", error);
+  })
+}
 
 
   function get() {
