@@ -1,195 +1,471 @@
 <!DOCTYPE html>
 <html>
-
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
+    />
     <title>Dashboard - Brand</title>
-    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&amp;display=swap">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="assets/fonts/fontawesome5-overrides.min.css">
-    <link rel="stylesheet" href="assets/css/styles.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
-</head>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&amp;display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.12.0/css/all.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link rel="stylesheet" href="assets/fonts/fontawesome5-overrides.min.css" />
+    <link rel="stylesheet" href="assets/css/styles.min.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css"
+    />
+  </head>
 
-<body id="page-top">
+  <body id="page-top">
     <div id="wrapper">
-        <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0">
-            <div class="container-fluid d-flex flex-column p-0"><a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="index.html">
-                    <div>
-                        <div class="sidebar-brand-icon rotate-n-15"><i class="fas fa-bicycle"></i></div>
-                        <div class="sidebar-brand-text mx-3"><span>Bike brand</span></div>
+      <nav
+        class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0"
+      >
+        <div class="container-fluid d-flex flex-column p-0">
+          <a
+            class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0"
+            href="index.html"
+          >
+            <div>
+              <div class="sidebar-brand-icon rotate-n-15">
+                <i class="fas fa-bicycle"></i>
+              </div>
+              <div class="sidebar-brand-text mx-3"><span>Bike brand</span></div>
+            </div>
+          </a>
+          <hr class="sidebar-divider my-0" />
+          <ul class="navbar-nav text-light" id="accordionSidebar">
+            <li class="nav-item">
+              <a
+                class="nav-link"
+                data-bss-hover-animate="pulse"
+                href="login.html"
+                data-bs-target="#modal-1"
+                data-bs-toggle="modal"
+                ><i class="far fa-user-circle"></i><span>Login</span></a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link"
+                data-bss-hover-animate="pulse"
+                href="register.html"
+                style="color: rgba(255, 255, 255, 0.8)"
+                data-bs-target="#modal-2"
+                data-bs-toggle="modal"
+                ><i class="fas fa-user-circle"></i><span>Register</span></a
+              >
+            </li>
+          </ul>
+        </div>
+      </nav>
+      <div class="d-flex flex-column" id="content-wrapper">
+        <div id="content">
+          <nav
+            class="navbar navbar-light navbar-expand bg-white shadow mb-4 topbar static-top"
+            id="navbar"
+          >
+            <div class="container-fluid">
+              <button
+                class="btn btn-link d-md-none rounded-circle me-3"
+                id="sidebarToggleTop"
+                type="button"
+              >
+                <i class="fas fa-bars"></i>
+              </button>
+              <form
+                class="d-none d-sm-inline-block me-auto ms-md-3 my-2 my-md-0 mw-100 navbar-search"
+              >
+                <div class="input-group">
+                  <input
+                    class="bg-light form-control border-0 small"
+                    type="text"
+                    id="navbar_search_field"
+                    placeholder="Search for ..."
+                  /><button
+                    class="btn btn-primary py-0"
+                    id="navbar_search_button"
+                    type="button"
+                  >
+                    <i class="fas fa-search"></i>
+                  </button>
+                </div>
+              </form>
+            </div>
+          </nav>
+          <div class="container">
+            <h1>Bicycles</h1>
+            <div class="row" style="margin-bottom: 5px">
+              <div class="col">
+                <a href="product.html">
+                  <div class="card">
+                    <div class="card-body">
+                      <img
+                        class="img-fluid"
+                        src="assets/img/200829b1-9d17-4b9b-8bf8-36baba8859e6.jpg"
+                      />
+                      <h4 class="card-title" style="color: var(--bs-gray)">
+                        Bike's name
+                      </h4>
+                      <h6
+                        class="text-muted card-subtitle mb-2"
+                        style="font-weight: bold"
+                      >
+                        Price $
+                      </h6>
                     </div>
+                  </div>
                 </a>
-                <hr class="sidebar-divider my-0">
-                <ul class="navbar-nav text-light" id="accordionSidebar">
-                    <li class="nav-item"><a class="nav-link" data-bss-hover-animate="pulse" href="login.html" data-bs-target="#modal-1" data-bs-toggle="modal"><i class="far fa-user-circle"></i><span>Login</span></a></li>
-                    <li class="nav-item"><a class="nav-link" data-bss-hover-animate="pulse" href="register.html" style="color: rgba(255, 255, 255, 0.8);" data-bs-target="#modal-2" data-bs-toggle="modal"><i class="fas fa-user-circle"></i><span>Register</span></a></li>
-                </ul>
-                <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0" id="sidebarToggle" type="button"></button></div>
+              </div>
+              <div class="col">
+                <a href="product.html">
+                  <div class="card">
+                    <div class="card-body">
+                      <img
+                        class="img-fluid"
+                        src="assets/img/200829b1-9d17-4b9b-8bf8-36baba8859e6.jpg"
+                      />
+                      <h4 style="color: var(--bs-gray)">Bike's name</h4>
+                      <h6
+                        class="text-muted card-subtitle mb-2"
+                        style="font-weight: bold"
+                      >
+                        Price $
+                      </h6>
+                    </div>
+                  </div>
+                </a>
+              </div>
+              <div class="col">
+                <a href="product.html">
+                  <div class="card">
+                    <div class="card-body">
+                      <img
+                        class="img-fluid"
+                        src="assets/img/200829b1-9d17-4b9b-8bf8-36baba8859e6.jpg"
+                      />
+                      <h4 class="card-title" style="color: var(--bs-gray)">
+                        Bike's name
+                      </h4>
+                      <h6
+                        class="text-muted card-subtitle mb-2"
+                        style="font-weight: bold"
+                      >
+                        Price $
+                      </h6>
+                    </div>
+                  </div>
+                </a>
+              </div>
+              <div class="col">
+                <a href="product.html">
+                  <div class="card">
+                    <div class="card-body">
+                      <img
+                        class="img-fluid"
+                        src="assets/img/200829b1-9d17-4b9b-8bf8-36baba8859e6.jpg"
+                      />
+                      <h4 class="card-title" style="color: var(--bs-gray)">
+                        Bike's name
+                      </h4>
+                      <h6
+                        class="text-muted card-subtitle mb-2"
+                        style="font-weight: bold"
+                      >
+                        Price $
+                      </h6>
+                    </div>
+                  </div>
+                </a>
+              </div>
+              <div class="col">
+                <a href="product.html">
+                  <div class="card">
+                    <div class="card-body">
+                      <img
+                        class="img-fluid"
+                        src="assets/img/200829b1-9d17-4b9b-8bf8-36baba8859e6.jpg"
+                      />
+                      <h4 class="card-title" style="color: var(--bs-gray)">
+                        Bike's name
+                      </h4>
+                      <h6
+                        class="text-muted card-subtitle mb-2"
+                        style="font-weight: bold"
+                      >
+                        Price $
+                      </h6>
+                    </div>
+                  </div>
+                </a>
+              </div>
             </div>
-        </nav>
-        <div class="d-flex flex-column" id="content-wrapper">
-            <div id="content">
-                <nav class="navbar navbar-light navbar-expand bg-white shadow mb-4 topbar static-top" id="navbar">
-                    <div class="container-fluid"><button class="btn btn-link d-md-none rounded-circle me-3" id="sidebarToggleTop" type="button"><i class="fas fa-bars"></i></button>
-                        <form class="d-none d-sm-inline-block me-auto ms-md-3 my-2 my-md-0 mw-100 navbar-search">
-                            <div class="input-group"><input class="bg-light form-control border-0 small" type="text" id="navbar_search_field" placeholder="Search for ..."><button class="btn btn-primary py-0" id="navbar_search_button" type="button"><i class="fas fa-search"></i></button></div>
-                        </form>
+          </div>
+          <div class="container">
+            <h1>Scooters</h1>
+            <div class="row">
+              <div class="col">
+                <a href="product.html">
+                  <div class="card">
+                    <div class="card-body">
+                      <img class="img-fluid" src="assets/img/snimok6.png" />
+                      <h4 class="card-title" style="color: var(--bs-gray)">
+                        Scooter's name
+                      </h4>
+                      <h6
+                        class="text-muted card-subtitle mb-2"
+                        style="font-weight: bold"
+                      >
+                        Price $
+                      </h6>
                     </div>
-                </nav>
-                <div class="container">
-                    <h1>Bicycles</h1>
-                    <div class="row" style="margin-bottom: 5px;">
-                        <div class="col"><a href="product.html">
-                                <div class="card">
-                                    <div class="card-body"><img class="img-fluid" src="assets/img/200829b1-9d17-4b9b-8bf8-36baba8859e6.jpg">
-                                        <h4 class="card-title" style="color: var(--bs-gray);">Bike's name</h4>
-                                        <h6 class="text-muted card-subtitle mb-2" style="font-weight: bold;">Price $</h6>
-                                    </div>
-                                </div>
-                            </a></div>
-                        <div class="col"><a href="product.html">
-                                <div class="card">
-                                    <div class="card-body"><img class="img-fluid" src="assets/img/200829b1-9d17-4b9b-8bf8-36baba8859e6.jpg">
-                                        <h4 style="color: var(--bs-gray);">Bike's name</h4>
-                                        <h6 class="text-muted card-subtitle mb-2" style="font-weight: bold;">Price $</h6>
-                                    </div>
-                                </div>
-                            </a></div>
-                        <div class="col"><a href="product.html">
-                                <div class="card">
-                                    <div class="card-body"><img class="img-fluid" src="assets/img/200829b1-9d17-4b9b-8bf8-36baba8859e6.jpg">
-                                        <h4 class="card-title" style="color: var(--bs-gray);">Bike's name</h4>
-                                        <h6 class="text-muted card-subtitle mb-2" style="font-weight: bold;">Price $</h6>
-                                    </div>
-                                </div>
-                            </a></div>
-                        <div class="col"><a href="product.html">
-                                <div class="card">
-                                    <div class="card-body"><img class="img-fluid" src="assets/img/200829b1-9d17-4b9b-8bf8-36baba8859e6.jpg">
-                                        <h4 class="card-title" style="color: var(--bs-gray);">Bike's name</h4>
-                                        <h6 class="text-muted card-subtitle mb-2" style="font-weight: bold;">Price $</h6>
-                                    </div>
-                                </div>
-                            </a></div>
-                        <div class="col"><a href="product.html">
-                                <div class="card">
-                                    <div class="card-body"><img class="img-fluid" src="assets/img/200829b1-9d17-4b9b-8bf8-36baba8859e6.jpg">
-                                        <h4 class="card-title" style="color: var(--bs-gray);">Bike's name</h4>
-                                        <h6 class="text-muted card-subtitle mb-2" style="font-weight: bold;">Price $</h6>
-                                    </div>
-                                </div>
-                            </a></div>
+                  </div>
+                </a>
+              </div>
+              <div class="col">
+                <a href="product.html">
+                  <div class="card">
+                    <div class="card-body">
+                      <img class="img-fluid" src="assets/img/snimok6.png" />
+                      <h4 class="card-title" style="color: var(--bs-gray)">
+                        Scooter's name
+                      </h4>
+                      <h6
+                        class="text-muted card-subtitle mb-2"
+                        style="font-weight: bold"
+                      >
+                        Price $
+                      </h6>
                     </div>
-                </div>
-                <div class="container">
-                    <h1>Scooters</h1>
-                    <div class="row">
-                        <div class="col"><a href="product.html">
-                                <div class="card">
-                                    <div class="card-body"><img class="img-fluid" src="assets/img/snimok6.png">
-                                        <h4 class="card-title" style="color: var(--bs-gray);">Scooter's name</h4>
-                                        <h6 class="text-muted card-subtitle mb-2" style="font-weight: bold;">Price $</h6>
-                                    </div>
-                                </div>
-                            </a></div>
-                        <div class="col"><a href="product.html">
-                                <div class="card">
-                                    <div class="card-body"><img class="img-fluid" src="assets/img/snimok6.png">
-                                        <h4 class="card-title" style="color: var(--bs-gray);">Scooter's name</h4>
-                                        <h6 class="text-muted card-subtitle mb-2" style="font-weight: bold;">Price $</h6>
-                                    </div>
-                                </div>
-                            </a></div>
-                        <div class="col"><a href="product.html">
-                                <div class="card">
-                                    <div class="card-body"><img class="img-fluid" src="assets/img/snimok6.png">
-                                        <h4 class="card-title" style="color: var(--bs-gray);">Scooter's name</h4>
-                                        <h6 class="text-muted card-subtitle mb-2" style="font-weight: bold;">Price $</h6>
-                                    </div>
-                                </div>
-                            </a></div>
-                        <div class="col"><a href="product.html">
-                                <div class="card">
-                                    <div class="card-body"><img class="img-fluid" src="assets/img/snimok6.png">
-                                        <h4 class="card-title" style="color: var(--bs-gray);">Scooter's name</h4>
-                                        <h6 class="text-muted card-subtitle mb-2" style="font-weight: bold;">Price $</h6>
-                                    </div>
-                                </div>
-                            </a></div>
-                        <div class="col"><a href="product.html">
-                                <div class="card">
-                                    <div class="card-body"><img class="img-fluid" src="assets/img/snimok6.png">
-                                        <h4 class="card-title" style="color: var(--bs-gray);">Scooter's name</h4>
-                                        <h6 class="text-muted card-subtitle mb-2" style="font-weight: bold;">Price $</h6>
-                                    </div>
-                                </div>
-                            </a></div>
+                  </div>
+                </a>
+              </div>
+              <div class="col">
+                <a href="product.html">
+                  <div class="card">
+                    <div class="card-body">
+                      <img class="img-fluid" src="assets/img/snimok6.png" />
+                      <h4 class="card-title" style="color: var(--bs-gray)">
+                        Scooter's name
+                      </h4>
+                      <h6
+                        class="text-muted card-subtitle mb-2"
+                        style="font-weight: bold"
+                      >
+                        Price $
+                      </h6>
                     </div>
-                </div>
-                <footer class="bg-white sticky-footer">
-                    <div class="text-center"><a href="#"><br><strong>Determine shipping rates &amp; Time</strong><br></a></div>
-                    <div class="container my-auto">
-                        <div class="text-center my-auto copyright"><span>Copyright © BikesBrand 2022</span></div>
+                  </div>
+                </a>
+              </div>
+              <div class="col">
+                <a href="product.html">
+                  <div class="card">
+                    <div class="card-body">
+                      <img class="img-fluid" src="assets/img/snimok6.png" />
+                      <h4 class="card-title" style="color: var(--bs-gray)">
+                        Scooter's name
+                      </h4>
+                      <h6
+                        class="text-muted card-subtitle mb-2"
+                        style="font-weight: bold"
+                      >
+                        Price $
+                      </h6>
                     </div>
-                </footer>
+                  </div>
+                </a>
+              </div>
+              <div class="col">
+                <a href="product.html">
+                  <div class="card">
+                    <div class="card-body">
+                      <img class="img-fluid" src="assets/img/snimok6.png" />
+                      <h4 class="card-title" style="color: var(--bs-gray)">
+                        Scooter's name
+                      </h4>
+                      <h6
+                        class="text-muted card-subtitle mb-2"
+                        style="font-weight: bold"
+                      >
+                        Price $
+                      </h6>
+                    </div>
+                  </div>
+                </a>
+              </div>
             </div>
+          </div>
+          <footer class="bg-white sticky-footer">
+            <div class="text-center">
+              <a href="#"
+                ><br /><strong>Determine shipping rates &amp; Time</strong><br
+              /></a>
+            </div>
+            <div class="container my-auto">
+              <div class="text-center my-auto copyright">
+                <span>Copyright © BikesBrand 2022</span>
+              </div>
+            </div>
+          </footer>
         </div>
-    </div><!-- Start: Login modal -->
+      </div>
+    </div>
+    <!-- Start: Login modal -->
     <div class="modal fade" role="dialog" tabindex="-1" id="modal-1">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="p-5">
-                    <div class="text-center">
-                        <h4 class="text-dark mb-4">Welcome Back!</h4>
-                    </div>
-                    <form class="user">
-                        <div class="mb-3"><input class="form-control form-control-user" type="email" id="login_email" aria-describedby="emailHelp" placeholder="Enter Email Address..." name="email" autofocus="" required=""></div>
-                        <div class="mb-3"><input class="form-control form-control-user" type="password" id="login_pass" placeholder="Password" name="password" required="" minlength="8">
-                        </div><a class="btn btn-primary d-block btn-user w-100" role="button" id="login_btn">Login</a>
-                        <hr>
-                    </form>
-                    <div class="text-center"><a class="small" href="forgot-password.html">Forgot Password?</a></div>
-                    <div class="text-center"><a class="small" data-bs-target="#modal-2" data-bs-toggle="modal">Create an Account!</a></div>
-                </div>
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="p-5">
+            <div class="text-center">
+              <h4 class="text-dark mb-4">Welcome Back!</h4>
             </div>
+            <form class="user">
+              <div class="mb-3">
+                <input
+                  class="form-control form-control-user"
+                  type="email"
+                  id="login_email"
+                  aria-describedby="emailHelp"
+                  placeholder="Enter Email Address..."
+                  name="email"
+                  autofocus=""
+                  required=""
+                />
+              </div>
+              <div class="mb-3">
+                <input
+                  class="form-control form-control-user"
+                  type="password"
+                  id="login_pass"
+                  placeholder="Password"
+                  name="password"
+                  required=""
+                  minlength="8"
+                />
+              </div>
+              <a
+                class="btn btn-primary d-block btn-user w-100"
+                role="button"
+                id="login_btn"
+                >Login</a
+              >
+              <hr />
+            </form>
+            <div class="text-center">
+              <a class="small" href="forgot-password.html">Forgot Password?</a>
+            </div>
+            <div class="text-center">
+              <a class="small" data-bs-target="#modal-2" data-bs-toggle="modal"
+                >Create an Account!</a
+              >
+            </div>
+          </div>
         </div>
-    </div><!-- End: Login modal -->
+      </div>
+    </div>
+    <!-- End: Login modal -->
     <!-- Start: Register model -->
     <div class="modal fade" role="dialog" tabindex="-1" id="modal-2">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="p-5">
-                    <div class="text-center">
-                        <h4 class="text-dark mb-4">Create an Account!</h4>
-                    </div>
-                    <form class="user">
-                        <div class="row mb-3">
-                            <div class="col-sm-6 mb-3 mb-sm-0"><input class="form-control form-control-user" type="text" id="reg_name" placeholder="Name" name="first_name"></div>
-                            <div class="col-sm-6"><input class="form-control form-control-user" type="tel" id="reg_phone" placeholder="Phone number" name="last_name"></div>
-                        </div>
-                        <div class="mb-3"><input class="form-control form-control-user" type="email" id="reg_email" aria-describedby="emailHelp" placeholder="Email Address" name="email"></div>
-                        <div class="row mb-3">
-                            <div class="col-sm-6 mb-3 mb-sm-0"><input class="form-control form-control-user" type="password" id="reg_password" placeholder="Password" name="password"></div>
-                            <div class="col-sm-6"><input class="form-control form-control-user" type="password" id="reg_conf_pass" placeholder="Repeat Password" name="password_repeat"></div>
-                        </div><a class="btn btn-primary d-block btn-user w-100" role="button" id="reg_btn">Register Account</a>
-                        <hr>
-                    </form>
-                    <div class="text-center"><a class="small" href="forgot-password.html">Forgot Password?</a></div>
-                    <div class="text-center"><a class="small" href="login.html" data-bs-target="#modal-1" data-bs-toggle="modal">Already have an account? Login!</a></div>
-                </div>
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="p-5">
+            <div class="text-center">
+              <h4 class="text-dark mb-4">Create an Account!</h4>
             </div>
+            <form class="user">
+              <div class="row mb-3">
+                <div class="col-sm-6 mb-3 mb-sm-0">
+                  <input
+                    class="form-control form-control-user"
+                    type="text"
+                    id="reg_name"
+                    placeholder="Name"
+                    name="first_name"
+                  />
+                </div>
+                <div class="col-sm-6">
+                  <input
+                    class="form-control form-control-user"
+                    type="tel"
+                    id="reg_phone"
+                    placeholder="Phone number"
+                    name="last_name"
+                  />
+                </div>
+              </div>
+              <div class="mb-3">
+                <input
+                  class="form-control form-control-user"
+                  type="email"
+                  id="reg_email"
+                  aria-describedby="emailHelp"
+                  placeholder="Email Address"
+                  name="email"
+                />
+              </div>
+              <div class="row mb-3">
+                <div class="col-sm-6 mb-3 mb-sm-0">
+                  <input
+                    class="form-control form-control-user"
+                    type="password"
+                    id="reg_password"
+                    placeholder="Password"
+                    name="password"
+                  />
+                </div>
+                <div class="col-sm-6">
+                  <input
+                    class="form-control form-control-user"
+                    type="password"
+                    id="reg_conf_pass"
+                    placeholder="Repeat Password"
+                    name="password_repeat"
+                  />
+                </div>
+              </div>
+              <a
+                class="btn btn-primary d-block btn-user w-100"
+                role="button"
+                id="reg_btn"
+                >Register Account</a
+              >
+              <hr />
+            </form>
+            <div class="text-center">
+              <a class="small" href="forgot-password.html">Forgot Password?</a>
+            </div>
+            <div class="text-center">
+              <a
+                class="small"
+                href="login.html"
+                data-bs-target="#modal-1"
+                data-bs-toggle="modal"
+                >Already have an account? Login!</a
+              >
+            </div>
+          </div>
         </div>
-    </div><!-- End: Register model -->
+      </div>
+    </div>
+    <!-- End: Register model -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="assets/js/script.min.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-database.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-auth.js"></script>
     <script type="module" src="firebase.js"></script>
-</body>
-
+    <script type="module" src="index.js"></script>
+  </body>
 </html>

@@ -1,7 +1,7 @@
 import express from "express";
 import path from "path";
 import { requestTime, logger } from "./middlewares.js";
-const sideBarBtn = document.getElementById("sidebarToggle");
+
 // import serverRoutes from './servers.js'
 const __dirname = path.resolve();
 const PORT = process.env.PORT ?? 3000;
