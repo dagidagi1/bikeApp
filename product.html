@@ -95,7 +95,7 @@
               <form
                 class="d-none d-sm-inline-block me-auto ms-md-3 my-2 my-md-0 mw-100 navbar-search"
               >
-                <div class="input-group">
+                <div class="input-group" id="searchgroup">
                   <input
                     class="bg-light form-control border-0 small"
                     type="text"
@@ -213,11 +213,13 @@
                     <tbody>
                       <tr>
                         <th>Type</th>
-                        <td class="text-break">Electric Bicycle<br /></td>
+                        <td class="text-break" id="type_d">
+                          Electric Bicycle<br />
+                        </td>
                       </tr>
                       <tr>
                         <th>Description:<br /></th>
-                        <td class="text-break">
+                        <td class="text-break" id="description_d">
                           Lorem ipsum dolor sit amet, consectetur adipiscing
                           elit, sed do eiusmod tempor incididunt ut labore et
                           dolore magna aliqua. Ut enim ad minim veniam, quis
@@ -231,19 +233,19 @@
                       </tr>
                       <tr>
                         <th>Manufacturer:</th>
-                        <td>Lorem ipsum</td>
+                        <td id="manufactur_d">Lorem ipsum</td>
                       </tr>
                       <tr>
                         <th>Max speed:</th>
-                        <td>1 km/h</td>
+                        <td id="max_speed_d">1 km/h</td>
                       </tr>
                       <tr>
                         <th>Weight:</th>
-                        <td>5 kg</td>
+                        <td id="weight_d">5 kg</td>
                       </tr>
                       <tr>
                         <th>Wheel size:&nbsp;</th>
-                        <td>18" inch</td>
+                        <td id="wheel_size_d">18" inch</td>
                       </tr>
                       <tr>
                         <th class="text-start">Quantity:</th>
@@ -264,7 +266,12 @@
                             "
                             step="1"
                             min="1"
-                          /><button class="btn btn-primary" type="button">
+                            id="quantetity_d"
+                          /><button
+                            class="btn btn-primary"
+                            type="button"
+                            id="add_to_card"
+                          >
                             <i class="fa fa-cart-plus"></i
                             ><span>&nbsp;Add to cart</span>
                           </button>
