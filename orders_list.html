@@ -301,5 +301,13 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="assets/js/script.min.js"></script>
     <script type="module" src="orderList.js"></script>
+    <script>
+      function CancelOrder(btn) {
+        console.log("canceld");
+      }
+      document
+        .getElementById("btncancel")
+        .addEventListener("click", CancelOrder);
+    </script>
   </body>
 </html>

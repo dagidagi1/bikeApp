@@ -37,7 +37,7 @@ const makeRowOrder = (ord) => {
           color: var(--bs-table-striped-color);
           border-style: hidden;
         "
-        onclick="CancelOrder(this)"
+        onclick="CancelOrder()"
         data-tip=${ord.order_number}
       >
         Cancel order&nbsp;<i class="fa fa-ban"></i>
@@ -73,7 +73,7 @@ const makeRowOrder = (ord) => {
   }
 };
 const CancelOrder = (btn) => {
-  console.log("cancelorder");
+  order.status = "Canceld";
 };
 const feedBack = (btn) => {
   console.log("feedBack");
