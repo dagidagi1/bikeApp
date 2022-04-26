@@ -1,4 +1,3 @@
-import { updateName } from "./homeregiserd.js";
 // Your web app's Firebase configuration
 var firebaseConfig = {
   apiKey: "AIzaSyCavKsAEr_YoIpryJGDElMoS_gje0y4YCQ",
@@ -114,3 +113,58 @@ document.getElementById("email_ver_btn").addEventListener("click", function () {
       // ..
     });
 });
+import { data } from "./data.js";
+import { redirectToDiscription } from "./product.js";
+export const flagLogin = false;
+let col;
+function productElment(d, i) {
+  return `<div class="col">
+  <a ${flagLogin ? 'href="product.html"' : ""}>
+  <div class="card" id="${i}">
+  <div class="card-body"><img class="img-fluid" src=${
+    d.type === "Bicycle"
+      ? "assets/img/200829b1-9d17-4b9b-8bf8-36baba8859e6.jpg"
+      : "assets/img/snimok6.png"
+  }>
+      <h4 class="card-title" style="color: var(--bs-gray);">${d.name}</h4>
+      <h6 class="text-muted card-subtitle mb-2" style="font-weight: bold;">${
+        d.price
+      }$</h6>
+  </div>
+</div> 
+</a></div> `;
+}
+const init = () => {
+  let d = data
+    .filter((a) => a.type === "Bicycle")
+    .sort((a, b) => {
+      b.price - a.price;
+    });
+  console.log(d);
+  col = document.getElementById(`col_0`);
+  col.innerHTML = "";
+  for (let i = 0; i < 5; i++) {
+    col.innerHTML += productElment(d[i], i);
+    flagLogin
+      ? document.getElementById(`${i}`)?.addEventListener("click", () => {
+          redirectToDiscription(i);
+        })
+      : false;
+  }
+  d = data
+    .filter((a) => a.type === "Scooter")
+    .sort((a, b) => {
+      b.price - a.price;
+    });
+  console.log(d);
+  col = document.getElementById(`col_1`);
+  for (let i = 0; i < 5; i++) {
+    col.innerHTML += productElment(d[i], i);
+    flagLogin
+      ? document.getElementById(`${i}`)?.addEventListener("click", () => {
+          redirectToDiscription(i);
+        })
+      : false;
+  }
+};
+init();

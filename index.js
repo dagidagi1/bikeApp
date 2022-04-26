@@ -6,10 +6,6 @@ import { requestTime, logger } from "./middlewares.js";
 const __dirname = path.resolve();
 const PORT = process.env.PORT ?? 3000;
 const app = express();
-
-// app.set('view engine', 'ejs')
-// app.set('views', path.resolve(__dirname, 'ejs'))
-
 app.use(express.static(path.resolve(__dirname, "./")));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));

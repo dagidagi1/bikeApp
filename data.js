@@ -44,7 +44,7 @@ export const data = [
     quantity: 10,
   },
   {
-    type: "Bicycle",
+    type: "Scooter",
     name: "BMX",
     price: 137,
     description: "good bike",
@@ -77,7 +77,7 @@ export const data = [
     quantity: 10,
   },
   {
-    type: "Bicycle",
+    type: "Scooter",
     name: "BMX",
     price: 134,
     description: "good bike",
@@ -99,7 +99,7 @@ export const data = [
     quantity: 10,
   },
   {
-    type: "Bicycle",
+    type: "Scooter",
     name: "BMX",
     price: 131,
     description: "good bike",
@@ -110,7 +110,7 @@ export const data = [
     quantity: 10,
   },
   {
-    type: "Bicycle",
+    type: "Scooter",
     name: "BMX",
     price: 130,
     description: "good bike",

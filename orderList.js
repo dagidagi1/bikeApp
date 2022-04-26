@@ -1,10 +1,18 @@
-import { order } from "./orderdata.js";
+import { user } from "./user.js";
 const rate_order_text = document.getElementById("rate_order_text");
 const rate_order = document.getElementById("rate_order");
 const btn_review = document.getElementById("submit_review");
 const search = document.getElementById("searchgroup");
 search.remove();
 const orderList = document.getElementById("orderList");
+const userNameNavBar = document.getElementById("navbar_profile_name");
+const wish_list = document.getElementById("wish_list");
+const shopping_cart = document.getElementById("shopping_cart");
+const updateNavBar = () => {
+  userNameNavBar.innerText = user.name;
+  if (user.wishList.length > 0) wish_list.style = "color: red";
+  if (user.orderList.length > 0) shopping_cart.style = "color: red";
+};
 const makeRowOrder = (ord) => {
   if (ord.status === "Shipping") {
     return `<tr>
@@ -102,13 +110,13 @@ const makeRowOrder = (ord) => {
   }
 };
 const CancelOrder = (e) => {
-  order.map((o) => {
+  user.orderList.map((o) => {
     if (o.order_number === e) o.status = "Cancelled";
   });
   init();
 };
 const feedBack = (e) => {
-  order.map((o) => {
+  user.orderList.map((o) => {
     if (o.order_number === e) {
       o.rate = rate_order.value;
       o.rate_order_text = rate_order_text.value;
@@ -118,14 +126,13 @@ const feedBack = (e) => {
 };
 btn_review.addEventListener("click", () => {
   feedBack(document.getElementById("feedBack").value);
-  console.log(order);
   init();
   location.replace("/orders_list.html");
 });
 const init = () => {
   orderList.innerHTML = "";
-  for (let i = 0; i < order.length; i++) {
-    orderList.innerHTML += makeRowOrder(order[i], i);
+  for (let i = 0; i < user.orderList.length; i++) {
+    orderList.innerHTML += makeRowOrder(user.orderList[i], i);
   }
   document.getElementById("feedBack")?.addEventListener("click", () => {
     feedBack(document.getElementById("feedBack").value);
@@ -136,3 +143,4 @@ const init = () => {
 };
 const saveToFirebase = () => {};
 init();
+updateNavBar();

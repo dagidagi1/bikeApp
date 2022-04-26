@@ -1,4 +1,5 @@
 import { data } from "./data.js";
+import { user } from "./user.js";
 import { redirectToDiscription } from "./product.js";
 const MAX_IN_ROW = 4;
 const serachType = ["Bike", "bicycle", "scooter", "BMX"];
@@ -13,6 +14,14 @@ const btn_category = document.getElementById("btn_category");
 const btn_price = document.getElementById("btn_price");
 const searchInput = document.getElementById("navbar_search_field");
 const searchBtn = document.getElementById("navbar_search_button");
+const userNameNavBar = document.getElementById("navbar_profile_name");
+const wish_list = document.getElementById("wish_list");
+const shopping_cart = document.getElementById("shopping_cart");
+const updateNavBar = () => {
+  userNameNavBar.innerText = user.name;
+  if (user.wishList.length > 0) wish_list.style = "color: red";
+  if (user.orderList.length > 0) shopping_cart.style = "color: red";
+};
 function Search(input) {
   return data.filter((d) => {
     if (d.description.toLocaleLowerCase().includes(input.toLocaleLowerCase())) {
@@ -37,7 +46,11 @@ function productElment(d, i) {
   return `<div class="col">
     <a>
       <div class="card" id="${i}">
-          <div class="card-body"><img class="img-fluid" src=${"assets/img/200829b1-9d17-4b9b-8bf8-36baba8859e6.jpg"}>
+          <div class="card-body"><img class="img-fluid" src=${
+            d.type === "Bicycle"
+              ? "assets/img/200829b1-9d17-4b9b-8bf8-36baba8859e6.jpg"
+              : "assets/img/snimok6.png"
+          }>
               <h4 class="card-title" style="color: var(--bs-gray);">${
                 d.name
               }</h4>
@@ -99,3 +112,4 @@ dropdownChoiceScooter.addEventListener("click", () => {
   btn_category.innerText = "Scooter";
   init(newData);
 });
+updateNavBar();
