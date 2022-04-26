@@ -1,4 +1,5 @@
 import { data } from "./data.js";
+import { redirectToDiscription } from "./product.js";
 const MAX_IN_ROW = 4;
 const serachType = ["Bike", "bicycle", "scooter", "BMX"];
 let col;
@@ -32,10 +33,10 @@ searchBtn.addEventListener("click", () => {
   const d = Search(searchInput.value);
   init(d);
 });
-function productElment(d) {
+function productElment(d, i) {
   return `<div class="col">
-    <a href="product.html">
-      <div class="card">
+    <a>
+      <div class="card" id="${i}">
           <div class="card-body"><img class="img-fluid" src=${"assets/img/200829b1-9d17-4b9b-8bf8-36baba8859e6.jpg"}>
               <h4 class="card-title" style="color: var(--bs-gray);">${
                 d.name
@@ -54,39 +55,47 @@ const init = (data) => {
     col = document.getElementById(`col_${i}`);
     col.innerHTML = "";
     for (let j = 0; j < MAX_IN_ROW; j++) {
-      col.innerHTML += productElment(data[j + i * MAX_IN_ROW]);
+      col.innerHTML += productElment(
+        data[j + i * MAX_IN_ROW],
+        j + i * MAX_IN_ROW
+      );
+      document
+        .getElementById(`${j + i * MAX_IN_ROW}`)
+        ?.addEventListener("click", () => {
+          redirectToDiscription(j + i * MAX_IN_ROW);
+        });
     }
   }
 };
 dropdownNONE.addEventListener("click", () => {
-  btn_price.innerHTML = "None";
+  btn_price.innerText = "None";
   init(data);
 });
 dropdownHTL.addEventListener("click", () => {
-  btn_price.innerHTML = "High to Low";
+  btn_price.innerText = "High to Low";
   const d = data.sort((a, b) => b.price - a.price);
   init(d);
 });
 dropdownLTH.addEventListener("click", () => {
-  btn_price.innerHTML = "Low to High";
+  btn_price.innerText = "Low to High";
   const d = data.sort((a, b) => a.price - b.price);
   init(d);
 });
 dropdownChoiceAll.addEventListener("click", () => {
-  btn_category.innerHTML = "All";
+  btn_category.innerText = "All";
   init(data);
 });
 dropdownChoiceBicycle.addEventListener("click", () => {
   const newData = data.filter((d) => {
     return d.type.normalize() === "Bicycle";
   });
-  btn_category.innerHTML = "Bicycle";
+  btn_category.innerText = "Bicycle";
   init(newData);
 });
 dropdownChoiceScooter.addEventListener("click", () => {
   const newData = data.filter((d) => {
     return d.type.normalize() === "Scooter";
   });
-  btn_category.innerHTML = "Scooter";
+  btn_category.innerText = "Scooter";
   init(newData);
 });

@@ -1,3 +1,4 @@
+import { data } from "./data.js";
 const type = document.getElementById("type_d");
 const name = document.getElementById("product_page_name");
 const price = document.getElementById("product_page_price");
@@ -9,4 +10,8 @@ const wheel_size = document.getElementById("wheel_size_d");
 const quantity = document.getElementById("quantetity_d");
 const userName = document.getElementById("navbar_profile_name");
 const search = document.getElementById("searchgroup");
-search.remove();
+if (search != null) search.remove();
+export const redirectToDiscription = (i) => {
+  console.log(i);
+  type.innerText = data[i].type;
+};

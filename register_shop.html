@@ -95,7 +95,7 @@
               <form
                 class="d-none d-sm-inline-block me-auto ms-md-3 my-2 my-md-0 mw-100 navbar-search"
               >
-                <div class="input-group">
+                <div class="input-group" id="searchgroup">
                   <input
                     class="bg-light form-control border-0 small"
                     type="text"
@@ -205,7 +205,7 @@
                                 <th>Work Hours</th>
                               </tr>
                             </thead>
-                            <tbody id="create_store_tb" >
+                            <tbody id="create_store_tb">
                               <tr class="text-center">
                                 <td class="text-start">
                                   <div class="col align-self-center">
@@ -499,7 +499,11 @@
                       </div>
                     </div>
                     <div class="text-center mb-3" style="margin-top: 20px">
-                      <button class="btn btn-primary btn-sm" type="submit" id="create_store_submit_btn">
+                      <button
+                        class="btn btn-primary btn-sm"
+                        type="submit"
+                        id="create_store_submit_btn"
+                      >
                         Create
                       </button>
                     </div>
