@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Profile - Brand</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&amp;display=swap">
+    <link rel="stylesheet" href="assets/fonts/fontawesome-all.min.css">
+    <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/fonts/fontawesome5-overrides.min.css">
+    <link rel="stylesheet" href="assets/css/Bootstrap-4---Product-List.css">
+    <link rel="stylesheet" href="assets/css/ebs-bootstrap-datepicker-1.css">
+    <link rel="stylesheet" href="assets/css/ebs-bootstrap-datepicker-2.css">
+    <link rel="stylesheet" href="assets/css/ebs-bootstrap-datepicker-3.css">
+    <link rel="stylesheet" href="assets/css/ebs-bootstrap-datepicker-4.css">
+    <link rel="stylesheet" href="assets/css/ebs-bootstrap-datepicker.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="assets/css/untitled.css">
+</head>
+
+<body id="page-top">
+    <div id="wrapper">
+        <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0">
+            <div class="container-fluid d-flex flex-column p-0"><a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="index.html">
+                    <div>
+                        <div class="sidebar-brand-icon rotate-n-15"><i class="fas fa-bicycle"></i></div>
+                        <div class="sidebar-brand-text mx-3"><span>Bike brand</span></div>
+                    </div>
+                </a>
+                <hr class="sidebar-divider my-0">
+                <ul class="navbar-nav text-light" id="accordionSidebar">
+                    <li class="nav-item"><a class="nav-link" data-bss-hover-animate="pulse" href="registered_home.html"><i class="fa fa-home"></i><span>Home</span></a></li>
+                    <li class="nav-item"><a class="nav-link" data-bss-hover-animate="pulse" style="color: rgba(255, 255, 255, 0.8);" href="catalogue.html"><i class="fa fa-th"></i><span>Catalogue</span></a></li>
+                    <li class="nav-item"><a class="nav-link" data-bss-hover-animate="pulse" style="color: rgba(255, 255, 255, 0.8);" href="orders_list.html"><i class="fa fa-reorder"></i><span>My orders</span></a></li>
+                    <li class="nav-item"><a class="nav-link" data-bss-hover-animate="pulse" style="color: rgba(255, 255, 255, 0.8);" href="shop_unregistered.html"><i class="fa fa-shopping-bag"></i><span>My store</span></a></li>
+                </ul>
+                <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0" id="sidebarToggle" type="button"></button></div>
+            </div>
+        </nav>
+        <div class="d-flex flex-column" id="content-wrapper">
+            <div id="content">
+                <nav class="navbar navbar-light navbar-expand bg-white shadow mb-4 topbar static-top" id="navbar">
+                    <div class="container-fluid"><button class="btn btn-link d-md-none rounded-circle me-3" id="sidebarToggleTop" type="button"><i class="fas fa-bars"></i></button>
+                        <form class="d-none d-sm-inline-block me-auto ms-md-3 my-2 my-md-0 mw-100 navbar-search">
+                            <div class="input-group"><input class="bg-light form-control border-0 small" type="text" id="navbar_search_field" placeholder="Search for ..."><button class="btn btn-primary py-0" id="navbar_search_button" type="button"><i class="fas fa-search"></i></button></div>
+                        </form>
+                        <ul class="navbar-nav flex-nowrap ms-auto visible">
+                            <li class="nav-item dropdown d-sm-none no-arrow"><a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#"><i class="fas fa-search"></i></a>
+                                <div class="dropdown-menu dropdown-menu-end p-3 animated--grow-in" aria-labelledby="searchDropdown">
+                                    <form class="me-auto navbar-search w-100">
+                                        <div class="input-group"><input class="bg-light form-control border-0 small" type="text" placeholder="Search for ...">
+                                            <div class="input-group-append"><button class="btn btn-primary py-0" type="button"><i class="fas fa-search"></i></button></div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </li>
+                            <li class="nav-item"><a class="nav-link" href="wish_list.html"><i class="fa fa-heart"></i></a></li>
+                            <li class="nav-item"><a class="nav-link" href="shopping_cart.html"><i class="fa fa-shopping-cart"></i></a></li>
+                            <div class="d-none d-sm-block topbar-divider"></div>
+                            <li class="nav-item dropdown no-arrow"><a class="nav-link" href="profile.html"><span class="d-none d-lg-inline me-2 text-gray-600 small" id="navbar_profile_name">User's name</span><img class="border rounded-circle img-profile" id="navbar_profile_photo" src="assets/img/avatars/avatar1.jpeg"></a></li>
+                            <li class="nav-item"><a class="nav-link" href="index.html"><i class="fa fa-sign-out fs-5"></i></a></li>
+                        </ul>
+                    </div>
+                </nav>
+                <div class="container-fluid">
+                    <h3 class="text-dark mb-4">Create Store</h3>
+                    <div class="col">
+                        <div class="card shadow mb-3">
+                            <div class="card-header py-3">
+                                <p class="text-primary m-0 fw-bold">Store Settings</p>
+                            </div>
+                            <div class="card-body">
+                                <form>
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="mb-3"><label class="form-label" for="username"><strong>Name</strong></label><input class="form-control" type="text" id="username" placeholder="Papa Bike" name="username"></div>
+                                        </div>
+                                        <div class="col"></div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <div>
+                                                <table class="table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Work Days</th>
+                                                            <th>Work Hours</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr class="text-center">
+                                                            <td class="text-start">
+                                                                <div class="col align-self-center">
+                                                                    <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-1" checked="" name="Sunday"><label class="form-check-label" for="formCheck-1">Sunday</label></div>
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <div class="row">
+                                                                    <div class="col-auto">
+                                                                        <div class="input-group"><span class="input-group-text">From</span><input class="form-control form-control-sm" type="text" required="" minlength="1" maxlength="2" pattern="[0]?[0-9]|[1][0-9]|[2][0-4]" value="8" name="Sunday_f" style="max-width: 40px;"><span class="input-group-text">:00</span></div>
+                                                                    </div>
+                                                                    <div class="col-auto">
+                                                                        <div class="input-group"><span class="input-group-text">Till</span><input class="form-control form-control-sm" type="text" required="" minlength="1" maxlength="2" pattern="[0]?[0-9]|[1][0-9]|[2][0-4]" value="22" style="max-width: 40px;"><span class="input-group-text">:00</span></div>
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr class="text-center">
+                                                            <td class="text-start">
+                                                                <div class="col align-self-center">
+                                                                    <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-2" name="Monday" checked=""><label class="form-check-label" for="formCheck-2">Monday</label></div>
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <div class="row">
+                                                                    <div class="col-auto">
+                                                                        <div class="input-group"><span class="input-group-text">From</span><input class="form-control form-control-sm" type="text" required="" minlength="1" maxlength="2" pattern="[0]?[0-9]|[1][0-9]|[2][0-4]" value="8" style="max-width: 40px;"><span class="input-group-text">:00</span></div>
+                                                                    </div>
+                                                                    <div class="col-auto">
+                                                                        <div class="input-group"><span class="input-group-text">Till</span><input class="form-control form-control-sm" type="text" required="" minlength="1" maxlength="2" pattern="[0]?[0-9]|[1][0-9]|[2][0-4]" value="22" style="max-width: 40px;"><span class="input-group-text">:00</span></div>
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr class="text-center">
+                                                            <td class="text-start">
+                                                                <div class="col align-self-center">
+                                                                    <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-3" name="Tuesday" checked=""><label class="form-check-label" for="formCheck-3">Tuesday</label></div>
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <div class="row">
+                                                                    <div class="col-auto">
+                                                                        <div class="input-group"><span class="input-group-text">From</span><input class="form-control form-control-sm" type="text" required="" minlength="1" maxlength="2" pattern="[0]?[0-9]|[1][0-9]|[2][0-4]" value="8" style="max-width: 40px;"><span class="input-group-text">:00</span></div>
+                                                                    </div>
+                                                                    <div class="col-auto">
+                                                                        <div class="input-group"><span class="input-group-text">Till</span><input class="form-control form-control-sm" type="text" required="" minlength="1" maxlength="2" pattern="[0]?[0-9]|[1][0-9]|[2][0-4]" value="22" style="max-width: 40px;"><span class="input-group-text">:00</span></div>
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr class="text-center">
+                                                            <td class="text-start">
+                                                                <div class="col align-self-center">
+                                                                    <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-4" name="Wednesday" checked=""><label class="form-check-label" for="formCheck-4">Wednesday</label></div>
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <div class="row">
+                                                                    <div class="col-auto">
+                                                                        <div class="input-group"><span class="input-group-text">From</span><input class="form-control form-control-sm" type="text" required="" minlength="1" maxlength="2" pattern="[0]?[0-9]|[1][0-9]|[2][0-4]" value="8" style="max-width: 40px;"><span class="input-group-text">:00</span></div>
+                                                                    </div>
+                                                                    <div class="col-auto">
+                                                                        <div class="input-group"><span class="input-group-text">Till</span><input class="form-control form-control-sm" type="text" required="" minlength="1" maxlength="2" pattern="[0]?[0-9]|[1][0-9]|[2][0-4]" value="22" style="max-width: 40px;"><span class="input-group-text">:00</span></div>
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr class="text-center">
+                                                            <td class="text-start">
+                                                                <div class="col align-self-center">
+                                                                    <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-5" name="Thursday" checked=""><label class="form-check-label" for="formCheck-5">Thursday</label></div>
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <div class="row">
+                                                                    <div class="col-auto">
+                                                                        <div class="input-group"><span class="input-group-text">From</span><input class="form-control form-control-sm" type="text" required="" minlength="1" maxlength="2" pattern="[0]?[0-9]|[1][0-9]|[2][0-4]" value="8" style="max-width: 40px;"><span class="input-group-text">:00</span></div>
+                                                                    </div>
+                                                                    <div class="col-auto">
+                                                                        <div class="input-group"><span class="input-group-text">Till</span><input class="form-control form-control-sm" type="text" required="" minlength="1" maxlength="2" pattern="[0]?[0-9]|[1][0-9]|[2][0-4]" value="22" style="max-width: 40px;"><span class="input-group-text">:00</span></div>
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr class="text-center">
+                                                            <td class="text-start">
+                                                                <div class="col align-self-center">
+                                                                    <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-7" name="Friday" checked=""><label class="form-check-label" for="formCheck-7">Friday</label></div>
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <div class="row">
+                                                                    <div class="col-auto">
+                                                                        <div class="input-group"><span class="input-group-text">From</span><input class="form-control form-control-sm" type="text" required="" minlength="1" maxlength="2" pattern="[0]?[0-9]|[1][0-9]|[2][0-4]" value="8" style="max-width: 40px;"><span class="input-group-text">:00</span></div>
+                                                                    </div>
+                                                                    <div class="col-auto">
+                                                                        <div class="input-group"><span class="input-group-text">Till</span><input class="form-control form-control-sm" type="text" required="" minlength="1" maxlength="2" pattern="[0]?[0-9]|[1][0-9]|[2][0-4]" value="22" style="max-width: 40px;"><span class="input-group-text">:00</span></div>
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr class="text-center">
+                                                            <td class="text-start">
+                                                                <div class="col align-self-center">
+                                                                    <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-6" name="Saturday" checked=""><label class="form-check-label" for="formCheck-6">Saturday</label></div>
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <div class="row">
+                                                                    <div class="col-auto">
+                                                                        <div class="input-group"><span class="input-group-text">From</span><input class="form-control form-control-sm" type="text" required="" minlength="1" maxlength="2" pattern="[0]?[0-9]|[1][0-9]|[2][0-4]" value="8" style="max-width: 40px;"><span class="input-group-text">:00</span></div>
+                                                                    </div>
+                                                                    <div class="col-auto">
+                                                                        <div class="input-group"><span class="input-group-text">Till</span><input class="form-control form-control-sm" type="text" required="" minlength="1" maxlength="2" pattern="[0]?[0-9]|[1][0-9]|[2][0-4]" value="22" style="max-width: 40px;"><span class="input-group-text">:00</span></div>
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="text-center mb-3" style="margin-top: 20px;"><button class="btn btn-primary btn-sm" type="submit">Create</button></div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <footer class="bg-white sticky-footer">
+                <div class="text-center"><a href="#"><br><strong>Determine shipping rates &amp; Time</strong><br></a></div>
+                <div class="container my-auto">
+                    <div class="text-center my-auto copyright"><span>Copyright © BikesBrand 2022</span></div>
+                </div>
+            </footer>
+        </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
+    </div>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/js/bs-init.js"></script>
+    <script src="assets/js/theme.js"></script>
+</body>
+
+</html>
