@@ -1,4 +1,4 @@
-/* eslint-disable */
+import { updateName } from "./homeregiserd.js";
 // Your web app's Firebase configuration
 var firebaseConfig = {
   apiKey: "AIzaSyCavKsAEr_YoIpryJGDElMoS_gje0y4YCQ",
