@@ -1,11 +1,6 @@
 import { user } from "./user.js";
 const search = document.getElementById("searchgroup");
 search.remove();
-<<<<<<< HEAD
-let username = document.getElementById("username");
-let phone_number = document.getElementById("phone_number");
-let email = document.getElementById("email");
-=======
 const userNameNavBar = document.getElementById("navbar_profile_name");
 const wish_list = document.getElementById("wish_list");
 const shopping_cart = document.getElementById("shopping_cart");
@@ -18,7 +13,6 @@ updateNavBar();
 let username=document.getElementById("username");
 let phone_number=document.getElementById("phone_number");
 let email=document.getElementById("email");
->>>>>>> 7eea06447a66330cdc0666f1f65cf55f11675e1a
 
 const updateDetails = () => {
   username.value = user.name;
