@@ -92,6 +92,7 @@ function login() {
     .then((userCredential) => {
       // Signed in
       var user = userCredential.user;
+      alert("ggggg")
       location.replace("/registered_home.html");
     })
     .catch((error) => {
@@ -113,7 +114,7 @@ document.getElementById("email_ver_btn").addEventListener("click", function () {
       // ..
     });
 });
-import { data } from "./data.js";
+import { data } from "./src/firebase/data.js";
 import { redirectToDiscription } from "./product.js";
 export const flagLogin = false;
 let col;
