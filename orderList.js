@@ -125,6 +125,7 @@ const feedBack = (e) => {
   });
 };
 btn_submit_review.addEventListener("click", () => {
+  feedBack(document.getElementById("BtnfeedBack").value);
   location.replace("/orders_list.html");
 });
 const init = () => {
@@ -132,9 +133,7 @@ const init = () => {
   for (let i = 0; i < user.orderList.length; i++) {
     orderList.innerHTML += makeRowOrder(user.orderList[i], i);
   }
-  document.getElementById("feedBack")?.addEventListener("click", () => {
-    feedBack(document.getElementById("feedBack").value);
-  });
+
   document.getElementById("btncancel")?.addEventListener("click", () => {
     CancelOrder(document.getElementById("btncancel").value);
   });
