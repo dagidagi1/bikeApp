@@ -1,6 +1,6 @@
-import { data } from "./data.js";
-import { user } from "./user.js";
-import { redirectToDiscription } from "./product.js";
+import { data } from "../firebase/data.js";
+import { user } from "../firebase/user.js";
+import { redirectToDiscription } from "../../product.js";
 const MAX_IN_ROW = 4;
 const serachType = ["Bike", "bicycle", "scooter", "BMX"];
 let col;
