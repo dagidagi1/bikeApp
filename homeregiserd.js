@@ -35,7 +35,6 @@ const init = () => {
     .sort((a, b) => {
       b.price - a.price;
     });
-  console.log(d);
   col = document.getElementById(`col_0`);
   col.innerHTML = "";
   for (let i = 0; i < 5; i++) {
