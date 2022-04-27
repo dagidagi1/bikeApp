@@ -1,7 +1,7 @@
 import { user } from "./user.js";
 const rate_order_text = document.getElementById("rate_order_text");
 const rate_order = document.getElementById("rate_order");
-const btn_review = document.getElementById("submit_review");
+const btn_submit_review = document.getElementById("submit_review");
 const search = document.getElementById("searchgroup");
 search.remove();
 const orderList = document.getElementById("orderList");
@@ -91,7 +91,7 @@ const makeRowOrder = (ord) => {
   <td style="color: var(--bs-success)">${ord.status}</td>
   <td class="text-end">
     <button
-    id="feedBack"
+    id="BtnfeedBack"
       class="btn btn-primary visible"
       type="button"
       style="
@@ -124,9 +124,7 @@ const feedBack = (e) => {
     }
   });
 };
-btn_review.addEventListener("click", () => {
-  feedBack(document.getElementById("feedBack").value);
-  init();
+btn_submit_review.addEventListener("click", () => {
   location.replace("/orders_list.html");
 });
 const init = () => {
