@@ -1,4 +1,4 @@
-import { user } from "./user.js";
+import { user } from "../firebase/user.js";
 const search = document.getElementById("searchgroup");
 search.remove();
 const userNameNavBar = document.getElementById("navbar_profile_name");
@@ -10,9 +10,9 @@ const updateNavBar = () => {
   if (user.orderList.length > 0) shopping_cart.style = "color: red";
 };
 updateNavBar();
-let username=document.getElementById("username");
-let phone_number=document.getElementById("phone_number");
-let email=document.getElementById("email");
+let username = document.getElementById("username");
+let phone_number = document.getElementById("phone_number");
+let email = document.getElementById("email");
 
 const updateDetails = () => {
   username.value = user.name;

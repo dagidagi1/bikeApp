@@ -1,4 +1,4 @@
-import { data } from "./data.js";
+import { data } from "../firebase/data.js";
 const type = document.getElementById("type_d");
 const name = document.getElementById("product_page_name");
 const price = document.getElementById("product_page_price");

@@ -43,7 +43,7 @@ function save() {
     })
     .then((docRef) => {
       alert("Document written with ID: ", docRef.id);
-      location.replace("/registered_home.html");
+      location.replace("registered_home.html");
     })
     .catch((error) => {
       console.error("Error adding document: ", error);
@@ -92,8 +92,7 @@ function login() {
     .then((userCredential) => {
       // Signed in
       var user = userCredential.user;
-      alert("ggggg")
-      location.replace("/registered_home.html");
+      location.replace("registered_home.html");
     })
     .catch((error) => {
       var errorCode = error.code;
@@ -115,7 +114,7 @@ document.getElementById("email_ver_btn").addEventListener("click", function () {
     });
 });
 import { data } from "./src/firebase/data.js";
-import { redirectToDiscription } from "./product.js";
+import { redirectToDiscription } from "./src/js/product.js";
 export const flagLogin = false;
 let col;
 function productElment(d, i) {
@@ -124,8 +123,8 @@ function productElment(d, i) {
   <div class="card" id="${i}">
   <div class="card-body"><img class="img-fluid" src=${
     d.type === "Bicycle"
-      ? "assets/img/200829b1-9d17-4b9b-8bf8-36baba8859e6.jpg"
-      : "assets/img/snimok6.png"
+      ? "../../assets/img/200829b1-9d17-4b9b-8bf8-36baba8859e6.jpg"
+      : "../../assets/img/snimok6.png"
   }>
       <h4 class="card-title" style="color: var(--bs-gray);">${d.name}</h4>
       <h6 class="text-muted card-subtitle mb-2" style="font-weight: bold;">${

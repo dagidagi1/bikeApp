@@ -7,20 +7,21 @@ const __dirname = path.resolve();
 const PORT = process.env.PORT ?? 3000;
 const app = express();
 app.use(express.static(path.resolve(__dirname, "./")));
+app.use(express.static(path.resolve(__dirname, "./src/html")));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(requestTime);
 app.use(logger);
 
 // app.use(serverRoutes)
-app.set('view engine', 'jade')
+app.set("view engine", "jade");
 app.get("/", (req, res) => {
-  res.sendFile(__dirname + '/src/html/index.html')
+  console.log(req);
+  res.sendFile(__dirname + "/src/html" + req.url);
   //res.render("index", { title: "Main Page", active: "main" });
 });
 
 app.get("/features", (req, res) => {
-  
   res.render("features", { title: "Features Page", active: "features" });
 });
 
