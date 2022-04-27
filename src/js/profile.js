@@ -19,6 +19,10 @@ edit_btn.addEventListener('click',()=>{
   edit_btn.disabled=true;
 })
 
+save_btn.addEventListener('click',()=>{
+  alert(username.value, phone_number.value, email.value);
+
+})
 let username = document.getElementById("username");
 let phone_number = document.getElementById("phone_number");
 let email = document.getElementById("email");
