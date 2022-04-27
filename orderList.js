@@ -99,7 +99,7 @@ const makeRowOrder = (ord) => {
         color: var(--bs-table-striped-color);
         border-style: hidden;"
       value="${ord.order_number}"
-      data-bs-target="#modal-1"
+      data-bs-target="#modal-2"
               data-bs-toggle="modal"
               
     >
