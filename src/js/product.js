@@ -1,4 +1,4 @@
-import { data } from "../firebase/data.js";
+//import { data } from "../firebase/data.js";
 const type = document.getElementById("type_d");
 const name = document.getElementById("product_page_name");
 const price = document.getElementById("product_page_price");
@@ -11,7 +11,10 @@ const quantity = document.getElementById("quantetity_d");
 const userName = document.getElementById("navbar_profile_name");
 const search = document.getElementById("searchgroup");
 if (search != null) search.remove();
-export const redirectToDiscription = (i) => {
-  console.log(i);
-  type.innerText = data[i].type;
+const redirectToDiscription = () => {
+  //var test = window["example_attribute"];
+  var value = localStorage.getItem("numberLS");
+  alert(value);
+  //type.innerText = data[i].type;
 };
+redirectToDiscription();

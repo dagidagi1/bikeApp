@@ -1,9 +1,10 @@
 import { data } from "../firebase/data.js";
 import { user } from "../firebase/user.js";
-import { redirectToDiscription } from "../../product.js";
 const MAX_IN_ROW = 4;
 const serachType = ["Bike", "bicycle", "scooter", "BMX"];
 let col;
+var number = 123;
+localStorage.setItem("numberLS", number);
 const dropdownChoiceAll = document.getElementById("ct_all");
 const dropdownChoiceBicycle = document.getElementById("ct_bic");
 const dropdownChoiceScooter = document.getElementById("ct_scot");
@@ -44,8 +45,8 @@ searchBtn.addEventListener("click", () => {
 });
 function productElment(d, i) {
   return `<div class="col">
-    <a>
-      <div class="card" id="${i}">
+    <a href="product.html">
+      <div class="card" id="${i}" >
           <div class="card-body"><img class="img-fluid" src=${
             d.type === "Bicycle"
               ? "assets/img/200829b1-9d17-4b9b-8bf8-36baba8859e6.jpg"
@@ -75,7 +76,7 @@ const init = (data) => {
       document
         .getElementById(`${j + i * MAX_IN_ROW}`)
         ?.addEventListener("click", () => {
-          redirectToDiscription(j + i * MAX_IN_ROW);
+          updateGlobal(document.getElementById(`${j + i * MAX_IN_ROW}`).id);
         });
     }
   }
@@ -113,3 +114,6 @@ dropdownChoiceScooter.addEventListener("click", () => {
   init(newData);
 });
 updateNavBar();
+const updateGlobal = (i) => {
+  // window["example_attribute"] = i;
+};

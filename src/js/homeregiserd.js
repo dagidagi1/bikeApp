@@ -1,5 +1,4 @@
 import { data } from "../firebase/data.js";
-import { redirectToDiscription } from "./product.js";
 import { user } from "../firebase/user.js";
 
 let col;
@@ -41,7 +40,7 @@ const init = () => {
     col.innerHTML += productElment(d[i], i);
 
     document.getElementById(`${i}`)?.addEventListener("click", () => {
-      redirectToDiscription(i);
+      globalVariable = { example_attribute: i };
     });
   }
   d = data
