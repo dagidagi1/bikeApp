@@ -114,12 +114,12 @@ document.getElementById("email_ver_btn").addEventListener("click", function () {
     });
 });
 import { data } from "./src/firebase/data.js";
-import { redirectToDiscription } from "./src/js/product.js";
+// import { redirectToDiscription } from "./src/js/product.js";
 export const flagLogin = false;
 let col;
 function productElment(d, i) {
   return `<div class="col">
-  <a ${flagLogin ? 'href="product.html"' : ""}>
+  <a>
   <div class="card" id="${i}">
   <div class="card-body"><img class="img-fluid" src=${
     d.type === "Bicycle"
@@ -145,11 +145,9 @@ const init = () => {
   col.innerHTML = "";
   for (let i = 0; i < 5; i++) {
     col.innerHTML += productElment(d[i], i);
-    flagLogin
-      ? document.getElementById(`${i}`)?.addEventListener("click", () => {
-          redirectToDiscription(i);
-        })
-      : false;
+    document.getElementById(`${i}`)?.addEventListener("click", () => {
+      redirectToDiscription(i);
+    });
   }
   d = data
     .filter((a) => a.type === "Scooter")
@@ -160,11 +158,10 @@ const init = () => {
   col = document.getElementById(`col_1`);
   for (let i = 0; i < 5; i++) {
     col.innerHTML += productElment(d[i], i);
-    flagLogin
-      ? document.getElementById(`${i}`)?.addEventListener("click", () => {
-          redirectToDiscription(i);
-        })
-      : false;
+
+    document.getElementById(`${i}`)?.addEventListener("click", () => {
+      //redirectToDiscription(i);
+    });
   }
 };
 init();
