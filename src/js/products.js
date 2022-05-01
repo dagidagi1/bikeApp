@@ -20,9 +20,6 @@ class Products {
     this.wheel_size = wheel_size;
     this.quantity = quantity;
   }
-  toString() {
-    return this.name + ", " + this.state + ", " + this.country;
-  }
 
   toFirestore = (product) => {
     return {

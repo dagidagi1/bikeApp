@@ -1,5 +1,7 @@
 import { data } from "../firebase/data.js";
 import { user } from "../firebase/user.js";
+const search = document.getElementById("searchgroup");
+search.remove();
 
 let col;
 const userNameNavBar = document.getElementById("navbar_profile_name");
