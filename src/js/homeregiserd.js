@@ -1,5 +1,4 @@
 import { dbProducts, fbAuth, dbUsers } from "../firebase/data.js";
-import { user } from "../firebase/user.js";
 const search = document.getElementById("searchgroup");
 search.remove();
 let col;
@@ -12,17 +11,19 @@ const updateNavBar = () => {
     if (user) {
       // User is signed in, see docs for a list of available properties
       // https://firebase.google.com/docs/reference/js/firebase.User
-      dbUsers.where("email", "==", user.email).get().then((snapshot)=>{
-        snapshot.forEach((doc)=>{
-          userNameNavBar.innerText = doc.data().name;
-          if (doc.data().wishList.length > 0) wish_list.style = "color: red";
-          if (doc.data().orderList.length > 0) shopping_cart.style = "color: red";
-      });
-      })
+      dbUsers
+        .where("email", "==", user.email)
+        .get()
+        .then((snapshot) => {
+          snapshot.forEach((doc) => {
+            userNameNavBar.innerText = doc.data().name;
+            if (doc.data().wishList.length > 0) wish_list.style = "color: red";
+            if (doc.data().orderList.length > 0)
+              shopping_cart.style = "color: red";
+          });
+        });
     }
   });
-  
-  
 };
 updateNavBar();
 function productElment(d, i) {
@@ -71,8 +72,7 @@ const init = () => {
   }
 };
 
-dbProducts.get()
-.then((querySnapshot) => {
+dbProducts.get().then((querySnapshot) => {
   querySnapshot.forEach((doc) => {
     data.push(doc.data());
   });
