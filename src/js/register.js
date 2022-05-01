@@ -1,5 +1,6 @@
 import { state } from "../../firebase.js";
-firebase.initializeApp(state.firebaseConfig);
+import { data } from "../firebase/data.js";
+if (firebase.apps.length === 0) firebase.initializeApp(state.firebaseConfig);
 // Set database variable
 //import "firebase/firestore";
 var database = firebase.firestore();
@@ -122,14 +123,11 @@ function productElment(d, i) {
   </a></div> `;
 }
 const init = () => {
-  //   let d = database
-  //     .collection("products")
-  //     .filter((a) => a.type === "Bicycle")
-  //     .sort((a, b) => {
-  //       b.price - a.price;
-  //     });
-  const d = database.collection("products");
-  console.log(d);
+  let d = data
+    .filter((a) => a.type === "Bicycle")
+    .sort((a, b) => {
+      b.price - a.price;
+    });
   col = document.getElementById(`col_0`);
   col.innerHTML = "";
   for (let i = 0; i < 5; i++) {

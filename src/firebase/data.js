@@ -1,123 +1,15 @@
-export const data = [
-  {
-    type: "Bicycle",
-    name: "BMX",
-    price: 122,
-    description: "good bike",
-    manufacturer: "BMX",
-    max_speed: 20,
-    weight: 5.2,
-    wheel_size: 1.25,
-    quantity: 10,
-  },
-  {
-    type: "Bicycle",
-    name: "Trek Bicycle",
-    price: 1210,
-    description: "good bike",
-    manufacturer: "Trek",
-    max_speed: 20,
-    weight: 5.2,
-    wheel_size: 1.25,
-    quantity: 10,
-  },
-  {
-    type: "Scooter",
-    name: "Adiva",
-    price: 12000,
-    description: "good scooter Adiva",
-    manufacturer: "Italy",
-    max_speed: 20,
-    weight: 5.2,
-    wheel_size: 1.25,
-    quantity: 10,
-  },
-  {
-    type: "Bicycle",
-    name: "Smart Bike",
-    price: 138,
-    description: "good bike",
-    manufacturer: "Nano",
-    max_speed: 20,
-    weight: 5.2,
-    wheel_size: 1.25,
-    quantity: 10,
-  },
-  {
-    type: "Scooter",
-    name: "Mi 1S",
-    price: 137,
-    description: "good scooter",
-    manufacturer: "Xiaomi",
-    max_speed: 20,
-    weight: 5.2,
-    wheel_size: 1.25,
-    quantity: 10,
-  },
-  {
-    type: "Bicycle",
-    name: "Big Foot",
-    price: 136,
-    description: "good bike",
-    manufacturer: "Smart",
-    max_speed: 20,
-    weight: 5.2,
-    wheel_size: 1.25,
-    quantity: 10,
-  },
-  {
-    type: "Bicycle",
-    name: "Fisher Gold",
-    price: 135,
-    description: "good bike",
-    manufacturer: "Gold",
-    max_speed: 20,
-    weight: 5.2,
-    wheel_size: 1.25,
-    quantity: 10,
-  },
-  {
-    type: "Scooter",
-    name: "Koning Imax",
-    price: 134,
-    description: "good scooter",
-    manufacturer: "Koning",
-    max_speed: 20,
-    weight: 5.2,
-    wheel_size: 1.25,
-    quantity: 10,
-  },
-  {
-    type: "Bicycle",
-    name: "Neuron",
-    price: 133,
-    description: "good bike",
-    manufacturer: "Active Neuron",
-    max_speed: 20,
-    weight: 5.2,
-    wheel_size: 1.25,
-    quantity: 10,
-  },
-  {
-    type: "Scooter",
-    name: "Xiaomi",
-    price: 131,
-    description: "good scooter",
-    manufacturer: "Xiaomi",
-    max_speed: 20,
-    weight: 5.2,
-    wheel_size: 1.25,
-    quantity: 10,
-  },
-  {
-    type: "Scooter",
-    name: "Rider",
-    price: 130,
-    description: "good scooter",
-    manufacturer: "RIDER",
-    max_speed: 20,
-    weight: 5.2,
-    wheel_size: 1.25,
-    quantity: 10,
-  },
-];
+import { state } from "../../firebase.js";
+let data = [];
+firebase.initializeApp(state.firebaseConfig);
+// Set database variable
+//import "firebase/firestore";
+var database = firebase.firestore();
+database
+  .collection("products")
+  .get()
+  .then((querySnapshot) => {
+    querySnapshot.forEach((doc) => {
+      data.push(doc.data());
+    });
+  });
+export { data as data };
