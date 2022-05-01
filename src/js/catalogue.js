@@ -31,6 +31,8 @@ function Search(input) {
     }
   });
 }
+
+
 searchInput.addEventListener("input", () => {
   serachType.forEach((st) => {
     if (
