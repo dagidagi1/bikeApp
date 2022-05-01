@@ -29,7 +29,8 @@
     "express": "^4.17.3",
     "firebase": "^8.10.1",
     "jade": "^1.9.2",
-    "nodemon": "^2.0.15"
+    "nodemon": "^2.0.15",
+    "@firebase/database": "0.6.2"
   },
   "devDependencies": {
     "@types/mocha": "github:types/mocha",
