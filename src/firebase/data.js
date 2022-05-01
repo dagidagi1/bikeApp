@@ -1,7 +1,7 @@
 import { state } from "../../firebase.js";
 
 let data = [];
-console.log("gavno")
+
 firebase.initializeApp(state.firebaseConfig);
 // Set database variable
 //import "firebase/firestore";
@@ -26,5 +26,4 @@ firebase.auth().onAuthStateChanged((user) => {
       // ...
     }
   });
-console.log("gavno")
 export { data as data };
