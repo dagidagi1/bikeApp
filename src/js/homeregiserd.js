@@ -30,6 +30,7 @@ function productElment(d, i) {
 </a></div> `;
 }
 const init = () => {
+  while(data === undefined){console.log("huyna")};
   let d = data
     .filter((a) => a.type === "Bicycle")
     .sort((a, b) => {
@@ -58,4 +59,4 @@ const init = () => {
     });
   }
 };
-init();
+setTimeout(init, 1000);
