@@ -34,4 +34,5 @@ export let user = {
   phone: "0547345662",
   store: false,
   wishList: [],
+  productList: [],
 };

@@ -1,7 +1,7 @@
 import { data } from "../firebase/data.js";
-import { redirectToDiscription } from "./product.js";
 import { user } from "../firebase/user.js";
-
+const search = document.getElementById("searchgroup");
+search.remove();
 let col;
 const userNameNavBar = document.getElementById("navbar_profile_name");
 const wish_list = document.getElementById("wish_list");
@@ -30,6 +30,7 @@ function productElment(d, i) {
 </a></div> `;
 }
 const init = () => {
+  while(data === undefined){console.log("huyna")};
   let d = data
     .filter((a) => a.type === "Bicycle")
     .sort((a, b) => {
@@ -41,7 +42,7 @@ const init = () => {
     col.innerHTML += productElment(d[i], i);
 
     document.getElementById(`${i}`)?.addEventListener("click", () => {
-      redirectToDiscription(i);
+      globalVariable = { example_attribute: i };
     });
   }
   d = data
@@ -58,4 +59,4 @@ const init = () => {
     });
   }
 };
-init();
+setTimeout(init, 1000);
