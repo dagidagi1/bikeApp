@@ -1,5 +1,6 @@
 import { state } from "../../firebase.js";
-import { data } from "../firebase/data.js";
+import { dbProducts } from "../firebase/data.js";
+var data = [];
 if (firebase.apps.length === 0) firebase.initializeApp(state.firebaseConfig);
 // Set database variable
 //import "firebase/firestore";
@@ -151,4 +152,11 @@ const init = () => {
     });
   }
 };
-init();
+dbProducts.get()
+.then((querySnapshot) => {
+  let x = [];
+  querySnapshot.forEach((doc) => {
+    data.push(doc.data());
+  });
+  init();
+});

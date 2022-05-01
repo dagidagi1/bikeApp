@@ -1,8 +1,9 @@
-import { data } from "../firebase/data.js";
+import { dbProducts } from "../firebase/data.js";
 import { user } from "../firebase/user.js";
 const MAX_IN_ROW = 4;
 const serachType = ["Bike", "bicycle", "scooter", "BMX"];
 let col;
+let data = [];
 var number = 123;
 localStorage.setItem("numberLS", number);
 const dropdownChoiceAll = document.getElementById("ct_all");
@@ -44,6 +45,7 @@ searchBtn.addEventListener("click", () => {
   init(d);
 });
 function productElment(d, i) {
+  console.log("catalog/productElment(d,i): ", d, i);
   return `<div class="col">
     <a href="product.html">
       <div class="card" id="${i}" >
@@ -63,8 +65,9 @@ function productElment(d, i) {
     </a>
   </div>`;
 }
-
+//inside init there is a call to productelement with undified object
 const init = (data) => {
+  console.log("catalog/init/data: ", data);
   for (let i = 0; i < (data.length % 4) + 1; i++) {
     col = document.getElementById(`col_${i}`);
     col.innerHTML = "";
@@ -117,3 +120,11 @@ updateNavBar();
 const updateGlobal = (i) => {
   // window["example_attribute"] = i;
 };
+dbProducts.get()
+.then((querySnapshot) => {
+  querySnapshot.forEach((doc) => {
+    data.push(doc.data());
+  });
+  console.log(data)
+  init(data);
+});
