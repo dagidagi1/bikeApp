@@ -1,9 +1,3 @@
-
-document.getElementById("add_item_btn").addEventListener("click", function(){
-    document.getElementById("sells").textContent="Wrong"
-    document.getElementById("earnings").textContent="Wrong"
-});
-
 init_charts();
 
 var top_orders_list = document.getElementById("top_orders_list")
