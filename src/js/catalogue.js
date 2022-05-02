@@ -59,13 +59,13 @@ searchBtn.addEventListener("click", () => {
 function productElment(d, i) {
   console.log("catalog/productElment(d,i): ", d, i);
   return `<div class="col">
-    <a href="#"  >
+    <a href="product.html?index=${i}">
       <div class="card">
-          <div class="card-body"  type="button"  id="${i}"><img class="img-fluid" src=${
-    d.type === "Bicycle"
-      ? "assets/img/200829b1-9d17-4b9b-8bf8-36baba8859e6.jpg"
-      : "assets/img/snimok6.png"
-  }>
+          <div class="card-body"><img class="img-fluid" src=${
+            d.type === 0
+              ? "assets/img/200829b1-9d17-4b9b-8bf8-36baba8859e6.jpg"
+              : "assets/img/snimok6.png"
+          }>
               <h4 class="card-title" style="color: var(--bs-gray);">${
                 d.name
               }</h4>
@@ -80,7 +80,8 @@ function productElment(d, i) {
 //inside init there is a call to productelement with undified object
 const init = (data) => {
   console.log("catalog/init/data: ", data);
-  for (var i = 0; i < (data.length % 4) + 1; i++) {
+  console.log((data.length % 4) + 2);
+  for (var i = 0; i < (data.length % 5) + 1; i++) {
     col = document.getElementById(`col_${i}`);
     col.innerHTML = "";
     for (var j = 0; j < MAX_IN_ROW; j++) {
@@ -88,9 +89,6 @@ const init = (data) => {
         data[j + i * MAX_IN_ROW],
         j + i * MAX_IN_ROW
       );
-      document
-        .getElementById(`${j + i * MAX_IN_ROW}`)
-        .addEventListener("click", () => markProduct(j + i * MAX_IN_ROW));
     }
   }
 };
@@ -114,14 +112,14 @@ dropdownChoiceAll.addEventListener("click", () => {
 });
 dropdownChoiceBicycle.addEventListener("click", () => {
   const newData = data.filter((d) => {
-    return d.type.normalize() === "Bicycle";
+    return d.type === 0;
   });
   btn_category.innerText = "Bicycle";
   init(newData);
 });
 dropdownChoiceScooter.addEventListener("click", () => {
   const newData = data.filter((d) => {
-    return d.type.normalize() === "Scooter";
+    return d.type === 1;
   });
   btn_category.innerText = "Scooter";
   init(newData);
@@ -137,6 +135,3 @@ dbProducts.get().then((querySnapshot) => {
   console.log(data);
   init(data);
 });
-const markProduct = (i) => {
-  // הרעיון פה ליצור דגל לכל מוצר אם מלחץ או לא וככה נטען אותו בדף של המוצרים
-};

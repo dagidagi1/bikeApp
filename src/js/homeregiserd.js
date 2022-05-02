@@ -19,7 +19,7 @@ const updateNavBar = () => {
         .then((snapshot) => {
           snapshot.forEach((doc) => {
             userNameNavBar.innerText = doc.data().name;
-            if(doc.data().store != false) has_store = doc.data().store;
+            if (doc.data().store != false) has_store = doc.data().store;
             if (doc.data().wishList.length > 0) wish_list.style = "color: red";
             if (doc.data().orderList.length > 0)
               shopping_cart.style = "color: red";
@@ -34,7 +34,7 @@ function productElment(d, i) {
   <a href="product.html">
   <div class="card" id="${i}">
   <div class="card-body"><img class="img-fluid" src=${
-    d.type === "Bicycle"
+    d.type === 0
       ? "../../assets/img/200829b1-9d17-4b9b-8bf8-36baba8859e6.jpg"
       : "../../assets/img/snimok6.png"
   }>
@@ -48,7 +48,7 @@ function productElment(d, i) {
 }
 const init = () => {
   let d = data
-    .filter((a) => a.type === "Bicycle")
+    .filter((a) => a.type === 0)
     .sort((a, b) => {
       b.price - a.price;
     });
@@ -62,7 +62,7 @@ const init = () => {
     });
   }
   d = data
-    .filter((a) => a.type === "Scooter")
+    .filter((a) => a.type === 1)
     .sort((a, b) => {
       b.price - a.price;
     });
@@ -73,12 +73,13 @@ const init = () => {
       redirectToDiscription(i);
     });
   }
-  my_store.addEventListener("click", function(){
-    if(has_store != false){
-      location.replace("shop_dashboard.html" + '?id=' + has_store);
+  my_store.addEventListener("click", function () {
+    if (has_store != false) {
+      location.replace("shop_dashboard.html" + "?id=" + has_store);
+    } else {
+      location.replace("shop_unregistered.html");
     }
-    else {location.replace("shop_unregistered.html");}
-  })
+  });
 };
 
 dbProducts.get().then((querySnapshot) => {

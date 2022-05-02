@@ -1,4 +1,8 @@
 import { dbProducts, fbAuth, dbUsers } from "../firebase/data.js";
+var parametrs = location.search.substring(1).split("&");
+var temp = parametrs[0].split("=");
+const index_p = decodeURI(temp[1]);
+let data = [];
 const type = document.getElementById("type_d");
 const name = document.getElementById("product_page_name");
 const price = document.getElementById("product_page_price");
@@ -12,6 +16,7 @@ const search = document.getElementById("searchgroup");
 const userNameNavBar = document.getElementById("navbar_profile_name");
 const wish_list = document.getElementById("wish_list");
 const shopping_cart = document.getElementById("shopping_cart");
+const img = document.getElementById("product_page_image");
 search.remove();
 const updateNavBar = () => {
   fbAuth.onAuthStateChanged((user) => {
@@ -33,6 +38,24 @@ const updateNavBar = () => {
   });
 };
 updateNavBar();
-
-const redirectToDiscription = () => {};
-redirectToDiscription();
+dbProducts.get().then((querySnapshot) => {
+  querySnapshot.forEach((doc) => {
+    data.push(doc.data());
+  });
+  console.log(data);
+  updateDescriptions(data[index_p]);
+});
+const updateDescriptions = (data) => {
+  type.innerText = data.type === 0 ? "Bycicle" : "Scooter";
+  name.innerText = data.name;
+  price.innerText = data.price;
+  description.innerText = data.description;
+  manufacturer.innerText = data.manufacturer;
+  max_speed.innerText = data.max_speed;
+  weight.innerText = data.weight;
+  wheel_size.innerText = data.wheel_size;
+  img.src =
+    data.type === 0
+      ? "assets/img/200829b1-9d17-4b9b-8bf8-36baba8859e6.jpg"
+      : "assets/img/snimok6.png";
+};
