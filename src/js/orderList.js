@@ -1,17 +1,47 @@
-import { user } from "../firebase/user.js";
+import { dbProducts, fbAuth, dbUsers } from "../firebase/data.js";
 const rate_order_text = document.getElementById("rate_order_text");
 const rate_order = document.getElementById("rate_order");
 const btn_submit_review = document.getElementById("submit_review");
 const search = document.getElementById("searchgroup");
 search.remove();
+let user;
+fbAuth.onAuthStateChanged((u) => {
+  if (u) {
+    // User is signed in, see docs for a list of available properties
+    // https://firebase.google.com/docs/reference/js/firebase.User
+    dbUsers
+      .where("email", "==", u.email)
+      .get()
+      .then((snapshot) => {
+        snapshot.forEach((doc) => {
+          user = doc.data();
+          init();
+        });
+      });
+  }
+});
 const orderList = document.getElementById("orderList");
 const userNameNavBar = document.getElementById("navbar_profile_name");
 const wish_list = document.getElementById("wish_list");
 const shopping_cart = document.getElementById("shopping_cart");
 const updateNavBar = () => {
-  userNameNavBar.innerText = user.name;
-  if (user.wishList.length > 0) wish_list.style = "color: red";
-  if (user.orderList.length > 0) shopping_cart.style = "color: red";
+  fbAuth.onAuthStateChanged((user) => {
+    if (user) {
+      // User is signed in, see docs for a list of available properties
+      // https://firebase.google.com/docs/reference/js/firebase.User
+      dbUsers
+        .where("email", "==", user.email)
+        .get()
+        .then((snapshot) => {
+          snapshot.forEach((doc) => {
+            userNameNavBar.innerText = doc.data().name;
+            if (doc.data().wishList.length > 0) wish_list.style = "color: red";
+            if (doc.data().orderList.length > 0)
+              shopping_cart.style = "color: red";
+          });
+        });
+    }
+  });
 };
 const makeRowOrder = (ord) => {
   if (ord.status === "Shipping") {
@@ -130,14 +160,14 @@ btn_submit_review.addEventListener("click", () => {
 });
 const init = () => {
   orderList.innerHTML = "";
-  for (let i = 0; i < user.orderList.length; i++) {
-    orderList.innerHTML += makeRowOrder(user.orderList[i], i);
+  if (user.orderList.length > 0) {
+    for (let i = 0; i < user.orderList.length; i++) {
+      orderList.innerHTML += makeRowOrder(user.orderList[i], i);
+    }
+    document.getElementById("btncancel")?.addEventListener("click", () => {
+      CancelOrder(document.getElementById("btncancel").value);
+    });
   }
-
-  document.getElementById("btncancel")?.addEventListener("click", () => {
-    CancelOrder(document.getElementById("btncancel").value);
-  });
 };
 const saveToFirebase = () => {};
-init();
 updateNavBar();

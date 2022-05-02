@@ -1,15 +1,29 @@
-import { data } from "../firebase/data.js";
-import { user } from "../firebase/user.js";
+import { dbProducts, fbAuth, dbUsers } from "../firebase/data.js";
 const search = document.getElementById("searchgroup");
 search.remove();
 let col;
+let data = [];
 const userNameNavBar = document.getElementById("navbar_profile_name");
 const wish_list = document.getElementById("wish_list");
 const shopping_cart = document.getElementById("shopping_cart");
 const updateNavBar = () => {
-  userNameNavBar.innerText = user.name;
-  if (user.wishList.length > 0) wish_list.style = "color: red";
-  if (user.orderList.length > 0) shopping_cart.style = "color: red";
+  fbAuth.onAuthStateChanged((user) => {
+    if (user) {
+      // User is signed in, see docs for a list of available properties
+      // https://firebase.google.com/docs/reference/js/firebase.User
+      dbUsers
+        .where("email", "==", user.email)
+        .get()
+        .then((snapshot) => {
+          snapshot.forEach((doc) => {
+            userNameNavBar.innerText = doc.data().name;
+            if (doc.data().wishList.length > 0) wish_list.style = "color: red";
+            if (doc.data().orderList.length > 0)
+              shopping_cart.style = "color: red";
+          });
+        });
+    }
+  });
 };
 updateNavBar();
 function productElment(d, i) {
@@ -30,7 +44,6 @@ function productElment(d, i) {
 </a></div> `;
 }
 const init = () => {
-  while(data === undefined){console.log("huyna")};
   let d = data
     .filter((a) => a.type === "Bicycle")
     .sort((a, b) => {
@@ -50,7 +63,6 @@ const init = () => {
     .sort((a, b) => {
       b.price - a.price;
     });
-  console.log(d);
   col = document.getElementById(`col_1`);
   for (let i = 0; i < 5; i++) {
     col.innerHTML += productElment(d[i], i);
@@ -59,4 +71,19 @@ const init = () => {
     });
   }
 };
-setTimeout(init, 1000);
+
+dbProducts.get().then((querySnapshot) => {
+  querySnapshot.forEach((doc) => {
+    data.push(doc.data());
+  });
+  init();
+});
+
+dbUsers.get().then((querySnapshot) => {
+  // contains all users list, idk if needed here!
+  let ddd = [];
+  querySnapshot.forEach((doc) => {
+    ddd.push(doc.data());
+  });
+  //console.log(ddd);
+});

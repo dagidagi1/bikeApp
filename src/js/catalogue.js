@@ -1,10 +1,8 @@
-import { data } from "../firebase/data.js";
-import { user } from "../firebase/user.js";
+import { dbProducts, fbAuth, dbUsers } from "../firebase/data.js";
 const MAX_IN_ROW = 4;
 const serachType = ["Bike", "bicycle", "scooter", "BMX"];
 let col;
-var number = 123;
-localStorage.setItem("numberLS", number);
+let data = [];
 const dropdownChoiceAll = document.getElementById("ct_all");
 const dropdownChoiceBicycle = document.getElementById("ct_bic");
 const dropdownChoiceScooter = document.getElementById("ct_scot");
@@ -19,9 +17,23 @@ const userNameNavBar = document.getElementById("navbar_profile_name");
 const wish_list = document.getElementById("wish_list");
 const shopping_cart = document.getElementById("shopping_cart");
 const updateNavBar = () => {
-  userNameNavBar.innerText = user.name;
-  if (user.wishList.length > 0) wish_list.style = "color: red";
-  if (user.orderList.length > 0) shopping_cart.style = "color: red";
+  fbAuth.onAuthStateChanged((user) => {
+    if (user) {
+      // User is signed in, see docs for a list of available properties
+      // https://firebase.google.com/docs/reference/js/firebase.User
+      dbUsers
+        .where("email", "==", user.email)
+        .get()
+        .then((snapshot) => {
+          snapshot.forEach((doc) => {
+            userNameNavBar.innerText = doc.data().name;
+            if (doc.data().wishList.length > 0) wish_list.style = "color: red";
+            if (doc.data().orderList.length > 0)
+              shopping_cart.style = "color: red";
+          });
+        });
+    }
+  });
 };
 function Search(input) {
   return data.filter((d) => {
@@ -30,6 +42,7 @@ function Search(input) {
     }
   });
 }
+
 searchInput.addEventListener("input", () => {
   serachType.forEach((st) => {
     if (
@@ -44,14 +57,15 @@ searchBtn.addEventListener("click", () => {
   init(d);
 });
 function productElment(d, i) {
+  console.log("catalog/productElment(d,i): ", d, i);
   return `<div class="col">
-    <a href="product.html">
-      <div class="card" id="${i}" >
-          <div class="card-body"><img class="img-fluid" src=${
-            d.type === "Bicycle"
-              ? "assets/img/200829b1-9d17-4b9b-8bf8-36baba8859e6.jpg"
-              : "assets/img/snimok6.png"
-          }>
+    <a href="#"  >
+      <div class="card">
+          <div class="card-body"  type="button"  id="${i}"><img class="img-fluid" src=${
+    d.type === "Bicycle"
+      ? "assets/img/200829b1-9d17-4b9b-8bf8-36baba8859e6.jpg"
+      : "assets/img/snimok6.png"
+  }>
               <h4 class="card-title" style="color: var(--bs-gray);">${
                 d.name
               }</h4>
@@ -63,21 +77,20 @@ function productElment(d, i) {
     </a>
   </div>`;
 }
-
+//inside init there is a call to productelement with undified object
 const init = (data) => {
-  for (let i = 0; i < (data.length % 4) + 1; i++) {
+  console.log("catalog/init/data: ", data);
+  for (var i = 0; i < (data.length % 4) + 1; i++) {
     col = document.getElementById(`col_${i}`);
     col.innerHTML = "";
-    for (let j = 0; j < MAX_IN_ROW; j++) {
+    for (var j = 0; j < MAX_IN_ROW; j++) {
       col.innerHTML += productElment(
         data[j + i * MAX_IN_ROW],
         j + i * MAX_IN_ROW
       );
       document
         .getElementById(`${j + i * MAX_IN_ROW}`)
-        ?.addEventListener("click", () => {
-          updateGlobal(document.getElementById(`${j + i * MAX_IN_ROW}`).id);
-        });
+        .addEventListener("click", () => markProduct(j + i * MAX_IN_ROW));
     }
   }
 };
@@ -116,4 +129,14 @@ dropdownChoiceScooter.addEventListener("click", () => {
 updateNavBar();
 const updateGlobal = (i) => {
   // window["example_attribute"] = i;
+};
+dbProducts.get().then((querySnapshot) => {
+  querySnapshot.forEach((doc) => {
+    data.push(doc.data());
+  });
+  console.log(data);
+  init(data);
+});
+const markProduct = (i) => {
+  // הרעיון פה ליצור דגל לכל מוצר אם מלחץ או לא וככה נטען אותו בדף של המוצרים
 };
