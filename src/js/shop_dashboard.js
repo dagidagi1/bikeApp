@@ -1,12 +1,17 @@
-init_charts();
-
+import {dbStores} from 
+DAYS_OF_WEEK = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+var parametrs = location.search.substring(1).split('&')
+var temp = parametrs[0].split("=")
+const store_id = decodeURI(temp[1])
 var top_orders_list = document.getElementById("top_orders_list")
 var top_income_list = document.getElementById("top_income_list")
+// DAYS_OF_WEEK.forEach((i) => {
+    
+// })
 
-for(var i = 0; i<3; ++i){
-    var entry = document.createElement('li');
-    entry.appendChild(document.createTextNode("First Last"));
-    top_orders_list.appendChild(entry);
+function init() {
+    init_charts();
+
 }
 
 function init_charts() {

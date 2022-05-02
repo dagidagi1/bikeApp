@@ -6,6 +6,8 @@ let data = [];
 const userNameNavBar = document.getElementById("navbar_profile_name");
 const wish_list = document.getElementById("wish_list");
 const shopping_cart = document.getElementById("shopping_cart");
+const my_store = document.getElementById("nav_store");
+var has_store = false;
 const updateNavBar = () => {
   fbAuth.onAuthStateChanged((user) => {
     if (user) {
@@ -17,6 +19,7 @@ const updateNavBar = () => {
         .then((snapshot) => {
           snapshot.forEach((doc) => {
             userNameNavBar.innerText = doc.data().name;
+            if(doc.data().store != false) has_store = doc.data().store;
             if (doc.data().wishList.length > 0) wish_list.style = "color: red";
             if (doc.data().orderList.length > 0)
               shopping_cart.style = "color: red";
@@ -70,6 +73,12 @@ const init = () => {
       redirectToDiscription(i);
     });
   }
+  my_store.addEventListener("click", function(){
+    if(has_store != false){
+      location.replace("shop_dashboard.html" + '?id=' + has_store);
+    }
+    else {location.replace("shop_unregistered.html");}
+  })
 };
 
 dbProducts.get().then((querySnapshot) => {
