@@ -57,7 +57,6 @@ searchBtn.addEventListener("click", () => {
   init(d);
 });
 function productElment(d, i) {
-  console.log("catalog/productElment(d,i): ", d, i);
   return `<div class="col">
     <a href="product.html?index=${i}">
       <div class="card">
@@ -79,12 +78,10 @@ function productElment(d, i) {
 }
 //inside init there is a call to productelement with undified object
 const init = (data) => {
-  console.log("catalog/init/data: ", data);
-  console.log((data.length % 4) + 2);
-  for (var i = 0; i < (data.length % 5) + 1; i++) {
+  for (var i = 0; i < 10; i++) {
     col = document.getElementById(`col_${i}`);
     col.innerHTML = "";
-    for (var j = 0; j < MAX_IN_ROW; j++) {
+    for (var j = 0; data.length != 0 && j < MAX_IN_ROW; j++) {
       col.innerHTML += productElment(
         data[j + i * MAX_IN_ROW],
         j + i * MAX_IN_ROW
@@ -125,13 +122,10 @@ dropdownChoiceScooter.addEventListener("click", () => {
   init(newData);
 });
 updateNavBar();
-const updateGlobal = (i) => {
-  // window["example_attribute"] = i;
-};
+
 dbProducts.get().then((querySnapshot) => {
   querySnapshot.forEach((doc) => {
     data.push(doc.data());
   });
-  console.log(data);
   init(data);
 });

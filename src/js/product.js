@@ -38,6 +38,7 @@ const updateNavBar = () => {
         .then((snapshot) => {
           snapshot.forEach((doc) => {
             cur_user = doc.data();
+            cur_user.id = doc.id;
             console.log(cur_user);
             userNameNavBar.innerText = doc.data().name;
             if (doc.data().wishList.length > 0) wish_list.style = "color: red";
@@ -73,7 +74,11 @@ const updateDescriptions = (data) => {
 const addToCart = () => {
   //need to call firebase to update user
   cur_user.orderList.push(index_p);
+  dbUsers.doc(cur_user.id).update(cur_user);
+  updateNavBar();
 };
 const addToWishList = () => {
   cur_user.wishList.push(index_p);
+  dbUsers.doc(cur_user.id).update(cur_user);
+  updateNavBar();
 };

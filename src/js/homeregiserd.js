@@ -31,8 +31,8 @@ const updateNavBar = () => {
 updateNavBar();
 function productElment(d, i) {
   return `<div class="col">
-  <a href="product.html">
-  <div class="card" id="${i}">
+  <a href="product.html?index=${i}">
+  <div class="card">
   <div class="card-body"><img class="img-fluid" src=${
     d.type === 0
       ? "../../assets/img/200829b1-9d17-4b9b-8bf8-36baba8859e6.jpg"
@@ -67,11 +67,8 @@ const init = () => {
       b.price - a.price;
     });
   col = document.getElementById(`col_1`);
-  for (let i = 0; i < 5; i++) {
-    col.innerHTML += productElment(d[i], i);
-    document.getElementById(`${i}`)?.addEventListener("click", () => {
-      redirectToDiscription(i);
-    });
+  for (let i = 5; i < 10; i++) {
+    col.innerHTML += productElment(d[i - 5], i);
   }
   my_store.addEventListener("click", function () {
     if (has_store != false) {

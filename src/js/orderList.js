@@ -1,25 +1,35 @@
-import { dbProducts, fbAuth, dbUsers } from "../firebase/data.js";
+import { dbProducts, fbAuth, dbUsers, dbOrders } from "../firebase/data.js";
 const rate_order_text = document.getElementById("rate_order_text");
 const rate_order = document.getElementById("rate_order");
 const btn_submit_review = document.getElementById("submit_review");
 const search = document.getElementById("searchgroup");
 search.remove();
-let user;
+var orders = [];
+var user;
 fbAuth.onAuthStateChanged((u) => {
   if (u) {
-    // User is signed in, see docs for a list of available properties
-    // https://firebase.google.com/docs/reference/js/firebase.User
     dbUsers
       .where("email", "==", u.email)
       .get()
       .then((snapshot) => {
         snapshot.forEach((doc) => {
           user = doc.data();
-          init();
+          loadorders();
         });
       });
   }
 });
+const loadorders = () => {
+  dbOrders
+    .where("email", "==", user.email)
+    .get()
+    .then((querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+        orders.push(doc.data());
+      });
+      init();
+    });
+};
 const orderList = document.getElementById("orderList");
 const userNameNavBar = document.getElementById("navbar_profile_name");
 const wish_list = document.getElementById("wish_list");
@@ -49,7 +59,7 @@ const makeRowOrder = (ord) => {
     <td>${ord.order_number}</td>
     <td>
       <img
-        src='assets/img/200829b1-9d17-4b9b-8bf8-36baba8859e6.jpg'
+        src='${ord.src}'
         width="80px"
       />
     </td>
@@ -131,7 +141,7 @@ const makeRowOrder = (ord) => {
       value="${ord.order_number}"
       data-bs-target="#modal-2"
               data-bs-toggle="modal"
-              
+
     >
       Leave feedback&nbsp;<i class="fa fa-pencil"></i>
     </button>
@@ -140,34 +150,35 @@ const makeRowOrder = (ord) => {
   }
 };
 const CancelOrder = (e) => {
-  user.orderList.map((o) => {
-    if (o.order_number === e) o.status = "Cancelled";
+  orders.map((o) => {
+    if (o.order_number === e) {
+      o.status = "Cancelled";
+      dbOrders.where("order_number", "==", o.order_number).set(o);
+    }
   });
-  init();
 };
 const feedBack = (e) => {
-  user.orderList.map((o) => {
+  orders.map((o) => {
     if (o.order_number === e) {
       o.rate = rate_order.value;
       o.rate_order_text = rate_order_text.value;
       o.review = true;
+      dbOrders.doc(o.order_number).set(o);
     }
   });
 };
 btn_submit_review.addEventListener("click", () => {
   feedBack(document.getElementById("BtnfeedBack").value);
-  location.replace("/orders_list.html");
+  init();
 });
 const init = () => {
   orderList.innerHTML = "";
-  if (user.orderList.length > 0) {
-    for (let i = 0; i < user.orderList.length; i++) {
-      orderList.innerHTML += makeRowOrder(user.orderList[i], i);
-    }
-    document.getElementById("btncancel")?.addEventListener("click", () => {
-      CancelOrder(document.getElementById("btncancel").value);
-    });
+  for (let i = 0; i < orders.length; i++) {
+    orderList.innerHTML += makeRowOrder(orders[i], i);
   }
+  document.getElementById("btncancel")?.addEventListener("click", () => {
+    CancelOrder(document.getElementById("btncancel").value);
+    init();
+  });
 };
-const saveToFirebase = () => {};
 updateNavBar();
