@@ -1,18 +1,13 @@
-import { state } from "../../firebase.js";
-import { dbProducts } from "../firebase/data.js";
+import { dbProducts, fbAuth, dbUsers } from "../firebase/data.js";
 var data = [];
-if (firebase.apps.length === 0) firebase.initializeApp(state.firebaseConfig);
-// Set database variable
-//import "firebase/firestore";
-var database = firebase.firestore();
 function save() {
   //saves user only in auth
   var email = document.querySelector("#reg_email").value;
   var password = document.getElementById("reg_password").value;
   var name = document.getElementById("reg_name").value;
   var phone = document.getElementById("reg_phone").value;
-  firebase
-    .auth()
+
+  fbAuth
     .createUserWithEmailAndPassword(email, password)
     .then((userCredential) => {
       // Signed in
@@ -24,8 +19,8 @@ function save() {
       alert(errorCode);
       // ..
     });
-  database
-    .collection("users")
+  dbUsers
+    .doc()
     .add({
       email: email,
       password: password,
@@ -78,8 +73,7 @@ function remove() {
 function login() {
   var email = document.getElementById("login_email").value;
   var password = document.getElementById("login_pass").value;
-  firebase
-    .auth()
+  fbAuth
     .signInWithEmailAndPassword(email, password)
     .then((userCredential) => {
       // Signed in
@@ -111,7 +105,7 @@ function productElment(d, i) {
     <a>
     <div class="card" id="${i}">
     <div class="card-body"><img class="img-fluid" src=${
-      d.type === "Bicycle"
+      d.type === 0
         ? "../../assets/img/200829b1-9d17-4b9b-8bf8-36baba8859e6.jpg"
         : "../../assets/img/snimok6.png"
     }>
@@ -125,7 +119,7 @@ function productElment(d, i) {
 }
 const init = () => {
   let d = data
-    .filter((a) => a.type === "Bicycle")
+    .filter((a) => a.type === 0)
     .sort((a, b) => {
       b.price - a.price;
     });
@@ -138,7 +132,7 @@ const init = () => {
     });
   }
   d = data
-    .filter((a) => a.type === "Scooter")
+    .filter((a) => a.type === 1)
     .sort((a, b) => {
       b.price - a.price;
     });
@@ -152,11 +146,10 @@ const init = () => {
     });
   }
 };
-dbProducts.get()
-.then((querySnapshot) => {
-  let x = [];
+dbProducts.get().then((querySnapshot) => {
   querySnapshot.forEach((doc) => {
     data.push(doc.data());
   });
+  console.log(data);
   init();
 });
