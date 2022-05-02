@@ -153,7 +153,7 @@ const CancelOrder = (e) => {
   orders.map((o) => {
     if (o.order_number === e) {
       o.status = "Cancelled";
-      dbOrders.where("order_number", "==", o.order_number).set(o);
+      dbOrders.doc(o.order_number).set(o);
     }
   });
 };

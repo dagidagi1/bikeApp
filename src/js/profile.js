@@ -1,10 +1,16 @@
 import { dbProducts, fbAuth, dbUsers } from "../firebase/data.js";
-let username = document.getElementById("username");
-let phone_number = document.getElementById("phone_number");
-let email = document.getElementById("email");
+const username = document.getElementById("username");
+const phone_number = document.getElementById("phone_number");
+const email = document.getElementById("email");
+const passwored = document.getElementById("passwored");
+const passwored_c = document.getElementById("passwored_c");
+const save_pass = document.getElementById("save_password");
 const search = document.getElementById("searchgroup");
 search.remove();
-let user;
+var user;
+const cur_user = fbAuth.currentUser;
+const edit_btn = document.getElementById("edit_btn");
+const save_btn_set = document.getElementById("save_btn");
 const userNameNavBar = document.getElementById("navbar_profile_name");
 const wish_list = document.getElementById("wish_list");
 const shopping_cart = document.getElementById("shopping_cart");
@@ -20,7 +26,6 @@ const updateNavBar = () => {
           snapshot.forEach((doc) => {
             user = doc.data();
             user.id = doc.id;
-            console.log(user);
             userNameNavBar.innerText = doc.data().name;
             updateDetails();
             if (doc.data().store != false) has_store = doc.data().store;
@@ -32,9 +37,6 @@ const updateNavBar = () => {
     }
   });
 };
-updateNavBar();
-const edit_btn = document.getElementById("edit_btn");
-const save_btn_set = document.getElementById("save_btn");
 edit_btn.addEventListener("click", () => {
   save_btn_set.disabled = false;
   email.disabled = false;
@@ -44,12 +46,12 @@ edit_btn.addEventListener("click", () => {
 });
 
 save_btn_set.addEventListener("click", () => {
-  user.name = username.value;
-  user.phone = phone_number.value;
-  dbUsers.doc(user.id).update(user);
+  saveToFirebase();
 });
-
-const updateDetails = () => {
+save_pass.addEventListener("click", () => {
+  changePassword();
+});
+function updateDetails() {
   username.value = user.name;
   phone_number.value = user.phone;
   email.value = user.email;
@@ -57,4 +59,27 @@ const updateDetails = () => {
   username.disabled = true;
   phone_number.disabled = true;
   save_btn_set.disabled = true;
-};
+  dbUsers.doc(user.id).set(user);
+}
+function saveToFirebase() {
+  user.name = username.value;
+  user.phone = phone_number.value;
+  console.log(user);
+  edit_btn.disabled = false;
+  updateDetails();
+}
+function changePassword() {
+  if (passwored.value === passwored_c.value && passwored.value.length > 5) {
+    cur_user
+      .updatePassword(passwored.value)
+      .then(() => {
+        alert("Password changed");
+      })
+      .catch((error) => {
+        alert(error);
+      });
+  }
+  alert("error");
+  updateDetails();
+}
+updateNavBar();
