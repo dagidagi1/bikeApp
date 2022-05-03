@@ -20,7 +20,6 @@ function save() {
       // ..
     });
   dbUsers
-    .doc()
     .add({
       email: email,
       password: password,
