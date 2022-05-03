@@ -1,4 +1,4 @@
-import { dbProducts, fbAuth, dbUsers, dbStores } from "../firebase/data.js";
+import { dbProducts, fbAuth, dbUsers, dbStores, storageRef } from "../firebase/data.js";
 
 const v_category = document.getElementById("category")
 const v_type = document.getElementById("vehicle_type")
@@ -17,6 +17,9 @@ var shop_id = null
 photo.addEventListener("change", (e) => {
     const file = e.target.files[0];
     console.log(file);
+    storageRef.child('x.png').put(file).then((snapshot) => {
+        console.log('Uploaded a blob or file!\n', snapshot);
+      });
 })
 
 add_item_btn.addEventListener("click", function () {

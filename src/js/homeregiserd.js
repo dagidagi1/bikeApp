@@ -1,4 +1,4 @@
-import { dbProducts, fbAuth, dbUsers, dbOrders } from "../firebase/data.js";
+import { dbProducts, fbAuth,storageRef, dbUsers, dbOrders } from "../firebase/data.js";
 const search = document.getElementById("searchgroup");
 search.remove();
 let col;
