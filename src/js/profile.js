@@ -1,4 +1,4 @@
-import { dbProducts, fbAuth, dbUsers } from "../firebase/data.js";
+import { dbProducts, fbAuth, dbUsers, dbOrders } from "../firebase/data.js";
 const username = document.getElementById("username");
 const phone_number = document.getElementById("phone_number");
 const email = document.getElementById("email");
@@ -8,7 +8,11 @@ const save_pass = document.getElementById("save_password");
 const search = document.getElementById("searchgroup");
 search.remove();
 var user;
-const cur_user = fbAuth.currentUser;
+var orders = [];
+let cur_user;
+fbAuth.onAuthStateChanged((u) => {
+  cur_user = u;
+});
 const edit_btn = document.getElementById("edit_btn");
 const save_btn_set = document.getElementById("save_btn");
 const userNameNavBar = document.getElementById("navbar_profile_name");
@@ -30,7 +34,7 @@ const updateNavBar = () => {
             updateDetails();
             if (doc.data().store != false) has_store = doc.data().store;
             if (doc.data().wishList.length > 0) wish_list.style = "color: red";
-            if (doc.data().orderList.length > 0)
+            if (doc.data().shoppingList.length > 0)
               shopping_cart.style = "color: red";
           });
         });
@@ -64,12 +68,14 @@ function updateDetails() {
 function saveToFirebase() {
   user.name = username.value;
   user.phone = phone_number.value;
-  console.log(user);
   edit_btn.disabled = false;
   updateDetails();
 }
 function changePassword() {
   if (passwored.value === passwored_c.value && passwored.value.length > 5) {
+    user.password = passwored.value;
+    updateDetails();
+    console.log(cur_user);
     cur_user
       .updatePassword(passwored.value)
       .then(() => {
@@ -78,8 +84,7 @@ function changePassword() {
       .catch((error) => {
         alert(error);
       });
-  }
-  alert("error");
+  } else alert("error");
   updateDetails();
 }
 updateNavBar();

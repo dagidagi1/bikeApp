@@ -46,7 +46,7 @@ const updateNavBar = () => {
           snapshot.forEach((doc) => {
             userNameNavBar.innerText = doc.data().name;
             if (doc.data().wishList.length > 0) wish_list.style = "color: red";
-            if (doc.data().orderList.length > 0)
+            if (doc.data().shoppingList.length > 0)
               shopping_cart.style = "color: red";
           });
         });
@@ -154,6 +154,7 @@ const CancelOrder = (e) => {
     if (o.order_number === e) {
       o.status = "Cancelled";
       dbOrders.doc(o.order_number).set(o);
+      init();
     }
   });
 };

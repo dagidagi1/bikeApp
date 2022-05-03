@@ -1,8 +1,9 @@
-import { dbProducts, fbAuth, dbUsers } from "../firebase/data.js";
+import { dbProducts, fbAuth, dbUsers, dbOrders } from "../firebase/data.js";
 const MAX_IN_ROW = 4;
 const serachType = ["Bike", "bicycle", "scooter", "BMX"];
 let col;
-let data = [];
+var data = [];
+var orders = [];
 const dropdownChoiceAll = document.getElementById("ct_all");
 const dropdownChoiceBicycle = document.getElementById("ct_bic");
 const dropdownChoiceScooter = document.getElementById("ct_scot");
@@ -28,7 +29,7 @@ const updateNavBar = () => {
           snapshot.forEach((doc) => {
             userNameNavBar.innerText = doc.data().name;
             if (doc.data().wishList.length > 0) wish_list.style = "color: red";
-            if (doc.data().orderList.length > 0)
+            if (doc.data().shoppingList.length > 0)
               shopping_cart.style = "color: red";
           });
         });
@@ -60,17 +61,9 @@ function productElment(d, i) {
   return `<div class="col">
     <a href="product.html?index=${i}">
       <div class="card">
-          <div class="card-body"><img class="img-fluid" src=${
-            d.type === 0
-              ? "assets/img/200829b1-9d17-4b9b-8bf8-36baba8859e6.jpg"
-              : "assets/img/snimok6.png"
-          }>
-              <h4 class="card-title" style="color: var(--bs-gray);">${
-                d.name
-              }</h4>
-              <h6 class="text-muted card-subtitle mb-2" style="font-weight: bold;">${
-                d.price
-              }$</h6>
+          <div class="card-body"><img class="img-fluid" src="${d.src}">
+              <h4 class="card-title" style="color: var(--bs-gray);">${d.name}</h4>
+              <h6 class="text-muted card-subtitle mb-2" style="font-weight: bold;">${d.price}$</h6>
           </div>
       </div> 
     </a>

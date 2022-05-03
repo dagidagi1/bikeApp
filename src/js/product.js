@@ -1,9 +1,9 @@
-import { dbProducts, fbAuth, dbUsers } from "../firebase/data.js";
+import { dbProducts, fbAuth, dbUsers, dbOrders } from "../firebase/data.js";
 var parametrs = location.search.substring(1).split("&");
 var temp = parametrs[0].split("=");
 const index_p = decodeURI(temp[1]);
-let data = [];
-let cur_user;
+var data = [];
+var cur_user;
 const type = document.getElementById("type_d");
 const name = document.getElementById("product_page_name");
 const price = document.getElementById("product_page_price");
@@ -37,12 +37,12 @@ const updateNavBar = () => {
         .get()
         .then((snapshot) => {
           snapshot.forEach((doc) => {
-            cur_user = doc.data();
+            cur_user = user;
             cur_user.id = doc.id;
             console.log(cur_user);
             userNameNavBar.innerText = doc.data().name;
             if (doc.data().wishList.length > 0) wish_list.style = "color: red";
-            if (doc.data().orderList.length > 0)
+            if (doc.data().shoppingList.length > 0)
               shopping_cart.style = "color: red";
           });
         });
@@ -66,13 +66,18 @@ const updateDescriptions = (data) => {
   max_speed.innerText = data.max_speed;
   weight.innerText = data.weight;
   wheel_size.innerText = data.wheel_size;
-  img.src =
-    data.type === 0
-      ? "assets/img/200829b1-9d17-4b9b-8bf8-36baba8859e6.jpg"
-      : "assets/img/snimok6.png";
+  img.src = data.src;
 };
 const addToCart = () => {
-  //need to call firebase to update user
+  const r = Math.floor(1000 + Math.random() * 9000);
+  dbOrders.doc("#" + r).set({
+    email: cur_user.email,
+    nameProduct: data[index_p].name,
+    order_number: "#" + r,
+    status: "Waiting",
+    src: data[index_p].src,
+    review: false,
+  });
   cur_user.orderList.push(index_p);
   dbUsers.doc(cur_user.id).update(cur_user);
   updateNavBar();
