@@ -11,7 +11,13 @@ const wheel_size = document.getElementById("wheel_size")
 const quantity = document.getElementById("quantity")
 const description = document.getElementById("description")
 const add_item_btn = document.getElementById("add_item_btn")
+const photo = document.getElementById("photo")
 var shop_id = null
+
+photo.addEventListener("change", (e) => {
+    const file = e.target.files[0];
+    console.log(file);
+})
 
 add_item_btn.addEventListener("click", function () {
     fbAuth.onAuthStateChanged((user) => {
@@ -39,7 +45,6 @@ add_item_btn.addEventListener("click", function () {
                     storeRef.update({
                         products: firebase.firestore.FieldValue.arrayUnion(doc_id)
                     });
-                    // location.replace("registered_home.html" + '?id='+shop_id);
                 })
                 .catch((error) => {
                     console.error("Error adding document: ", error);
@@ -47,5 +52,5 @@ add_item_btn.addEventListener("click", function () {
             })
             
         }
-        });
     });
+});

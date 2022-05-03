@@ -1,32 +1,50 @@
-let store_name = document.getElementById("store_name")
-var sunday = document.getElementById("sunday_check")
-let sunday_from = document.getElementById("sunday_from")
-let sunday_till = document.getElementById("sunday_till")
-let monday = document.getElementById("monday_check")
-let monday_from = document.getElementById("monday_from")
-let monday_till = document.getElementById("monday_till")
-let tuesday = document.getElementById("tuesday_check")
-let tuesday_from = document.getElementById("tuesday_from")
-let tuesday_till = document.getElementById("tuesday_till")
-let wednesday = document.getElementById("wednesday_check")
-let wednesday_from = document.getElementById("wednesday_from")
-let wednesday_till = document.getElementById("wednesday_till")
-let thursday = document.getElementById("thursday_check")
-let thursday_from = document.getElementById("thursday_from")
-let thursday_till = document.getElementById("thursday_till")
-let friday = document.getElementById("friday_check")
-let friday_from = document.getElementById("friday_from")
-let friday_till = document.getElementById("friday_till")
-let saturday = document.getElementById("saturday_check")
-let saturday_from = document.getElementById("saturday_from")
-let saturday_till = document.getElementById("saturday_till")
+import { fbAuth, dbUsers, dbStores } from "../firebase/data.js";
 
-function save(){
-    if(sunday.checked == true){
-        alert("true")
-    }
-    else{
-        alert("false")
-    }
-}
+const DAYS_OF_WEEK = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+
+let store_name = document.getElementById("store_name")
+let user_id = null
+let shop_id = null
+
+document.getElementById("create_btn").addEventListener("click", function(){
+    let work_hours = new Map();
+    DAYS_OF_WEEK.forEach((d)=>{
+        if(document.getElementById(d).checked == false){
+            work_hours.set(d, [false]);
+        }
+        else{
+            work_hours.set(d, [true, document.getElementById(`${d}_from`).value, document.getElementById(`${d}_till`).value]);
+        }
+    })
+    const w_h = Object.fromEntries(work_hours);
+    fbAuth.onAuthStateChanged((user) => {
+        if (user) {
+            dbUsers.where("email", "==", user.email).get()
+            .then((snapshot) => {
+                snapshot.forEach((doc) => {
+                    user_id = doc.id;
+                });
+                dbStores.add({
+                    name: store_name.value,
+                    work_hours: w_h,
+                    products: [],
+                    income: 0,
+                    sells: 0
+                }).then((docRef) => {
+                    shop_id = docRef.id
+                    var userRef = dbUsers.doc(user_id)
+                    userRef.update({
+                        store: shop_id
+                    });
+                }).then(()=>{
+                    location.replace("shop_dashboard.html" + "?id=" + shop_id);
+                })
+                .catch((error) => {
+                    console.error("Error adding document: ", error);
+                });
+            })
+        }
+    });
+})
+
 

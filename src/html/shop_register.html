@@ -5,19 +5,10 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>Profile - Brand</title>
-    <link rel="stylesheet" href="../../assets/bootstrap/css/bootstrap.min.css?h=69aad2885f17d00b04c5ead447d80333">
-    <link rel="stylesheet" href="../../assets/css/Nunito.css?h=715bff1fb72b0101e79b1995396277e4">
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="../../assets/fonts/fontawesome5-overrides.min.css?h=a24cb0112e51902b6b3ed4606a7cd727">
-    <link rel="stylesheet" href="../../assets/css/Bootstrap-4---Product-List.css?h=52a9785eb5d8fa42022f3fc96f330ffd">
-    <link rel="stylesheet" href="../../assets/css/ebs-bootstrap-datepicker-1.css?h=46bd24b0e6d1732ea32cccb94aa36197">
-    <link rel="stylesheet" href="../../assets/css/ebs-bootstrap-datepicker-2.css?h=7b0a5deac08d5144edaf8e057d3e0c80">
-    <link rel="stylesheet" href="../../assets/css/ebs-bootstrap-datepicker-3.css?h=833282b1358a8ba920a3347a6509febe">
-    <link rel="stylesheet" href="../../assets/css/ebs-bootstrap-datepicker-4.css?h=61f2d5dfb2443dd2f8c216a555f129d7">
-    <link rel="stylesheet" href="../../assets/css/ebs-bootstrap-datepicker.css?h=51e3e64195ec22075db090daddbcfc11">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
-    <link rel="stylesheet" href="../../assets/css/untitled.css?h=d41d8cd98f00b204e9800998ecf8427e">
 </head>
 
 <body id="page-top">
@@ -75,7 +66,7 @@
                                 <form>
                                     <div class="row">
                                         <div class="col">
-                                            <div class="mb-3"><label class="form-label" for="username"><strong>Name</strong></label><input class="form-control" type="text" id="username" placeholder="Papa Bike" name="username"></div>
+                                            <div class="mb-3"><label class="form-label" for="store_name"><strong>Name</strong></label><input class="form-control" type="text" id="store_name" placeholder="Papa Bike" name="store_name"></div>
                                         </div>
                                         <div class="col"></div>
                                     </div>
@@ -93,16 +84,16 @@
                                                         <tr class="text-center">
                                                             <td class="text-start">
                                                                 <div class="col align-self-center">
-                                                                    <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-1" checked="" name="Sunday"><label class="form-check-label" for="formCheck-1">Sunday</label></div>
+                                                                    <div class="form-check"><input class="form-check-input" type="checkbox" id="Sunday" checked="" name="Sunday"><label class="form-check-label" for="formCheck-1">Sunday</label></div>
                                                                 </div>
                                                             </td>
                                                             <td>
                                                                 <div class="row">
                                                                     <div class="col-auto">
-                                                                        <div class="input-group"><span class="input-group-text">From</span><input class="form-control form-control-sm" type="text" required="" minlength="1" maxlength="2" pattern="[0]?[0-9]|[1][0-9]|[2][0-4]" value="8" name="Sunday_f" style="max-width: 40px;"><span class="input-group-text">:00</span></div>
+                                                                        <div class="input-group"><span class="input-group-text">From</span><input class="form-control form-control-sm" id="Sunday_from" type="text" required="" minlength="1" maxlength="2" pattern="[0]?[0-9]|[1][0-9]|[2][0-4]" value="8" name="Sunday_f" style="max-width: 40px;"><span class="input-group-text">:00</span></div>
                                                                     </div>
                                                                     <div class="col-auto">
-                                                                        <div class="input-group"><span class="input-group-text">Till</span><input class="form-control form-control-sm" type="text" required="" minlength="1" maxlength="2" pattern="[0]?[0-9]|[1][0-9]|[2][0-4]" value="22" style="max-width: 40px;"><span class="input-group-text">:00</span></div>
+                                                                        <div class="input-group"><span class="input-group-text">Till</span><input class="form-control form-control-sm" id="Sunday_till" type="text" required="" minlength="1" maxlength="2" pattern="[0]?[0-9]|[1][0-9]|[2][0-4]" value="22" style="max-width: 40px;"><span class="input-group-text">:00</span></div>
                                                                     </div>
                                                                 </div>
                                                             </td>
@@ -110,16 +101,16 @@
                                                         <tr class="text-center">
                                                             <td class="text-start">
                                                                 <div class="col align-self-center">
-                                                                    <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-2" name="Monday" checked=""><label class="form-check-label" for="formCheck-2">Monday</label></div>
+                                                                    <div class="form-check"><input class="form-check-input" type="checkbox" id="Monday" name="Monday" checked=""><label class="form-check-label" for="formCheck-2">Monday</label></div>
                                                                 </div>
                                                             </td>
                                                             <td>
                                                                 <div class="row">
                                                                     <div class="col-auto">
-                                                                        <div class="input-group"><span class="input-group-text">From</span><input class="form-control form-control-sm" type="text" required="" minlength="1" maxlength="2" pattern="[0]?[0-9]|[1][0-9]|[2][0-4]" value="8" style="max-width: 40px;"><span class="input-group-text">:00</span></div>
+                                                                        <div class="input-group"><span class="input-group-text">From</span><input class="form-control form-control-sm" id="Monday_from" type="text" required="" minlength="1" maxlength="2" pattern="[0]?[0-9]|[1][0-9]|[2][0-4]" value="8" style="max-width: 40px;"><span class="input-group-text">:00</span></div>
                                                                     </div>
                                                                     <div class="col-auto">
-                                                                        <div class="input-group"><span class="input-group-text">Till</span><input class="form-control form-control-sm" type="text" required="" minlength="1" maxlength="2" pattern="[0]?[0-9]|[1][0-9]|[2][0-4]" value="22" style="max-width: 40px;"><span class="input-group-text">:00</span></div>
+                                                                        <div class="input-group"><span class="input-group-text">Till</span><input class="form-control form-control-sm" id="Monday_till" type="text" required="" minlength="1" maxlength="2" pattern="[0]?[0-9]|[1][0-9]|[2][0-4]" value="22" style="max-width: 40px;"><span class="input-group-text">:00</span></div>
                                                                     </div>
                                                                 </div>
                                                             </td>
@@ -127,16 +118,16 @@
                                                         <tr class="text-center">
                                                             <td class="text-start">
                                                                 <div class="col align-self-center">
-                                                                    <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-3" name="Tuesday" checked=""><label class="form-check-label" for="formCheck-3">Tuesday</label></div>
+                                                                    <div class="form-check"><input class="form-check-input" type="checkbox" id="Tuesday" name="Tuesday" checked=""><label class="form-check-label" for="formCheck-3">Tuesday</label></div>
                                                                 </div>
                                                             </td>
                                                             <td>
                                                                 <div class="row">
                                                                     <div class="col-auto">
-                                                                        <div class="input-group"><span class="input-group-text">From</span><input class="form-control form-control-sm" type="text" required="" minlength="1" maxlength="2" pattern="[0]?[0-9]|[1][0-9]|[2][0-4]" value="8" style="max-width: 40px;"><span class="input-group-text">:00</span></div>
+                                                                        <div class="input-group"><span class="input-group-text">From</span><input class="form-control form-control-sm" id="Tuesday_from" type="text" required="" minlength="1" maxlength="2" pattern="[0]?[0-9]|[1][0-9]|[2][0-4]" value="8" style="max-width: 40px;"><span class="input-group-text">:00</span></div>
                                                                     </div>
                                                                     <div class="col-auto">
-                                                                        <div class="input-group"><span class="input-group-text">Till</span><input class="form-control form-control-sm" type="text" required="" minlength="1" maxlength="2" pattern="[0]?[0-9]|[1][0-9]|[2][0-4]" value="22" style="max-width: 40px;"><span class="input-group-text">:00</span></div>
+                                                                        <div class="input-group"><span class="input-group-text">Till</span><input class="form-control form-control-sm" id="Tuesday_till" type="text" required="" minlength="1" maxlength="2" pattern="[0]?[0-9]|[1][0-9]|[2][0-4]" value="22" style="max-width: 40px;"><span class="input-group-text">:00</span></div>
                                                                     </div>
                                                                 </div>
                                                             </td>
@@ -144,16 +135,16 @@
                                                         <tr class="text-center">
                                                             <td class="text-start">
                                                                 <div class="col align-self-center">
-                                                                    <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-4" name="Wednesday" checked=""><label class="form-check-label" for="formCheck-4">Wednesday</label></div>
+                                                                    <div class="form-check"><input class="form-check-input" type="checkbox" id="Wednesday" name="Wednesday" checked=""><label class="form-check-label" for="formCheck-4">Wednesday</label></div>
                                                                 </div>
                                                             </td>
                                                             <td>
                                                                 <div class="row">
                                                                     <div class="col-auto">
-                                                                        <div class="input-group"><span class="input-group-text">From</span><input class="form-control form-control-sm" type="text" required="" minlength="1" maxlength="2" pattern="[0]?[0-9]|[1][0-9]|[2][0-4]" value="8" style="max-width: 40px;"><span class="input-group-text">:00</span></div>
+                                                                        <div class="input-group"><span class="input-group-text">From</span><input class="form-control form-control-sm" id="Wednesday_from" type="text" required="" minlength="1" maxlength="2" pattern="[0]?[0-9]|[1][0-9]|[2][0-4]" value="8" style="max-width: 40px;"><span class="input-group-text">:00</span></div>
                                                                     </div>
                                                                     <div class="col-auto">
-                                                                        <div class="input-group"><span class="input-group-text">Till</span><input class="form-control form-control-sm" type="text" required="" minlength="1" maxlength="2" pattern="[0]?[0-9]|[1][0-9]|[2][0-4]" value="22" style="max-width: 40px;"><span class="input-group-text">:00</span></div>
+                                                                        <div class="input-group"><span class="input-group-text">Till</span><input class="form-control form-control-sm" id="Wednesday_till" type="text" required="" minlength="1" maxlength="2" pattern="[0]?[0-9]|[1][0-9]|[2][0-4]" value="22" style="max-width: 40px;"><span class="input-group-text">:00</span></div>
                                                                     </div>
                                                                 </div>
                                                             </td>
@@ -161,16 +152,16 @@
                                                         <tr class="text-center">
                                                             <td class="text-start">
                                                                 <div class="col align-self-center">
-                                                                    <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-5" name="Thursday" checked=""><label class="form-check-label" for="formCheck-5">Thursday</label></div>
+                                                                    <div class="form-check"><input class="form-check-input" type="checkbox" id="Thursday" name="Thursday" checked=""><label class="form-check-label" for="formCheck-5">Thursday</label></div>
                                                                 </div>
                                                             </td>
                                                             <td>
                                                                 <div class="row">
                                                                     <div class="col-auto">
-                                                                        <div class="input-group"><span class="input-group-text">From</span><input class="form-control form-control-sm" type="text" required="" minlength="1" maxlength="2" pattern="[0]?[0-9]|[1][0-9]|[2][0-4]" value="8" style="max-width: 40px;"><span class="input-group-text">:00</span></div>
+                                                                        <div class="input-group"><span class="input-group-text">From</span><input class="form-control form-control-sm" id="Thursday_from" type="text" required="" minlength="1" maxlength="2" pattern="[0]?[0-9]|[1][0-9]|[2][0-4]" value="8" style="max-width: 40px;"><span class="input-group-text">:00</span></div>
                                                                     </div>
                                                                     <div class="col-auto">
-                                                                        <div class="input-group"><span class="input-group-text">Till</span><input class="form-control form-control-sm" type="text" required="" minlength="1" maxlength="2" pattern="[0]?[0-9]|[1][0-9]|[2][0-4]" value="22" style="max-width: 40px;"><span class="input-group-text">:00</span></div>
+                                                                        <div class="input-group"><span class="input-group-text">Till</span><input class="form-control form-control-sm" id="Thursday_till" type="text" required="" minlength="1" maxlength="2" pattern="[0]?[0-9]|[1][0-9]|[2][0-4]" value="22" style="max-width: 40px;"><span class="input-group-text">:00</span></div>
                                                                     </div>
                                                                 </div>
                                                             </td>
@@ -178,16 +169,16 @@
                                                         <tr class="text-center">
                                                             <td class="text-start">
                                                                 <div class="col align-self-center">
-                                                                    <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-7" name="Friday" checked=""><label class="form-check-label" for="formCheck-7">Friday</label></div>
+                                                                    <div class="form-check"><input class="form-check-input" type="checkbox" id="Friday" name="Friday" checked=""><label class="form-check-label" for="formCheck-7">Friday</label></div>
                                                                 </div>
                                                             </td>
                                                             <td>
                                                                 <div class="row">
                                                                     <div class="col-auto">
-                                                                        <div class="input-group"><span class="input-group-text">From</span><input class="form-control form-control-sm" type="text" required="" minlength="1" maxlength="2" pattern="[0]?[0-9]|[1][0-9]|[2][0-4]" value="8" style="max-width: 40px;"><span class="input-group-text">:00</span></div>
+                                                                        <div class="input-group"><span class="input-group-text">From</span><input class="form-control form-control-sm" id="Friday_from" type="text" required="" minlength="1" maxlength="2" pattern="[0]?[0-9]|[1][0-9]|[2][0-4]" value="8" style="max-width: 40px;"><span class="input-group-text">:00</span></div>
                                                                     </div>
                                                                     <div class="col-auto">
-                                                                        <div class="input-group"><span class="input-group-text">Till</span><input class="form-control form-control-sm" type="text" required="" minlength="1" maxlength="2" pattern="[0]?[0-9]|[1][0-9]|[2][0-4]" value="22" style="max-width: 40px;"><span class="input-group-text">:00</span></div>
+                                                                        <div class="input-group"><span class="input-group-text">Till</span><input class="form-control form-control-sm" id="Friday_till" type="text" required="" minlength="1" maxlength="2" pattern="[0]?[0-9]|[1][0-9]|[2][0-4]" value="22" style="max-width: 40px;"><span class="input-group-text">:00</span></div>
                                                                     </div>
                                                                 </div>
                                                             </td>
@@ -195,16 +186,16 @@
                                                         <tr class="text-center">
                                                             <td class="text-start">
                                                                 <div class="col align-self-center">
-                                                                    <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-6" name="Saturday" checked=""><label class="form-check-label" for="formCheck-6">Saturday</label></div>
+                                                                    <div class="form-check"><input class="form-check-input" type="checkbox" id="Saturday" name="Saturday" checked=""><label class="form-check-label" for="formCheck-6">Saturday</label></div>
                                                                 </div>
                                                             </td>
                                                             <td>
                                                                 <div class="row">
                                                                     <div class="col-auto">
-                                                                        <div class="input-group"><span class="input-group-text">From</span><input class="form-control form-control-sm" type="text" required="" minlength="1" maxlength="2" pattern="[0]?[0-9]|[1][0-9]|[2][0-4]" value="8" style="max-width: 40px;"><span class="input-group-text">:00</span></div>
+                                                                        <div class="input-group"><span class="input-group-text">From</span><input class="form-control form-control-sm" id="Saturday_from" type="text" required="" minlength="1" maxlength="2" pattern="[0]?[0-9]|[1][0-9]|[2][0-4]" value="8" style="max-width: 40px;"><span class="input-group-text">:00</span></div>
                                                                     </div>
                                                                     <div class="col-auto">
-                                                                        <div class="input-group"><span class="input-group-text">Till</span><input class="form-control form-control-sm" type="text" required="" minlength="1" maxlength="2" pattern="[0]?[0-9]|[1][0-9]|[2][0-4]" value="22" style="max-width: 40px;"><span class="input-group-text">:00</span></div>
+                                                                        <div class="input-group"><span class="input-group-text">Till</span><input class="form-control form-control-sm" id="Saturday_till" type="text" required="" minlength="1" maxlength="2" pattern="[0]?[0-9]|[1][0-9]|[2][0-4]" value="22" style="max-width: 40px;"><span class="input-group-text">:00</span></div>
                                                                     </div>
                                                                 </div>
                                                             </td>
@@ -214,7 +205,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="text-center mb-3" style="margin-top: 20px;"><button class="btn btn-primary btn-sm" type="submit">Create</button></div>
+                                    <div class="text-center mb-3" style="margin-top: 20px;"><button class="btn btn-primary btn-sm" id="create_btn" type="button">Create</button></div>
                                 </form>
                             </div>
                         </div>
@@ -230,11 +221,10 @@
         </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="../../assets/js/bs-init.js?h=cfc1cf2ac1407be801a1de7dc4705464"></script>
-    <script src="../../assets/js/theme.js?h=79f403485707cf2617c5bc5a2d386bb0"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+    <script type="module" src="src/js/shop_register.js"></script>
 </body>
 
 </html>
