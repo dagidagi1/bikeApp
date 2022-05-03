@@ -39,12 +39,15 @@ add_item_btn.addEventListener("click", function () {
                     wheel_size: wheel_size.value,
                     quantity: quantity.value,
                     description: description.value,
+                    deleted: false
                 }).then((docRef) => {
                     const doc_id = docRef.id
                     var storeRef = dbStores.doc(shop_id)
                     storeRef.update({
                         products: firebase.firestore.FieldValue.arrayUnion(doc_id)
                     });
+                }).then(()=>{
+                    location.replace("shop_dashboard.html" + "?id=" + shop_id);
                 })
                 .catch((error) => {
                     console.error("Error adding document: ", error);
