@@ -1,10 +1,18 @@
 import { dbProducts, fbAuth, dbUsers, dbOrders } from "../firebase/data.js";
 const search = document.getElementById("searchgroup");
 search.remove();
+const data = [];
+let price = 0;
+var cur_user;
 const userNameNavBar = document.getElementById("navbar_profile_name");
 const wish_list = document.getElementById("wish_list");
 const shopping_cart = document.getElementById("shopping_cart");
 const shopping_cart_table = document.getElementById("shopping_cart_table");
+const total_price = document.getElementById("total_price");
+const chekout_shop_cart_btn = document.getElementById("chekout_shop_cart");
+chekout_shop_cart_btn.addEventListener("click", () => {
+  location.replace("chekout.html" + "?email=" + cur_user.email);
+});
 const updateNavBar = () => {
   fbAuth.onAuthStateChanged((user) => {
     if (user) {
@@ -15,10 +23,14 @@ const updateNavBar = () => {
         .get()
         .then((snapshot) => {
           snapshot.forEach((doc) => {
+            cur_user = doc.data();
+            cur_user.id = doc.id;
+            console.log(cur_user);
             userNameNavBar.innerText = doc.data().name;
             if (doc.data().wishList.length > 0) wish_list.style = "color: red";
             if (doc.data().shoppingList.length > 0)
               shopping_cart.style = "color: red";
+            init();
           });
         });
     }
@@ -49,10 +61,40 @@ const makeRow = (d, i) => {
     </td>
     <td>${d.price}$</td>
     <td class="text-end">
-      <button class="btn btn-primary" type="button" id="btn_delete" value="${i}">
+      <button class="btn btn-primary" type="button" id="btn_delete_${i}" value="${i}">
         Delete
       </button>
     </td>
   </tr>`;
 };
+function deleteItem(i) {
+  total_price.innerText = ` Subtotal: ${price}$`;
+  cur_user.shoppingList.pop(i);
+  dbUsers.doc(cur_user.id).set(cur_user);
+  if (cur_user.shoppingList.length == 0) shopping_cart.style = "";
+}
+function init() {
+  shopping_cart_table.innerHTML = "";
+  price = 0;
+  for (let i = 0; i < cur_user.shoppingList.length; i++) {
+    shopping_cart_table.innerHTML += makeRow(
+      data[+cur_user.shoppingList[i]],
+      i
+    );
+    price += data[+cur_user.shoppingList[i]].price;
+  }
+  total_price.innerText = ` Subtotal: ${price}$`;
+  for (let i = 0; i < cur_user.shoppingList.length; i++) {
+    document.getElementById(`btn_delete_${i}`).addEventListener("click", () => {
+      console.log(document.getElementById(`btn_delete_${i}`).value);
+      deleteItem(document.getElementById(`btn_delete_${i}`).value);
+      init();
+    });
+  }
+}
 updateNavBar();
+dbProducts.get().then((querySnapshot) => {
+  querySnapshot.forEach((doc) => {
+    data.push(doc.data());
+  });
+});
