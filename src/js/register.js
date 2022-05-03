@@ -1,17 +1,54 @@
 import { dbProducts, fbAuth, dbUsers } from "../firebase/data.js";
 var data = [];
+window.onload = function example() {
+  fbAuth.onAuthStateChanged((user) => {
+    if (user) {
+      location.replace("registered_home.html");
+    }
+  });
+}
+function checkInput(pass, confPass, name, phone){
+  if(!(/^[a-zA-Z]+$/.test(name)))
+    return 'Invalid name';
+  if(!(/^[0-9]{10}$/.test(phone)))
+    return 'Invalid phone';
+  if(pass.length < 6)
+    return 'Password must be at least 6 characters.';
+  if(!(pass === confPass))
+    return 'Passwords doesnt match!';
+  return 0;
+  //if (/^[a-zA-Z]+$/.test(name) && /^[0-9]{10}$/.test(phone) && password === confirmPass && password.length > 5)
+}
 function save() {
   //saves user only in auth
   var email = document.querySelector("#reg_email").value;
   var password = document.getElementById("reg_password").value;
+  var confirmPass = document.getElementById("reg_conf_pass").value;
   var name = document.getElementById("reg_name").value;
   var phone = document.getElementById("reg_phone").value;
-
-  fbAuth
-    .createUserWithEmailAndPassword(email, password)
+  let inputErr = checkInput(password,confirmPass, name,phone);
+  if(inputErr == 0){
+    fbAuth
+      .createUserWithEmailAndPassword(email, password)
     .then((userCredential) => {
       // Signed in
       var user = userCredential.user;
+      dbUsers.doc(email)
+        .set({
+          email: email,
+          name: name,
+          phone: phone,
+          store: null,
+          shoppingList: [],
+          wishList: []
+        })
+        .then((docRef) => {
+          //alert("Document written with ID: ", docRef.id);
+          location.replace("registered_home.html");
+        })
+        .catch((error) => {
+          console.error("Error adding document: ", error);
+        });
     })
     .catch((error) => {
       var errorCode = error.code;
@@ -19,21 +56,10 @@ function save() {
       alert(errorCode);
       // ..
     });
-  dbUsers
-    .add({
-      email: email,
-      password: password,
-      name: name,
-      phone: phone,
-      store: false,
-    })
-    .then((docRef) => {
-      alert("Document written with ID: ", docRef.id);
-      location.replace("registered_home.html");
-    })
-    .catch((error) => {
-      console.error("Error adding document: ", error);
-    });
+  }
+else{
+  alert(inputErr);
+}
 }
 
 function get() {
@@ -91,7 +117,7 @@ document.getElementById("email_ver_btn").addEventListener("click", function () {
   firebase
     .auth()
     .sendPasswordResetEmail(document.getElementById("forg_email").value)
-    .then(() => {})
+    .then(() => { })
     .catch((error) => {
       var errorCode = error.code;
       var errorMessage = error.message;
