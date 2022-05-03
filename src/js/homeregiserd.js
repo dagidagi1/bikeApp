@@ -89,3 +89,11 @@ dbUsers.get().then((querySnapshot) => {
   });
   //console.log(ddd);
 });
+
+var logoutBtn = document.getElementById("home_reg_logout_btn").addEventListener('click', function(){
+  fbAuth.signOut().then(() => {
+    location.replace("index.html");
+  }).catch((error) => {
+    console.log("Logout err: ", error);
+  });
+});
