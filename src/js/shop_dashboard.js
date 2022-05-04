@@ -71,6 +71,10 @@ document.getElementById("items").addEventListener("click", function(){
     location.replace("shop_items.html" + "?id=" + store_id);
 })
 
+document.getElementById("ordersCard").addEventListener("click", function(){
+    location.replace("shop_orders.html" + "?id=" + store_id);
+})
+
 function init(data) {
     document.getElementById("subMainContainer").style.display = "flex";
     init_statistics(data);

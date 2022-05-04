@@ -14,9 +14,6 @@ const weight = document.getElementById("weight_d");
 const wheel_size = document.getElementById("wheel_size_d");
 const quantity = document.getElementById("quantetity_d");
 const search = document.getElementById("searchgroup");
-const userNameNavBar = document.getElementById("navbar_profile_name");
-const wish_list = document.getElementById("wish_list");
-const shopping_cart = document.getElementById("shopping_cart");
 const img = document.getElementById("product_page_image");
 const add_wish_btn = document.getElementById("wish_btn");
 const add_cart_btn = document.getElementById("add_to_card");
@@ -27,7 +24,7 @@ add_wish_btn.addEventListener("click", () => {
   addToWishList();
 });
 search.remove();
-const updateNavBar = () => {
+const getUser = () => {
   fbAuth.onAuthStateChanged((user) => {
     if (user) {
       // User is signed in, see docs for a list of available properties
@@ -39,17 +36,12 @@ const updateNavBar = () => {
           snapshot.forEach((doc) => {
             cur_user = doc.data();
             cur_user.id = doc.id;
-            console.log(cur_user);
-            userNameNavBar.innerText = doc.data().name;
-            if (doc.data().wishList.length > 0) wish_list.style = "color: red";
-            if (doc.data().shoppingList.length > 0)
-              shopping_cart.style = "color: red";
           });
         });
     }
   });
 };
-updateNavBar();
+getUser();
 dbProducts.get().then((querySnapshot) => {
   querySnapshot.forEach((doc) => {
     data.push(doc.data());
@@ -58,7 +50,11 @@ dbProducts.get().then((querySnapshot) => {
   updateDescriptions(data[index_p]);
 });
 const updateDescriptions = (data) => {
-  type.innerText = data.type === 0 ? "Bycicle" : "Scooter";
+  if (data.type === 0)
+    type.innerText = data.category === 0 ? "Bycicle" : "Scooter";
+  if (data.type === 1)
+    type.innerText =
+      data.category === 0 ? "Electric Bycicle" : "Electric Scooter";
   name.innerText = data.name;
   price.innerText = data.price + "$";
   description.innerText = data.description;

@@ -17,25 +17,6 @@ const searchBtn = document.getElementById("navbar_search_button");
 const userNameNavBar = document.getElementById("navbar_profile_name");
 const wish_list = document.getElementById("wish_list");
 const shopping_cart = document.getElementById("shopping_cart");
-const updateNavBar = () => {
-  fbAuth.onAuthStateChanged((user) => {
-    if (user) {
-      // User is signed in, see docs for a list of available properties
-      // https://firebase.google.com/docs/reference/js/firebase.User
-      dbUsers
-        .where("email", "==", user.email)
-        .get()
-        .then((snapshot) => {
-          snapshot.forEach((doc) => {
-            userNameNavBar.innerText = doc.data().name;
-            if (doc.data().wishList.length > 0) wish_list.style = "color: red";
-            if (doc.data().shoppingList.length > 0)
-              shopping_cart.style = "color: red";
-          });
-        });
-    }
-  });
-};
 function Search(input) {
   return data.filter((d) => {
     if (d.description.toLocaleLowerCase().includes(input.toLocaleLowerCase())) {
@@ -102,19 +83,18 @@ dropdownChoiceAll.addEventListener("click", () => {
 });
 dropdownChoiceBicycle.addEventListener("click", () => {
   const newData = data.filter((d) => {
-    return d.type === 0;
+    return d.category === 0;
   });
   btn_category.innerText = "Bicycle";
   init(newData);
 });
 dropdownChoiceScooter.addEventListener("click", () => {
   const newData = data.filter((d) => {
-    return d.type === 1;
+    return d.category === 1;
   });
   btn_category.innerText = "Scooter";
   init(newData);
 });
-updateNavBar();
 
 dbProducts.get().then((querySnapshot) => {
   querySnapshot.forEach((doc) => {
