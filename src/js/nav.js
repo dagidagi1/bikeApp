@@ -29,3 +29,15 @@ document.getElementById("home_reg_logout_btn").addEventListener('click', functio
   });
 });
 
+document.getElementById("nav_home_btn").addEventListener('click', function() {
+  location.replace("registered_home.html");
+})
+document.getElementById("nav_catalog_btn").addEventListener('click', function() {
+  location.replace("catalogue.html");
+})
+document.getElementById("nav_orders_btn").addEventListener('click', function() {
+  location.replace("orders_list.html");
+})
+document.getElementById("nav_store_btn").addEventListener('click', function() {
+  location.replace("shop_dashboard.html");
+})
