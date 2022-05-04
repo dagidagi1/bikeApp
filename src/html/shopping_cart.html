@@ -50,35 +50,32 @@
             <li class="nav-item">
               <a
                 class="nav-link"
-                data-bss-hover-animate="pulse"
-                href="registered_home.html"
+                id="nav_home_btn" 
+                style="cursor: pointer"
                 ><i class="fa fa-home"></i><span>Home</span></a
               >
             </li>
             <li class="nav-item">
               <a
                 class="nav-link"
-                data-bss-hover-animate="pulse"
-                style="color: rgba(255, 255, 255, 0.8)"
-                href="catalogue.html"
+                style="color: rgba(255, 255, 255, 0.8);cursor: pointer"
+                id="nav_catalog_btn"
                 ><i class="fa fa-th"></i><span>Catalogue</span></a
               >
             </li>
             <li class="nav-item">
               <a
                 class="nav-link"
-                data-bss-hover-animate="pulse"
-                style="color: rgba(255, 255, 255, 0.8)"
-                href="orders_list.html"
+                style="color: rgba(255, 255, 255, 0.8);cursor: pointer"
+                id="nav_orders_btn"
                 ><i class="fa fa-reorder"></i><span>My orders</span></a
               >
             </li>
             <li class="nav-item">
               <a
                 class="nav-link"
-                data-bss-hover-animate="pulse"
-                style="color: rgba(255, 255, 255, 0.8)"
-                href="my_shop.html"
+                style="color: rgba(255, 255, 255, 0.8);cursor: pointer"
+                id="nav_store_btn"
                 ><i class="fa fa-shopping-bag"></i><span>My store</span></a
               >
             </li>
@@ -162,8 +159,8 @@
                       src="assets/img/avatars/avatar1.jpeg"
                   /></a>
                 </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="index.html"
+                <li class="nav-item" id="logout_btn">
+                  <a class="nav-link"
                     ><i class="fa fa-sign-out fs-5"></i
                   ></a>
                 </li>
@@ -177,117 +174,6 @@
                 <div class="table-responsive">
                   <table class="table">
                     <tbody id="shopping_cart_table">
-                      <!-- <tr>
-                        <td>
-                          <img
-                            src="assets/img/200829b1-9d17-4b9b-8bf8-36baba8859e6.jpg"
-                            width="80px"
-                          />
-                        </td>
-                        <td>Here is bike name</td>
-                        <td>
-                          Quantity:&nbsp;<input
-                            type="number"
-                            value="1"
-                            min="1"
-                            step="1"
-                            style="
-                              border-style: hidden;
-                              min-width: auto;
-                              max-width: 50px;
-                              color: var(--bs-gray-800);
-                            "
-                          />
-                        </td>
-                        <td>1499$</td>
-                        <td class="text-end">
-                          <button class="btn btn-primary" type="button">
-                            Delete
-                          </button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <img
-                            src="assets/img/200829b1-9d17-4b9b-8bf8-36baba8859e6.jpg"
-                            width="80px"
-                          />
-                        </td>
-                        <td>Here is bike name</td>
-                        <td>
-                          Quantity:&nbsp;<input
-                            type="number"
-                            value="1"
-                            min="1"
-                            step="1"
-                            style="
-                              border-style: hidden;
-                              min-width: auto;
-                              max-width: 50px;
-                              color: var(--bs-gray-800);
-                            "
-                          />
-                        </td>
-                        <td>1499$</td>
-                        <td class="text-end">
-                          <button class="btn btn-primary" type="button">
-                            Delete
-                          </button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <img src="assets/img/snimok6.png" width="80px" />
-                        </td>
-                        <td>Here is scooter name</td>
-                        <td>
-                          Quantity:&nbsp;<input
-                            type="number"
-                            value="1"
-                            min="1"
-                            step="1"
-                            style="
-                              border-style: hidden;
-                              min-width: auto;
-                              max-width: 50px;
-                              color: var(--bs-gray-800);
-                            "
-                          />
-                        </td>
-                        <td>999$</td>
-                        <td class="text-end">
-                          <button class="btn btn-primary" type="button">
-                            Delete
-                          </button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td style="text-align: left">
-                          <img src="assets/img/snimok6.png" width="80px" />
-                        </td>
-                        <td>Here is scooter name</td>
-                        <td>
-                          Quantity:&nbsp;<input
-                            type="number"
-                            value="1"
-                            min="1"
-                            step="1"
-                            style="
-                              border-style: hidden;
-                              min-width: auto;
-                              max-width: 50px;
-                              color: var(--bs-gray-800);
-                              text-align: left;
-                            "
-                          />
-                        </td>
-                        <td>999$</td>
-                        <td class="text-end">
-                          <button class="btn btn-primary" type="button">
-                            Delete
-                          </button>
-                        </td>
-                      </tr> -->
                     </tbody>
                   </table>
                 </div>
@@ -380,5 +266,6 @@
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-storage.js"></script>
+    <script type="module" src="src/js/nav.js"></script>
   </body>
 </html>

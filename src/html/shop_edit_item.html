@@ -5,19 +5,10 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>Dashboard - Brand</title>
-    <link rel="stylesheet" href="../../assets/bootstrap/css/bootstrap.min.css?h=69aad2885f17d00b04c5ead447d80333">
-    <link rel="stylesheet" href="../../assets/css/Nunito.css?h=715bff1fb72b0101e79b1995396277e4">
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="../../assets/fonts/fontawesome5-overrides.min.css?h=a24cb0112e51902b6b3ed4606a7cd727">
-    <link rel="stylesheet" href="../../assets/css/Bootstrap-4---Product-List.css?h=52a9785eb5d8fa42022f3fc96f330ffd">
-    <link rel="stylesheet" href="../../assets/css/ebs-bootstrap-datepicker-1.css?h=46bd24b0e6d1732ea32cccb94aa36197">
-    <link rel="stylesheet" href="../../assets/css/ebs-bootstrap-datepicker-2.css?h=7b0a5deac08d5144edaf8e057d3e0c80">
-    <link rel="stylesheet" href="../../assets/css/ebs-bootstrap-datepicker-3.css?h=833282b1358a8ba920a3347a6509febe">
-    <link rel="stylesheet" href="../../assets/css/ebs-bootstrap-datepicker-4.css?h=61f2d5dfb2443dd2f8c216a555f129d7">
-    <link rel="stylesheet" href="../../assets/css/ebs-bootstrap-datepicker.css?h=51e3e64195ec22075db090daddbcfc11">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
-    <link rel="stylesheet" href="../../assets/css/untitled.css?h=d41d8cd98f00b204e9800998ecf8427e">
 </head>
 
 <body id="page-top">
@@ -31,10 +22,10 @@
                 </a>
                 <hr class="sidebar-divider my-0">
                 <ul class="navbar-nav text-light" id="accordionSidebar">
-                    <li class="nav-item"><a class="nav-link" data-bss-hover-animate="pulse" href="registered_home.html"><i class="fa fa-home"></i><span>Home</span></a></li>
-                    <li class="nav-item"><a class="nav-link" data-bss-hover-animate="pulse" style="color: rgba(255, 255, 255, 0.8);" href="catalogue.html"><i class="fa fa-th"></i><span>Catalogue</span></a></li>
-                    <li class="nav-item"><a class="nav-link" data-bss-hover-animate="pulse" style="color: rgba(255, 255, 255, 0.8);" href="orders_list.html"><i class="fa fa-reorder"></i><span>My orders</span></a></li>
-                    <li class="nav-item"><a class="nav-link" data-bss-hover-animate="pulse" style="color: rgba(255, 255, 255, 0.8);" href="shop_unregistered.html"><i class="fa fa-shopping-bag"></i><span>My store</span></a></li>
+                    <li class="nav-item"><a class="nav-link" id="nav_home_btn" style="cursor: pointer"><i class="fa fa-home"></i><span>Home</span></a></li>
+                    <li class="nav-item"><a class="nav-link" style="color: rgba(255, 255, 255, 0.8);cursor: pointer" id="nav_catalog_btn"><i class="fa fa-th"></i><span>Catalogue</span></a></li>
+                    <li class="nav-item"><a class="nav-link" style="color: rgba(255, 255, 255, 0.8);cursor: pointer" id="nav_orders_btn"><i class="fa fa-reorder"></i><span>My orders</span></a></li>
+                    <li class="nav-item"><a class="nav-link" style="color: rgba(255, 255, 255, 0.8);cursor: pointer" id="nav_store_btn"><i class="fa fa-shopping-bag"></i><span>My store</span></a></li>
                 </ul>
                 <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0" id="sidebarToggle" type="button"></button></div>
             </div>
@@ -60,12 +51,12 @@
                             <li class="nav-item"><a class="nav-link" href="shopping_cart.html"><i class="fa fa-shopping-cart"></i></a></li>
                             <div class="d-none d-sm-block topbar-divider"></div>
                             <li class="nav-item dropdown no-arrow"><a class="nav-link" href="profile.html"><span class="d-none d-lg-inline me-2 text-gray-600 small" id="navbar_profile_name">User's name</span><img class="border rounded-circle img-profile" id="navbar_profile_photo" src="../../assets/img/avatars/avatar1.jpeg?h=0ecc82101fb9a10ca459432faa8c0656"></a></li>
-                            <li class="nav-item"><a class="nav-link" href="index.html"><i class="fa fa-sign-out fs-5"></i></a></li>
+                            <li class="nav-item" id="logout_btn"><a class="nav-link"><i class="fa fa-sign-out fs-5"></i></a></li>
                         </ul>
                     </div>
                 </nav>
                 <div class="container">
-                    <div class="card">
+                    <div class="card" id="mainCard" style="display: none;">
                         <div class="card-header">
                             <p class="fs-2">Edit item</p>
                         </div>
@@ -139,7 +130,7 @@
                                 </div>
                             </form>
                         </div>
-                        <div class="card-footer text-end"><button class="btn btn-primary btn-lg" type="submit">Save changes</button></div>
+                        <div class="card-footer text-end"><button class="btn btn-primary btn-lg" type="button" id="add_item_btn">Save changes</button></div>
                     </div>
                 </div>
             </div>
@@ -152,13 +143,12 @@
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="../../assets/js/bs-init.js?h=cfc1cf2ac1407be801a1de7dc4705464"></script>
-    <script src="../../assets/js/theme.js?h=79f403485707cf2617c5bc5a2d386bb0"></script>
-    <script src="src/js/shop_edit_item.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-storage.js"></script>
+    <script type="module" src="src/js/nav.js"></script>
+    <script type="module" src="src/js/shop_edit_item.js"></script>
 </body>
 
 </html>

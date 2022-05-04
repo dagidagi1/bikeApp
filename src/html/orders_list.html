@@ -56,36 +56,33 @@
           <ul class="navbar-nav text-light" id="accordionSidebar">
             <li class="nav-item">
               <a
-                class="nav-link"
-                data-bss-hover-animate="pulse"
-                href="registered_home.html"
+                class="nav-link active"
+                id="nav_home_btn" 
+                style="cursor: pointer"
                 ><i class="fa fa-home"></i><span>Home</span></a
               >
             </li>
             <li class="nav-item">
               <a
                 class="nav-link"
-                data-bss-hover-animate="pulse"
-                style="color: rgba(255, 255, 255, 0.8)"
-                href="catalogue.html"
+                style="color: rgba(255, 255, 255, 0.8);cursor: pointer"
+                id="nav_catalog_btn"
                 ><i class="fa fa-th"></i><span>Catalogue</span></a
               >
-            </li>
+            </li> 
             <li class="nav-item">
               <a
-                class="nav-link active"
-                data-bss-hover-animate="pulse"
-                style="color: rgba(255, 255, 255, 0.8)"
-                href="orders_list.html"
+                class="nav-link"
+                style="color: rgba(255, 255, 255, 0.8);cursor: pointer"
+                id="nav_orders_btn"
                 ><i class="fa fa-reorder"></i><span>My orders</span></a
               >
             </li>
             <li class="nav-item">
               <a
                 class="nav-link"
-                data-bss-hover-animate="pulse"
-                style="color: rgba(255, 255, 255, 0.8)"
-                href="my_shop.html"
+                style="color: rgba(255, 255, 255, 0.8);cursor: pointer"
+                id="nav_store_btn"
                 ><i class="fa fa-shopping-bag"></i><span>My store</span></a
               >
             </li>
@@ -177,7 +174,7 @@
                   /></a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" id="home_reg_logout_btn"
+                  <a class="nav-link" id="logout_btn"
                     ><i class="fa fa-sign-out fs-5"></i
                   ></a>
                 </li>
@@ -200,90 +197,6 @@
                       </tr>
                     </thead>
                     <tbody id="orderList">
-                      <!-- <tr>
-                        <td>#8965</td>
-                        <td>
-                          <img
-                            src="assets/img/200829b1-9d17-4b9b-8bf8-36baba8859e6.jpg"
-                            width="80px"
-                          />
-                        </td>
-                        <td>Here is bike name</td>
-                        <td style="color: var(--bs-danger)">Waiting</td>
-                        <td class="text-end">
-                          <button
-                            class="btn btn-primary"
-                            type="button"
-                            style="
-                              background: var(--bs-table-bg);
-                              color: var(--bs-table-striped-color);
-                              border-style: hidden;
-                            "
-                          >
-                            Cancel order&nbsp;<i class="fa fa-ban"></i>
-                          </button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>#2796</td>
-                        <td>
-                          <img
-                            src="assets/img/200829b1-9d17-4b9b-8bf8-36baba8859e6.jpg"
-                            width="80px"
-                          />
-                        </td>
-                        <td>Here is bike name</td>
-                        <td style="color: var(--bs-danger)">Waiting</td>
-                        <td class="text-end">
-                          <button
-                            class="btn btn-primary"
-                            type="button"
-                            style="
-                              background: var(--bs-table-bg);
-                              color: var(--bs-table-striped-color);
-                              border-style: hidden;
-                            "
-                          >
-                            Cancel order&nbsp;<i class="fa fa-ban"></i>
-                          </button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>#1345</td>
-                        <td>
-                          <img
-                            src="assets/img/200829b1-9d17-4b9b-8bf8-36baba8859e6.jpg"
-                            width="80px"
-                          />
-                        </td>
-                        <td>Here is bike name</td>
-                        <td style="color: var(--bs-info)">Shipping</td>
-                        <td class="text-end"></td>
-                      </tr>
-                      <tr>
-                        <td>#1234</td>
-                        <td style="text-align: left">
-                          <img
-                            src="assets/img/200829b1-9d17-4b9b-8bf8-36baba8859e6.jpg"
-                            width="80px"
-                          />
-                        </td>
-                        <td>Here is bike name</td>
-                        <td style="color: var(--bs-success)">Delivered</td>
-                        <td class="text-end">
-                          <button
-                            class="btn btn-primary visible"
-                            type="button"
-                            style="
-                              background: var(--bs-table-bg);
-                              color: var(--bs-table-striped-color);
-                              border-style: hidden;
-                            "
-                          >
-                            Leave feedback&nbsp;<i class="fa fa-pencil"></i>
-                          </button>
-                        </td>
-                      </tr> -->
                     </tbody>
                   </table>
                 </div>

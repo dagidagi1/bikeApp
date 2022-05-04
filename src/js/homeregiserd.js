@@ -7,7 +7,6 @@ var orders = [];
 // const userNameNavBar = document.getElementById("navbar_profile_name");
 // const wish_list = document.getElementById("wish_list");
 // const shopping_cart = document.getElementById("shopping_cart");
-const my_store = document.getElementById("nav_store");
 var has_store = false;
 // const updateNavBar = () => {
 //   fbAuth.onAuthStateChanged((user) => {
@@ -65,13 +64,6 @@ const init = () => {
   for (let i = 5; i < 10; i++) {
     col.innerHTML += productElment(d[i - 5], i);
   }
-  my_store.addEventListener("click", function () {
-    if (has_store != false) {
-      location.replace("shop_dashboard.html" + "?id=" + has_store);
-    } else {
-      location.replace("shop_unregistered.html");
-    }
-  });
 };
 
 dbProducts.get().then((querySnapshot) => {
