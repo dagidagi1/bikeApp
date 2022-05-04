@@ -1,34 +1,65 @@
+import { dbProducts, storageRef, fbAuth, dbUsers } from "../firebase/data.js";
+
 var parametrs = location.search.substring(1).split('&')
 var temp = parametrs[0].split("=")
-id = decodeURI(temp[1])
+const prodId = decodeURI(temp[1])
 
-v_category = document.getElementById("category")
-v_category.selectedIndex = id
+const v_category = document.getElementById("category")
+const v_type = document.getElementById("vehicle_type")
+const v_name = document.getElementById("vehicle_name")
+const price = document.getElementById("price")
+const manufacturer = document.getElementById("manufacturer")
+const max_speed = document.getElementById("max_speed")
+const weight = document.getElementById("weight")
+const wheel_size = document.getElementById("wheel_size")
+const quantity = document.getElementById("quantity")
+const description = document.getElementById("description")
 
-v_type = document.getElementById("vehicle_type")
-v_type.selectedIndex = id
+const itemRef = dbProducts.doc(prodId);
+itemRef.get().then((doc) => {
+    if (doc.exists) {
+        const data = doc.data()
+        v_category.selectedIndex = data.category
+        v_type.selectedIndex = data.type
+        v_name.value = data.name
+        price.value = data.price
+        manufacturer.value = data.manufacturer
+        max_speed.value = data.max_speed
+        weight.value = data.weight
+        wheel_size.value = data.wheel_size
+        quantity.value = data.quantity
+        description.value = data.description
+        document.getElementById("mainCard").style.display = "block"
+    } else {
+        // doc.data() will be undefined in this case
+        console.log("No such document!");
+    }
+}).catch((error) => {
+    console.log("Error getting document:", error);
+});
 
-v_name = document.getElementById("vehicle_name")
-v_name.value = id
-
-price = document.getElementById("price")
-price.value = id
-
-manufacturer = document.getElementById("manufacturer")
-manufacturer.value = id
-
-max_speed = document.getElementById("max_speed")
-max_speed.value = id
-
-weight = document.getElementById("weight")
-weight.value = id
-
-wheel_size = document.getElementById("wheel_size")
-wheel_size.value = id
-
-quantity = document.getElementById("quantity")
-quantity.value = id
-
-description = document.getElementById("description")
-description.value = id
-
+document.getElementById("add_item_btn").addEventListener("click", function () {
+    itemRef.update({
+        category: v_category.selectedIndex,
+        type: v_type.selectedIndex,
+        name: v_name.value,
+        price: price.value,
+        manufacturer: manufacturer.value,
+        max_speed: max_speed.value,
+        weight: weight.value,
+        wheel_size: wheel_size.value,
+        quantity: quantity.value,
+        description: description.value,
+        deleted: false
+    }).then(() => {
+        fbAuth.onAuthStateChanged((user)=>{
+            if(user){
+                dbUsers.doc(user.email).get().then((doc)=>{
+                    location.replace("shop_items.html" + "?id=" + doc.data().store);
+                })
+            }
+        });
+    }).catch((error) => {
+        console.error("Error adding document: ", error);
+    });
+});
