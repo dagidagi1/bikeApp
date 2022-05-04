@@ -37,7 +37,7 @@ const updateNavBar = () => {
         .get()
         .then((snapshot) => {
           snapshot.forEach((doc) => {
-            cur_user = user;
+            cur_user = doc.data();
             cur_user.id = doc.id;
             console.log(cur_user);
             userNameNavBar.innerText = doc.data().name;
@@ -69,16 +69,17 @@ const updateDescriptions = (data) => {
   img.src = data.src;
 };
 const addToCart = () => {
-  const r = Math.floor(1000 + Math.random() * 9000);
-  dbOrders.doc("#" + r).set({
-    email: cur_user.email,
-    nameProduct: data[index_p].name,
-    order_number: "#" + r,
-    status: "Waiting",
-    src: data[index_p].src,
-    review: false,
-  });
-  cur_user.orderList.push(index_p);
+  // const r = Math.floor(1000 + Math.random() * 9000);
+  // dbOrders.doc("#" + r).set({
+  //   email: cur_user.email,
+  //   nameProduct: data[index_p].name,
+  //   order_number: "#" + r,
+  //   status: "Waiting",
+  //   src: data[index_p].src,
+  //   review: false,
+  // });
+
+  cur_user.shoppingList.push(index_p);
   dbUsers.doc(cur_user.id).update(cur_user);
   updateNavBar();
 };
