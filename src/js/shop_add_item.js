@@ -13,14 +13,20 @@ const description = document.getElementById("description")
 const add_item_btn = document.getElementById("add_item_btn")
 const photo = document.getElementById("photo")
 var shop_id = null
-var file = 0, ext;
+var file = 0;
+var storeRef, doc_id;
 photo.addEventListener("change", (e) => {
     file = e.target.files[0];
-    const photoNameArr = file.name.split('.');
-    ext = photoNameArr[photoNameArr.length-1];
-    // storageRef.child('x.png').put(file).then((snapshot) => {
+    // const photoNameArr = file.name.split('.');
+    // ext = photoNameArr[photoNameArr.length-1];
+    // storageRef.child('www').put(file).then((snapshot) => {
     //     console.log('Uploaded a blob or file!\n', snapshot);
     //   });
+    //   storageRef.child('www').getDownloadURL()
+    //   .then((url) => {
+    //     console.log(url);
+    //     });
+    
 })
 
 add_item_btn.addEventListener("click", function () {
@@ -31,7 +37,8 @@ add_item_btn.addEventListener("click", function () {
                 snapshot.forEach((doc) => {
                     shop_id = doc.data().store;
                 });
-                let src;
+                let src, hasImg = true;
+                if(file == 0) hasImg = false;
                 if(v_category.selectedIndex === 0)
                     src = "assets/img/200829b1-9d17-4b9b-8bf8-36baba8859e6.jpg";
                 else
@@ -49,16 +56,23 @@ add_item_btn.addEventListener("click", function () {
                     quantity: quantity.value,
                     description: description.value,
                     deleted: false,
-                    src: src
+                    src: src,
+                    hasImg: hasImg
                 }).then((docRef) => {
-                    const doc_id = docRef.id
-                    var storeRef = dbStores.doc(shop_id)
-                    
-                    storeRef.update({
-                        products: firebase.firestore.FieldValue.arrayUnion(doc_id)
-                    });
+                    doc_id = docRef.id
+                    storeRef = dbStores.doc(shop_id)
+                    if(hasImg){
+                        storageRef.child(doc_id).put(file).then((snapshot) => {
+                            storeRef.update({
+                                products: firebase.firestore.FieldValue.arrayUnion(doc_id)
+                            });
+                            location.replace("shop_dashboard.html" + "?id=" + shop_id);
+                          });
+                    }
+                    else{
+                        location.replace("shop_dashboard.html" + "?id=" + shop_id);
+                    }
                 }).then(()=>{
-                    location.replace("shop_dashboard.html" + "?id=" + shop_id);
                 })
                 .catch((error) => {
                     console.error("Error adding document: ", error);

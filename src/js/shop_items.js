@@ -1,4 +1,4 @@
-import { dbProducts, dbStores } from "../firebase/data.js";
+import { dbProducts, dbStores, storageRef } from "../firebase/data.js";
 
 var parametrs = location.search.substring(1).split('&')
 var temp = parametrs[0].split("=")
@@ -39,7 +39,8 @@ function get_element(item) {
             var v_name = doc.data().name
             var price = doc.data().price
             var v_type = doc.data().category
-            build_element(item, img, v_name, price, v_type)
+            var hasImg = doc.data().hasImg
+            build_element(item, img, v_name, price, v_type, hasImg)
         } else {
             // doc.data() will be undefined in this case
             console.log("No such document!");
@@ -49,7 +50,7 @@ function get_element(item) {
     });
 }
 
-function build_element(i_id, img_src, i_name, i_price, i_type) {
+function build_element(i_id, img_src, i_name, i_price, i_type, hasImg) {
     const edit_btn = document.createElement('button')
     edit_btn.setAttribute("class", "btn btn-primary")
     edit_btn.setAttribute("type", "button")
@@ -72,10 +73,23 @@ function build_element(i_id, img_src, i_name, i_price, i_type) {
     row.setAttribute("id", "row" + i_id)
     var col1 = document.createElement('td')
     var img = document.createElement('img')
+    img.setAttribute("id", "item_img" + i_id);
     img.width = 80
     img.src = img_src
     col1.appendChild(img)
     row.appendChild(col1)
+    console.log(img_src);
+    if(hasImg){
+        storageRef.child(i_id).getDownloadURL()
+            .then((url) => {
+                // Or inserted into an <img> element
+                var img = document.getElementById("item_img" + i_id);
+                img.src = url;
+            })
+            .catch((error) => {
+                console.log(error)
+            });
+    }
 
     var col2 = document.createElement('td')
     var bike_name = document.createElement('span')
