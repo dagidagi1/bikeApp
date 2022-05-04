@@ -58,7 +58,11 @@ dbProducts.get().then((querySnapshot) => {
   updateDescriptions(data[index_p]);
 });
 const updateDescriptions = (data) => {
-  type.innerText = data.type === 0 ? "Bycicle" : "Scooter";
+  if (data.type === 0)
+    type.innerText = data.category === 0 ? "Bycicle" : "Scooter";
+  if (data.type === 1)
+    type.innerText =
+      data.category === 0 ? "Electric Bycicle" : "Electric Scooter";
   name.innerText = data.name;
   price.innerText = data.price + "$";
   description.innerText = data.description;
