@@ -102,14 +102,14 @@ dropdownChoiceAll.addEventListener("click", () => {
 });
 dropdownChoiceBicycle.addEventListener("click", () => {
   const newData = data.filter((d) => {
-    return d.type === 0;
+    return d.category === 0;
   });
   btn_category.innerText = "Bicycle";
   init(newData);
 });
 dropdownChoiceScooter.addEventListener("click", () => {
   const newData = data.filter((d) => {
-    return d.type === 1;
+    return d.category === 1;
   });
   btn_category.innerText = "Scooter";
   init(newData);
