@@ -2,7 +2,7 @@ import {fbAuth, dbUsers} from "../firebase/data.js"
 const userNameNavBar = document.getElementById("navbar_profile_name");
 const wish_list = document.getElementById("wish_list");
 const shopping_cart = document.getElementById("shopping_cart");
-
+var checker = 0;
 fbAuth.onAuthStateChanged((user) => {
   if (user) {
     // updates the name and color of wish list and cart.
@@ -14,14 +14,14 @@ fbAuth.onAuthStateChanged((user) => {
           userNameNavBar.innerText = doc.data().name;
           if (doc.data().wishList.length > 0) wish_list.style = "color: red";
           if (doc.data().shoppingList.length > 0) shopping_cart.style = "color: red";
+          checker++;
         });
       });
   }
 });
 
-document.getElementById("home_reg_logout_btn").addEventListener('click', function(){
-  //logout navbar button(li)
-  //alert("test logout");
+document.getElementById("logout_btn").addEventListener('click', function(){
+  checker++;
   fbAuth.signOut().then(() => {
     location.replace("index.html");
   }).catch((error) => {
@@ -29,15 +29,24 @@ document.getElementById("home_reg_logout_btn").addEventListener('click', functio
   });
 });
 
-document.getElementById("nav_home_btn").addEventListener('click', function() {
+const homeBtn = document.getElementById("nav_home_btn");
+const catalogBtn = document.getElementById("nav_catalog_btn");
+const ordersBtn = document.getElementById("nav_orders_btn");
+const storeBtn = document.getElementById("nav_store_btn");
+homeBtn.setAttribute("data-bss-hover-animate", "pulse");
+catalogBtn.setAttribute("data-bss-hover-animate", "pulse");
+ordersBtn.setAttribute("data-bss-hover-animate", "pulse");
+storeBtn.setAttribute("data-bss-hover-animate", "pulse");
+homeBtn.addEventListener('click', function() {
   location.replace("registered_home.html");
 })
-document.getElementById("nav_catalog_btn").addEventListener('click', function() {
+catalogBtn.addEventListener('click', function() {
   location.replace("catalogue.html");
 })
-document.getElementById("nav_orders_btn").addEventListener('click', function() {
+ordersBtn.addEventListener('click', function() {
   location.replace("orders_list.html");
 })
-document.getElementById("nav_store_btn").addEventListener('click', function() {
+storeBtn.addEventListener('click', function() {
   location.replace("shop_dashboard.html");
 })
+console.log(checker);
