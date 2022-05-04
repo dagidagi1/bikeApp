@@ -87,7 +87,7 @@ function init_statistics(data) {
     document.getElementById("shop_items").textContent = data.products.length
     document.getElementById("earnings").textContent = data.income
     document.getElementById("sells").textContent = data.sells
-    document.getElementById("orders").textContent = data.orders
+    document.getElementById("orders").textContent = data.orders.length
     document.getElementById("statistics_cards").style.display = "flex"
 }
 
