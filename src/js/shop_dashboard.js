@@ -1,26 +1,51 @@
-import { dbStores } from "../firebase/data.js";
+import { dbStores,dbUsers,fbAuth } from "../firebase/data.js";
 var days_of_week = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-// Get store id from Url link
-var parametrs = location.search.substring(1).split('&')
-var temp = parametrs[0].split("=")
-const store_id = decodeURI(temp[1])
+
+var store_id = null;
+var storeRef = null;
 var top_orders_list = document.getElementById("top_orders_list")
 var top_income_list = document.getElementById("top_income_list")
 const modal = new bootstrap.Modal(document.getElementById("modal-1"))
 
 // Get document of store from Firebase
-var docRef = dbStores.doc(store_id);
-docRef.get().then((doc) => {
-    if (doc.exists) {
-        init(doc.data())
-    } else {
-        // doc.data() will be undefined in this case
-        console.log("No such document!");
-        location.replace("registered_home.html");
-    }
-}).catch((error) => {
-    console.log("Error getting document:", error);
-});
+
+window.onload = function example() {
+    fbAuth.onAuthStateChanged((user) => {
+        if (user) {
+            dbUsers.doc(user.email).get().then((doc) => {
+                if(doc.data().store != false){
+                    store_id = doc.data().store;
+                    getStore();
+                }
+                else{
+                    document.getElementById("mainContainer").innerHTML = `<div class="text-center">
+                    <p class="text-center">Sorry, You haven't opened store yet :(</p>
+                    <a class="btn btn-primary" role="button" id="create_shop_btn" href="shop_register.html">Create store</a>
+                  </div>
+                </div>
+         `}
+            })
+        }
+        else
+            location.replace("registered_home.html");
+    });
+  }
+
+
+function getStore(){
+    storeRef = dbStores.doc(store_id);
+    storeRef.get().then((doc) => {
+        if (doc.exists) {
+            init(doc.data())
+        } else {
+            // doc.data() will be undefined in this case
+            console.log("No store with this id!\nid: ", store_id);
+            //location.replace("registered_home.html");
+        }
+    }).catch((error) => {
+        console.log("Error getting document:", error);
+    });
+}
 
 document.getElementById("save_btn").addEventListener("click", () => {
     let work_hours = new Map();
@@ -33,7 +58,7 @@ document.getElementById("save_btn").addEventListener("click", () => {
         }
     })
     const w_h = Object.fromEntries(work_hours);
-    docRef.update({
+    storeRef.update({
         work_hours: w_h
     }).then(() => {
         modal.hide()
@@ -47,6 +72,7 @@ document.getElementById("items").addEventListener("click", function(){
 })
 
 function init(data) {
+    document.getElementById("subMainContainer").style.display = "flex";
     init_statistics(data);
     init_top_customers();
     init_work_hours(data.work_hours);

@@ -1,6 +1,7 @@
 import { dbProducts, fbAuth, dbUsers } from "../firebase/data.js";
 var data = [];
 window.onload = function example() {
+
   fbAuth.onAuthStateChanged((user) => {
     if (user) {
       location.replace("registered_home.html");
@@ -33,12 +34,19 @@ function save() {
     .then((userCredential) => {
       // Signed in
       var user = userCredential.user;
-      dbUsers.doc(email)
+    })
+    .catch((error) => {
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      alert(errorCode);
+      // ..
+    });
+    dbUsers.doc(email)
         .set({
           email: email,
           name: name,
           phone: phone,
-          store: null,
+          store: false,
           shoppingList: [],
           wishList: []
         })
@@ -49,13 +57,6 @@ function save() {
         .catch((error) => {
           console.error("Error adding document: ", error);
         });
-    })
-    .catch((error) => {
-      var errorCode = error.code;
-      var errorMessage = error.message;
-      alert(errorCode);
-      // ..
-    });
   }
 else{
   alert(inputErr);

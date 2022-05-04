@@ -29,7 +29,8 @@ document.getElementById("create_btn").addEventListener("click", function(){
                     work_hours: w_h,
                     products: [],
                     income: 0,
-                    sells: 0
+                    sells: 0,
+                    orders: 0
                 }).then((docRef) => {
                     shop_id = docRef.id
                     var userRef = dbUsers.doc(user_id)
