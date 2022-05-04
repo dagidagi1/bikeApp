@@ -9,7 +9,7 @@ window.onload = function example() {
   });
 }
 function checkInput(pass, confPass, name, phone){
-  if(!(/^[a-zA-Z]+$/.test(name)))
+  if(!(/^[a-z A-Z]+$/.test(name)))
     return 'Invalid name';
   if(!(/^[0-9]{10}$/.test(phone)))
     return 'Invalid phone';
