@@ -13,13 +13,14 @@ const description = document.getElementById("description")
 const add_item_btn = document.getElementById("add_item_btn")
 const photo = document.getElementById("photo")
 var shop_id = null
-
+var file = 0, ext;
 photo.addEventListener("change", (e) => {
-    const file = e.target.files[0];
-    console.log(file);
-    storageRef.child('x.png').put(file).then((snapshot) => {
-        console.log('Uploaded a blob or file!\n', snapshot);
-      });
+    file = e.target.files[0];
+    const photoNameArr = file.name.split('.');
+    ext = photoNameArr[photoNameArr.length-1];
+    // storageRef.child('x.png').put(file).then((snapshot) => {
+    //     console.log('Uploaded a blob or file!\n', snapshot);
+    //   });
 })
 
 add_item_btn.addEventListener("click", function () {
@@ -30,6 +31,11 @@ add_item_btn.addEventListener("click", function () {
                 snapshot.forEach((doc) => {
                     shop_id = doc.data().store;
                 });
+                let src;
+                if(v_category.selectedIndex === 0)
+                    src = "assets/img/200829b1-9d17-4b9b-8bf8-36baba8859e6.jpg";
+                else
+                    src = "assets/img/snimok6.png";
                 dbProducts.add({
                     store_id: shop_id,
                     category: v_category.selectedIndex,
@@ -42,10 +48,12 @@ add_item_btn.addEventListener("click", function () {
                     wheel_size: wheel_size.value,
                     quantity: quantity.value,
                     description: description.value,
-                    deleted: false
+                    deleted: false,
+                    src: src
                 }).then((docRef) => {
                     const doc_id = docRef.id
                     var storeRef = dbStores.doc(shop_id)
+                    
                     storeRef.update({
                         products: firebase.firestore.FieldValue.arrayUnion(doc_id)
                     });
