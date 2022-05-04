@@ -4,8 +4,6 @@ search.remove();
 const data = [];
 let price = 0;
 var cur_user;
-const userNameNavBar = document.getElementById("navbar_profile_name");
-const wish_list = document.getElementById("wish_list");
 const shopping_cart = document.getElementById("shopping_cart");
 const shopping_cart_table = document.getElementById("shopping_cart_table");
 const total_price = document.getElementById("total_price");
@@ -13,7 +11,7 @@ const chekout_shop_cart_btn = document.getElementById("chekout_shop_cart");
 chekout_shop_cart_btn.addEventListener("click", () => {
   location.replace("chekout.html" + "?email=" + cur_user.email);
 });
-const updateNavBar = () => {
+const getUser = () => {
   fbAuth.onAuthStateChanged((user) => {
     if (user) {
       // User is signed in, see docs for a list of available properties
@@ -25,11 +23,6 @@ const updateNavBar = () => {
           snapshot.forEach((doc) => {
             cur_user = doc.data();
             cur_user.id = doc.id;
-            console.log(cur_user);
-            userNameNavBar.innerText = doc.data().name;
-            if (doc.data().wishList.length > 0) wish_list.style = "color: red";
-            if (doc.data().shoppingList.length > 0)
-              shopping_cart.style = "color: red";
             init();
           });
         });
@@ -92,7 +85,7 @@ function init() {
     });
   }
 }
-updateNavBar();
+getUser();
 dbProducts.get().then((querySnapshot) => {
   querySnapshot.forEach((doc) => {
     data.push(doc.data());
