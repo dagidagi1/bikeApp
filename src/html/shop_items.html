@@ -9,11 +9,7 @@
     <title>Dashboard - Brand</title>
     <link
       rel="stylesheet"
-      href="../../assets/bootstrap/css/bootstrap.min.css?h=69aad2885f17d00b04c5ead447d80333"
-    />
-    <link
-      rel="stylesheet"
-      href="../../assets/css/Nunito.css?h=715bff1fb72b0101e79b1995396277e4"
+      href="assets/bootstrap/css/bootstrap.min.css"
     />
     <link
       rel="stylesheet"
@@ -25,39 +21,7 @@
     />
     <link
       rel="stylesheet"
-      href="../../assets/fonts/fontawesome5-overrides.min.css?h=a24cb0112e51902b6b3ed4606a7cd727"
-    />
-    <link
-      rel="stylesheet"
-      href="../../assets/css/Bootstrap-4---Product-List.css?h=52a9785eb5d8fa42022f3fc96f330ffd"
-    />
-    <link
-      rel="stylesheet"
-      href="../../assets/css/ebs-bootstrap-datepicker-1.css?h=46bd24b0e6d1732ea32cccb94aa36197"
-    />
-    <link
-      rel="stylesheet"
-      href="../../assets/css/ebs-bootstrap-datepicker-2.css?h=7b0a5deac08d5144edaf8e057d3e0c80"
-    />
-    <link
-      rel="stylesheet"
-      href="../../assets/css/ebs-bootstrap-datepicker-3.css?h=833282b1358a8ba920a3347a6509febe"
-    />
-    <link
-      rel="stylesheet"
-      href="../../assets/css/ebs-bootstrap-datepicker-4.css?h=61f2d5dfb2443dd2f8c216a555f129d7"
-    />
-    <link
-      rel="stylesheet"
-      href="../../assets/css/ebs-bootstrap-datepicker.css?h=51e3e64195ec22075db090daddbcfc11"
-    />
-    <link
-      rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css"
-    />
-    <link
-      rel="stylesheet"
-      href="../../assets/css/untitled.css?h=d41d8cd98f00b204e9800998ecf8427e"
     />
   </head>
 
@@ -236,43 +200,7 @@
                     <h4 class="card-title">Scooters</h4>
                     <div class="table-responsive">
                       <table class="table">
-                        <tbody>
-                          <tr>
-                            <td>
-                              <img
-                                src="../../assets/img/snimok6.png?h=0f689f5f27d589190515d0ac2ffd7f39"
-                                width="80px"
-                              />
-                            </td>
-                            <td><span>Scooter name</span></td>
-                            <td><span>Price $</span></td>
-                            <td class="text-end">
-                              <div class="btn-group" role="group">
-                                <button
-                                  class="btn btn-primary"
-                                  type="button"
-                                  style="
-                                    color: var(--bs-table-striped-color);
-                                    background: var(--bs-table-bg);
-                                    border-style: hidden;
-                                  "
-                                >
-                                  Edit&nbsp;<i class="fa fa-pencil"></i></button
-                                ><button
-                                  class="btn btn-primary"
-                                  type="button"
-                                  style="
-                                    background: var(--bs-table-bg);
-                                    color: var(--bs-table-striped-color);
-                                    border-style: hidden;
-                                  "
-                                >
-                                  Delete&nbsp;<i class="fa fa-trash"></i>
-                                </button>
-                              </div>
-                            </td>
-                          </tr>
-                        </tbody>
+                        <tbody id="scooter_table"></tbody>
                       </table>
                     </div>
                   </div>
@@ -296,9 +224,7 @@
       </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="../../assets/js/bs-init.js?h=cfc1cf2ac1407be801a1de7dc4705464"></script>
-    <script src="../../assets/js/theme.js?h=79f403485707cf2617c5bc5a2d386bb0"></script>
-    <script src="src/js/shop_items.js"></script>
+    <script type="module" src="src/js/shop_items.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>

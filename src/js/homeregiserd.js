@@ -1,35 +1,35 @@
-import { dbProducts, fbAuth, dbUsers, dbOrders } from "../firebase/data.js";
+import { dbProducts, fbAuth,storageRef, dbUsers, dbOrders } from "../firebase/data.js";
 const search = document.getElementById("searchgroup");
 search.remove();
 let col;
 var data = [];
 var orders = [];
-const userNameNavBar = document.getElementById("navbar_profile_name");
-const wish_list = document.getElementById("wish_list");
-const shopping_cart = document.getElementById("shopping_cart");
+// const userNameNavBar = document.getElementById("navbar_profile_name");
+// const wish_list = document.getElementById("wish_list");
+// const shopping_cart = document.getElementById("shopping_cart");
 const my_store = document.getElementById("nav_store");
 var has_store = false;
-const updateNavBar = () => {
-  fbAuth.onAuthStateChanged((user) => {
-    if (user) {
-      // User is signed in, see docs for a list of available properties
-      // https://firebase.google.com/docs/reference/js/firebase.User
-      dbUsers
-        .where("email", "==", user.email)
-        .get()
-        .then((snapshot) => {
-          snapshot.forEach((doc) => {
-            userNameNavBar.innerText = doc.data().name;
-            if (doc.data().store != false) has_store = doc.data().store;
-            if (doc.data().wishList.length > 0) wish_list.style = "color: red";
-            if (doc.data().shoppingList.length > 0)
-              shopping_cart.style = "color: red";
-          });
-        });
-    }
-  });
-};
-updateNavBar();
+// const updateNavBar = () => {
+//   fbAuth.onAuthStateChanged((user) => {
+//     if (user) {
+//       // User is signed in, see docs for a list of available properties
+//       // https://firebase.google.com/docs/reference/js/firebase.User
+//       dbUsers
+//         .where("email", "==", user.email)
+//         .get()
+//         .then((snapshot) => {
+//           snapshot.forEach((doc) => {
+//             userNameNavBar.innerText = doc.data().name;
+//             if (doc.data().store != false) has_store = doc.data().store;
+//             if (doc.data().wishList.length > 0) wish_list.style = "color: red";
+//             if (doc.data().shoppingList.length > 0)
+//               shopping_cart.style = "color: red";
+//           });
+//         });
+//     }
+//   });
+// };
+// updateNavBar();
 function productElment(d, i) {
   return `<div class="col">
   <a href="product.html?index=${i}">

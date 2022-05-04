@@ -1,4 +1,4 @@
-import { dbProducts, fbAuth, dbUsers, dbStores } from "../firebase/data.js";
+import { dbProducts, fbAuth, dbUsers, dbStores, storageRef } from "../firebase/data.js";
 
 const v_category = document.getElementById("category")
 const v_type = document.getElementById("vehicle_type")
@@ -17,6 +17,9 @@ var shop_id = null
 photo.addEventListener("change", (e) => {
     const file = e.target.files[0];
     console.log(file);
+    storageRef.child('x.png').put(file).then((snapshot) => {
+        console.log('Uploaded a blob or file!\n', snapshot);
+      });
 })
 
 add_item_btn.addEventListener("click", function () {
@@ -39,12 +42,15 @@ add_item_btn.addEventListener("click", function () {
                     wheel_size: wheel_size.value,
                     quantity: quantity.value,
                     description: description.value,
+                    deleted: false
                 }).then((docRef) => {
                     const doc_id = docRef.id
                     var storeRef = dbStores.doc(shop_id)
                     storeRef.update({
                         products: firebase.firestore.FieldValue.arrayUnion(doc_id)
                     });
+                }).then(()=>{
+                    location.replace("shop_dashboard.html" + "?id=" + shop_id);
                 })
                 .catch((error) => {
                     console.error("Error adding document: ", error);

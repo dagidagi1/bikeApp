@@ -42,6 +42,10 @@ document.getElementById("save_btn").addEventListener("click", () => {
     });
 })
 
+document.getElementById("items").addEventListener("click", function(){
+    location.replace("shop_items.html" + "?id=" + store_id);
+})
+
 function init(data) {
     init_statistics(data);
     init_top_customers();
