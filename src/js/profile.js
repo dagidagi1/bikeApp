@@ -15,10 +15,7 @@ fbAuth.onAuthStateChanged((u) => {
 });
 const edit_btn = document.getElementById("edit_btn");
 const save_btn_set = document.getElementById("save_btn");
-const userNameNavBar = document.getElementById("navbar_profile_name");
-const wish_list = document.getElementById("wish_list");
-const shopping_cart = document.getElementById("shopping_cart");
-const updateNavBar = () => {
+const getUser = () => {
   fbAuth.onAuthStateChanged((u) => {
     if (u) {
       // User is signed in, see docs for a list of available properties
@@ -30,12 +27,9 @@ const updateNavBar = () => {
           snapshot.forEach((doc) => {
             user = doc.data();
             user.id = doc.id;
-            userNameNavBar.innerText = doc.data().name;
+            console.log(user);
             updateDetails();
             if (doc.data().store != false) has_store = doc.data().store;
-            if (doc.data().wishList.length > 0) wish_list.style = "color: red";
-            if (doc.data().shoppingList.length > 0)
-              shopping_cart.style = "color: red";
           });
         });
     }
@@ -87,4 +81,4 @@ function changePassword() {
   } else alert("error");
   updateDetails();
 }
-updateNavBar();
+getUser();
