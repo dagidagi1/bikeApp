@@ -60,11 +60,18 @@ document.getElementById("save_btn").addEventListener("click", () => {
     const w_h = Object.fromEntries(work_hours);
     storeRef.update({
         work_hours: w_h
-    }).then(() => {
-        modal.hide()
     }).catch((error) => {
         console.log("Error getting document:", error);
     });
+    days_of_week.forEach((day) => {
+        if (document.getElementById("modal_" + day).checked == false) {
+            document.getElementById(day).textContent = "Closed";
+        }
+        else {
+            document.getElementById(day).textContent = `${document.getElementById(day + "_from").value}:00 - ${document.getElementById(day + "_till").value}:00`;
+        }
+    });
+    modal.hide()
 })
 
 document.getElementById("items").addEventListener("click", function(){
