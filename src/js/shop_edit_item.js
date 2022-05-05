@@ -4,6 +4,8 @@ var parametrs = location.search.substring(1).split('&')
 var temp = parametrs[0].split("=")
 const prodId = decodeURI(temp[1])
 
+var file = 0
+var hasImg = false
 const v_category = document.getElementById("category")
 const v_type = document.getElementById("vehicle_type")
 const v_name = document.getElementById("vehicle_name")
@@ -14,6 +16,7 @@ const weight = document.getElementById("weight")
 const wheel_size = document.getElementById("wheel_size")
 const quantity = document.getElementById("quantity")
 const description = document.getElementById("description")
+const photo = document.getElementById("photo")
 
 const itemRef = dbProducts.doc(prodId);
 itemRef.get().then((doc) => {
@@ -29,6 +32,7 @@ itemRef.get().then((doc) => {
         wheel_size.value = data.wheel_size
         quantity.value = data.quantity
         description.value = data.description
+        hasImg = data.hasImg
         document.getElementById("mainCard").style.display = "block"
     } else {
         // doc.data() will be undefined in this case
@@ -37,6 +41,11 @@ itemRef.get().then((doc) => {
 }).catch((error) => {
     console.log("Error getting document:", error);
 });
+
+photo.addEventListener("change", (e) => {
+    file = e.target.files[0];
+    hasImg = true
+})
 
 document.getElementById("add_item_btn").addEventListener("click", function () {
     itemRef.update({
@@ -50,15 +59,19 @@ document.getElementById("add_item_btn").addEventListener("click", function () {
         wheel_size: wheel_size.value,
         quantity: quantity.value,
         description: description.value,
-        deleted: false
+        hasImg: hasImg
     }).then(() => {
-        fbAuth.onAuthStateChanged((user)=>{
-            if(user){
-                dbUsers.doc(user.email).get().then((doc)=>{
-                    location.replace("shop_items.html" + "?id=" + doc.data().store);
-                })
-            }
-        });
+        if(file != 0){
+            storageRef.child(prodId).put(file).then((snapshot) => {
+                fbAuth.onAuthStateChanged((user)=>{
+                    if(user){
+                        dbUsers.doc(user.email).get().then((doc)=>{
+                            location.replace("shop_items.html" + "?id=" + doc.data().store);
+                        })
+                    }
+                });
+            });
+        }
     }).catch((error) => {
         console.error("Error adding document: ", error);
     });
