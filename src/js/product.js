@@ -70,9 +70,9 @@ dbProducts.get().then((querySnapshot) => {
   }
 });
 const updateDescriptions = (data) => {
-  if (data.type === 0)
-    type.innerText = data.category === 0 ? "Bycicle" : "Scooter";
   if (data.type === 1)
+    type.innerText = data.category === 0 ? "Bycicle" : "Scooter";
+  if (data.type === 0)
     type.innerText =
       data.category === 0 ? "Electric Bycicle" : "Electric Scooter";
   name.innerText = data.name;

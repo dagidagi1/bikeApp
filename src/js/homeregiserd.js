@@ -25,27 +25,30 @@ function productElment(d, i) {
 }
 const init = () => {
   let d = data
-    .filter((a) => a.type === 0)
+    .filter((a) => a.category === 0)
     .sort((a, b) => {
       b.price - a.price;
     });
   col = document.getElementById(`col_0`);
   col.innerHTML = "";
   for (let i = 0; i < 5; i++) {
-    col.innerHTML += productElment(d[i], i);
-
-    document.getElementById(`${i}`)?.addEventListener("click", () => {
-      globalVariable = { example_attribute: i };
-    });
+    if (!data[i].deleted) {
+      col.innerHTML += productElment(d[i], i);
+      document.getElementById(`${i}`)?.addEventListener("click", () => {
+        globalVariable = { example_attribute: i };
+      });
+    }
   }
   d = data
-    .filter((a) => a.type === 1)
+    .filter((a) => a.category === 1)
     .sort((a, b) => {
       b.price - a.price;
     });
   col = document.getElementById(`col_1`);
   for (let i = 5; i < 10; i++) {
-    col.innerHTML += productElment(d[i - 5], i);
+    if (!data[i].deleted) {
+      col.innerHTML += productElment(d[i - 5], i);
+    }
   }
 };
 

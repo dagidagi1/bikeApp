@@ -53,11 +53,13 @@ const init = (da, sort = "all") => {
     col = document.getElementById(`col_${i}`);
     col.innerHTML = "";
     for (var j = 0; data.length != 0 && j < MAX_IN_ROW; j++) {
-      col.innerHTML += productElment(
-        da[j + i * MAX_IN_ROW],
-        j + i * MAX_IN_ROW,
-        sort
-      );
+      if (!data[i].deleted) {
+        col.innerHTML += productElment(
+          da[j + i * MAX_IN_ROW],
+          j + i * MAX_IN_ROW,
+          sort
+        );
+      }
     }
   }
 };
