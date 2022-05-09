@@ -53,8 +53,11 @@ const init = () => {
 };
 
 dbProducts.get().then((querySnapshot) => {
+  let i = 0;
   querySnapshot.forEach((doc) => {
     data.push(doc.data());
+    data[i].id = doc.id;
+    i++;
   });
   init();
 });
