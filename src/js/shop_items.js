@@ -4,8 +4,8 @@ var parametrs = location.search.substring(1).split('&');
 var temp = parametrs[0].split('=');
 const storeId = decodeURI(temp[1]);
 
-const bicycleTable = document.getElementById('bicycleTable');
-const scooterTable = document.getElementById('scooterTable');
+const bicycleTable = document.getElementById('bicycle_table');
+const scooterTable = document.getElementById('scooter_table');
 
 var listOfItems = null;
 

@@ -36,7 +36,6 @@ function getStore() {
   storeRef = dbStores.doc(storeId);
   storeRef.get().then((doc) => {
     if (doc.exists) {
-      console.log(doc.data());
       init(doc.data());
     } else {
       // doc.data() will be undefined in this case
@@ -102,7 +101,6 @@ function initTopCustomers() {
 }
 
 function initWorkHours(workHours) {
-  console.log('workHours: ', workHours);
   const wH = new Map(Object.entries(workHours));
   daysOfWeek.forEach((day) => {
     const elem = document.getElementById(day);
