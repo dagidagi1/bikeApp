@@ -36,6 +36,7 @@ function getStore() {
   storeRef = dbStores.doc(storeId);
   storeRef.get().then((doc) => {
     if (doc.exists) {
+      console.log(doc.data());
       init(doc.data());
     } else {
       // doc.data() will be undefined in this case
@@ -84,7 +85,7 @@ function init(data) {
   document.getElementById('subMainContainer').style.display = 'flex';
   initStatistics(data);
   initTopCustomers();
-  initWorkHours(data.workHours);
+  initWorkHours(data.work_hours);
   initCharts();
 }
 
@@ -101,6 +102,7 @@ function initTopCustomers() {
 }
 
 function initWorkHours(workHours) {
+  console.log('workHours: ', workHours);
   const wH = new Map(Object.entries(workHours));
   daysOfWeek.forEach((day) => {
     const elem = document.getElementById(day);
@@ -118,7 +120,7 @@ function initWorkHours(workHours) {
     }
   });
   // Display work hours
-  document.getElementById('workHours_card').style.display = 'block';
+  document.getElementById('work_hours_card').style.display = 'block';
 }
 
 function initCharts() {

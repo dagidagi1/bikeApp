@@ -1,4 +1,4 @@
-import { dbProducts, storageRef, fbAuth, dbUsers } from '../firebase/data.js';
+import {dbProducts, storageRef, fbAuth, dbUsers} from '../firebase/data.js';
 
 const red_color = '#e74a3b';
 
@@ -55,7 +55,7 @@ document.getElementById('add_item_btn').addEventListener('click', () => {
   } else {
     updateItem();
   }
-})
+});
 
 
 function updateItem() {
@@ -82,8 +82,7 @@ function updateItem() {
           }
         });
       });
-    }
-    else{
+    } else {
       fbAuth.onAuthStateChanged((user) => {
         if (user) {
           dbUsers.doc(user.email).get().then((doc) => {
@@ -110,7 +109,7 @@ function formValidation() {
   if (price.value == null || price.value == '' || /^\d+(\.\d+)?$/.test(price.value) == false) {
     price.style.borderColor = red_color;
     if (price.value == null || price.value == '') {
-        document.getElementById('price_err').textContent = "Price cannot be empty";
+      document.getElementById('price_err').textContent = 'Price cannot be empty';
       document.getElementById('price_err').style.display = 'block';
     } else {
       document.getElementById('price_err').textContent = 'Price must contain only numbers';
@@ -132,7 +131,7 @@ function formValidation() {
   if (max_speed.value == null || max_speed.value == '' || /^\d+(\.\d+)?$/.test(max_speed.value) == false) {
     max_speed.style.borderColor = red_color;
     if (max_speed.value == null || max_speed.value == '') {
-        document.getElementById('max_speed_err').textContent = "Max speed cannot be empty";
+      document.getElementById('max_speed_err').textContent = 'Max speed cannot be empty';
       document.getElementById('max_speed_err').style.display = 'block';
     } else {
       document.getElementById('max_speed_err').textContent = 'Speed must contain only numbers';
@@ -146,7 +145,7 @@ function formValidation() {
   if (weight.value == null || weight.value == '' || /^\d+(\.\d+)?$/.test(weight.value) == false) {
     weight.style.borderColor = red_color;
     if (weight.value == null || weight.value == '') {
-        document.getElementById('weight_err').textContent = "Weight cannot be empty";
+      document.getElementById('weight_err').textContent = 'Weight cannot be empty';
       document.getElementById('weight_err').style.display = 'block';
     } else {
       document.getElementById('weight_err').textContent = 'Weight must contain only numbers';
@@ -160,7 +159,7 @@ function formValidation() {
   if (wheel_size.value == null || wheel_size.value == '' || /^\d+(\.\d+)?$/.test(wheel_size.value) == false) {
     wheel_size.style.borderColor = red_color;
     if (wheel_size.value == null || wheel_size.value == '') {
-        document.getElementById('wheel_size_err').textContent = "Wheel size cannot be empty";
+      document.getElementById('wheel_size_err').textContent = 'Wheel size cannot be empty';
       document.getElementById('wheel_size_err').style.display = 'block';
     } else {
       document.getElementById('wheel_size_err').textContent = 'Wheel size must contain only numbers';
@@ -174,7 +173,7 @@ function formValidation() {
   if (quantity.value == null || quantity.value == '' || /^\d+$/.test(quantity.value) == false) {
     quantity.style.borderColor = red_color;
     if (quantity.value == null || quantity.value == '') {
-        document.getElementById('quantity_err').textContent = "Wheel size cannot be empty";
+      document.getElementById('quantity_err').textContent = 'Wheel size cannot be empty';
       document.getElementById('quantity_err').style.display = 'block';
     } else {
       document.getElementById('quantity_err').textContent = 'Wheel size must contain only numbers';
