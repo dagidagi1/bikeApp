@@ -1,7 +1,7 @@
 import {fbAuth, dbUsers, dbOrders} from '../firebase/data.js';
-const rate_order_text = document.getElementById('rate_order_text');
-const rate_order = document.getElementById('rate_order');
-const btn_submit_review = document.getElementById('submit_review');
+const rateOrderText = document.getElementById('rateOrderText');
+const rateOrder = document.getElementById('rateOrder');
+const submitReviewBtn = document.getElementById('submit_review');
 const search = document.getElementById('searchgroup');
 search.remove();
 var orders = [];
@@ -32,8 +32,8 @@ const loadorders = () => {
 };
 const orderList = document.getElementById('orderList');
 const userNameNavBar = document.getElementById('navbar_profile_name');
-const wish_list = document.getElementById('wish_list');
-const shopping_cart = document.getElementById('shopping_cart');
+const wishList = document.getElementById('wishList');
+const shoppingCart = document.getElementById('shoppingCart');
 const updateNavBar = () => {
   fbAuth.onAuthStateChanged((user) => {
     if (user) {
@@ -45,9 +45,9 @@ const updateNavBar = () => {
           .then((snapshot) => {
             snapshot.forEach((doc) => {
               userNameNavBar.innerText = doc.data().name;
-              if (doc.data().wishList.length > 0) wish_list.style = 'color: red';
+              if (doc.data().wishList.length > 0) wishList.style = 'color: red';
               if (doc.data().shoppingList.length > 0) {
-                shopping_cart.style = 'color: red';
+                shoppingCart.style = 'color: red';
               }
             });
           });
@@ -162,14 +162,14 @@ const CancelOrder = (e) => {
 const feedBack = (e) => {
   orders.map((o) => {
     if (o.order_number === e) {
-      o.rate = rate_order.value;
-      o.rate_order_text = rate_order_text.value;
+      o.rate = rateOrder.value;
+      o.rateOrderText = rateOrderText.value;
       o.review = true;
       dbOrders.doc(o.order_number).set(o);
     }
   });
 };
-btn_submit_review.addEventListener('click', () => {
+submitReviewBtn.addEventListener('click', () => {
   feedBack(document.getElementById('BtnfeedBack').value);
   init();
 });

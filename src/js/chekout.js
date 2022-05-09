@@ -3,10 +3,10 @@ const search = document.getElementById('searchgroup');
 search.remove();
 var parametrs = location.search.substring(1).split('&');
 var temp = parametrs[0].split('=');
-const index_p = decodeURI(temp[1]);
-console.log(index_p);
+const indexP = decodeURI(temp[1]);
+console.log(indexP);
 // var data = [];
-var cur_user;
+var curUser;
 const getUser = () => {
   fbAuth.onAuthStateChanged((user) => {
     if (user) {
@@ -17,8 +17,8 @@ const getUser = () => {
           .get()
           .then((snapshot) => {
             snapshot.forEach((doc) => {
-              cur_user = doc.data();
-              cur_user.id = doc.id;
+              curUser = doc.data();
+              curUser.id = doc.id;
             });
           });
     }

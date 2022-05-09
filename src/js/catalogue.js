@@ -9,8 +9,8 @@ const dropdownChoiceScooter = document.getElementById('ct_scot');
 const dropdownHTL = document.getElementById('pr_HL');
 const dropdownLTH = document.getElementById('pr_LH');
 const dropdownNONE = document.getElementById('pr_n');
-const btn_category = document.getElementById('btn_category');
-const btn_price = document.getElementById('btn_price');
+const categoryBtn = document.getElementById('categoryBtn');
+const priceBtn = document.getElementById('priceBtn');
 const searchInput = document.getElementById('navbar_search_field');
 const searchBtn = document.getElementById('navbar_search_button');
 function Search(input) {
@@ -82,35 +82,35 @@ const init = (da, sort = 'all') => {
   }
 };
 dropdownNONE.addEventListener('click', () => {
-  btn_price.innerText = 'None';
+  priceBtn.innerText = 'None';
   init(data);
 });
 dropdownHTL.addEventListener('click', () => {
-  btn_price.innerText = 'High to Low';
+  priceBtn.innerText = 'High to Low';
   const d = data.sort((a, b) => b.price - a.price);
   init(d, 'HTL');
 });
 dropdownLTH.addEventListener('click', () => {
-  btn_price.innerText = 'Low to High';
+  priceBtn.innerText = 'Low to High';
   const d = data.sort((a, b) => a.price - b.price);
   init(d, 'LTH');
 });
 dropdownChoiceAll.addEventListener('click', () => {
-  btn_category.innerText = 'All';
+  categoryBtn.innerText = 'All';
   init(data);
 });
 dropdownChoiceBicycle.addEventListener('click', () => {
   const newData = data.filter((d) => {
     return d.category === 0;
   });
-  btn_category.innerText = 'Bicycle';
+  categoryBtn.innerText = 'Bicycle';
   init(newData, 'B');
 });
 dropdownChoiceScooter.addEventListener('click', () => {
   const newData = data.filter((d) => {
     return d.category === 1;
   });
-  btn_category.innerText = 'Scooter';
+  categoryBtn.innerText = 'Scooter';
   init(newData, 'S');
 });
 

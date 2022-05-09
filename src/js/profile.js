@@ -1,20 +1,20 @@
 import {fbAuth, dbUsers} from '../firebase/data.js';
 const username = document.getElementById('username');
-const phone_number = document.getElementById('phone_number');
+const phoneNumber = document.getElementById('phoneNumber');
 const email = document.getElementById('email');
 const passwored = document.getElementById('passwored');
-const passwored_c = document.getElementById('passwored_c');
-const save_pass = document.getElementById('save_password');
+const passworedC = document.getElementById('passworedC');
+const savePass = document.getElementById('savePassword');
 const search = document.getElementById('searchgroup');
 search.remove();
 var user;
 // var orders = [];
-let cur_user;
+let curUser;
 fbAuth.onAuthStateChanged((u) => {
-  cur_user = u;
+  curUser = u;
 });
-const edit_btn = document.getElementById('edit_btn');
-const save_btn_set = document.getElementById('save_btn');
+const editBtn = document.getElementById('editBtn');
+const saveBtnSet = document.getElementById('save_btn');
 const getUser = () => {
   fbAuth.onAuthStateChanged((u) => {
     if (u) {
@@ -29,48 +29,48 @@ const getUser = () => {
               user.id = doc.id;
               console.log(user);
               updateDetails();
-              if (doc.data().store != false) has_store = doc.data().store;
+              if (doc.data().store != false) hasStore = doc.data().store;
             });
           });
     }
   });
 };
-edit_btn.addEventListener('click', () => {
-  save_btn_set.disabled = false;
+editBtn.addEventListener('click', () => {
+  saveBtnSet.disabled = false;
   email.disabled = false;
   username.disabled = false;
-  phone_number.disabled = false;
-  edit_btn.disabled = true;
+  phoneNumber.disabled = false;
+  editBtn.disabled = true;
 });
 
-save_btn_set.addEventListener('click', () => {
+saveBtnSet.addEventListener('click', () => {
   saveToFirebase();
 });
-save_pass.addEventListener('click', () => {
+savePass.addEventListener('click', () => {
   changePassword();
 });
 function updateDetails() {
   username.value = user.name;
-  phone_number.value = user.phone;
+  phoneNumber.value = user.phone;
   email.value = user.email;
   email.disabled = true;
   username.disabled = true;
-  phone_number.disabled = true;
-  save_btn_set.disabled = true;
+  phoneNumber.disabled = true;
+  saveBtnSet.disabled = true;
   dbUsers.doc(user.id).set(user);
 }
 function saveToFirebase() {
   user.name = username.value;
-  user.phone = phone_number.value;
-  edit_btn.disabled = false;
+  user.phone = phoneNumber.value;
+  editBtn.disabled = false;
   updateDetails();
 }
 function changePassword() {
-  if (passwored.value === passwored_c.value && passwored.value.length > 5) {
+  if (passwored.value === passworedC.value && passwored.value.length > 5) {
     user.password = passwored.value;
     updateDetails();
-    console.log(cur_user);
-    cur_user
+    console.log(curUser);
+    curUser
         .updatePassword(passwored.value)
         .then(() => {
           alert('Password changed');
