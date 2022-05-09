@@ -83,21 +83,23 @@
                                 </div>
                                 <div class="row">
                                     <div class="col">
-                                        <div class="mb-3"><label class="form-label" for="vehicle_name"><strong>Name</strong></label><input class="form-control" type="text" id="vehicle_name" placeholder="Bike name" name="Name" required=""></div>
+                                        <div class="mb-3"><label class="form-label" for="vehicle_name"><strong>Name</strong></label><input class="form-control" type="text" id="vehicle_name" placeholder="Bike name" name="Name" required=""><span id="name_err" style="color: rgb(231, 74, 59); display: none;">Name cannot be empty</span></div>
                                     </div>
                                     <div class="col">
                                         <div class="mb-3"><label class="form-label" for="price"><strong>Price</strong></label>
                                             <div class="input-group"><input class="form-control" type="text" pattern="[1-9][0-9]*[.]?[0-9]*" required="" id="price"><span class="input-group-text">$</span></div>
+                                            <span id="price_err" style="color: rgb(231, 74, 59); display: none;">Price cannot be empty</span>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col">
-                                        <div class="mb-3"><label class="form-label" for="manufacturer"><strong>Manufacturer</strong></label><input class="form-control" type="text" id="manufacturer" placeholder="Manufacturer" name="Manufacturer" required=""></div>
+                                        <div class="mb-3"><label class="form-label" for="manufacturer"><strong>Manufacturer</strong></label><input class="form-control" type="text" id="manufacturer" placeholder="Manufacturer" name="Manufacturer" required=""><span id="manufacturer_err" style="color: rgb(231, 74, 59); display: none;">Manufacturer cannot be empty</span></div>
                                     </div>
                                     <div class="col">
                                         <div class="mb-3"><label class="form-label" for="max_speed"><strong>Max speed</strong></label>
                                             <div class="input-group"><input class="form-control" type="text" pattern="[1-9][0-9]*[.]?[0-9]*" required="" id="max_speed"><span class="input-group-text">Km/h</span></div>
+                                            <span id="max_speed_err" style="color: rgb(231, 74, 59); display: none;">Max speed cannot be empty</span>
                                         </div>
                                     </div>
                                 </div>
@@ -105,23 +107,25 @@
                                     <div class="col">
                                         <div class="mb-3"><label class="form-label" for="weight"><strong>Weight</strong></label>
                                             <div class="input-group"><input class="form-control" type="text" pattern="[1-9][0-9]*[.]?[0-9]*" id="weight" required=""><span class="input-group-text">Kg</span></div>
+                                            <span id="weight_err" style="color: rgb(231, 74, 59); display: none;">Weight cannot be empty</span>
                                         </div>
                                     </div>
                                     <div class="col">
                                         <div class="mb-3"><label class="form-label" for="wheel_size"><strong>Wheel size</strong></label>
                                             <div class="input-group"><input class="form-control" type="text" pattern="[1-9][0-9]*[.]?[0-9]*" id="wheel_size" required=""><span class="input-group-text">Inch</span></div>
+                                            <span id="wheel_size_err" style="color: rgb(231, 74, 59); display: none;">Wheel size cannot be empty</span>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col">
-                                        <div class="mb-3"><label class="form-label" for="quantity"><strong>Available quantity</strong></label><input class="form-control" type="text" pattern="[1-9][0-9]*" id="quantity" required=""></div>
+                                        <div class="mb-3"><label class="form-label" for="quantity"><strong>Available quantity</strong></label><input class="form-control" type="text" pattern="[1-9][0-9]*" id="quantity" required=""><span id="quantity_err" style="color: rgb(231, 74, 59); display: none;">Quantity cannot be empty</span></div>
                                     </div>
                                     <div class="col"></div>
                                 </div>
                                 <div class="row">
                                     <div class="col">
-                                        <div class="mb-3"><label class="form-label" for="description"><strong>Description</strong></label><input class="form-control" type="text" id="description" required=""></div>
+                                        <div class="mb-3"><label class="form-label" for="description"><strong>Description</strong></label><input class="form-control" type="text" id="description" required=""><span id="description_err" style="color: rgb(231, 74, 59); display: none;">Description cannot be empty</span></div>
                                     </div>
                                 </div>
                                 <div class="row">
