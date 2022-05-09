@@ -1,10 +1,10 @@
 import {dbStores, dbUsers, fbAuth} from '../firebase/data.js';
-var days_of_week = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+var daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
-var store_id = null;
+var storeId = null;
 var storeRef = null;
-var top_orders_list = document.getElementById('top_orders_list');
-var top_income_list = document.getElementById('top_income_list');
+// var top_orders_list = document.getElementById('top_orders_list');
+// var top_income_list = document.getElementById('top_income_list');
 const modal = new bootstrap.Modal(document.getElementById('modal-1'));
 
 // Get document of store from Firebase
@@ -14,7 +14,7 @@ window.onload = function example() {
     if (user) {
       dbUsers.doc(user.email).get().then((doc) => {
         if (doc.data().store != false) {
-          store_id = doc.data().store;
+          storeId = doc.data().store;
           getStore();
         } else {
           document.getElementById('mainContainer').innerHTML = `<div class="text-center">
@@ -33,13 +33,13 @@ window.onload = function example() {
 
 
 function getStore() {
-  storeRef = dbStores.doc(store_id);
+  storeRef = dbStores.doc(storeId);
   storeRef.get().then((doc) => {
     if (doc.exists) {
       init(doc.data());
     } else {
       // doc.data() will be undefined in this case
-      console.log('No store with this id!\nid: ', store_id);
+      console.log('No store with this id!\nid: ', storeId);
       // location.replace("registered_home.html");
     }
   }).catch((error) => {
@@ -48,21 +48,21 @@ function getStore() {
 }
 
 document.getElementById('save_btn').addEventListener('click', () => {
-  const work_hours = new Map();
-  days_of_week.forEach((d) => {
+  const workHours = new Map();
+  daysOfWeek.forEach((d) => {
     if (document.getElementById(`modal_${d}`).checked == false) {
-      work_hours.set(d, [false]);
+      workHours.set(d, [false]);
     } else {
-      work_hours.set(d, [true, document.getElementById(`${d}_from`).value, document.getElementById(`${d}_till`).value]);
+      workHours.set(d, [true, document.getElementById(`${d}_from`).value, document.getElementById(`${d}_till`).value]);
     }
   });
-  const w_h = Object.fromEntries(work_hours);
+  const wH = Object.fromEntries(workHours);
   storeRef.update({
-    work_hours: w_h,
+    workHours: wH,
   }).catch((error) => {
     console.log('Error getting document:', error);
   });
-  days_of_week.forEach((day) => {
+  daysOfWeek.forEach((day) => {
     if (document.getElementById('modal_' + day).checked == false) {
       document.getElementById(day).textContent = 'Closed';
     } else {
@@ -73,22 +73,22 @@ document.getElementById('save_btn').addEventListener('click', () => {
 });
 
 document.getElementById('items').addEventListener('click', function() {
-  location.replace('shop_items.html' + '?id=' + store_id);
+  location.replace('shop_items.html' + '?id=' + storeId);
 });
 
 document.getElementById('ordersCard').addEventListener('click', function() {
-  location.replace('shop_orders.html' + '?id=' + store_id);
+  location.replace('shop_orders.html' + '?id=' + storeId);
 });
 
 function init(data) {
   document.getElementById('subMainContainer').style.display = 'flex';
-  init_statistics(data);
-  init_top_customers();
-  init_work_hours(data.work_hours);
-  init_charts();
+  initStatistics(data);
+  initTopCustomers();
+  initWorkHours(data.workHours);
+  initCharts();
 }
 
-function init_statistics(data) {
+function initStatistics(data) {
   document.getElementById('shop_items').textContent = data.products.length;
   document.getElementById('earnings').textContent = data.income;
   document.getElementById('sells').textContent = data.sells;
@@ -96,19 +96,19 @@ function init_statistics(data) {
   document.getElementById('statistics_cards').style.display = 'flex';
 }
 
-function init_top_customers() {
+function initTopCustomers() {
   document.getElementById('top_customers_card').style.display = 'block';
 }
 
-function init_work_hours(work_hours) {
-  const w_h = new Map(Object.entries(work_hours));
-  days_of_week.forEach((day) => {
+function initWorkHours(workHours) {
+  const wH = new Map(Object.entries(workHours));
+  daysOfWeek.forEach((day) => {
     const elem = document.getElementById(day);
-    const modal_elem = document.getElementById('modal_' + day);
-    const hours = w_h.get(day);
+    const modalElem = document.getElementById('modal_' + day);
+    const hours = wH.get(day);
     if (hours[0] == false) {
       elem.textContent = 'Closed';
-      modal_elem.checked = false;
+      modalElem.checked = false;
     } else {
       elem.textContent = `${hours[1]}:00 - ${hours[2]}:00`;
       const fm = document.getElementById(day + '_from');
@@ -118,17 +118,17 @@ function init_work_hours(work_hours) {
     }
   });
   // Display work hours
-  document.getElementById('work_hours_card').style.display = 'block';
+  document.getElementById('workHours_card').style.display = 'block';
 }
 
-function init_charts() {
+function initCharts() {
   const ctx1 = document.getElementById('earning_chart').getContext('2d');
-  const myChart1 = new Chart(ctx1, {
+  new Chart(ctx1, {
     type: 'line',
     data: {
       labels: ['January', 'Fabruary', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
       datasets: [{
-        data: get_chart1_data(),
+        data: getChart1Data(),
         backgroundColor: 'rgba(78,115,223, 1)',
         borderColor: 'rgba(78,115,223, 1)',
         pointStyle: 'circle',
@@ -151,12 +151,12 @@ function init_charts() {
     },
   });
   const ctx2 = document.getElementById('sells_chart').getContext('2d');
-  const myChart2 = new Chart(ctx2, {
+  new Chart(ctx2, {
     type: 'doughnut',
     data: {
       labels: ['Bicycles', 'Scooters'],
       datasets: [{
-        data: get_chart2_data(),
+        data: getChart2Data(),
         backgroundColor: [
           'rgb(78,115,223)',
           'rgb(28,200,138)',
@@ -173,10 +173,10 @@ function init_charts() {
   document.getElementById('charts_card').style.display = 'flex';
 }
 
-function get_chart1_data() {
+function getChart1Data() {
   return [1200, 1900, 300, 500, 2000, 3000, 1000, 800, 1300, 2000, 700, 1500];
 }
 
-function get_chart2_data() {
+function getChart2Data() {
   return [2000, 1000];
 }
