@@ -1,4 +1,4 @@
-import { dbProducts, fbAuth, dbUsers, dbStores, storageRef } from "../firebase/data.js";
+import {dbProducts, fbAuth, dbUsers, dbStores, storageRef} from '../firebase/data.js';
 
 const red_color = '#e74a3b'
 

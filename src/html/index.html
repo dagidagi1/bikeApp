@@ -171,13 +171,13 @@
                     </div>
                     <form class="user">
                         <div class="row mb-3">
-                            <div class="col-sm-6 mb-3 mb-sm-0"><input class="form-control form-control-user" type="text" id="reg_name" placeholder="Name" name="first_name"></div>
-                            <div class="col-sm-6"><input class="form-control form-control-user" type="tel" id="reg_phone" placeholder="Phone number" name="last_name"></div>
+                            <div class="col-sm-6 mb-3 mb-sm-0"><input class="form-control form-control-user" type="text" id="reg_name" placeholder="Name" name="first_name"><span id="reg_name_sp" style="color: red; display: none;">Name cannot be empty!</span></div>
+                            <div class="col-sm-6"><input class="form-control form-control-user" type="tel" id="reg_phone" placeholder="Phone number" name="last_name"><span id="reg_phone_sp" style="color: red; display: none;">Must be 10 characters!</span></div>
                         </div>
-                        <div class="mb-3"><input class="form-control form-control-user" type="email" id="reg_email" aria-describedby="emailHelp" placeholder="Email Address" name="email"></div>
+                        <div class="mb-3"><input class="form-control form-control-user" type="email" id="reg_email" aria-describedby="emailHelp" placeholder="Email Address" name="email"><span id="reg_email_sp" style="color: red; display: none;">Invalid email!</span></div>
                         <div class="row mb-3">
-                            <div class="col-sm-6 mb-3 mb-sm-0"><input class="form-control form-control-user" type="password" id="reg_password" placeholder="Password" name="password"></div>
-                            <div class="col-sm-6"><input class="form-control form-control-user" type="password" id="reg_conf_pass" placeholder="Repeat Password" name="password_repeat"></div>
+                            <div class="col-sm-6 mb-3 mb-sm-0"><input class="form-control form-control-user" type="password" id="reg_password" placeholder="Password" name="password"><span id="reg_pass_sp" style="color: red; display: none;">Must be at least 6 characters!</span></div>
+                            <div class="col-sm-6"><input class="form-control form-control-user" type="password" id="reg_conf_pass" placeholder="Repeat Password" name="password_repeat"><span id="reg_conf_pass_sp" style="color: red; display: none;">Passwords does not match!</span></div>
 
                         </div><a class="btn btn-primary d-block btn-user w-100" role="button" id="reg_btn">Register Account</a>
                         <hr>

@@ -1,15 +1,15 @@
-import { dbProducts, fbAuth, dbUsers, dbOrders } from "../firebase/data.js";
-const search = document.getElementById("searchgroup");
+import {dbProducts, fbAuth, dbUsers, dbOrders} from '../firebase/data.js';
+const search = document.getElementById('searchgroup');
 search.remove();
 const data = [];
 let price = 0;
 var cur_user;
-const shopping_cart = document.getElementById("shopping_cart");
-const shopping_cart_table = document.getElementById("shopping_cart_table");
-const total_price = document.getElementById("total_price");
-const chekout_shop_cart_btn = document.getElementById("chekout_shop_cart");
-chekout_shop_cart_btn.addEventListener("click", () => {
-  location.replace("chekout.html" + "?email=" + cur_user.email);
+const shopping_cart = document.getElementById('shopping_cart');
+const shopping_cart_table = document.getElementById('shopping_cart_table');
+const total_price = document.getElementById('total_price');
+const chekout_shop_cart_btn = document.getElementById('chekout_shop_cart');
+chekout_shop_cart_btn.addEventListener('click', () => {
+  location.replace('chekout.html' + '?email=' + cur_user.email);
 });
 const getUser = () => {
   fbAuth.onAuthStateChanged((user) => {
@@ -17,15 +17,15 @@ const getUser = () => {
       // User is signed in, see docs for a list of available properties
       // https://firebase.google.com/docs/reference/js/firebase.User
       dbUsers
-        .where("email", "==", user.email)
-        .get()
-        .then((snapshot) => {
-          snapshot.forEach((doc) => {
-            cur_user = doc.data();
-            cur_user.id = doc.id;
-            init();
+          .where('email', '==', user.email)
+          .get()
+          .then((snapshot) => {
+            snapshot.forEach((doc) => {
+              cur_user = doc.data();
+              cur_user.id = doc.id;
+              init();
+            });
           });
-        });
     }
   });
 };
@@ -64,21 +64,21 @@ function deleteItem(i) {
   total_price.innerText = ` Subtotal: ${price}$`;
   cur_user.shoppingList.pop(i);
   dbUsers.doc(cur_user.id).set(cur_user);
-  if (cur_user.shoppingList.length == 0) shopping_cart.style = "";
+  if (cur_user.shoppingList.length == 0) shopping_cart.style = '';
 }
 function init() {
-  shopping_cart_table.innerHTML = "";
+  shopping_cart_table.innerHTML = '';
   price = 0;
   for (let i = 0; i < cur_user.shoppingList.length; i++) {
     shopping_cart_table.innerHTML += makeRow(
-      data[+cur_user.shoppingList[i]],
-      i
+        data[+cur_user.shoppingList[i]],
+        i,
     );
     price += data[+cur_user.shoppingList[i]].price;
   }
   total_price.innerText = ` Subtotal: ${price}$`;
   for (let i = 0; i < cur_user.shoppingList.length; i++) {
-    document.getElementById(`btn_delete_${i}`).addEventListener("click", () => {
+    document.getElementById(`btn_delete_${i}`).addEventListener('click', () => {
       console.log(document.getElementById(`btn_delete_${i}`).value);
       deleteItem(document.getElementById(`btn_delete_${i}`).value);
       init();

@@ -1,129 +1,127 @@
-import { dbProducts, fbAuth, dbUsers } from "../firebase/data.js";
+import {dbProducts, fbAuth, dbUsers} from '../firebase/data.js';
 var data = [];
+const email = document.querySelector('#reg_email');
+const password = document.getElementById('reg_password');
+const confirmPass = document.getElementById('reg_conf_pass');
+const name = document.getElementById('reg_name');
+const phone = document.getElementById('reg_phone');
 window.onload = function example() {
-
   fbAuth.onAuthStateChanged((user) => {
     if (user) {
-      location.replace("registered_home.html");
+      location.replace('registered_home.html');
     }
   });
-}
-function checkInput(pass, confPass, name, phone){
-  if(!(/^[a-z A-Z]+$/.test(name)))
-    return 'Invalid name';
-  if(!(/^[0-9]{10}$/.test(phone)))
-    return 'Invalid phone';
-  if(pass.length < 6)
-    return 'Password must be at least 6 characters.';
-  if(!(pass === confPass))
-    return 'Passwords doesnt match!';
-  return 0;
-  //if (/^[a-zA-Z]+$/.test(name) && /^[0-9]{10}$/.test(phone) && password === confirmPass && password.length > 5)
+};
+function checkInput() {
+  const nameSp = document.getElementById('reg_name_sp');
+  const phoneSp = document.getElementById('reg_phone_sp');
+  const passSp = document.getElementById('reg_pass_sp');
+  const confPassSp = document.getElementById('reg_conf_pass_sp');
+  if (!/^[a-z A-Z]+$/.test(name.value)) {
+    name.style.borderColor = 'red';
+    nameSp.style.display = 'block';
+    return false;
+  } else {
+    nameSp.style.display = 'none';
+    name.style.borderColor = '';
+  }
+  if (!/^[0-9]{10}$/.test(phone.value)) {
+    phone.style.borderColor = 'red';
+    phoneSp.style.display = 'block';
+    return false;
+  } else {
+    phone.style.borderColor = '';
+    phoneSp.style.display = 'none';
+  }
+  if (password.value.length < 6) {
+    password.style.borderColor = 'red';
+    passSp.style.display = 'block';
+    return false;
+  } else {
+    password.style.borderColor = '';
+    passSp.style.display = 'none';
+  }
+  if (!(password.value === confirmPass.value)) {
+    confirmPass.style.borderColor = 'red';
+    confPassSp.style.display = 'block';
+    return false;
+  } else {
+    confirmPass.style.borderColor = '';
+    confPassSp.style.display = 'none';
+  }
+  // if (/^[a-zA-Z]+$/.test(name) && /^[0-9]{10}$/.test(phone) && password === confirmPass && password.length > 5)
+  return true;
 }
 function save() {
-  //saves user only in auth
-  var email = document.querySelector("#reg_email").value;
-  var password = document.getElementById("reg_password").value;
-  var confirmPass = document.getElementById("reg_conf_pass").value;
-  var name = document.getElementById("reg_name").value;
-  var phone = document.getElementById("reg_phone").value;
-  let inputErr = checkInput(password,confirmPass, name,phone);
-  if(inputErr == 0){
+  // adds users email+password to firebase auth and then to collection with the remain user data.
+  const emailSp = document.getElementById('reg_email_sp');
+  if (checkInput() === true) {
+    let flag = false;
     fbAuth
-      .createUserWithEmailAndPassword(email, password)
-    .then((userCredential) => {
-      // Signed in
-      var user = userCredential.user;
-    })
-    .catch((error) => {
-      var errorCode = error.code;
-      var errorMessage = error.message;
-      alert(errorCode);
-      // ..
-    });
-    dbUsers.doc(email)
-        .set({
-          email: email,
-          name: name,
-          phone: phone,
-          store: false,
-          shoppingList: [],
-          wishList: []
-        })
-        .then((docRef) => {
-          //alert("Document written with ID: ", docRef.id);
-          location.replace("registered_home.html");
+        .createUserWithEmailAndPassword(email.value, password.value)
+        .then((userCredential) => {
+        // Signed in
+          var user = userCredential.user;
+          flag = true;
+          email.style.borderColor = '';
+          emailSp.style.display = 'none';
         })
         .catch((error) => {
-          console.error("Error adding document: ", error);
+          // color the email.
+          email.style.borderColor = 'red';
+          emailSp.style.display = 'block';
+        // ..
         });
+    if (flag === true) {
+      dbUsers
+          .doc(email.value)
+          .set({
+            email: email.value,
+            name: name.value,
+            phone: phone.value,
+            store: false,
+            shoppingList: [],
+            wishList: [],
+          })
+          .then((docRef) => {
+          // alert("Document written with ID: ", docRef.id);
+            location.replace('registered_home.html');
+          })
+          .catch((error) => {
+            console.error('Error adding document: ', error);
+          });
+    }
   }
-else{
-  alert(inputErr);
-}
 }
 
-function get() {
-  var username = document.getElementById("username").value;
-
-  var user_ref = database.ref("users/" + username);
-  user_ref.on("value", function (snapshot) {
-    var data = snapshot.val();
-
-    alert(data.email);
-  });
-}
-
-function update() {
-  var username = document.getElementById("username").value;
-  var email = document.getElementById("email").value;
-  var password = document.getElementById("password").value;
-
-  var updates = {
-    email: email,
-    password: password,
-  };
-
-  database.ref("users/" + email).update(updates);
-
-  alert("updated");
-}
-
-function remove() {
-  var email = document.getElementById("email").value;
-
-  database.ref("users/" + email).remove();
-
-  alert("deleted");
-}
 function login() {
-  var email = document.getElementById("login_email").value;
-  var password = document.getElementById("login_pass").value;
+  const logEmail = document.getElementById('login_email');
+  const logPass = document.getElementById('login_pass');
   fbAuth
-    .signInWithEmailAndPassword(email, password)
-    .then((userCredential) => {
+      .signInWithEmailAndPassword(logEmail.value, logPass.value)
+      .then((userCredential) => {
       // Signed in
-      var user = userCredential.user;
-      location.replace("registered_home.html");
-    })
-    .catch((error) => {
-      var errorCode = error.code;
-      var errorMessage = error.message;
-      alert(errorCode);
-    });
+        var user = userCredential.user;
+        location.replace('registered_home.html');
+      })
+      .catch((error) => {
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        alert(errorCode);
+      });
 }
-document.getElementById("reg_btn").addEventListener("click", save, false);
-document.getElementById("login_btn").addEventListener("click", login, false);
-document.getElementById("email_ver_btn").addEventListener("click", function () {
+document.getElementById('reg_btn').addEventListener('click', save, false);
+document.getElementById('login_btn').addEventListener('click', login, false);
+document.getElementById('email_ver_btn').addEventListener('click', function() {
   firebase
-    .auth()
-    .sendPasswordResetEmail(document.getElementById("forg_email").value)
-    .then(() => { })
-    .catch((error) => {
-      var errorCode = error.code;
-      var errorMessage = error.message;
+      .auth()
+      .sendPasswordResetEmail(document.getElementById('forg_email').value)
+      .then(() => {})
+      .catch((error) => {
+        var errorCode = error.code;
+        var errorMessage = error.message;
       // ..
-    });
+      });
 });
 let col;
 function productElment(d, i) {
@@ -139,31 +137,35 @@ function productElment(d, i) {
 }
 const init = () => {
   let d = data
-    .filter((a) => a.type === 0)
-    .sort((a, b) => {
-      b.price - a.price;
-    });
-  col = document.getElementById(`col_0`);
-  col.innerHTML = "";
+      .filter((a) => a.category === 0)
+      .sort((a, b) => {
+        b.price - a.price;
+      });
+  col = document.getElementById('col_0');
+  col.innerHTML = '';
   for (let i = 0; i < 5; i++) {
-    col.innerHTML += productElment(d[i], i);
-    document.getElementById(`${i}`)?.addEventListener("click", () => {
-      redirectToDiscription(i);
-    });
+    if (!data[i].deleted) {
+      col.innerHTML += productElment(d[i], i);
+      document.getElementById(`${i}`)?.addEventListener('click', () => {
+        redirectToDiscription(i);
+      });
+    }
   }
   d = data
-    .filter((a) => a.type === 1)
-    .sort((a, b) => {
-      b.price - a.price;
-    });
+      .filter((a) => a.category === 1)
+      .sort((a, b) => {
+        b.price - a.price;
+      });
   console.log(d);
-  col = document.getElementById(`col_1`);
+  col = document.getElementById('col_1');
   for (let i = 0; i < 5; i++) {
-    col.innerHTML += productElment(d[i], i);
+    if (!data[i].deleted) {
+      col.innerHTML += productElment(d[i], i);
 
-    document.getElementById(`${i}`)?.addEventListener("click", () => {
-      //redirectToDiscription(i);
-    });
+      document.getElementById(`${i}`)?.addEventListener('click', () => {
+        // redirectToDiscription(i);
+      });
+    }
   }
 };
 dbProducts.get().then((querySnapshot) => {
@@ -171,5 +173,6 @@ dbProducts.get().then((querySnapshot) => {
     data.push(doc.data());
   });
   console.log(data);
+
   init();
 });
