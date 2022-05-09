@@ -1,249 +1,125 @@
 <!DOCTYPE html>
 <html>
-  <head>
+
+<head>
     <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
-    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
     <title>Dashboard - Brand</title>
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css" />
-    <link
-      rel="stylesheet"
-      href="https://use.fontawesome.com/releases/v5.12.0/css/all.css"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
-    />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
     <link rel="stylesheet" href="assets/fonts/fontawesome5-overrides.min.css" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css"
-    />
-  </head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css" />
+</head>
 
-  <body id="page-top">
+<body id="page-top">
     <div id="wrapper">
-      <nav
-        class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0"
-      >
-        <div class="container-fluid d-flex flex-column p-0">
-          <a
-            class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0"
-            href="index.html"
-          >
-            <div>
-              <div class="sidebar-brand-icon rotate-n-15">
-                <i class="fas fa-bicycle"></i>
-              </div>
-              <div class="sidebar-brand-text mx-3"><span>Bike brand</span></div>
-            </div>
-          </a>
-          <hr class="sidebar-divider my-0" />
-          <ul class="navbar-nav text-light" id="accordionSidebar">
-            <li class="nav-item">
-              <a class="nav-link" id="nav_home_btn" style="cursor: pointer"
-                ><i class="fa fa-home"></i><span>Home</span></a
-              >
-            </li>
-            <li class="nav-item">
-              <a
-                class="nav-link"
-                id="nav_catalog_btn"
-                style="color: rgba(255, 255, 255, 0.8); cursor: pointer"
-                ><i class="fa fa-th"></i><span>Catalogue</span></a
-              >
-            </li>
-            <li class="nav-item">
-              <a
-                class="nav-link"
-                id="nav_orders_btn"
-                style="color: rgba(255, 255, 255, 0.8); cursor: pointer"
-                ><i class="fa fa-reorder"></i><span>My orders</span></a
-              >
-            </li>
-            <li class="nav-item">
-              <a
-                class="nav-link"
-                id="nav_store_btn"
-                style="color: rgba(255, 255, 255, 0.8); cursor: pointer"
-                ><i class="fa fa-shopping-bag"></i><span>My store</span></a
-              >
-            </li>
-          </ul>
-          <div class="text-center d-none d-md-inline">
-            <button
-              class="btn rounded-circle border-0"
-              id="sidebarToggle"
-              type="button"
-            ></button>
-          </div>
-        </div>
-      </nav>
-      <div class="d-flex flex-column" id="content-wrapper">
-        <div id="content">
-          <nav
-            class="navbar navbar-light navbar-expand bg-white shadow mb-4 topbar static-top"
-            id="navbar"
-          >
-            <div class="container-fluid">
-              <button
-                class="btn btn-link d-md-none rounded-circle me-3"
-                id="sidebarToggleTop"
-                type="button"
-              >
-                <i class="fas fa-bars"></i>
-              </button>
-              <form
-                class="d-none d-sm-inline-block me-auto ms-md-3 my-2 my-md-0 mw-100 navbar-search"
-              >
-                <div class="input-group">
-                  <input
-                    class="bg-light form-control border-0 small"
-                    type="text"
-                    id="navbar_search_field"
-                    placeholder="Search for ..."
-                  /><button
-                    class="btn btn-primary py-0"
-                    id="navbar_search_button"
-                    type="button"
-                  >
-                    <i class="fas fa-search"></i>
-                  </button>
-                </div>
-              </form>
-              <ul class="navbar-nav flex-nowrap ms-auto visible">
-                <li class="nav-item dropdown d-sm-none no-arrow">
-                  <a
-                    class="dropdown-toggle nav-link"
-                    aria-expanded="false"
-                    data-bs-toggle="dropdown"
-                    href="#"
-                    ><i class="fas fa-search"></i
-                  ></a>
-                  <div
-                    class="dropdown-menu dropdown-menu-end p-3 animated--grow-in"
-                    aria-labelledby="searchDropdown"
-                  >
-                    <form class="me-auto navbar-search w-100">
-                      <div class="input-group">
-                        <input
-                          class="bg-light form-control border-0 small"
-                          type="text"
-                          placeholder="Search for ..."
-                        />
-                        <div class="input-group-append">
-                          <button class="btn btn-primary py-0" type="button">
-                            <i class="fas fa-search"></i>
-                          </button>
+        <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0">
+            <div class="container-fluid d-flex flex-column p-0">
+                <a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0"
+                    href="index.html">
+                    <div>
+                        <div class="sidebar-brand-icon rotate-n-15">
+                            <i class="fas fa-bicycle"></i>
                         </div>
-                      </div>
-                    </form>
-                  </div>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="wish_list.html"
-                    ><i class="fa fa-heart" id="wish_list"></i
-                  ></a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="shopping_cart.html"
-                    ><i class="fa fa-shopping-cart" id="shopping_cart"></i
-                  ></a>
-                </li>
-                <div class="d-none d-sm-block topbar-divider"></div>
-                <li class="nav-item dropdown no-arrow">
-                  <a class="nav-link" href="profile.html"
-                    ><span
-                      class="d-none d-lg-inline me-2 text-gray-600 small"
-                      id="navbar_profile_name"
-                      >User's name</span
-                    ><img
-                      class="border rounded-circle img-profile"
-                      id="navbar_profile_photo"
-                      src="../../assets/img/avatars/avatar1.jpeg?h=0ecc82101fb9a10ca459432faa8c0656"
-                  /></a>
-                </li>
-                <li class="nav-item" id="logout_btn">
-                  <a class="nav-link" href="index.html"
-                    ><i class="fa fa-sign-out fs-5"></i
-                  ></a>
-                </li>
-              </ul>
+                        <div class="sidebar-brand-text mx-3"><span>Bike brand</span></div>
+                    </div>
+                </a>
+                <hr class="sidebar-divider my-0" />
+                <ul class="navbar-nav text-light" id="accordionSidebar">
+                    <li class="nav-item">
+                        <a class="nav-link" id="nav_home_btn" style="cursor: pointer"><i
+                                class="fa fa-home"></i><span>Home</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="nav_catalog_btn"
+                            style="color: rgba(255, 255, 255, 0.8); cursor: pointer"><i
+                                class="fa fa-th"></i><span>Catalogue</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="nav_orders_btn"
+                            style="color: rgba(255, 255, 255, 0.8); cursor: pointer"><i
+                                class="fa fa-reorder"></i><span>My orders</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="nav_store_btn"
+                            style="color: rgba(255, 255, 255, 0.8); cursor: pointer"><i
+                                class="fa fa-shopping-bag"></i><span>My store</span></a>
+                    </li>
+                </ul>
+                <div class="text-center d-none d-md-inline">
+                    <button class="btn rounded-circle border-0" id="sidebarToggle" type="button"></button>
+                </div>
             </div>
-          </nav>
-          <div class="container">
-            <div class="card">
-              <div class="card-header">
-                <p class="fs-2">Add item</p>
-              </div>
-              <div class="card-body">
-                <form>
-                  <div class="row">
-                    <div class="col">
-                      <div class="mb-3">
-                        <label class="form-label" for="first_name"
-                          ><strong>Category</strong></label
-                        ><select class="form-select" required="" id="category">
-                          <optgroup label="Category">
-                            <option value="0" selected="">Bicycle</option>
-                            <option value="1">Scooter</option>
-                          </optgroup>
-                        </select>
-                      </div>
+        </nav>
+        <div class="d-flex flex-column" id="content-wrapper">
+            <div id="content">
+                <nav class="navbar navbar-light navbar-expand bg-white shadow mb-4 topbar static-top" id="navbar">
+                    <div class="container-fluid">
+                        <button class="btn btn-link d-md-none rounded-circle me-3" id="sidebarToggleTop" type="button">
+                            <i class="fas fa-bars"></i>
+                        </button>
+                        <form class="d-none d-sm-inline-block me-auto ms-md-3 my-2 my-md-0 mw-100 navbar-search">
+                            <div class="input-group">
+                                <input class="bg-light form-control border-0 small" type="text" id="navbar_search_field"
+                                    placeholder="Search for ..." /><button class="btn btn-primary py-0"
+                                    id="navbar_search_button" type="button">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                        </form>
+                        <ul class="navbar-nav flex-nowrap ms-auto visible">
+                            <li class="nav-item dropdown d-sm-none no-arrow">
+                                <a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown"
+                                    href="#"><i class="fas fa-search"></i></a>
+                                <div class="dropdown-menu dropdown-menu-end p-3 animated--grow-in"
+                                    aria-labelledby="searchDropdown">
+                                    <form class="me-auto navbar-search w-100">
+                                        <div class="input-group">
+                                            <input class="bg-light form-control border-0 small" type="text"
+                                                placeholder="Search for ..." />
+                                            <div class="input-group-append">
+                                                <button class="btn btn-primary py-0" type="button">
+                                                    <i class="fas fa-search"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="wish_list.html"><i class="fa fa-heart" id="wish_list"></i></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="shopping_cart.html"><i class="fa fa-shopping-cart"
+                                        id="shopping_cart"></i></a>
+                            </li>
+                            <div class="d-none d-sm-block topbar-divider"></div>
+                            <li class="nav-item dropdown no-arrow">
+                                <a class="nav-link" href="profile.html"><span
+                                        class="d-none d-lg-inline me-2 text-gray-600 small"
+                                        id="navbar_profile_name">User's name</span><img
+                                        class="border rounded-circle img-profile" id="navbar_profile_photo"
+                                        src="../../assets/img/avatars/avatar1.jpeg?h=0ecc82101fb9a10ca459432faa8c0656" /></a>
+                            </li>
+                            <li class="nav-item" id="logout_btn">
+                                <a class="nav-link" href="index.html"><i class="fa fa-sign-out fs-5"></i></a>
+                            </li>
+                        </ul>
                     </div>
-                    <div class="col">
-                      <div class="mb-3">
-                        <label class="form-label" for="last_name"
-                          ><strong>Type</strong></label
-                        ><select
-                          class="form-select"
-                          required=""
-                          id="vehicle_type"
-                        >
-                          <optgroup label="Type">
-                            <option value="0" selected="">Electric</option>
-                            <option value="1">Non electric</option>
-                          </optgroup>
-                        </select>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col">
-                      <div class="mb-3">
-                        <label class="form-label" for="vehicle_name"
-                          ><strong>Name</strong></label
-                        ><input
-                          class="form-control"
-                          type="text"
-                          id="vehicle_name"
-                          placeholder="Bike name"
-                          name="Name"
-                          required=""
-                        />
-                      </div>
-                    </div>
-                    <div class="col">
-                      <div class="mb-3">
-                        <label class="form-label" for="price"
-                          ><strong>Price</strong></label
-                        >
-                        <div class="input-group">
-                          <input
-                            class="form-control"
-                            type="text"
-                            pattern="[1-9][0-9]*[.]?[0-9]*"
-                            required=""
-                            id="price"
-                          /><span class="input-group-text">$</span>
+                </nav>
+                <div class="container">
+                    <div class="card">
+                        <div class="card-header">
+                            <p class="fs-2">Add item</p>
                         </div>
                         <div class="card-body">
                             <form>
                                 <div class="row">
                                     <div class="col">
-                                        <div class="mb-3"><label class="form-label" for="first_name"><strong>Category</strong></label><select class="form-select" required="" id="category">
+                                        <div class="mb-3"><label class="form-label"
+                                                for="first_name"><strong>Category</strong></label><select
+                                                class="form-select" required="" id="category">
                                                 <optgroup label="Category">
                                                     <option value="0" selected="">Bicycle</option>
                                                     <option value="1">Scooter</option>
@@ -251,7 +127,9 @@
                                             </select></div>
                                     </div>
                                     <div class="col">
-                                        <div class="mb-3"><label class="form-label" for="last_name"><strong>Type</strong></label><select class="form-select" required="" id="vehicle_type">
+                                        <div class="mb-3"><label class="form-label"
+                                                for="last_name"><strong>Type</strong></label><select class="form-select"
+                                                required="" id="vehicle_type">
                                                 <optgroup label="Type">
                                                     <option value="0" selected="">Electric</option>
                                                     <option value="1">Non electric</option>
@@ -261,167 +139,116 @@
                                 </div>
                                 <div class="row">
                                     <div class="col">
-                                        <div class="mb-3"><label class="form-label" for="vehicle_name"><strong>Name</strong></label><input class="form-control" type="text" id="vehicle_name" placeholder="Bike name" name="Name" required=""><span id="name_err" style="color: rgb(231, 74, 59); display: none;">Name cannot be empty</span></div>
+                                        <div class="mb-3"><label class="form-label"
+                                                for="vehicle_name"><strong>Name</strong></label><input
+                                                class="form-control" type="text" id="vehicle_name"
+                                                placeholder="Bike name" name="Name" required=""><span id="name_err"
+                                                style="color: rgb(231, 74, 59); display: none;">Name cannot be
+                                                empty</span></div>
                                     </div>
                                     <div class="col">
-                                        <div class="mb-3"><label class="form-label" for="price"><strong>Price</strong></label>
-                                            <div class="input-group"><input class="form-control" type="text" pattern="[1-9][0-9]*[.]?[0-9]*" required="" id="price"><span class="input-group-text">$</span></div>
-                                            <span id="price_err" style="color: rgb(231, 74, 59); display: none;">Price cannot be empty</span>
+                                        <div class="mb-3"><label class="form-label"
+                                                for="price"><strong>Price</strong></label>
+                                            <div class="input-group"><input class="form-control" type="text"
+                                                    pattern="[1-9][0-9]*[.]?[0-9]*" required="" id="price"><span
+                                                    class="input-group-text">$</span></div>
+                                            <span id="price_err" style="color: rgb(231, 74, 59); display: none;">Price
+                                                cannot be empty</span>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col">
-                                        <div class="mb-3"><label class="form-label" for="manufacturer"><strong>Manufacturer</strong></label><input class="form-control" type="text" id="manufacturer" placeholder="Manufacturer" name="Manufacturer" required=""><span id="manufacturer_err" style="color: rgb(231, 74, 59); display: none;">Manufacturer cannot be empty</span></div>
+                                        <div class="mb-3"><label class="form-label"
+                                                for="manufacturer"><strong>Manufacturer</strong></label><input
+                                                class="form-control" type="text" id="manufacturer"
+                                                placeholder="Manufacturer" name="Manufacturer" required=""><span
+                                                id="manufacturer_err"
+                                                style="color: rgb(231, 74, 59); display: none;">Manufacturer cannot be
+                                                empty</span></div>
                                     </div>
                                     <div class="col">
-                                        <div class="mb-3"><label class="form-label" for="max_speed"><strong>Max speed</strong></label>
-                                            <div class="input-group"><input class="form-control" type="text" pattern="[1-9][0-9]*[.]?[0-9]*" required="" id="max_speed"><span class="input-group-text">Km/h</span></div>
-                                            <span id="max_speed_err" style="color: rgb(231, 74, 59); display: none;">Max speed cannot be empty</span>
+                                        <div class="mb-3"><label class="form-label" for="max_speed"><strong>Max
+                                                    speed</strong></label>
+                                            <div class="input-group"><input class="form-control" type="text"
+                                                    pattern="[1-9][0-9]*[.]?[0-9]*" required="" id="max_speed"><span
+                                                    class="input-group-text">Km/h</span></div>
+                                            <span id="max_speed_err" style="color: rgb(231, 74, 59); display: none;">Max
+                                                speed cannot be empty</span>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col">
-                                        <div class="mb-3"><label class="form-label" for="weight"><strong>Weight</strong></label>
-                                            <div class="input-group"><input class="form-control" type="text" pattern="[1-9][0-9]*[.]?[0-9]*" id="weight" required=""><span class="input-group-text">Kg</span></div>
-                                            <span id="weight_err" style="color: rgb(231, 74, 59); display: none;">Weight cannot be empty</span>
+                                        <div class="mb-3"><label class="form-label"
+                                                for="weight"><strong>Weight</strong></label>
+                                            <div class="input-group"><input class="form-control" type="text"
+                                                    pattern="[1-9][0-9]*[.]?[0-9]*" id="weight" required=""><span
+                                                    class="input-group-text">Kg</span></div>
+                                            <span id="weight_err" style="color: rgb(231, 74, 59); display: none;">Weight
+                                                cannot be empty</span>
                                         </div>
                                     </div>
                                     <div class="col">
-                                        <div class="mb-3"><label class="form-label" for="wheel_size"><strong>Wheel size</strong></label>
-                                            <div class="input-group"><input class="form-control" type="text" pattern="[1-9][0-9]*[.]?[0-9]*" id="wheel_size" required=""><span class="input-group-text">Inch</span></div>
-                                            <span id="wheel_size_err" style="color: rgb(231, 74, 59); display: none;">Wheel size cannot be empty</span>
+                                        <div class="mb-3"><label class="form-label" for="wheel_size"><strong>Wheel
+                                                    size</strong></label>
+                                            <div class="input-group"><input class="form-control" type="text"
+                                                    pattern="[1-9][0-9]*[.]?[0-9]*" id="wheel_size" required=""><span
+                                                    class="input-group-text">Inch</span></div>
+                                            <span id="wheel_size_err"
+                                                style="color: rgb(231, 74, 59); display: none;">Wheel size cannot be
+                                                empty</span>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col">
-                                        <div class="mb-3"><label class="form-label" for="quantity"><strong>Available quantity</strong></label><input class="form-control" type="text" pattern="[1-9][0-9]*" id="quantity" required=""><span id="quantity_err" style="color: rgb(231, 74, 59); display: none;">Quantity cannot be empty</span></div>
+                                        <div class="mb-3"><label class="form-label" for="quantity"><strong>Available
+                                                    quantity</strong></label><input class="form-control" type="text"
+                                                pattern="[1-9][0-9]*" id="quantity" required=""><span id="quantity_err"
+                                                style="color: rgb(231, 74, 59); display: none;">Quantity cannot be
+                                                empty</span></div>
                                     </div>
                                     <div class="col"></div>
                                 </div>
                                 <div class="row">
                                     <div class="col">
-                                        <div class="mb-3"><label class="form-label" for="description"><strong>Description</strong></label><input class="form-control" type="text" id="description" required=""><span id="description_err" style="color: rgb(231, 74, 59); display: none;">Description cannot be empty</span></div>
+                                        <div class="mb-3"><label class="form-label"
+                                                for="description"><strong>Description</strong></label><input
+                                                class="form-control" type="text" id="description" required=""><span
+                                                id="description_err"
+                                                style="color: rgb(231, 74, 59); display: none;">Description cannot be
+                                                empty</span></div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col">
-                                        <div class="mb-3"><label class="form-label" for="photo"><strong>Upload photo</strong></label><input class="form-control" type="file" required="" id="photo" accept="image/png, image/jpeg"></div>
+                                        <div class="mb-3"><label class="form-label" for="photo"><strong>Upload
+                                                    photo</strong></label><input class="form-control" type="file"
+                                                required="" id="photo" accept="image/png, image/jpeg"></div>
                                     </div>
                                 </div>
                             </form>
                         </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col">
-                      <div class="mb-3">
-                        <label class="form-label" for="weight"
-                          ><strong>Weight</strong></label
-                        >
-                        <div class="input-group">
-                          <input
-                            class="form-control"
-                            type="text"
-                            pattern="[1-9][0-9]*[.]?[0-9]*"
-                            id="weight"
-                            required=""
-                          /><span class="input-group-text">Kg</span>
+                        <div class="card-footer text-end">
+                            <button class="btn btn-primary btn-lg" type="submit" id="add_item_btn">
+                                Add item
+                            </button>
                         </div>
-                      </div>
                     </div>
-                    <div class="col">
-                      <div class="mb-3">
-                        <label class="form-label" for="wheel_size"
-                          ><strong>Wheel size</strong></label
-                        >
-                        <div class="input-group">
-                          <input
-                            class="form-control"
-                            type="text"
-                            pattern="[1-9][0-9]*[.]?[0-9]*"
-                            id="wheel_size"
-                            required=""
-                          /><span class="input-group-text">Inch</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col">
-                      <div class="mb-3">
-                        <label class="form-label" for="quantity"
-                          ><strong>Available quantity</strong></label
-                        ><input
-                          class="form-control"
-                          type="text"
-                          pattern="[1-9][0-9]*"
-                          id="quantity"
-                          required=""
-                        />
-                      </div>
-                    </div>
-                    <div class="col"></div>
-                  </div>
-                  <div class="row">
-                    <div class="col">
-                      <div class="mb-3">
-                        <label class="form-label" for="description"
-                          ><strong>Description</strong></label
-                        ><input
-                          class="form-control"
-                          type="text"
-                          id="description"
-                          required=""
-                        />
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col">
-                      <div class="mb-3">
-                        <label class="form-label" for="photo"
-                          ><strong>Upload photo</strong></label
-                        ><input
-                          class="form-control"
-                          type="file"
-                          required=""
-                          id="photo"
-                          accept="image/png, image/jpeg"
-                        />
-                      </div>
-                    </div>
-                  </div>
-                </form>
-              </div>
-              <div class="card-footer text-end">
-                <button
-                  class="btn btn-primary btn-lg"
-                  type="submit"
-                  id="add_item_btn"
-                >
-                  Add item
-                </button>
-              </div>
+                </div>
             </div>
-          </div>
+            <footer class="bg-white sticky-footer">
+                <div class="text-center">
+                    <a href="#"><br /><strong>Determine shipping rates &amp; Time</strong><br /></a>
+                </div>
+                <div class="container my-auto">
+                    <div class="text-center my-auto copyright">
+                        <span>Copyright © BikesBrand 2022</span>
+                    </div>
+                </div>
+            </footer>
         </div>
-        <footer class="bg-white sticky-footer">
-          <div class="text-center">
-            <a href="#"
-              ><br /><strong>Determine shipping rates &amp; Time</strong><br
-            /></a>
-          </div>
-          <div class="container my-auto">
-            <div class="text-center my-auto copyright">
-              <span>Copyright © BikesBrand 2022</span>
-            </div>
-          </div>
-        </footer>
-      </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
@@ -430,5 +257,6 @@
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-storage.js"></script>
     <script type="module" src="src/js/shop_add_item.js"></script>
     <script type="module" src="src/js/nav.js"></script>
-  </body>
+</body>
+
 </html>
