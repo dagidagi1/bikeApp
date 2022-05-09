@@ -1,5 +1,10 @@
 import {dbProducts, fbAuth, dbUsers} from '../firebase/data.js';
 var data = [];
+const email = document.querySelector('#reg_email');
+const password = document.getElementById('reg_password');
+const confirmPass = document.getElementById('reg_conf_pass');
+const name = document.getElementById('reg_name');
+const phone = document.getElementById('reg_phone');
 window.onload = function example() {
   fbAuth.onAuthStateChanged((user) => {
     if (user) {
@@ -7,25 +12,20 @@ window.onload = function example() {
     }
   });
 };
-function checkInput(pass, confPass, name, phone) {
-  if (!/^[a-z A-Z]+$/.test(name)) return 'Invalid name';
-  if (!/^[0-9]{10}$/.test(phone)) return 'Invalid phone';
-  if (pass.length < 6) return 'Password must be at least 6 characters.';
-  if (!(pass === confPass)) return 'Passwords doesnt match!';
+function checkInput() {
+  if (!/^[a-z A-Z]+$/.test(name.value)) return 'Invalid name';
+  if (!/^[0-9]{10}$/.test(phone.value)) return 'Invalid phone';
+  if (password.value.length < 6) return 'Password must be at least 6 characters.';
+  if (!(password.value === confirmPass.value)) return 'Passwords doesnt match!';
+  //if (/^[a-zA-Z]+$/.test(name) && /^[0-9]{10}$/.test(phone) && password === confirmPass && password.length > 5)
   return 0;
-  // if (/^[a-zA-Z]+$/.test(name) && /^[0-9]{10}$/.test(phone) && password === confirmPass && password.length > 5)
 }
 function save() {
-  // saves user only in auth
-  var email = document.querySelector('#reg_email').value;
-  var password = document.getElementById('reg_password').value;
-  var confirmPass = document.getElementById('reg_conf_pass').value;
-  var name = document.getElementById('reg_name').value;
-  var phone = document.getElementById('reg_phone').value;
-  const inputErr = checkInput(password, confirmPass, name, phone);
+  // adds users email+password to firebase auth and then to collection with the remain user data.
+  const inputErr = checkInput();
   if (inputErr == 0) {
     fbAuth
-        .createUserWithEmailAndPassword(email, password)
+        .createUserWithEmailAndPassword(email.value, password.value)
         .then((userCredential) => {
         // Signed in
           var user = userCredential.user;
@@ -37,11 +37,11 @@ function save() {
         // ..
         });
     dbUsers
-        .doc(email)
+        .doc(email.value)
         .set({
-          email: email,
-          name: name,
-          phone: phone,
+          email: email.value,
+          name: name.value,
+          phone: phone.value,
           store: false,
           shoppingList: [],
           wishList: [],
@@ -59,10 +59,10 @@ function save() {
 }
 
 function login() {
-  var email = document.getElementById('login_email').value;
-  var password = document.getElementById('login_pass').value;
+const logEmail = document.getElementById('login_email');
+const logPass = document.getElementById('login_pass');
   fbAuth
-      .signInWithEmailAndPassword(email, password)
+      .signInWithEmailAndPassword(logEmail.value, logPass.value)
       .then((userCredential) => {
       // Signed in
         var user = userCredential.user;

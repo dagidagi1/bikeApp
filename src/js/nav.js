@@ -17,7 +17,6 @@ function update() {
               if (doc.data().shoppingList.length > 0) {
                 shopping_cart.style = 'color: red';
               }
-              checker++;
             });
           });
     }
@@ -25,7 +24,6 @@ function update() {
 }
 update();
 document.getElementById('logout_btn').addEventListener('click', function() {
-  checker++;
   fbAuth
       .signOut()
       .then(() => {
