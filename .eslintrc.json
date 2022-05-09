@@ -14,7 +14,10 @@
         "ecmaVersion": "latest"
     },
     "globals":{
-        "document": false
+        "document": false,
+        "firebase": false,
+        "bootstrap": false,
+        "Chart": false
     },
     "plugins": [
         "@typescript-eslint"
@@ -29,6 +32,7 @@
         "no-var": "off",
         "quotes": [
             "error",
-            "single"]
+            "single"],
+        "camelcase": "off"
     }
 }
