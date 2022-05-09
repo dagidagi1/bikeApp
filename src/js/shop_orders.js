@@ -1,4 +1,4 @@
-import { dbProducts, dbStores, dbOrders } from "../firebase/data.js";
+import { dbProducts, dbStores, dbOrders, storageRef } from "../firebase/data.js";
 
 var parametrs = location.search.substring(1).split('&')
 var temp = parametrs[0].split("=")
@@ -47,8 +47,10 @@ function get_element(item) {
             itemRef.get().then((doc) => {
                 if (doc.exists) {
                     var img = doc.data().src
+                    var iId = doc.id
+                    var hasImg = doc.data().hasImg
                     var v_name = doc.data().name
-                    build_element(orderRef.id, img, v_name, quantity, delivery, status)
+                    build_element(orderRef.id, img, v_name, quantity, delivery, status, hasImg, iId)
                 } else {
                     // doc.data() will be undefined in this case
                     console.log("No such document!");
@@ -64,7 +66,7 @@ function get_element(item) {
     });
 }
 
-function build_element(oId, iImg, iName, oQuantity, oDelivery, oStatus) {
+function build_element(oId, iImg, iName, oQuantity, oDelivery, oStatus, hasImg, iId) {
     const approveBtn = document.createElement('button')
     approveBtn.setAttribute("class", "btn btn-primary")
     approveBtn.setAttribute("type", "button")
@@ -95,7 +97,20 @@ function build_element(oId, iImg, iName, oQuantity, oDelivery, oStatus) {
     var col1 = document.createElement('td')
     var img = document.createElement('img')
     img.width = 80
-    img.src = iImg
+    if(hasImg == false){
+        img.src = iImg
+    }
+    else 
+    {
+        storageRef.child(iId).getDownloadURL()
+            .then((url) => {
+                // Or inserted into an <img> element
+                img.src = url;
+            })
+            .catch((error) => {
+                console.log(error)
+            });
+    }
     col1.appendChild(img)
     row.appendChild(col1)
 

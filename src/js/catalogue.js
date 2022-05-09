@@ -14,9 +14,6 @@ const btn_category = document.getElementById("btn_category");
 const btn_price = document.getElementById("btn_price");
 const searchInput = document.getElementById("navbar_search_field");
 const searchBtn = document.getElementById("navbar_search_button");
-const userNameNavBar = document.getElementById("navbar_profile_name");
-const wish_list = document.getElementById("wish_list");
-const shopping_cart = document.getElementById("shopping_cart");
 function Search(input) {
   return data.filter((d) => {
     if (d.description.toLocaleLowerCase().includes(input.toLocaleLowerCase())) {
@@ -38,9 +35,9 @@ searchBtn.addEventListener("click", () => {
   const d = Search(searchInput.value);
   init(d);
 });
-function productElment(d, i) {
+function productElment(d, i, sort = "all") {
   return `<div class="col">
-    <a href="product.html?index=${i}">
+    <a href="product.html?index=${i}-${sort}">
       <div class="card">
           <div class="card-body"><img class="img-fluid" src="${d.src}">
               <h4 class="card-title" style="color: var(--bs-gray);">${d.name}</h4>
@@ -51,15 +48,18 @@ function productElment(d, i) {
   </div>`;
 }
 //inside init there is a call to productelement with undified object
-const init = (data) => {
+const init = (da, sort = "all") => {
   for (var i = 0; i < 10; i++) {
     col = document.getElementById(`col_${i}`);
     col.innerHTML = "";
     for (var j = 0; data.length != 0 && j < MAX_IN_ROW; j++) {
-      col.innerHTML += productElment(
-        data[j + i * MAX_IN_ROW],
-        j + i * MAX_IN_ROW
-      );
+      if (!data[i].deleted) {
+        col.innerHTML += productElment(
+          da[j + i * MAX_IN_ROW],
+          j + i * MAX_IN_ROW,
+          sort
+        );
+      }
     }
   }
 };
@@ -70,12 +70,12 @@ dropdownNONE.addEventListener("click", () => {
 dropdownHTL.addEventListener("click", () => {
   btn_price.innerText = "High to Low";
   const d = data.sort((a, b) => b.price - a.price);
-  init(d);
+  init(d, "HTL");
 });
 dropdownLTH.addEventListener("click", () => {
   btn_price.innerText = "Low to High";
   const d = data.sort((a, b) => a.price - b.price);
-  init(d);
+  init(d, "LTH");
 });
 dropdownChoiceAll.addEventListener("click", () => {
   btn_category.innerText = "All";
@@ -86,14 +86,14 @@ dropdownChoiceBicycle.addEventListener("click", () => {
     return d.category === 0;
   });
   btn_category.innerText = "Bicycle";
-  init(newData);
+  init(newData, "B");
 });
 dropdownChoiceScooter.addEventListener("click", () => {
   const newData = data.filter((d) => {
     return d.category === 1;
   });
   btn_category.innerText = "Scooter";
-  init(newData);
+  init(newData, "S");
 });
 
 dbProducts.get().then((querySnapshot) => {

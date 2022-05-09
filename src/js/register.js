@@ -1,22 +1,17 @@
 import { dbProducts, fbAuth, dbUsers } from "../firebase/data.js";
 var data = [];
 window.onload = function example() {
-
   fbAuth.onAuthStateChanged((user) => {
     if (user) {
       location.replace("registered_home.html");
     }
   });
-}
-function checkInput(pass, confPass, name, phone){
-  if(!(/^[a-z A-Z]+$/.test(name)))
-    return 'Invalid name';
-  if(!(/^[0-9]{10}$/.test(phone)))
-    return 'Invalid phone';
-  if(pass.length < 6)
-    return 'Password must be at least 6 characters.';
-  if(!(pass === confPass))
-    return 'Passwords doesnt match!';
+};
+function checkInput(pass, confPass, name, phone) {
+  if (!/^[a-z A-Z]+$/.test(name)) return "Invalid name";
+  if (!/^[0-9]{10}$/.test(phone)) return "Invalid phone";
+  if (pass.length < 6) return "Password must be at least 6 characters.";
+  if (!(pass === confPass)) return "Passwords doesnt match!";
   return 0;
   //if (/^[a-zA-Z]+$/.test(name) && /^[0-9]{10}$/.test(phone) && password === confirmPass && password.length > 5)
 }
@@ -27,40 +22,40 @@ function save() {
   var confirmPass = document.getElementById("reg_conf_pass").value;
   var name = document.getElementById("reg_name").value;
   var phone = document.getElementById("reg_phone").value;
-  let inputErr = checkInput(password,confirmPass, name,phone);
-  if(inputErr == 0){
+  let inputErr = checkInput(password, confirmPass, name, phone);
+  if (inputErr == 0) {
     fbAuth
       .createUserWithEmailAndPassword(email, password)
-    .then((userCredential) => {
-      // Signed in
-      var user = userCredential.user;
-    })
-    .catch((error) => {
-      var errorCode = error.code;
-      var errorMessage = error.message;
-      alert(errorCode);
-      // ..
-    });
-    dbUsers.doc(email)
-        .set({
-          email: email,
-          name: name,
-          phone: phone,
-          store: false,
-          shoppingList: [],
-          wishList: []
-        })
-        .then((docRef) => {
-          //alert("Document written with ID: ", docRef.id);
-          location.replace("registered_home.html");
-        })
-        .catch((error) => {
-          console.error("Error adding document: ", error);
-        });
+      .then((userCredential) => {
+        // Signed in
+        var user = userCredential.user;
+      })
+      .catch((error) => {
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        alert(errorCode);
+        // ..
+      });
+    dbUsers
+      .doc(email)
+      .set({
+        email: email,
+        name: name,
+        phone: phone,
+        store: false,
+        shoppingList: [],
+        wishList: [],
+      })
+      .then((docRef) => {
+        //alert("Document written with ID: ", docRef.id);
+        location.replace("registered_home.html");
+      })
+      .catch((error) => {
+        console.error("Error adding document: ", error);
+      });
+  } else {
+    alert(inputErr);
   }
-else{
-  alert(inputErr);
-}
 }
 
 function get() {
@@ -118,7 +113,7 @@ document.getElementById("email_ver_btn").addEventListener("click", function () {
   firebase
     .auth()
     .sendPasswordResetEmail(document.getElementById("forg_email").value)
-    .then(() => { })
+    .then(() => {})
     .catch((error) => {
       var errorCode = error.code;
       var errorMessage = error.message;
@@ -139,31 +134,35 @@ function productElment(d, i) {
 }
 const init = () => {
   let d = data
-    .filter((a) => a.type === 0)
+    .filter((a) => a.category === 0)
     .sort((a, b) => {
       b.price - a.price;
     });
   col = document.getElementById(`col_0`);
   col.innerHTML = "";
   for (let i = 0; i < 5; i++) {
-    col.innerHTML += productElment(d[i], i);
-    document.getElementById(`${i}`)?.addEventListener("click", () => {
-      redirectToDiscription(i);
-    });
+    if (!data[i].deleted) {
+      col.innerHTML += productElment(d[i], i);
+      document.getElementById(`${i}`)?.addEventListener("click", () => {
+        redirectToDiscription(i);
+      });
+    }
   }
   d = data
-    .filter((a) => a.type === 1)
+    .filter((a) => a.category === 1)
     .sort((a, b) => {
       b.price - a.price;
     });
   console.log(d);
   col = document.getElementById(`col_1`);
   for (let i = 0; i < 5; i++) {
-    col.innerHTML += productElment(d[i], i);
+    if (!data[i].deleted) {
+      col.innerHTML += productElment(d[i], i);
 
-    document.getElementById(`${i}`)?.addEventListener("click", () => {
-      //redirectToDiscription(i);
-    });
+      document.getElementById(`${i}`)?.addEventListener("click", () => {
+        //redirectToDiscription(i);
+      });
+    }
   }
 };
 dbProducts.get().then((querySnapshot) => {

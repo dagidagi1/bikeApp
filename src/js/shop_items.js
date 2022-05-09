@@ -75,21 +75,23 @@ function build_element(i_id, img_src, i_name, i_price, i_type, hasImg) {
     var img = document.createElement('img')
     img.setAttribute("id", "item_img" + i_id);
     img.width = 80
-    img.src = img_src
-    col1.appendChild(img)
-    row.appendChild(col1)
-    console.log(img_src);
-    if(hasImg){
+    if(hasImg == false){
+        img.src = img_src
+    }
+    else 
+    {
         storageRef.child(i_id).getDownloadURL()
             .then((url) => {
                 // Or inserted into an <img> element
-                var img = document.getElementById("item_img" + i_id);
                 img.src = url;
             })
             .catch((error) => {
                 console.log(error)
             });
     }
+    col1.appendChild(img)
+    row.appendChild(col1)
+    
 
     var col2 = document.createElement('td')
     var bike_name = document.createElement('span')

@@ -1,8 +1,10 @@
 import { dbProducts, fbAuth, dbUsers, dbOrders } from "../firebase/data.js";
 var parametrs = location.search.substring(1).split("&");
 var temp = parametrs[0].split("=");
-const index_p = decodeURI(temp[1]);
+const index_p = temp[1].split("-");
+console.log(Number(index_p[0]), index_p[1]);
 var data = [];
+var newData;
 var cur_user;
 const type = document.getElementById("type_d");
 const name = document.getElementById("product_page_name");
@@ -46,13 +48,31 @@ dbProducts.get().then((querySnapshot) => {
   querySnapshot.forEach((doc) => {
     data.push(doc.data());
   });
-  console.log(data);
-  updateDescriptions(data[index_p]);
+  if (index_p[1] === "B") {
+    newData = data.filter((d) => {
+      return d.category === 0;
+    });
+    console.log(newData[Number(index_p[0])]);
+    updateDescriptions(newData[Number(index_p[0])]);
+  } else if (index_p[1] === "S") {
+    newData = data.filter((d) => {
+      return d.category === 1;
+    });
+    updateDescriptions(newData[Number(index_p[0])]);
+  } else if (index_p[1] === "LTH") {
+    newData = data.sort((a, b) => a.price - b.price);
+    updateDescriptions(newData[Number(index_p[0])]);
+  } else if (index_p[1] === "HTL") {
+    newData = data.sort((a, b) => b.price - a.price);
+    updateDescriptions(newData[Number(index_p[0])]);
+  } else {
+    updateDescriptions(data[Number(index_p[0])]);
+  }
 });
 const updateDescriptions = (data) => {
-  if (data.type === 0)
-    type.innerText = data.category === 0 ? "Bycicle" : "Scooter";
   if (data.type === 1)
+    type.innerText = data.category === 0 ? "Bycicle" : "Scooter";
+  if (data.type === 0)
     type.innerText =
       data.category === 0 ? "Electric Bycicle" : "Electric Scooter";
   name.innerText = data.name;
@@ -75,12 +95,12 @@ const addToCart = () => {
   //   review: false,
   // });
 
-  cur_user.shoppingList.push(index_p);
+  cur_user.shoppingList.push(Number(index_p[0]));
   dbUsers.doc(cur_user.id).update(cur_user);
   updateNavBar();
 };
 const addToWishList = () => {
-  cur_user.wishList.push(index_p);
+  cur_user.wishList.push(Number(index_p[0]));
   dbUsers.doc(cur_user.id).update(cur_user);
   updateNavBar();
 };
