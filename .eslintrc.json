@@ -2,7 +2,8 @@
     "env": {
         "node": true,
         "commonjs": true,
-        "es2021": true
+        "es2021": true,
+        "browser": true
     },
     "extends": [
         "eslint:recommended",
@@ -11,6 +12,9 @@
     "parser": "@typescript-eslint/parser",
     "parserOptions": {
         "ecmaVersion": "latest"
+    },
+    "globals":{
+        "document": false
     },
     "plugins": [
         "@typescript-eslint"
