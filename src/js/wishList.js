@@ -1,2 +1,2 @@
-const search = document.getElementById("searchgroup");
+const search = document.getElementById('searchgroup');
 search.remove();

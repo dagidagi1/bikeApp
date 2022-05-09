@@ -4,8 +4,8 @@ import {
   storageRef,
   dbUsers,
   dbOrders,
-} from "../firebase/data.js";
-const search = document.getElementById("searchgroup");
+} from '../firebase/data.js';
+const search = document.getElementById('searchgroup');
 search.remove();
 let col;
 var data = [];
@@ -25,26 +25,26 @@ function productElment(d, i) {
 }
 const init = () => {
   let d = data
-    .filter((a) => a.category === 0)
-    .sort((a, b) => {
-      b.price - a.price;
-    });
-  col = document.getElementById(`col_0`);
-  col.innerHTML = "";
+      .filter((a) => a.category === 0)
+      .sort((a, b) => {
+        b.price - a.price;
+      });
+  col = document.getElementById('col_0');
+  col.innerHTML = '';
   for (let i = 0; i < 5; i++) {
     if (!data[i].deleted) {
       col.innerHTML += productElment(d[i], i);
-      document.getElementById(`${i}`)?.addEventListener("click", () => {
-        globalVariable = { example_attribute: i };
+      document.getElementById(`${i}`)?.addEventListener('click', () => {
+        globalVariable = {example_attribute: i};
       });
     }
   }
   d = data
-    .filter((a) => a.category === 1)
-    .sort((a, b) => {
-      b.price - a.price;
-    });
-  col = document.getElementById(`col_1`);
+      .filter((a) => a.category === 1)
+      .sort((a, b) => {
+        b.price - a.price;
+      });
+  col = document.getElementById('col_1');
   for (let i = 5; i < 10; i++) {
     if (!data[i].deleted) {
       col.innerHTML += productElment(d[i - 5], i);
@@ -64,9 +64,9 @@ dbProducts.get().then((querySnapshot) => {
 
 dbUsers.get().then((querySnapshot) => {
   // contains all users list, idk if needed here!
-  let ddd = [];
+  const ddd = [];
   querySnapshot.forEach((doc) => {
     ddd.push(doc.data());
   });
-  //console.log(ddd);
+  // console.log(ddd);
 });
