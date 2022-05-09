@@ -1,10 +1,4 @@
-import {
-  dbProducts,
-  fbAuth,
-  dbUsers,
-  dbOrders,
-  storageRef,
-} from '../firebase/data.js';
+import {dbProducts, storageRef} from '../firebase/data.js';
 const MAX_IN_ROW = 4;
 const serachType = ['Bike', 'bicycle', 'scooter', 'BMX'];
 let col;

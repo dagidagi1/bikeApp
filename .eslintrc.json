@@ -17,7 +17,8 @@
         "document": false,
         "firebase": false,
         "bootstrap": false,
-        "Chart": false
+        "Chart": false,
+        "storageRef": false
     },
     "plugins": [
         "@typescript-eslint"
@@ -32,7 +33,6 @@
         "no-var": "off",
         "quotes": [
             "error",
-            "single"],
-        "camelcase": "off"
+            "single"]
     }
 }

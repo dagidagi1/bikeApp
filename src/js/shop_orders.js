@@ -2,13 +2,13 @@ import {dbProducts, dbStores, dbOrders, storageRef} from '../firebase/data.js';
 
 var parametrs = location.search.substring(1).split('&');
 var temp = parametrs[0].split('=');
-const store_id = decodeURI(temp[1]);
+const storeId = decodeURI(temp[1]);
 
 const ordersTable = document.getElementById('ordersTable');
 
 var listOfOrders = null;
 
-const storeRef = dbStores.doc(store_id);
+const storeRef = dbStores.doc(storeId);
 
 storeRef.get().then((doc) => {
   if (doc.exists) {
@@ -19,7 +19,7 @@ storeRef.get().then((doc) => {
   }
 }).then(() => {
   listOfOrders.forEach((item) => {
-    get_element(item);
+    getElement(item);
   });
 }).catch((error) => {
   console.log('Error getting document:', error);
@@ -34,7 +34,7 @@ document.addEventListener('click', (e) => {
   }
 });
 
-function get_element(item) {
+function getElement(item) {
   var orderRef = dbOrders.doc(item);
   orderRef.get().then((doc) => {
     if (doc.exists) {
@@ -48,8 +48,8 @@ function get_element(item) {
           var img = doc.data().src;
           var iId = doc.id;
           var hasImg = doc.data().hasImg;
-          var v_name = doc.data().name;
-          build_element(orderRef.id, img, v_name, quantity, delivery, status, hasImg, iId);
+          var vName = doc.data().name;
+          buildElement(orderRef.id, img, vName, quantity, delivery, status, hasImg, iId);
         } else {
           // doc.data() will be undefined in this case
           console.log('No such document!');
@@ -64,7 +64,7 @@ function get_element(item) {
   });
 }
 
-function build_element(oId, iImg, iName, oQuantity, oDelivery, oStatus, hasImg, iId) {
+function buildElement(oId, iImg, iName, oQuantity, oDelivery, oStatus, hasImg, iId) {
   const approveBtn = document.createElement('button');
   approveBtn.setAttribute('class', 'btn btn-primary');
   approveBtn.setAttribute('type', 'button');
@@ -111,9 +111,9 @@ function build_element(oId, iImg, iName, oQuantity, oDelivery, oStatus, hasImg, 
   row.appendChild(col1);
 
   var col2 = document.createElement('td');
-  var bike_name = document.createElement('span');
-  bike_name.textContent = iName;
-  col2.appendChild(bike_name);
+  var bikeName = document.createElement('span');
+  bikeName.textContent = iName;
+  col2.appendChild(bikeName);
   row.appendChild(col2);
 
   var col3 = document.createElement('td');
@@ -138,14 +138,14 @@ function build_element(oId, iImg, iName, oQuantity, oDelivery, oStatus, hasImg, 
   col5.setAttribute('class', 'text-end');
 
   if (oStatus == 'Waiting') {
-    var btn_group = document.createElement('div');
-    btn_group.setAttribute('class', 'btn-group');
-    btn_group.setAttribute('role', 'group');
+    var btnGroup = document.createElement('div');
+    btnGroup.setAttribute('class', 'btn-group');
+    btnGroup.setAttribute('role', 'group');
     approveBtn.setAttribute('id', 'approveBtn/' + oId);
     denyBtn.setAttribute('id', 'denyBtn/' + oId);
-    btn_group.append(approveBtn);
-    btn_group.append(denyBtn);
-    col5.appendChild(btn_group);
+    btnGroup.append(approveBtn);
+    btnGroup.append(denyBtn);
+    col5.appendChild(btnGroup);
   } else {
     var statusSpan = document.createElement('span');
     statusSpan.textContent = oStatus;
@@ -171,5 +171,5 @@ function changeStatus(oId, oStatus) {
     status: oStatus,
   });
   ordersTable.removeChild(document.getElementById('row/'+oId));
-  get_element(oId);
+  getElement(oId);
 }

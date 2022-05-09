@@ -61,7 +61,6 @@ function save() {
         .createUserWithEmailAndPassword(email.value, password.value)
         .then((userCredential) => {
         // Signed in
-          var user = userCredential.user;
           flag = true;
           email.style.borderColor = '';
           emailSp.style.display = 'none';
@@ -101,13 +100,10 @@ function login() {
       .signInWithEmailAndPassword(logEmail.value, logPass.value)
       .then((userCredential) => {
       // Signed in
-        var user = userCredential.user;
         location.replace('registered_home.html');
       })
       .catch((error) => {
-        var errorCode = error.code;
-        var errorMessage = error.message;
-        alert(errorCode);
+        alert(error.code);
       });
 }
 document.getElementById('reg_btn').addEventListener('click', save, false);
@@ -118,9 +114,7 @@ document.getElementById('email_ver_btn').addEventListener('click', function() {
       .sendPasswordResetEmail(document.getElementById('forg_email').value)
       .then(() => {})
       .catch((error) => {
-        var errorCode = error.code;
-        var errorMessage = error.message;
-      // ..
+        alert(error.code);
       });
 });
 let col;
@@ -147,7 +141,7 @@ const init = () => {
     if (!data[i].deleted) {
       col.innerHTML += productElment(d[i], i);
       document.getElementById(`${i}`)?.addEventListener('click', () => {
-        redirectToDiscription(i);
+        // redirectToDiscription(i);
       });
     }
   }

@@ -1,15 +1,15 @@
-import {dbProducts, fbAuth, dbUsers, dbOrders} from '../firebase/data.js';
+import {dbProducts, fbAuth, dbUsers} from '../firebase/data.js';
 const search = document.getElementById('searchgroup');
 search.remove();
 const data = [];
 let price = 0;
-var cur_user;
-const shopping_cart = document.getElementById('shopping_cart');
-const shopping_cart_table = document.getElementById('shopping_cart_table');
-const total_price = document.getElementById('total_price');
-const chekout_shop_cart_btn = document.getElementById('chekout_shop_cart');
-chekout_shop_cart_btn.addEventListener('click', () => {
-  location.replace('chekout.html' + '?email=' + cur_user.email);
+var curUser;
+const shoppingCart = document.getElementById('shoppingCart');
+const shoppingCartTable = document.getElementById('shoppingCartTable');
+const totalPrice = document.getElementById('totalPrice');
+const chekoutShopCartBtn = document.getElementById('chekout_shop_cart');
+chekoutShopCartBtn.addEventListener('click', () => {
+  location.replace('chekout.html' + '?email=' + curUser.email);
 });
 const getUser = () => {
   fbAuth.onAuthStateChanged((user) => {
@@ -21,8 +21,8 @@ const getUser = () => {
           .get()
           .then((snapshot) => {
             snapshot.forEach((doc) => {
-              cur_user = doc.data();
-              cur_user.id = doc.id;
+              curUser = doc.data();
+              curUser.id = doc.id;
               init();
             });
           });
@@ -61,23 +61,23 @@ const makeRow = (d, i) => {
   </tr>`;
 };
 function deleteItem(i) {
-  total_price.innerText = ` Subtotal: ${price}$`;
-  cur_user.shoppingList.pop(i);
-  dbUsers.doc(cur_user.id).set(cur_user);
-  if (cur_user.shoppingList.length == 0) shopping_cart.style = '';
+  totalPrice.innerText = ` Subtotal: ${price}$`;
+  curUser.shoppingList.pop(i);
+  dbUsers.doc(curUser.id).set(curUser);
+  if (curUser.shoppingList.length == 0) shoppingCart.style = '';
 }
 function init() {
-  shopping_cart_table.innerHTML = '';
+  shoppingCartTable.innerHTML = '';
   price = 0;
-  for (let i = 0; i < cur_user.shoppingList.length; i++) {
-    shopping_cart_table.innerHTML += makeRow(
-        data[+cur_user.shoppingList[i]],
+  for (let i = 0; i < curUser.shoppingList.length; i++) {
+    shoppingCartTable.innerHTML += makeRow(
+        data[+curUser.shoppingList[i]],
         i,
     );
-    price += data[+cur_user.shoppingList[i]].price;
+    price += data[+curUser.shoppingList[i]].price;
   }
-  total_price.innerText = ` Subtotal: ${price}$`;
-  for (let i = 0; i < cur_user.shoppingList.length; i++) {
+  totalPrice.innerText = ` Subtotal: ${price}$`;
+  for (let i = 0; i < curUser.shoppingList.length; i++) {
     document.getElementById(`btn_delete_${i}`).addEventListener('click', () => {
       console.log(document.getElementById(`btn_delete_${i}`).value);
       deleteItem(document.getElementById(`btn_delete_${i}`).value);

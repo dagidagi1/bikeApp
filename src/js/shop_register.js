@@ -2,42 +2,42 @@ import {fbAuth, dbUsers, dbStores} from '../firebase/data.js';
 
 const DAYS_OF_WEEK = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
-const store_name = document.getElementById('store_name');
-let user_id = null;
-let shop_id = null;
+const storeName = document.getElementById('storeName');
+let userId = null;
+let shopId = null;
 
 document.getElementById('create_btn').addEventListener('click', function() {
-  const work_hours = new Map();
+  const workHours = new Map();
   DAYS_OF_WEEK.forEach((d)=>{
     if (document.getElementById(d).checked == false) {
-      work_hours.set(d, [false]);
+      workHours.set(d, [false]);
     } else {
-      work_hours.set(d, [true, document.getElementById(`${d}_from`).value, document.getElementById(`${d}_till`).value]);
+      workHours.set(d, [true, document.getElementById(`${d}_from`).value, document.getElementById(`${d}_till`).value]);
     }
   });
-  const w_h = Object.fromEntries(work_hours);
+  const wH = Object.fromEntries(workHours);
   fbAuth.onAuthStateChanged((user) => {
     if (user) {
       dbUsers.where('email', '==', user.email).get()
           .then((snapshot) => {
             snapshot.forEach((doc) => {
-              user_id = doc.id;
+              userId = doc.id;
             });
             dbStores.add({
-              name: store_name.value,
-              work_hours: w_h,
+              name: storeName.value,
+              workHours: wH,
               products: [],
               income: 0,
               sells: 0,
               orders: [],
             }).then((docRef) => {
-              shop_id = docRef.id;
-              var userRef = dbUsers.doc(user_id);
+              shopId = docRef.id;
+              var userRef = dbUsers.doc(userId);
               userRef.update({
-                store: shop_id,
+                store: shopId,
               });
             }).then(()=>{
-              location.replace('shop_dashboard.html' + '?id=' + shop_id);
+              location.replace('shop_dashboard.html' + '?id=' + shopId);
             })
                 .catch((error) => {
                   console.error('Error adding document: ', error);

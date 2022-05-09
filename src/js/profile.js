@@ -1,4 +1,4 @@
-import {dbProducts, fbAuth, dbUsers, dbOrders} from '../firebase/data.js';
+import {fbAuth, dbUsers} from '../firebase/data.js';
 const username = document.getElementById('username');
 const phone_number = document.getElementById('phone_number');
 const email = document.getElementById('email');
@@ -8,7 +8,7 @@ const save_pass = document.getElementById('save_password');
 const search = document.getElementById('searchgroup');
 search.remove();
 var user;
-var orders = [];
+// var orders = [];
 let cur_user;
 fbAuth.onAuthStateChanged((u) => {
   cur_user = u;
