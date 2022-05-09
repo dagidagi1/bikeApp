@@ -13,48 +13,88 @@ window.onload = function example() {
   });
 };
 function checkInput() {
-  if (!/^[a-z A-Z]+$/.test(name.value)) return 'Invalid name';
-  if (!/^[0-9]{10}$/.test(phone.value)) return 'Invalid phone';
-  if (password.value.length < 6) return 'Password must be at least 6 characters.';
-  if (!(password.value === confirmPass.value)) return 'Passwords doesnt match!';
+  const nameSp = document.getElementById('reg_name_sp');
+  const phoneSp = document.getElementById('reg_phone_sp');
+  const passSp = document.getElementById('reg_pass_sp');
+  const confPassSp = document.getElementById('reg_conf_pass_sp');
+  if (!/^[a-z A-Z]+$/.test(name.value)) {
+    name.style.borderColor = 'red';
+    nameSp.style.display = 'block';
+    return false;
+  }
+  else{
+    nameSp.style.display = 'none';
+    name.style.borderColor = '';
+  }
+  if (!/^[0-9]{10}$/.test(phone.value)){
+    phone.style.borderColor = 'red';
+    phoneSp.style.display = 'block';
+    return false;
+  } 
+  else{
+    phone.style.borderColor = '';
+    phoneSp.style.display = 'none';
+  }
+  if (password.value.length < 6){
+    password.style.borderColor = 'red';
+    passSp.style.display = 'block';
+    return false;
+  }
+  else{
+    password.style.borderColor = '';
+    passSp.style.display = 'none';
+  }
+  if (!(password.value === confirmPass.value)){
+    confirmPass.style.borderColor = 'red';
+    confPassSp.style.display = 'block';
+    return false;
+  }
+  else{
+    confirmPass.style.borderColor = '';
+    confPassSp.style.display = 'none';
+  }
   //if (/^[a-zA-Z]+$/.test(name) && /^[0-9]{10}$/.test(phone) && password === confirmPass && password.length > 5)
-  return 0;
+  return true;
 }
 function save() {
   // adds users email+password to firebase auth and then to collection with the remain user data.
-  const inputErr = checkInput();
-  if (inputErr == 0) {
+  const emailSp = document.getElementById('reg_email_sp');
+  if (checkInput() === true) {
+    let flag = false;
     fbAuth
         .createUserWithEmailAndPassword(email.value, password.value)
         .then((userCredential) => {
         // Signed in
           var user = userCredential.user;
+          flag = true;
+          email.style.borderColor = '';
+          emailSp.style.display = 'none';
         })
         .catch((error) => {
-          var errorCode = error.code;
-          var errorMessage = error.message;
-          alert(errorCode);
+          //color the email.
+          email.style.borderColor = 'red';
+          emailSp.style.display = 'block';
         // ..
         });
-    dbUsers
-        .doc(email.value)
-        .set({
-          email: email.value,
-          name: name.value,
-          phone: phone.value,
-          store: false,
-          shoppingList: [],
-          wishList: [],
-        })
-        .then((docRef) => {
-        // alert("Document written with ID: ", docRef.id);
-          location.replace('registered_home.html');
-        })
-        .catch((error) => {
-          console.error('Error adding document: ', error);
-        });
-  } else {
-    alert(inputErr);
+    if(flag === true){
+      dbUsers
+          .doc(email.value)
+          .set({
+            email: email.value,
+            name: name.value,
+            phone: phone.value,
+            store: false,
+            shoppingList: [],
+            wishList: [],
+          })
+          .then((docRef) => {
+          // alert("Document written with ID: ", docRef.id);
+            location.replace('registered_home.html');
+          })
+          .catch((error) => {
+            console.error('Error adding document: ', error);
+          });
+    }
   }
 }
 
