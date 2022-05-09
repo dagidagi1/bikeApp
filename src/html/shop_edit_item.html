@@ -14,7 +14,9 @@
 <body id="page-top">
     <div id="wrapper">
         <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0">
-            <div class="container-fluid d-flex flex-column p-0"><a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="index.html">
+            <div class="container-fluid d-flex flex-column p-0"><a
+                    class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0"
+                    href="index.html">
                     <div>
                         <div class="sidebar-brand-icon rotate-n-15"><i class="fas fa-bicycle"></i></div>
                         <div class="sidebar-brand-text mx-3"><span>Bike brand</span></div>
@@ -22,36 +24,50 @@
                 </a>
                 <hr class="sidebar-divider my-0">
                 <ul class="navbar-nav text-light" id="accordionSidebar">
-                    <li class="nav-item"><a class="nav-link" id="nav_home_btn" style="cursor: pointer"><i class="fa fa-home"></i><span>Home</span></a></li>
-                    <li class="nav-item"><a class="nav-link" style="color: rgba(255, 255, 255, 0.8);cursor: pointer" id="nav_catalog_btn"><i class="fa fa-th"></i><span>Catalogue</span></a></li>
-                    <li class="nav-item"><a class="nav-link" style="color: rgba(255, 255, 255, 0.8);cursor: pointer" id="nav_orders_btn"><i class="fa fa-reorder"></i><span>My orders</span></a></li>
-                    <li class="nav-item"><a class="nav-link" style="color: rgba(255, 255, 255, 0.8);cursor: pointer" id="nav_store_btn"><i class="fa fa-shopping-bag"></i><span>My store</span></a></li>
+                    <li class="nav-item"><a class="nav-link" id="nav_home_btn" style="cursor: pointer"><i
+                                class="fa fa-home"></i><span>Home</span></a></li>
+                    <li class="nav-item"><a class="nav-link" style="color: rgba(255, 255, 255, 0.8);cursor: pointer"
+                            id="nav_catalog_btn"><i class="fa fa-th"></i><span>Catalogue</span></a></li>
+                    <li class="nav-item"><a class="nav-link" style="color: rgba(255, 255, 255, 0.8);cursor: pointer"
+                            id="nav_orders_btn"><i class="fa fa-reorder"></i><span>My orders</span></a></li>
+                    <li class="nav-item"><a class="nav-link" style="color: rgba(255, 255, 255, 0.8);cursor: pointer"
+                            id="nav_store_btn"><i class="fa fa-shopping-bag"></i><span>My store</span></a></li>
                 </ul>
-                <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0" id="sidebarToggle" type="button"></button></div>
             </div>
         </nav>
         <div class="d-flex flex-column" id="content-wrapper">
             <div id="content">
                 <nav class="navbar navbar-light navbar-expand bg-white shadow mb-4 topbar static-top" id="navbar">
-                    <div class="container-fluid"><button class="btn btn-link d-md-none rounded-circle me-3" id="sidebarToggleTop" type="button"><i class="fas fa-bars"></i></button>
-                        <form class="d-none d-sm-inline-block me-auto ms-md-3 my-2 my-md-0 mw-100 navbar-search">
-                            <div class="input-group"><input class="bg-light form-control border-0 small" type="text" id="navbar_search_field" placeholder="Search for ..."><button class="btn btn-primary py-0" id="navbar_search_button" type="button"><i class="fas fa-search"></i></button></div>
-                        </form>
+                    <div class="container-fluid"><button class="btn btn-link d-md-none rounded-circle me-3"
+                            id="sidebarToggleTop" type="button"><i class="fas fa-bars"></i></button>
                         <ul class="navbar-nav flex-nowrap ms-auto visible">
-                            <li class="nav-item dropdown d-sm-none no-arrow"><a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#"><i class="fas fa-search"></i></a>
-                                <div class="dropdown-menu dropdown-menu-end p-3 animated--grow-in" aria-labelledby="searchDropdown">
+                            <li class="nav-item dropdown d-sm-none no-arrow"><a class="dropdown-toggle nav-link"
+                                    aria-expanded="false" data-bs-toggle="dropdown" href="#"><i
+                                        class="fas fa-search"></i></a>
+                                <div class="dropdown-menu dropdown-menu-end p-3 animated--grow-in"
+                                    aria-labelledby="searchDropdown">
                                     <form class="me-auto navbar-search w-100">
-                                        <div class="input-group"><input class="bg-light form-control border-0 small" type="text" placeholder="Search for ...">
-                                            <div class="input-group-append"><button class="btn btn-primary py-0" type="button"><i class="fas fa-search"></i></button></div>
+                                        <div class="input-group"><input class="bg-light form-control border-0 small"
+                                                type="text" placeholder="Search for ...">
+                                            <div class="input-group-append"><button class="btn btn-primary py-0"
+                                                    type="button"><i class="fas fa-search"></i></button></div>
                                         </div>
                                     </form>
                                 </div>
                             </li>
-                            <li class="nav-item"><a class="nav-link" href="wish_list.html"><i class="fa fa-heart" id="wish_list"></i></a></li>
-                            <li class="nav-item"><a class="nav-link" href="shopping_cart.html"><i class="fa fa-shopping-cart" id="shopping_cart"></i></a></li>
+                            <li class="nav-item"><a class="nav-link" href="wish_list.html"><i class="fa fa-heart"
+                                        id="wish_list"></i></a></li>
+                            <li class="nav-item"><a class="nav-link" href="shopping_cart.html"><i
+                                        class="fa fa-shopping-cart" id="shopping_cart"></i></a></li>
                             <div class="d-none d-sm-block topbar-divider"></div>
-                            <li class="nav-item dropdown no-arrow"><a class="nav-link" href="profile.html"><span class="d-none d-lg-inline me-2 text-gray-600 small" id="navbar_profile_name">User's name</span><img class="border rounded-circle img-profile" id="navbar_profile_photo" src="../../assets/img/avatars/avatar1.jpeg?h=0ecc82101fb9a10ca459432faa8c0656"></a></li>
-                            <li class="nav-item" id="logout_btn"><a class="nav-link"><i class="fa fa-sign-out fs-5"></i></a></li>
+                            <li class="nav-item dropdown no-arrow"><a class="nav-link" href="profile.html"><span
+                                        class="d-none d-lg-inline me-2 text-gray-600 small"
+                                        id="navbar_profile_name">User's name</span><img
+                                        class="border rounded-circle img-profile" id="navbar_profile_photo"
+                                        src="../../assets/img/avatars/avatar1.jpeg?h=0ecc82101fb9a10ca459432faa8c0656"></a>
+                            </li>
+                            <li class="nav-item" id="logout_btn"><a class="nav-link"><i
+                                        class="fa fa-sign-out fs-5"></i></a></li>
                         </ul>
                     </div>
                 </nav>
@@ -64,7 +80,9 @@
                             <form>
                                 <div class="row">
                                     <div class="col">
-                                        <div class="mb-3"><label class="form-label" for="first_name"><strong>Category</strong></label><select class="form-select" required="" id="category">
+                                        <div class="mb-3"><label class="form-label"
+                                                for="first_name"><strong>Category</strong></label><select
+                                                class="form-select" required="" id="category">
                                                 <optgroup label="Category">
                                                     <option value="0" selected="">Bicycle</option>
                                                     <option value="1">Scooter</option>
@@ -72,7 +90,9 @@
                                             </select></div>
                                     </div>
                                     <div class="col">
-                                        <div class="mb-3"><label class="form-label" for="last_name"><strong>Type</strong></label><select class="form-select" required="" id="vehicle_type">
+                                        <div class="mb-3"><label class="form-label"
+                                                for="last_name"><strong>Type</strong></label><select class="form-select"
+                                                required="" id="vehicle_type">
                                                 <optgroup label="Type">
                                                     <option value="0" selected="">Electric</option>
                                                     <option value="1">Non electric</option>
@@ -82,60 +102,105 @@
                                 </div>
                                 <div class="row">
                                     <div class="col">
-                                        <div class="mb-3"><label class="form-label" for="vehicle_name"><strong>Name</strong></label><input class="form-control" type="text" id="vehicle_name" placeholder="Bike name" name="Name" required=""></div>
+                                        <div class="mb-3"><label class="form-label"
+                                                for="vehicle_name"><strong>Name</strong></label><input
+                                                class="form-control" type="text" id="vehicle_name"
+                                                placeholder="Bike name" name="Name" required=""><span id="name_err"
+                                                style="color: rgb(231, 74, 59); display: none;">Name cannot be
+                                                empty</span></div>
                                     </div>
                                     <div class="col">
-                                        <div class="mb-3"><label class="form-label" for="price"><strong>Price</strong></label>
-                                            <div class="input-group"><input class="form-control" type="text" pattern="[1-9][0-9]*[.]?[0-9]*" required="" id="price"><span class="input-group-text">$</span></div>
+                                        <div class="mb-3"><label class="form-label"
+                                                for="price"><strong>Price</strong></label>
+                                            <div class="input-group"><input class="form-control" type="text"
+                                                    pattern="[1-9][0-9]*[.]?[0-9]*" required="" id="price"><span
+                                                    class="input-group-text">$</span></div>
+                                                    <span id="price_err" style="color: rgb(231, 74, 59); display: none;">Price
+                                                        cannot be empty</span>   
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col">
-                                        <div class="mb-3"><label class="form-label" for="manufacturer"><strong>Manufacturer</strong></label><input class="form-control" type="text" id="manufacturer" placeholder="Manufacturer" name="Manufacturer" required=""></div>
+                                        <div class="mb-3"><label class="form-label"
+                                                for="manufacturer"><strong>Manufacturer</strong></label><input
+                                                class="form-control" type="text" id="manufacturer"
+                                                placeholder="Manufacturer" name="Manufacturer" required=""><span
+                                                id="manufacturer_err"
+                                                style="color: rgb(231, 74, 59); display: none;">Manufacturer cannot be
+                                                empty</span></div>
                                     </div>
                                     <div class="col">
-                                        <div class="mb-3"><label class="form-label" for="max_speed"><strong>Max speed</strong></label>
-                                            <div class="input-group"><input class="form-control" type="text" pattern="[1-9][0-9]*[.]?[0-9]*" required="" id="max_speed"><span class="input-group-text">Km/h</span></div>
+                                        <div class="mb-3"><label class="form-label" for="max_speed"><strong>Max
+                                                    speed</strong></label>
+                                            <div class="input-group"><input class="form-control" type="text"
+                                                    pattern="[1-9][0-9]*[.]?[0-9]*" required="" id="max_speed"><span
+                                                    class="input-group-text">Km/h</span></div>
+                                                    <span id="max_speed_err" style="color: rgb(231, 74, 59); display: none;">Max
+                                                        speed cannot be empty</span>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col">
-                                        <div class="mb-3"><label class="form-label" for="weight"><strong>Weight</strong></label>
-                                            <div class="input-group"><input class="form-control" type="text" pattern="[1-9][0-9]*[.]?[0-9]*" id="weight" required=""><span class="input-group-text">Kg</span></div>
+                                        <div class="mb-3"><label class="form-label"
+                                                for="weight"><strong>Weight</strong></label>
+                                            <div class="input-group"><input class="form-control" type="text"
+                                                    pattern="[1-9][0-9]*[.]?[0-9]*" id="weight" required=""><span
+                                                    class="input-group-text">Kg</span></div>
+                                                    <span id="weight_err" style="color: rgb(231, 74, 59); display: none;">Weight
+                                                        cannot be empty</span>
                                         </div>
                                     </div>
                                     <div class="col">
-                                        <div class="mb-3"><label class="form-label" for="wheel_size"><strong>Wheel size</strong></label>
-                                            <div class="input-group"><input class="form-control" type="text" pattern="[1-9][0-9]*[.]?[0-9]*" id="wheel_size" required=""><span class="input-group-text">Inch</span></div>
+                                        <div class="mb-3"><label class="form-label" for="wheel_size"><strong>Wheel
+                                                    size</strong></label>
+                                            <div class="input-group"><input class="form-control" type="text"
+                                                    pattern="[1-9][0-9]*[.]?[0-9]*" id="wheel_size" required=""><span
+                                                    class="input-group-text">Inch</span></div>
+                                                    <span id="wheel_size_err"
+                                                style="color: rgb(231, 74, 59); display: none;">Wheel size cannot be
+                                                empty</span>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col">
-                                        <div class="mb-3"><label class="form-label" for="quantity"><strong>Available quantity</strong></label><input class="form-control" type="text" pattern="[1-9][0-9]*" id="quantity" required=""></div>
+                                        <div class="mb-3"><label class="form-label" for="quantity"><strong>Available
+                                                    quantity</strong></label><input class="form-control" type="text"
+                                                pattern="[1-9][0-9]*" id="quantity" required=""><span id="quantity_err"
+                                                style="color: rgb(231, 74, 59); display: none;">Quantity cannot be
+                                                empty</span></div>
                                     </div>
                                     <div class="col"></div>
                                 </div>
                                 <div class="row">
                                     <div class="col">
-                                        <div class="mb-3"><label class="form-label" for="description"><strong>Description</strong></label><input class="form-control" type="text" id="description" required=""></div>
+                                        <div class="mb-3"><label class="form-label"
+                                                for="description"><strong>Description</strong></label><input
+                                                class="form-control" type="text" id="description" required=""><span
+                                                id="description_err"
+                                                style="color: rgb(231, 74, 59); display: none;">Description cannot be
+                                                empty</span></div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col">
-                                        <div class="mb-3"><label class="form-label" for="photo"><strong>Upload photo</strong></label><input class="form-control" type="file" required="" id="photo" accept="image/*"></div>
+                                        <div class="mb-3"><label class="form-label" for="photo"><strong>Upload
+                                                    photo</strong></label><input class="form-control" type="file"
+                                                required="" id="photo" accept="image/*"></div>
                                     </div>
                                 </div>
                             </form>
                         </div>
-                        <div class="card-footer text-end"><button class="btn btn-primary btn-lg" type="button" id="add_item_btn">Save changes</button></div>
+                        <div class="card-footer text-end"><button class="btn btn-primary btn-lg" type="button"
+                                id="add_item_btn">Save changes</button></div>
                     </div>
                 </div>
             </div>
             <footer class="bg-white sticky-footer">
-                <div class="text-center"><a href="#"><br><strong>Determine shipping rates &amp; Time</strong><br></a></div>
+                <div class="text-center"><a href="#"><br><strong>Determine shipping rates &amp; Time</strong><br></a>
+                </div>
                 <div class="container my-auto">
                     <div class="text-center my-auto copyright"><span>Copyright © BikesBrand 2022</span></div>
                 </div>

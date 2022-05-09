@@ -22,7 +22,7 @@ photo.addEventListener('change', (e) => {
 });
 
 add_item_btn.addEventListener('click', function() {
-  if (formValidation() === false) {
+  if (formValidation() == false) {
     return;
   } else {
     saveProduct();
