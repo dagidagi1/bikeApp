@@ -1,20 +1,7 @@
-<<<<<<< HEAD
-import {
-  dbProducts,
-  fbAuth,
-  dbUsers,
-  dbOrders,
-  storageRef,
-} from "../firebase/data.js";
-var parametrs = location.search.substring(1).split("&");
-var temp = parametrs[0].split("=");
-const index_p = temp[1].split("-");
-=======
-import {dbProducts, fbAuth, dbUsers, dbOrders} from '../firebase/data.js';
+import {dbProducts, fbAuth, dbUsers} from '../firebase/data.js';
 var parametrs = location.search.substring(1).split('&');
 var temp = parametrs[0].split('=');
 const index_p = temp[1].split('-');
->>>>>>> 0ac34985e4284c29a0ab708b9919c976b961b1e7
 console.log(Number(index_p[0]), index_p[1]);
 var data = [];
 var newData;
@@ -27,7 +14,7 @@ const manufacturer = document.getElementById('manufactur_d');
 const max_speed = document.getElementById('max_speed_d');
 const weight = document.getElementById('weight_d');
 const wheel_size = document.getElementById('wheel_size_d');
-const quantity = document.getElementById('quantetity_d');
+// const quantity = document.getElementById('quantetity_d');
 const search = document.getElementById('searchgroup');
 const img = document.getElementById('product_page_image');
 const add_wish_btn = document.getElementById('wish_btn');
@@ -103,15 +90,15 @@ const updateDescriptions = (data) => {
   img.src = data.src;
   if (data.hasImg) {
     storageRef
-      .child(data.id)
-      .getDownloadURL()
-      .then((url) => {
+        .child(data.id)
+        .getDownloadURL()
+        .then((url) => {
         // Or inserted into an <img> element
-        img.src = url;
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+          img.src = url;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
   }
 };
 const addToCart = () => {
@@ -127,24 +114,22 @@ const addToCart = () => {
 
   cur_user.shoppingList.push(Number(index_p[0]));
   dbUsers.doc(cur_user.id).update(cur_user);
-  updateNavBar();
 };
 const addToWishList = () => {
   cur_user.wishList.push(Number(index_p[0]));
   dbUsers.doc(cur_user.id).update(cur_user);
-  updateNavBar();
 };
 const updateSrc = (i) => {
   if (data[i].hasImg) {
     storageRef
-      .child(data[i].id)
-      .getDownloadURL()
-      .then((url) => {
+        .child(data[i].id)
+        .getDownloadURL()
+        .then((url) => {
         // Or inserted into an <img> element
-        data[i].src = url.toString();
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+          data[i].src = url.toString();
+        })
+        .catch((error) => {
+          console.log(error);
+        });
   }
 };

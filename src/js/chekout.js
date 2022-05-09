@@ -1,11 +1,11 @@
-import {dbProducts, fbAuth, dbUsers, dbOrders} from '../firebase/data.js';
+import {fbAuth, dbUsers} from '../firebase/data.js';
 const search = document.getElementById('searchgroup');
 search.remove();
 var parametrs = location.search.substring(1).split('&');
 var temp = parametrs[0].split('=');
 const index_p = decodeURI(temp[1]);
 console.log(index_p);
-var data = [];
+// var data = [];
 var cur_user;
 const getUser = () => {
   fbAuth.onAuthStateChanged((user) => {

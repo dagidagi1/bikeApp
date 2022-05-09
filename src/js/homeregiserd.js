@@ -1,16 +1,10 @@
-import {
-  dbProducts,
-  fbAuth,
-  storageRef,
-  dbUsers,
-  dbOrders,
-} from '../firebase/data.js';
+import {dbProducts, dbUsers} from '../firebase/data.js';
 const search = document.getElementById('searchgroup');
 search.remove();
 let col;
 var data = [];
-var orders = [];
-var has_store = false;
+// var orders = [];
+// var has_store = false;
 
 function productElment(d, i) {
   return `<div class="col">

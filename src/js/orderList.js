@@ -1,4 +1,4 @@
-import {dbProducts, fbAuth, dbUsers, dbOrders} from '../firebase/data.js';
+import {fbAuth, dbUsers, dbOrders} from '../firebase/data.js';
 const rate_order_text = document.getElementById('rate_order_text');
 const rate_order = document.getElementById('rate_order');
 const btn_submit_review = document.getElementById('submit_review');
