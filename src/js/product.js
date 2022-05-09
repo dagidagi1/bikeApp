@@ -1,7 +1,20 @@
+<<<<<<< HEAD
+import {
+  dbProducts,
+  fbAuth,
+  dbUsers,
+  dbOrders,
+  storageRef,
+} from "../firebase/data.js";
+var parametrs = location.search.substring(1).split("&");
+var temp = parametrs[0].split("=");
+const index_p = temp[1].split("-");
+=======
 import {dbProducts, fbAuth, dbUsers, dbOrders} from '../firebase/data.js';
 var parametrs = location.search.substring(1).split('&');
 var temp = parametrs[0].split('=');
 const index_p = temp[1].split('-');
+>>>>>>> 0ac34985e4284c29a0ab708b9919c976b961b1e7
 console.log(Number(index_p[0]), index_p[1]);
 var data = [];
 var newData;
@@ -45,8 +58,11 @@ const getUser = () => {
 };
 getUser();
 dbProducts.get().then((querySnapshot) => {
+  let i = 0;
   querySnapshot.forEach((doc) => {
     data.push(doc.data());
+    data[i].id = doc.id;
+    i++;
   });
   if (index_p[1] === 'B') {
     newData = data.filter((d) => {
@@ -85,6 +101,18 @@ const updateDescriptions = (data) => {
   weight.innerText = data.weight;
   wheel_size.innerText = data.wheel_size;
   img.src = data.src;
+  if (data.hasImg) {
+    storageRef
+      .child(data.id)
+      .getDownloadURL()
+      .then((url) => {
+        // Or inserted into an <img> element
+        img.src = url;
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
 };
 const addToCart = () => {
   // const r = Math.floor(1000 + Math.random() * 9000);
@@ -105,4 +133,18 @@ const addToWishList = () => {
   cur_user.wishList.push(Number(index_p[0]));
   dbUsers.doc(cur_user.id).update(cur_user);
   updateNavBar();
+};
+const updateSrc = (i) => {
+  if (data[i].hasImg) {
+    storageRef
+      .child(data[i].id)
+      .getDownloadURL()
+      .then((url) => {
+        // Or inserted into an <img> element
+        data[i].src = url.toString();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
 };
