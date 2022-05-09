@@ -21,39 +21,35 @@ function checkInput() {
     name.style.borderColor = 'red';
     nameSp.style.display = 'block';
     return false;
-  }
-  else{
+  } else {
     nameSp.style.display = 'none';
     name.style.borderColor = '';
   }
-  if (!/^[0-9]{10}$/.test(phone.value)){
+  if (!/^[0-9]{10}$/.test(phone.value)) {
     phone.style.borderColor = 'red';
     phoneSp.style.display = 'block';
     return false;
-  } 
-  else{
+  } else {
     phone.style.borderColor = '';
     phoneSp.style.display = 'none';
   }
-  if (password.value.length < 6){
+  if (password.value.length < 6) {
     password.style.borderColor = 'red';
     passSp.style.display = 'block';
     return false;
-  }
-  else{
+  } else {
     password.style.borderColor = '';
     passSp.style.display = 'none';
   }
-  if (!(password.value === confirmPass.value)){
+  if (!(password.value === confirmPass.value)) {
     confirmPass.style.borderColor = 'red';
     confPassSp.style.display = 'block';
     return false;
-  }
-  else{
+  } else {
     confirmPass.style.borderColor = '';
     confPassSp.style.display = 'none';
   }
-  //if (/^[a-zA-Z]+$/.test(name) && /^[0-9]{10}$/.test(phone) && password === confirmPass && password.length > 5)
+  // if (/^[a-zA-Z]+$/.test(name) && /^[0-9]{10}$/.test(phone) && password === confirmPass && password.length > 5)
   return true;
 }
 function save() {
@@ -71,12 +67,12 @@ function save() {
           emailSp.style.display = 'none';
         })
         .catch((error) => {
-          //color the email.
+          // color the email.
           email.style.borderColor = 'red';
           emailSp.style.display = 'block';
         // ..
         });
-    if(flag === true){
+    if (flag === true) {
       dbUsers
           .doc(email.value)
           .set({
@@ -99,8 +95,8 @@ function save() {
 }
 
 function login() {
-const logEmail = document.getElementById('login_email');
-const logPass = document.getElementById('login_pass');
+  const logEmail = document.getElementById('login_email');
+  const logPass = document.getElementById('login_pass');
   fbAuth
       .signInWithEmailAndPassword(logEmail.value, logPass.value)
       .then((userCredential) => {
@@ -177,6 +173,6 @@ dbProducts.get().then((querySnapshot) => {
     data.push(doc.data());
   });
   console.log(data);
-  
+
   init();
 });
