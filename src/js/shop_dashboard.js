@@ -84,7 +84,7 @@ function init(data) {
   document.getElementById('subMainContainer').style.display = 'flex';
   initStatistics(data);
   initTopCustomers();
-  initWorkHours(data.workHours);
+  initWorkHours(data.work_hours);
   initCharts();
 }
 
@@ -118,7 +118,7 @@ function initWorkHours(workHours) {
     }
   });
   // Display work hours
-  document.getElementById('workHours_card').style.display = 'block';
+  document.getElementById('work_hours_card').style.display = 'block';
 }
 
 function initCharts() {
