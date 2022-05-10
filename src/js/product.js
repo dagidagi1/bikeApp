@@ -72,17 +72,19 @@ dbProducts.get().then((querySnapshot) => {
       .sort((a, b) => {
         b.price - a.price;
       });
-    updateDescriptions(newData[Number(indexP[0])]);
+
+    updateDescriptions(newData[+indexP[0]]);
   } else if (indexP[1] === "SS") {
+    console.log(data);
     newData = data
       .filter((a) => a.category === 1)
       .sort((a, b) => {
         b.price - a.price;
-
-        updateDescriptions(newData[indexP[0] - 5]);
       });
+    updateDescriptions(newData[indexP[0] - 5]);
+  } else {
+    updateDescriptions(data[Number(indexP[0])]);
   }
-  updateDescriptions(data[Number(indexP[0])]);
 });
 const updateDescriptions = (data) => {
   if (data.type === 1) {

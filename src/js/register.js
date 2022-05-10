@@ -137,7 +137,7 @@ const init = () => {
     });
   col = document.getElementById("col_0");
   col.innerHTML = "";
-  for (let i = 0; i < 5; i++) {
+  for (let i = 0; i < 5 && i < d.length; i++) {
     if (!data[i].deleted) {
       col.innerHTML += productElment(d[i], i);
       document.getElementById(`${i}`)?.addEventListener("click", () => {});
@@ -164,9 +164,8 @@ const init = () => {
     .sort((a, b) => {
       b.price - a.price;
     });
-  console.log(d);
   col = document.getElementById("col_1");
-  for (let i = 0; i < 5; i++) {
+  for (let i = 0; i < 5 && i < d.length; i++) {
     if (!data[i].deleted) {
       col.innerHTML += productElment(d[i], i + 5);
     }
