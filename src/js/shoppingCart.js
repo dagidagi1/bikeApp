@@ -1,15 +1,15 @@
-import { dbProducts, fbAuth, dbUsers, storageRef } from "../firebase/data.js";
-const search = document.getElementById("searchgroup");
+import {dbProducts, fbAuth, dbUsers, storageRef} from '../firebase/data.js';
+const search = document.getElementById('searchgroup');
 search.remove();
 const data = [];
 let price = 0;
 var curUser;
-const shoppingCart = document.getElementById("shopping_cart");
-const shoppingCartTable = document.getElementById("shopping_cart_table");
-const totalPrice = document.getElementById("total_price");
-const chekoutShopCartBtn = document.getElementById("chekout_shop_cart");
-chekoutShopCartBtn.addEventListener("click", () => {
-  location.replace("chekout.html" + "?email=" + curUser.email);
+const shoppingCart = document.getElementById('shopping_cart');
+const shoppingCartTable = document.getElementById('shopping_cart_table');
+const totalPrice = document.getElementById('total_price');
+const chekoutShopCartBtn = document.getElementById('chekout_shop_cart');
+chekoutShopCartBtn.addEventListener('click', () => {
+  location.replace('chekout.html' + '?email=' + curUser.email);
 });
 const getUser = () => {
   fbAuth.onAuthStateChanged((user) => {
@@ -17,15 +17,15 @@ const getUser = () => {
       // User is signed in, see docs for a list of available properties
       // https://firebase.google.com/docs/reference/js/firebase.User
       dbUsers
-        .where("email", "==", user.email)
-        .get()
-        .then((snapshot) => {
-          snapshot.forEach((doc) => {
-            curUser = doc.data();
-            curUser.id = doc.id;
-            init();
+          .where('email', '==', user.email)
+          .get()
+          .then((snapshot) => {
+            snapshot.forEach((doc) => {
+              curUser = doc.data();
+              curUser.id = doc.id;
+              init();
+            });
           });
-        });
     }
   });
 };
@@ -64,26 +64,26 @@ function deleteItem(i) {
   totalPrice.innerText = ` Subtotal: ${price}$`;
   curUser.shoppingList.pop(i);
   dbUsers.doc(curUser.id).set(curUser);
-  if (curUser.shoppingList.length == 0) shoppingCart.style = "";
+  if (curUser.shoppingList.length == 0) shoppingCart.style = '';
 }
 function init() {
-  shoppingCartTable.innerHTML = "";
+  shoppingCartTable.innerHTML = '';
   price = 0;
   for (let i = 0; i < curUser.shoppingList.length; i++) {
     shoppingCartTable.innerHTML += makeRow(data[+curUser.shoppingList[i]], i);
     price += +data[+curUser.shoppingList[i]].price;
     if (data[+curUser.shoppingList[i]].hasImg) {
       storageRef
-        .child(data[+curUser.shoppingList[i]].id)
-        .getDownloadURL()
-        .then((url) => {
+          .child(data[+curUser.shoppingList[i]].id)
+          .getDownloadURL()
+          .then((url) => {
           // Or inserted into an <img> element
-          const img = document.getElementById(`img${i}`);
-          img.src = url;
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+            const img = document.getElementById(`img${i}`);
+            img.src = url;
+          })
+          .catch((error) => {
+            console.log(error);
+          });
     } else {
       const img = document.getElementById(`img${i}`);
       img.src = data[+curUser.shoppingList[i]].src;
@@ -91,7 +91,7 @@ function init() {
   }
   totalPrice.innerText = ` Subtotal: ${price}$`;
   for (let i = 0; i < curUser.shoppingList.length; i++) {
-    document.getElementById(`btn_delete_${i}`).addEventListener("click", () => {
+    document.getElementById(`btn_delete_${i}`).addEventListener('click', () => {
       console.log(document.getElementById(`btn_delete_${i}`).value);
       deleteItem(document.getElementById(`btn_delete_${i}`).value);
       init();
