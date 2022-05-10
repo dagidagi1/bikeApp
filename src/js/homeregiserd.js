@@ -1,5 +1,5 @@
-import {dbProducts, dbUsers} from '../firebase/data.js';
-const search = document.getElementById('searchgroup');
+import { dbProducts, dbUsers, storageRef } from "../firebase/data.js";
+const search = document.getElementById("searchgroup");
 search.remove();
 let col;
 var data = [];
@@ -10,7 +10,7 @@ function productElment(d, i) {
   return `<div class="col">
   <a href="product.html?index=${i}">
   <div class="card">
-  <div class="card-body"><img class="img-fluid" src="${d.src}">
+  <div class="card-body"><img class="img-fluid" src="" id="img${i}">
       <h4 class="card-title" style="color: var(--bs-gray);">${d.name}</h4>
       <h6 class="text-muted card-subtitle mb-2" style="font-weight: bold;">${d.price}$</h6>
   </div>
@@ -19,29 +19,61 @@ function productElment(d, i) {
 }
 const init = () => {
   let d = data
-      .filter((a) => a.category === 0)
-      .sort((a, b) => {
-        b.price - a.price;
-      });
-  col = document.getElementById('col_0');
-  col.innerHTML = '';
+    .filter((a) => a.category === 0)
+    .sort((a, b) => {
+      b.price - a.price;
+    });
+  col = document.getElementById("col_0");
+  col.innerHTML = "";
   for (let i = 0; i < 5; i++) {
-    if (!data[i].deleted) {
+    if (!d[i].deleted) {
       col.innerHTML += productElment(d[i], i);
-      document.getElementById(`${i}`)?.addEventListener('click', () => {
-        globalVariable = {example_attribute: i};
+      document.getElementById(`${i}`)?.addEventListener("click", () => {
+        globalVariable = { example_attribute: i };
       });
+      if (d[i].hasImg) {
+        storageRef
+          .child(d[i].id)
+          .getDownloadURL()
+          .then((url) => {
+            // Or inserted into an <img> element
+            const img = document.getElementById(`img${i}`);
+            img.src = url;
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      } else {
+        const img = document.getElementById(`img${i}`);
+        img.src = d[i].src;
+      }
     }
   }
   d = data
-      .filter((a) => a.category === 1)
-      .sort((a, b) => {
-        b.price - a.price;
-      });
-  col = document.getElementById('col_1');
-  for (let i = 5; i < 10; i++) {
-    if (!data[i].deleted) {
-      col.innerHTML += productElment(d[i - 5], i);
+    .filter((a) => a.category === 1)
+    .sort((a, b) => {
+      b.price - a.price;
+    });
+  col = document.getElementById("col_1");
+  for (let i = 0; i < 5; i++) {
+    if (!d[i].deleted) {
+      col.innerHTML += productElment(d[i], i + 5);
+    }
+    if (d[i].hasImg) {
+      storageRef
+        .child(d[i].id)
+        .getDownloadURL()
+        .then((url) => {
+          // Or inserted into an <img> element
+          const img = document.getElementById(`img${i + 5}`);
+          img.src = url;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } else {
+      const img = document.getElementById(`img${i + 5}`);
+      img.src = d[i].src;
     }
   }
 };
