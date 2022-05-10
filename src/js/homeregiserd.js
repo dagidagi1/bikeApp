@@ -28,9 +28,6 @@ const init = () => {
   for (let i = 0; i < 5 && i < d.length; i++) {
     if (!d[i].deleted) {
       col.innerHTML += productElment(d[i], i, "BB");
-      document.getElementById(`${i}`)?.addEventListener("click", () => {
-        globalVariable = { example_attribute: i };
-      });
       if (d[i].hasImg) {
         storageRef
           .child(d[i].id)

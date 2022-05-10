@@ -29,7 +29,6 @@ const getUser = () => {
             user.id = doc.id;
             console.log(user);
             updateDetails();
-            if (doc.data().store != false) hasStore = doc.data().store;
           });
         });
     }

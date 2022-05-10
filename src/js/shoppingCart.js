@@ -85,7 +85,7 @@ function init() {
           console.log(error);
         });
     } else {
-      const img = document.getElementById(`img${x}`);
+      const img = document.getElementById(`img${i}`);
       img.src = data[+curUser.shoppingList[i]].src;
     }
   }
