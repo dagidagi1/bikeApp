@@ -84,7 +84,7 @@ function init(data) {
   document.getElementById('subMainContainer').style.display = 'flex';
   initStatistics(data);
   initTopCustomers();
-  initWorkHours(data.work_hours);
+  initWorkHours(data.workHours);
   initCharts();
 }
 
