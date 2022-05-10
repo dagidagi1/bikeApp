@@ -25,7 +25,7 @@ const init = () => {
     });
   col = document.getElementById("col_0");
   col.innerHTML = "";
-  for (let i = 0; i < 5; i++) {
+  for (let i = 0; i < 5 && i < d.length; i++) {
     if (!d[i].deleted) {
       col.innerHTML += productElment(d[i], i);
       document.getElementById(`${i}`)?.addEventListener("click", () => {
@@ -55,7 +55,7 @@ const init = () => {
       b.price - a.price;
     });
   col = document.getElementById("col_1");
-  for (let i = 0; i < 5; i++) {
+  for (let i = 0; i < 5 && i < d.length; i++) {
     if (!d[i].deleted) {
       col.innerHTML += productElment(d[i], i + 5);
     }

@@ -71,7 +71,7 @@ function init() {
   price = 0;
   for (let i = 0; i < curUser.shoppingList.length; i++) {
     shoppingCartTable.innerHTML += makeRow(data[+curUser.shoppingList[i]], i);
-    price += data[+curUser.shoppingList[i]].price;
+    price += +data[+curUser.shoppingList[i]].price;
     if (data[+curUser.shoppingList[i]].hasImg) {
       storageRef
         .child(data[+curUser.shoppingList[i]].id)

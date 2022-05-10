@@ -84,9 +84,9 @@ const updateDescriptions = (data) => {
   price.innerText = data.price + "$";
   description.innerText = data.description;
   manufacturer.innerText = data.manufacturer;
-  maxSpeed.innerText = data.max_speed;
+  maxSpeed.innerText = data.maxSpeed;
   weight.innerText = data.weight;
-  wheelSize.innerText = data.wheel_size;
+  wheelSize.innerText = data.wheelSize;
   img.src = data.src;
   if (data.hasImg) {
     storageRef
