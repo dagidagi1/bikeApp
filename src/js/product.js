@@ -2,7 +2,6 @@ import { dbProducts, fbAuth, dbUsers, storageRef } from "../firebase/data.js";
 var parametrs = location.search.substring(1).split("&");
 var temp = parametrs[0].split("=");
 const indexP = temp[1].split("-");
-console.log(Number(indexP[0]), indexP[1]);
 var data = [];
 var newData;
 var curUser;
@@ -55,7 +54,6 @@ dbProducts.get().then((querySnapshot) => {
     newData = data.filter((d) => {
       return d.category === 0;
     });
-    console.log(newData[Number(indexP[0])]);
     updateDescriptions(newData[Number(indexP[0])]);
   } else if (indexP[1] === "S") {
     newData = data.filter((d) => {
@@ -68,9 +66,23 @@ dbProducts.get().then((querySnapshot) => {
   } else if (indexP[1] === "HTL") {
     newData = data.sort((a, b) => b.price - a.price);
     updateDescriptions(newData[Number(indexP[0])]);
-  } else {
-    updateDescriptions(data[Number(indexP[0])]);
+  } else if (indexP[1] === "BB") {
+    newData = data
+      .filter((a) => a.category === 0)
+      .sort((a, b) => {
+        b.price - a.price;
+      });
+    updateDescriptions(newData[Number(indexP[0])]);
+  } else if (indexP[1] === "SS") {
+    newData = data
+      .filter((a) => a.category === 1)
+      .sort((a, b) => {
+        b.price - a.price;
+
+        updateDescriptions(newData[indexP[0] - 5]);
+      });
   }
+  updateDescriptions(data[Number(indexP[0])]);
 });
 const updateDescriptions = (data) => {
   if (data.type === 1) {
@@ -81,12 +93,12 @@ const updateDescriptions = (data) => {
       data.category === 0 ? "Electric Bycicle" : "Electric Scooter";
   }
   name.innerText = data.name;
-  price.innerText = data.price + "$";
+  price.innerText = "It's price " + data.price + "$";
   description.innerText = data.description;
   manufacturer.innerText = data.manufacturer;
-  maxSpeed.innerText = data.maxSpeed;
-  weight.innerText = data.weight;
-  wheelSize.innerText = data.wheelSize;
+  maxSpeed.innerText = data.maxSpeed + " km/h";
+  weight.innerText = data.weight + " kg";
+  wheelSize.innerText = data.wheelSize + '" inch';
   img.src = data.src;
   if (data.hasImg) {
     storageRef
@@ -118,18 +130,4 @@ const addToCart = () => {
 const addToWishList = () => {
   curUser.wishList.push(Number(indexP[0]));
   dbUsers.doc(curUser.id).update(curUser);
-};
-const updateSrc = (i) => {
-  if (data[i].hasImg) {
-    storageRef
-      .child(data[i].id)
-      .getDownloadURL()
-      .then((url) => {
-        // Or inserted into an <img> element
-        data[i].src = url.toString();
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }
 };

@@ -6,9 +6,9 @@ var data = [];
 // var orders = [];
 // var has_store = false;
 
-function productElment(d, i) {
+function productElment(d, i, sort) {
   return `<div class="col">
-  <a href="product.html?index=${i}">
+  <a href="product.html?index=${i}-${sort}">
   <div class="card">
   <div class="card-body"><img class="img-fluid" src="" id="img${i}">
       <h4 class="card-title" style="color: var(--bs-gray);">${d.name}</h4>
@@ -27,7 +27,7 @@ const init = () => {
   col.innerHTML = "";
   for (let i = 0; i < 5 && i < d.length; i++) {
     if (!d[i].deleted) {
-      col.innerHTML += productElment(d[i], i);
+      col.innerHTML += productElment(d[i], i, "BB");
       document.getElementById(`${i}`)?.addEventListener("click", () => {
         globalVariable = { example_attribute: i };
       });
@@ -57,7 +57,7 @@ const init = () => {
   col = document.getElementById("col_1");
   for (let i = 0; i < 5 && i < d.length; i++) {
     if (!d[i].deleted) {
-      col.innerHTML += productElment(d[i], i + 5);
+      col.innerHTML += productElment(d[i], i + 5, "SS");
     }
     if (d[i].hasImg) {
       storageRef
