@@ -84,7 +84,12 @@ function save() {
         })
         .then((docRef) => {
           // alert("Document written with ID: ", docRef.id);
-          location.replace("registered_home.html");
+          fbAuth
+            .signInWithEmailAndPassword(email.value, password.value)
+            .then((userCredential) => {
+              // Signed in
+              location.replace("registered_home.html");
+            })
         })
         .catch((error) => {
           console.error("Error adding document: ", error);
@@ -112,7 +117,7 @@ document.getElementById("email_ver_btn").addEventListener("click", function () {
   firebase
     .auth()
     .sendPasswordResetEmail(document.getElementById("forg_email").value)
-    .then(() => {})
+    .then(() => { })
     .catch((error) => {
       alert(error.code);
     });
@@ -137,10 +142,10 @@ const init = () => {
     });
   col = document.getElementById("col_0");
   col.innerHTML = "";
-  for (let i = 0; i < 5 && i < d.length; i++) {
+  for (let i = 0; i < 5; i++) {
     if (!data[i].deleted) {
       col.innerHTML += productElment(d[i], i);
-      document.getElementById(`${i}`)?.addEventListener("click", () => {});
+      document.getElementById(`${i}`)?.addEventListener("click", () => { });
     }
     if (d[i].hasImg) {
       storageRef
@@ -164,8 +169,9 @@ const init = () => {
     .sort((a, b) => {
       b.price - a.price;
     });
+  console.log(d);
   col = document.getElementById("col_1");
-  for (let i = 0; i < 5 && i < d.length; i++) {
+  for (let i = 0; i < 5; i++) {
     if (!data[i].deleted) {
       col.innerHTML += productElment(d[i], i + 5);
     }
