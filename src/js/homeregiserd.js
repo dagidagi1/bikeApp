@@ -1,5 +1,6 @@
 import { dbProducts, dbUsers, storageRef } from "../firebase/data.js";
 const search = document.getElementById("searchgroup");
+
 search.remove();
 let col;
 var data = [];
