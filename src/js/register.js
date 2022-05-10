@@ -5,9 +5,10 @@ const password = document.getElementById("reg_password");
 const confirmPass = document.getElementById("reg_conf_pass");
 const name = document.getElementById("reg_name");
 const phone = document.getElementById("reg_phone");
+var flag = false;
 window.onload = function example() {
   fbAuth.onAuthStateChanged((user) => {
-    if (user) {
+    if (user && flag===false) {
       location.replace("registered_home.html");
     }
   });
@@ -56,7 +57,6 @@ function save() {
   // adds users email+password to firebase auth and then to collection with the remain user data.
   const emailSp = document.getElementById("reg_email_sp");
   if (checkInput() === true) {
-    let flag = false;
     fbAuth
       .createUserWithEmailAndPassword(email.value, password.value)
       .then((userCredential) => {
@@ -64,15 +64,7 @@ function save() {
         flag = true;
         email.style.borderColor = "";
         emailSp.style.display = "none";
-      })
-      .catch((error) => {
-        // color the email.
-        email.style.borderColor = "red";
-        emailSp.style.display = "block";
-        // ..
-      });
-    if (flag === true) {
-      dbUsers
+        dbUsers
         .doc(email.value)
         .set({
           email: email.value,
@@ -80,10 +72,10 @@ function save() {
           phone: phone.value,
           store: false,
           shoppingList: [],
-          wishList: [],
+          wishList: []
         })
         .then((docRef) => {
-          // alert("Document written with ID: ", docRef.id);
+          //alert("Document written with ID: ", docRef.id);
           fbAuth
             .signInWithEmailAndPassword(email.value, password.value)
             .then((userCredential) => {
@@ -94,6 +86,15 @@ function save() {
         .catch((error) => {
           console.error("Error adding document: ", error);
         });
+      })
+      .catch((error) => {
+        // color the email.
+        email.style.borderColor = "red";
+        emailSp.style.display = "block";
+        // ..
+      });
+    if (flag === true) {
+      
     }
   }
 }
