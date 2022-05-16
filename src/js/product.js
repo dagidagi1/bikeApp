@@ -122,16 +122,22 @@ const updateDescriptions = (data) => {
   }
 };
 const addToCart = () => {
-  let index;
+  let index = Number(indexP[0]);
   if (indexP[1] != "all") {
     index = data.findIndex((pro) => {
       return pro.name === product.name;
     });
   }
   curUser.shoppingList.push(index);
-  dbUsers.doc(curUser.id).update(curUser);
+  dbUsers.doc(curUser.id).set(curUser);
 };
 const addToWishList = () => {
+  let index = Number(indexP[0]);
+  if (indexP[1] != "all") {
+    index = data.findIndex((pro) => {
+      return pro.name === product.name;
+    });
+  }
   curUser.wishList.push(Number(indexP[0]));
-  dbUsers.doc(curUser.id).update(curUser);
+  dbUsers.doc(curUser.id).set(curUser);
 };

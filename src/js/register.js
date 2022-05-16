@@ -140,26 +140,26 @@ const init = () => {
     });
   col = document.getElementById("col_0");
   col.innerHTML = "";
-  for (let i = 0; i < 5; i++) {
-    if (!data[i].deleted && +data[i].quantity > 0) {
+  for (let i = 0; i < 5 && i < d.length; i++) {
+    if (!d[i].deleted && +d[i].quantity > 0) {
       col.innerHTML += productElment(d[i], i);
       document.getElementById(`${i}`)?.addEventListener("click", () => {});
-    }
-    if (d[i].hasImg) {
-      storageRef
-        .child(d[i].id)
-        .getDownloadURL()
-        .then((url) => {
-          // Or inserted into an <img> element
-          const img = document.getElementById(`img${i}`);
-          img.src = url;
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    } else {
-      const img = document.getElementById(`img${i}`);
-      img.src = d[i].src;
+      if (d[i].hasImg) {
+        storageRef
+          .child(d[i].id)
+          .getDownloadURL()
+          .then((url) => {
+            // Or inserted into an <img> element
+            const img = document.getElementById(`img${i}`);
+            img.src = url;
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      } else {
+        const img = document.getElementById(`img${i}`);
+        img.src = d[i].src;
+      }
     }
   }
   d = data
@@ -167,27 +167,26 @@ const init = () => {
     .sort((a, b) => {
       b.price - a.price;
     });
-  console.log(d);
   col = document.getElementById("col_1");
-  for (let i = 0; i < 5; i++) {
-    if (!data[i].deleted && +data[i].quantity > 0) {
+  for (let i = 0; i < 5 && i < d.length; i++) {
+    if (!d[i].deleted && +d[i].quantity > 0) {
       col.innerHTML += productElment(d[i], i + 5);
-    }
-    if (d[i].hasImg) {
-      storageRef
-        .child(d[i].id)
-        .getDownloadURL()
-        .then((url) => {
-          // Or inserted into an <img> element
-          const img = document.getElementById(`img${i + 5}`);
-          img.src = url;
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    } else {
-      const img = document.getElementById(`img${i + 5}`);
-      img.src = d[i].src;
+      if (d[i].hasImg) {
+        storageRef
+          .child(d[i].id)
+          .getDownloadURL()
+          .then((url) => {
+            // Or inserted into an <img> element
+            const img = document.getElementById(`img${i + 5}`);
+            img.src = url;
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      } else {
+        const img = document.getElementById(`img${i + 5}`);
+        img.src = d[i].src;
+      }
     }
   }
 };
