@@ -1,5 +1,5 @@
-import {dbProducts, dbUsers, storageRef} from '../firebase/data.js';
-const search = document.getElementById('searchgroup');
+import { dbProducts, dbUsers, storageRef } from "../firebase/data.js";
+const search = document.getElementById("searchgroup");
 search.remove();
 let col;
 var data = [];
@@ -19,27 +19,27 @@ function productElment(d, i, sort) {
 }
 const init = () => {
   let d = data
-      .filter((a) => a.category === 0)
-      .sort((a, b) => {
-        b.price - a.price;
-      });
-  col = document.getElementById('col_0');
-  col.innerHTML = '';
+    .filter((a) => a.category === 0)
+    .sort((a, b) => {
+      b.price - a.price;
+    });
+  col = document.getElementById("col_0");
+  col.innerHTML = "";
   for (let i = 0; i < 5 && i < d.length; i++) {
-    if (!d[i].deleted) {
-      col.innerHTML += productElment(d[i], i, 'BB');
+    if (!d[i].deleted && +d[i].quantity > 0) {
+      col.innerHTML += productElment(d[i], i, "BB");
       if (d[i].hasImg) {
         storageRef
-            .child(d[i].id)
-            .getDownloadURL()
-            .then((url) => {
+          .child(d[i].id)
+          .getDownloadURL()
+          .then((url) => {
             // Or inserted into an <img> element
-              const img = document.getElementById(`img${i}`);
-              img.src = url;
-            })
-            .catch((error) => {
-              console.log(error);
-            });
+            const img = document.getElementById(`img${i}`);
+            img.src = url;
+          })
+          .catch((error) => {
+            console.log(error);
+          });
       } else {
         const img = document.getElementById(`img${i}`);
         img.src = d[i].src;
@@ -47,30 +47,31 @@ const init = () => {
     }
   }
   d = data
-      .filter((a) => a.category === 1)
-      .sort((a, b) => {
-        b.price - a.price;
-      });
-  col = document.getElementById('col_1');
+    .filter((a) => a.category === 1)
+    .sort((a, b) => {
+      b.price - a.price;
+    });
+  col = document.getElementById("col_1");
   for (let i = 0; i < 5 && i < d.length; i++) {
-    if (!d[i].deleted) {
-      col.innerHTML += productElment(d[i], i + 5, 'SS');
-    }
-    if (d[i].hasImg) {
-      storageRef
+    if (!d[i].deleted && +d[i].quantity > 0) {
+      col.innerHTML += productElment(d[i], i + 5, "SS");
+
+      if (d[i].hasImg) {
+        storageRef
           .child(d[i].id)
           .getDownloadURL()
           .then((url) => {
-          // Or inserted into an <img> element
+            // Or inserted into an <img> element
             const img = document.getElementById(`img${i + 5}`);
             img.src = url;
           })
           .catch((error) => {
             console.log(error);
           });
-    } else {
-      const img = document.getElementById(`img${i + 5}`);
-      img.src = d[i].src;
+      } else {
+        const img = document.getElementById(`img${i + 5}`);
+        img.src = d[i].src;
+      }
     }
   }
 };

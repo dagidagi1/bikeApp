@@ -1,18 +1,18 @@
-import {dbProducts, storageRef} from '../firebase/data.js';
+import { dbProducts, storageRef } from "../firebase/data.js";
 const MAX_IN_ROW = 4;
-const serachType = ['Bike', 'bicycle', 'scooter', 'BMX'];
+const serachType = ["Bike", "bicycle", "scooter", "BMX"];
 let col;
 var data = [];
-const dropdownChoiceAll = document.getElementById('ct_all');
-const dropdownChoiceBicycle = document.getElementById('ct_bic');
-const dropdownChoiceScooter = document.getElementById('ct_scot');
-const dropdownHTL = document.getElementById('pr_HL');
-const dropdownLTH = document.getElementById('pr_LH');
-const dropdownNONE = document.getElementById('pr_n');
-const categoryBtn = document.getElementById('btn_category');
-const priceBtn = document.getElementById('btn_price');
-const searchInput = document.getElementById('navbar_search_field');
-const searchBtn = document.getElementById('navbar_search_button');
+const dropdownChoiceAll = document.getElementById("ct_all");
+const dropdownChoiceBicycle = document.getElementById("ct_bic");
+const dropdownChoiceScooter = document.getElementById("ct_scot");
+const dropdownHTL = document.getElementById("pr_HL");
+const dropdownLTH = document.getElementById("pr_LH");
+const dropdownNONE = document.getElementById("pr_n");
+const categoryBtn = document.getElementById("btn_category");
+const priceBtn = document.getElementById("btn_price");
+const searchInput = document.getElementById("navbar_search_field");
+const searchBtn = document.getElementById("navbar_search_button");
 function Search(input) {
   return data.filter((d) => {
     if (d.description.toLocaleLowerCase().includes(input.toLocaleLowerCase())) {
@@ -21,7 +21,7 @@ function Search(input) {
   });
 }
 
-searchInput.addEventListener('input', () => {
+searchInput.addEventListener("input", () => {
   serachType.forEach((st) => {
     if (
       searchInput.value.toLocaleLowerCase().includes(st.toLocaleLowerCase())
@@ -30,11 +30,11 @@ searchInput.addEventListener('input', () => {
     }
   });
 });
-searchBtn.addEventListener('click', () => {
+searchBtn.addEventListener("click", () => {
   const d = Search(searchInput.value);
   init(d);
 });
-function productElment(d, i, sort = 'all') {
+function productElment(d, i, sort = "all") {
   return `<div class="col">
     <a href="product.html?index=${i}-${sort}">
       <div class="card">
@@ -47,31 +47,34 @@ function productElment(d, i, sort = 'all') {
   </div>`;
 }
 // inside init there is a call to productelement with undified object
-const init = (da, sort = 'all') => {
+const init = (da, sort = "all") => {
   let index = da.length;
   for (var i = 0; i < 10; i++) {
     col = document.getElementById(`col_${i}`);
-    col.innerHTML = '';
+    col.innerHTML = "";
     for (var j = 0; index > 0 && j < MAX_IN_ROW; j++) {
       const x = j + i * MAX_IN_ROW;
-      if (!da[i].deleted) {
+      if (
+        !da[j + i * MAX_IN_ROW].deleted &&
+        +da[j + i * MAX_IN_ROW].quantity > 0
+      ) {
         col.innerHTML += productElment(
-            da[j + i * MAX_IN_ROW],
-            j + i * MAX_IN_ROW,
-            sort,
+          da[j + i * MAX_IN_ROW],
+          j + i * MAX_IN_ROW,
+          sort
         );
         if (da[j + i * MAX_IN_ROW].hasImg) {
           storageRef
-              .child(da[j + i * MAX_IN_ROW].id)
-              .getDownloadURL()
-              .then((url) => {
+            .child(da[j + i * MAX_IN_ROW].id)
+            .getDownloadURL()
+            .then((url) => {
               // Or inserted into an <img> element
-                const img = document.getElementById(`img${x}`);
-                img.src = url;
-              })
-              .catch((error) => {
-                console.log(error);
-              });
+              const img = document.getElementById(`img${x}`);
+              img.src = url;
+            })
+            .catch((error) => {
+              console.log(error);
+            });
         } else {
           const img = document.getElementById(`img${x}`);
           img.src = da[j + i * MAX_IN_ROW].src;
@@ -81,37 +84,37 @@ const init = (da, sort = 'all') => {
     }
   }
 };
-dropdownNONE.addEventListener('click', () => {
-  priceBtn.innerText = 'None';
+dropdownNONE.addEventListener("click", () => {
+  priceBtn.innerText = "None";
   init(data);
 });
-dropdownHTL.addEventListener('click', () => {
-  priceBtn.innerText = 'High to Low';
+dropdownHTL.addEventListener("click", () => {
+  priceBtn.innerText = "High to Low";
   const d = data.sort((a, b) => b.price - a.price);
-  init(d, 'HTL');
+  init(d, "HTL");
 });
-dropdownLTH.addEventListener('click', () => {
-  priceBtn.innerText = 'Low to High';
+dropdownLTH.addEventListener("click", () => {
+  priceBtn.innerText = "Low to High";
   const d = data.sort((a, b) => a.price - b.price);
-  init(d, 'LTH');
+  init(d, "LTH");
 });
-dropdownChoiceAll.addEventListener('click', () => {
-  categoryBtn.innerText = 'All';
+dropdownChoiceAll.addEventListener("click", () => {
+  categoryBtn.innerText = "All";
   init(data);
 });
-dropdownChoiceBicycle.addEventListener('click', () => {
+dropdownChoiceBicycle.addEventListener("click", () => {
   const newData = data.filter((d) => {
     return d.category === 0;
   });
-  categoryBtn.innerText = 'Bicycle';
-  init(newData, 'B');
+  categoryBtn.innerText = "Bicycle";
+  init(newData, "B");
 });
-dropdownChoiceScooter.addEventListener('click', () => {
+dropdownChoiceScooter.addEventListener("click", () => {
   const newData = data.filter((d) => {
     return d.category === 1;
   });
-  categoryBtn.innerText = 'Scooter';
-  init(newData, 'S');
+  categoryBtn.innerText = "Scooter";
+  init(newData, "S");
 });
 
 dbProducts.get().then((querySnapshot) => {
