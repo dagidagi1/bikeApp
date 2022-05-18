@@ -138,6 +138,6 @@ const addToWishList = () => {
       return pro.name === product.name;
     });
   }
-  curUser.wishList.push(Number(indexP[0]));
+  curUser.wishList.push(index);
   dbUsers.doc(curUser.id).set(curUser);
 };
