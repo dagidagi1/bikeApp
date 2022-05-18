@@ -2,6 +2,7 @@ import { dbProducts, fbAuth, dbUsers, storageRef } from "../firebase/data.js";
 var parametrs = location.search.substring(1).split("&");
 var temp = parametrs[0].split("=");
 const indexP = temp[1].split("-");
+console.log(indexP);
 var data = [];
 var newData;
 var curUser;
@@ -85,7 +86,7 @@ dbProducts.get().then((querySnapshot) => {
       .sort((a, b) => {
         b.price - a.price;
       });
-    product = newData[Number(indexP[0])];
+    product = newData[Number(indexP[0]) - 5];
     updateDescriptions(newData[indexP[0] - 5]);
   } else {
     product = data[Number(indexP[0])];
@@ -95,8 +96,7 @@ dbProducts.get().then((querySnapshot) => {
 const updateDescriptions = (data) => {
   if (data.type === 1) {
     type.innerText = data.category === 0 ? "Bycicle" : "Scooter";
-  }
-  if (data.type === 0) {
+  } else {
     type.innerText =
       data.category === 0 ? "Electric Bycicle" : "Electric Scooter";
   }
@@ -132,12 +132,10 @@ const addToCart = () => {
   dbUsers.doc(curUser.id).set(curUser);
 };
 const addToWishList = () => {
-  let index = Number(indexP[0]);
-  if (indexP[1] != "all") {
-    index = data.findIndex((pro) => {
-      return pro.name === product.name;
-    });
-  }
+  let index = data.findIndex((pro) => {
+    return pro.name === product.name;
+  });
+  console.log(data[index]);
   curUser.wishList.push(index);
   dbUsers.doc(curUser.id).set(curUser);
 };
