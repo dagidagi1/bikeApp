@@ -256,17 +256,20 @@
                       <div class="col-4">
                         <div class="mb-3">
                           <label class="form-label" for="username"
-                            ><strong>Cardholder name</strong></label
+                            ><strong>Card holder name</strong></label
                           ><input
                             class="form-control"
                             type="text"
-                            id="username-3"
+                            id="checkout_card_name"
                             placeholder="Name"
                             name="username"
                             minlength="16"
                             maxlength="16"
                             pattern="[0-9]*"
                           />
+                          <span id="checkout_card_name_sp" style="color: red; display: none;">
+                            Name is required!
+                          </span>
                         </div>
                       </div>
                     </div>
@@ -278,20 +281,26 @@
                           ><input
                             class="form-control"
                             type="text"
-                            id="username"
+                            id="checkout_card_number"
                             placeholder="1234123412341234"
                             name="username"
                             minlength="16"
                             maxlength="16"
                             pattern="[0-9]*"
                           />
+                          <span id="checkout_card_num_sp" style="color: red; display: none;">
+                            Card number invalid!
+                          </span>
                         </div>
                       </div>
                       <div class="col">
                         <div>
                           <label class="form-label" style="font-weight: bold"
                             >Expiration</label
-                          ><input class="form-control" type="month" />
+                          ><input class="form-control" type="month" id="checkout_card_exp"/>
+                          <span id="checkout_card_exp_sp" style="color: red; display: none;">
+                            Invalid expiration date!
+                          </span>
                         </div>
                       </div>
                       <div class="col">
@@ -301,7 +310,7 @@
                           ><input
                             class="form-control"
                             type="text"
-                            id="first_name"
+                            id="checkout_card_cvv"
                             placeholder="777"
                             name="first_name"
                             min="0"
@@ -312,6 +321,9 @@
                             pattern="[0-9]*"
                             required=""
                           />
+                          <span id="checkout_card_cvv_sp" style="color: red; display: none;">
+                            invalid cvv!
+                          </span>
                         </div>
                       </div>
                     </div>
@@ -332,10 +344,13 @@
                           ><input
                             class="form-control"
                             type="text"
-                            id="username-1"
+                            id="checkout_country"
                             placeholder="England"
                             name="username"
                           />
+                          <span id="checkout_country_sp" style="color: red; display: none;">
+                            *Required!
+                          </span>
                         </div>
                       </div>
                       <div class="col">
@@ -345,10 +360,13 @@
                           ><input
                             class="form-control"
                             type="text"
-                            id="email-1"
+                            id="checkout_city"
                             name="email"
                             placeholder="London"
                           />
+                          <span id="checkout_city_sp" style="color: red; display: none;">
+                            *Required!
+                          </span>
                         </div>
                       </div>
                     </div>
@@ -360,10 +378,13 @@
                           ><input
                             class="form-control"
                             type="text"
-                            id="username-2"
+                            id="checkout_address"
                             placeholder="Baker's street 57/2"
                             name="username"
                           />
+                          <span id="checkout_address_sp" style="color: red; display: none;">
+                            *Required!
+                          </span>
                         </div>
                       </div>
                     </div>
@@ -393,6 +414,7 @@
                     class="btn btn-primary btn-lg float-end"
                     type="submit"
                     style="margin: 20px"
+                    id="checkout_submit_btn"
                   >
                     Checkout
                   </button>

@@ -54,4 +54,3 @@ ordersBtn.addEventListener('click', function() {
 storeBtn.addEventListener('click', function() {
   location.replace('shop_dashboard.html');
 });
-console.log(checker);
