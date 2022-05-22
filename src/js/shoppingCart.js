@@ -1,7 +1,7 @@
 import { dbProducts, fbAuth, dbUsers, storageRef } from "../firebase/data.js";
 const search = document.getElementById("searchgroup");
 search.remove();
-const data = [];
+var data = [];
 let price = 0;
 var curUser;
 const shoppingCart = document.getElementById("shopping_cart");
@@ -23,15 +23,30 @@ const getUser = () => {
           snapshot.forEach((doc) => {
             curUser = doc.data();
             curUser.id = doc.id;
-            init();
+            console.log(curUser);
+            getShopList();
           });
         });
     }
   });
 };
+function getShopList() {
+  dbProducts.get().then((querySnapshot) => {
+    let i = 0;
+    querySnapshot.forEach((doc) => {
+      if (curUser.shoppingList.includes(doc.id)) {
+        data.push(doc.data());
+        data[i].id = doc.id;
+        i++;
+      }
+    });
+    init();
+  });
+}
 const makeRow = (d, i) => {
   return `<tr>
     <td>
+    <a href="product.html?id=${d.id}">
       <img id="img${i}"
         src=""
         width="80px"
@@ -54,7 +69,7 @@ const makeRow = (d, i) => {
     </td>
     <td>${d.price}$</td>
     <td class="text-end">
-      <button class="btn btn-primary" type="button" id="btn_delete_${i}" value="${i}">
+      <button class="btn btn-primary" type="button" id="btn_delete_${i}" value="${d.id}">
         Delete
       </button>
     </td>
@@ -63,18 +78,19 @@ const makeRow = (d, i) => {
 function deleteItem(i) {
   totalPrice.innerText = ` Subtotal: ${price}$`;
   curUser.shoppingList.pop(i);
+  data.pop(i);
   dbUsers.doc(curUser.id).set(curUser);
   if (curUser.shoppingList.length == 0) shoppingCart.style = "";
 }
 function init() {
   shoppingCartTable.innerHTML = "";
   price = 0;
-  for (let i = 0; i < curUser.shoppingList.length; i++) {
-    shoppingCartTable.innerHTML += makeRow(data[+curUser.shoppingList[i]], i);
-    price += +data[+curUser.shoppingList[i]].price;
-    if (data[+curUser.shoppingList[i]].hasImg) {
+  for (let i = 0; i < data.length; i++) {
+    shoppingCartTable.innerHTML += makeRow(data[i], i);
+    price += +data[i].price;
+    if (data[i].hasImg) {
       storageRef
-        .child(data[+curUser.shoppingList[i]].id)
+        .child(data[i].id)
         .getDownloadURL()
         .then((url) => {
           // Or inserted into an <img> element
@@ -86,11 +102,11 @@ function init() {
         });
     } else {
       const img = document.getElementById(`img${i}`);
-      img.src = data[+curUser.shoppingList[i]].src;
+      img.src = data[i].src;
     }
   }
   totalPrice.innerText = ` Subtotal: ${price}$`;
-  for (let i = 0; i < curUser.shoppingList.length; i++) {
+  for (let i = 0; i < data.length; i++) {
     document.getElementById(`btn_delete_${i}`).addEventListener("click", () => {
       deleteItem(document.getElementById(`btn_delete_${i}`).value);
       init();
@@ -98,11 +114,3 @@ function init() {
   }
 }
 getUser();
-dbProducts.get().then((querySnapshot) => {
-  let i = 0;
-  querySnapshot.forEach((doc) => {
-    data.push(doc.data());
-    data[i].id = doc.id;
-    i++;
-  });
-});

@@ -1,10 +1,7 @@
 import { dbProducts, fbAuth, dbUsers, storageRef } from "../firebase/data.js";
 var parametrs = location.search.substring(1).split("&");
 var temp = parametrs[0].split("=");
-const indexP = temp[1].split("-");
-console.log(indexP);
-var data = [];
-var newData;
+const idP = temp[1].split("-");
 var curUser;
 var product;
 const type = document.getElementById("type_d");
@@ -46,71 +43,31 @@ const getUser = () => {
 };
 getUser();
 dbProducts.get().then((querySnapshot) => {
-  let i = 0;
   querySnapshot.forEach((doc) => {
-    data.push(doc.data());
-    data[i].id = doc.id;
-    i++;
+    if (doc.id === idP[0]) {
+      product = doc.data();
+      product.id = doc.id;
+    }
   });
-  if (indexP[1] === "B") {
-    newData = data.filter((d) => {
-      return d.category === 0;
-    });
-    product = newData[Number(indexP[0])];
-    updateDescriptions(newData[Number(indexP[0])]);
-  } else if (indexP[1] === "S") {
-    newData = data.filter((d) => {
-      return d.category === 1;
-    });
-    product = newData[Number(indexP[0])];
-    updateDescriptions(newData[Number(indexP[0])]);
-  } else if (indexP[1] === "LTH") {
-    newData = data.sort((a, b) => a.price - b.price);
-    product = newData[Number(indexP[0])];
-    updateDescriptions(newData[Number(indexP[0])]);
-  } else if (indexP[1] === "HTL") {
-    newData = data.sort((a, b) => b.price - a.price);
-    product = newData[Number(indexP[0])];
-    updateDescriptions(newData[Number(indexP[0])]);
-  } else if (indexP[1] === "BB") {
-    newData = data
-      .filter((a) => a.category === 0)
-      .sort((a, b) => {
-        b.price - a.price;
-      });
-    product = newData[Number(indexP[0])];
-    updateDescriptions(newData[+indexP[0]]);
-  } else if (indexP[1] === "SS") {
-    newData = data
-      .filter((a) => a.category === 1)
-      .sort((a, b) => {
-        b.price - a.price;
-      });
-    product = newData[Number(indexP[0]) - 5];
-    updateDescriptions(newData[indexP[0] - 5]);
-  } else {
-    product = data[Number(indexP[0])];
-    updateDescriptions(data[Number(indexP[0])]);
-  }
+  updateDescriptions(product);
 });
-const updateDescriptions = (data) => {
-  if (data.type === 1) {
-    type.innerText = data.category === 0 ? "Bycicle" : "Scooter";
+const updateDescriptions = (p) => {
+  if (p.type === 1) {
+    type.innerText = p.category === 0 ? "Bycicle" : "Scooter";
   } else {
-    type.innerText =
-      data.category === 0 ? "Electric Bycicle" : "Electric Scooter";
+    type.innerText = p.category === 0 ? "Electric Bycicle" : "Electric Scooter";
   }
-  name.innerText = data.name;
-  price.innerText = "It's price " + data.price + "$";
-  description.innerText = data.description;
-  manufacturer.innerText = data.manufacturer;
-  maxSpeed.innerText = data.maxSpeed + " km/h";
-  weight.innerText = data.weight + " kg";
-  wheelSize.innerText = data.wheelSize + '" inch';
-  img.src = data.src;
-  if (data.hasImg) {
+  name.innerText = p.name;
+  price.innerText = "It's price " + p.price + "$";
+  description.innerText = p.description;
+  manufacturer.innerText = p.manufacturer;
+  maxSpeed.innerText = p.maxSpeed + " km/h";
+  weight.innerText = p.weight + " kg";
+  wheelSize.innerText = p.wheelSize + '" inch';
+  img.src = p.src;
+  if (p.hasImg) {
     storageRef
-      .child(data.id)
+      .child(p.id)
       .getDownloadURL()
       .then((url) => {
         // Or inserted into an <img> element
@@ -122,20 +79,10 @@ const updateDescriptions = (data) => {
   }
 };
 const addToCart = () => {
-  let index = Number(indexP[0]);
-  if (indexP[1] != "all") {
-    index = data.findIndex((pro) => {
-      return pro.name === product.name;
-    });
-  }
-  curUser.shoppingList.push(index);
+  curUser.shoppingList.push(product.id);
   dbUsers.doc(curUser.id).set(curUser);
 };
 const addToWishList = () => {
-  let index = data.findIndex((pro) => {
-    return pro.name === product.name;
-  });
-  console.log(data[index]);
-  curUser.wishList.push(index);
+  curUser.wishList.push(product.id);
   dbUsers.doc(curUser.id).set(curUser);
 };

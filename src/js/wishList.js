@@ -2,7 +2,7 @@ import { dbProducts, fbAuth, dbUsers, storageRef } from "../firebase/data.js";
 const search = document.getElementById("searchgroup");
 search.remove();
 let wishListIcon = document.getElementById("wish_list");
-const data = [];
+var data = [];
 var curUser;
 const wishListTable = document.getElementById("wish_list_table");
 const getUser = () => {
@@ -17,7 +17,7 @@ const getUser = () => {
           snapshot.forEach((doc) => {
             curUser = doc.data();
             curUser.id = doc.id;
-            init();
+            getWishList();
           });
         });
     }
@@ -26,6 +26,7 @@ const getUser = () => {
 function makeRow(d, i) {
   return `<tr>
     <td>
+    <a href="product.html?id=${d.id}">
       <img id="img${i}"
         src=""
         width="80px"
@@ -43,7 +44,7 @@ function makeRow(d, i) {
             border-style: hidden;
           "
           id="add_to_cart${i}"
-          value="${i}"
+          value="${d.id}"
         >
           Add to cart&nbsp;<i
             class="fa fa-cart-plus"
@@ -57,7 +58,7 @@ function makeRow(d, i) {
             border-style: hidden;
           "
           id="delete${i}"
-          value="${i}"
+          value="${d.id}"
         >
           Delete&nbsp;<i class="fa fa-trash"></i>
         </button>
@@ -67,11 +68,11 @@ function makeRow(d, i) {
 }
 function init() {
   wishListTable.innerHTML = "";
-  for (let i = 0; i < curUser.wishList.length; i++) {
-    wishListTable.innerHTML += makeRow(data[+curUser.wishList[i]], i);
-    if (data[+curUser.wishList[i]].hasImg) {
+  for (let i = 0; i < data.length; i++) {
+    wishListTable.innerHTML += makeRow(data[i], i);
+    if (data[i].hasImg) {
       storageRef
-        .child(data[+curUser.wishList[i]].id)
+        .child(data[i].id)
         .getDownloadURL()
         .then((url) => {
           // Or inserted into an <img> element
@@ -83,10 +84,10 @@ function init() {
         });
     } else {
       const img = document.getElementById(`img${i}`);
-      img.src = data[+curUser.wishList[i]].src;
+      img.src = data[i].src;
     }
   }
-  for (let i = 0; i < curUser.wishList.length; i++) {
+  for (let i = 0; i < data.length; i++) {
     document.getElementById(`delete${i}`).addEventListener("click", () => {
       deleteItem(document.getElementById(`delete${i}`).value);
       init();
@@ -98,25 +99,29 @@ function init() {
   }
 }
 getUser();
-dbProducts.get().then((querySnapshot) => {
-  let i = 0;
-  querySnapshot.forEach((doc) => {
-    data.push(doc.data());
-    data[i].id = doc.id;
-    i++;
+function getWishList() {
+  dbProducts.get().then((querySnapshot) => {
+    let i = 0;
+    querySnapshot.forEach((doc) => {
+      if (curUser.wishList.includes(doc.id)) {
+        data.push(doc.data());
+        data[i].id = doc.id;
+        i++;
+      }
+    });
+    init();
   });
-});
+}
 function deleteItem(i) {
   curUser.wishList.pop(i);
+  data.pop(i);
   dbUsers.doc(curUser.id).set(curUser);
   if (curUser.wishList.length == 0) wishListIcon.style = "";
 }
 function addToCart(i) {
-  const index = data.findIndex((pro) => {
-    return pro.name === data[+curUser.wishList[i]].name;
-  });
-  curUser.shoppingList.push(index);
-  curUser.wishList.pop(index);
+  curUser.shoppingList.push(i);
+  curUser.wishList.pop(i);
+  data.pop(i);
   dbUsers.doc(curUser.id).set(curUser);
   if (curUser.wishList.length == 0) wishListIcon.style = "";
 }

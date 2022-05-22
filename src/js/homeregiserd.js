@@ -6,9 +6,9 @@ var data = [];
 // var orders = [];
 // var has_store = false;
 
-function productElment(d, i, sort) {
+function productElment(d, i) {
   return `<div class="col">
-  <a href="product.html?index=${i}-${sort}">
+  <a href="product.html?id=${d.id}"">
   <div class="card">
   <div class="card-body"><img class="img-fluid" src="" id="img${i}">
       <h4 class="card-title" style="color: var(--bs-gray);">${d.name}</h4>
@@ -27,7 +27,7 @@ const init = () => {
   col.innerHTML = "";
   for (let i = 0; i < 5 && i < d.length; i++) {
     if (!d[i].deleted && +d[i].quantity > 0) {
-      col.innerHTML += productElment(d[i], i, "BB");
+      col.innerHTML += productElment(d[i], i);
       if (d[i].hasImg) {
         storageRef
           .child(d[i].id)
@@ -54,7 +54,7 @@ const init = () => {
   col = document.getElementById("col_1");
   for (let i = 0; i < 5 && i < d.length; i++) {
     if (!d[i].deleted && +d[i].quantity > 0) {
-      col.innerHTML += productElment(d[i], i + 5, "SS");
+      col.innerHTML += productElment(d[i], i + 5);
 
       if (d[i].hasImg) {
         storageRef

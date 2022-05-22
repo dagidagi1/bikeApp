@@ -34,9 +34,9 @@ searchBtn.addEventListener("click", () => {
   const d = Search(searchInput.value);
   init(d);
 });
-function productElment(d, i, sort = "all") {
+function productElment(d, i) {
   return `<div class="col">
-    <a href="product.html?index=${i}-${sort}">
+    <a href="product.html?id=${d.id}">
       <div class="card">
           <div class="card-body"><img class="img-fluid" id="img${i}" src="">
               <h4 class="card-title" style="color: var(--bs-gray);">${d.name}</h4>
@@ -91,12 +91,12 @@ dropdownNONE.addEventListener("click", () => {
 dropdownHTL.addEventListener("click", () => {
   priceBtn.innerText = "High to Low";
   const d = data.sort((a, b) => b.price - a.price);
-  init(d, "HTL");
+  init(d);
 });
 dropdownLTH.addEventListener("click", () => {
   priceBtn.innerText = "Low to High";
   const d = data.sort((a, b) => a.price - b.price);
-  init(d, "LTH");
+  init(d);
 });
 dropdownChoiceAll.addEventListener("click", () => {
   categoryBtn.innerText = "All";
@@ -107,14 +107,14 @@ dropdownChoiceBicycle.addEventListener("click", () => {
     return d.category === 0;
   });
   categoryBtn.innerText = "Bicycle";
-  init(newData, "B");
+  init(newData);
 });
 dropdownChoiceScooter.addEventListener("click", () => {
   const newData = data.filter((d) => {
     return d.category === 1;
   });
   categoryBtn.innerText = "Scooter";
-  init(newData, "S");
+  init(newData);
 });
 
 dbProducts.get().then((querySnapshot) => {
