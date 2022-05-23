@@ -119,7 +119,7 @@ function deleteItem(i) {
   if (curUser.wishList.length == 0) wishListIcon.style = "";
 }
 function addToCart(i) {
-  curUser.shoppingList.push(i);
+  curUser.shoppingList.push({ id: i, quantity: 1 });
   curUser.wishList.pop(i);
   data.pop(i);
   dbUsers.doc(curUser.id).set(curUser);

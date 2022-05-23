@@ -12,7 +12,7 @@ const manufacturer = document.getElementById("manufactur_d");
 const maxSpeed = document.getElementById("max_speed_d");
 const weight = document.getElementById("weight_d");
 const wheelSize = document.getElementById("wheel_size_d");
-// const quantity = document.getElementById('quantetity_d');
+const quantity = document.getElementById("quantetity_d");
 const search = document.getElementById("searchgroup");
 const img = document.getElementById("product_page_image");
 const addWishBtn = document.getElementById("wish_btn");
@@ -79,10 +79,18 @@ const updateDescriptions = (p) => {
   }
 };
 const addToCart = () => {
-  curUser.shoppingList.push(product.id);
-  dbUsers.doc(curUser.id).set(curUser);
+  if (+quantity.value > 0) {
+    if (!curUser.shoppingList.includes(product.id)) {
+      curUser.shoppingList.push({ id: product.id, quantity: +quantity.value });
+      dbUsers.doc(curUser.id).set(curUser);
+    }
+  } else {
+    alert("Quantity must be positive");
+  }
 };
 const addToWishList = () => {
-  curUser.wishList.push(product.id);
-  dbUsers.doc(curUser.id).set(curUser);
+  if (!curUser.wishList.includes(product.id)) {
+    curUser.wishList.push(product.id);
+    dbUsers.doc(curUser.id).set(curUser);
+  }
 };

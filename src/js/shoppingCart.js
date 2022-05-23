@@ -23,7 +23,6 @@ const getUser = () => {
           snapshot.forEach((doc) => {
             curUser = doc.data();
             curUser.id = doc.id;
-            console.log(curUser);
             getShopList();
           });
         });
@@ -31,15 +30,20 @@ const getUser = () => {
   });
 };
 function getShopList() {
+  data = [];
   dbProducts.get().then((querySnapshot) => {
-    let i = 0;
+    let j = 0;
     querySnapshot.forEach((doc) => {
-      if (curUser.shoppingList.includes(doc.id)) {
-        data.push(doc.data());
-        data[i].id = doc.id;
-        i++;
+      for (let i = 0; i < curUser.shoppingList.length; i++) {
+        if (curUser.shoppingList[i].id === doc.id) {
+          data.push(doc.data());
+          data[j].id = doc.id;
+          data[j].quantity = curUser.shoppingList[i].quantity;
+          j++;
+        }
       }
     });
+    console.log(data);
     init();
   });
 }
@@ -56,7 +60,7 @@ const makeRow = (d, i) => {
     <td>
       Quantity:&nbsp;<input
         type="number"
-        value="1"
+        value="${d.quantity}"
         min="1"
         step="1"
         style="
@@ -65,6 +69,7 @@ const makeRow = (d, i) => {
           max-width: 50px;
           color: var(--bs-gray-800);
         "
+        id="quantity${d.id}"
       />
     </td>
     <td>${d.price}$</td>
@@ -87,7 +92,7 @@ function init() {
   price = 0;
   for (let i = 0; i < data.length; i++) {
     shoppingCartTable.innerHTML += makeRow(data[i], i);
-    price += +data[i].price;
+    price += +data[i].price * data[i].quantity;
     if (data[i].hasImg) {
       storageRef
         .child(data[i].id)
@@ -111,6 +116,16 @@ function init() {
       deleteItem(document.getElementById(`btn_delete_${i}`).value);
       init();
     });
+    document
+      .getElementById(`quantity${data[i].id}`)
+      .addEventListener("change", (e) => {
+        e.preventDefault();
+        curUser.shoppingList[i].quantity = +document.getElementById(
+          `quantity${data[i].id}`
+        ).value;
+        dbUsers.doc(curUser.id).set(curUser);
+        getShopList();
+      });
   }
 }
 getUser();
