@@ -43,7 +43,6 @@ function getShopList() {
         }
       }
     });
-    console.log(data);
     init();
   });
 }
@@ -83,9 +82,10 @@ const makeRow = (d, i) => {
 function deleteItem(i) {
   totalPrice.innerText = ` Subtotal: ${price}$`;
   curUser.shoppingList.pop(i);
-  data.pop(i);
+  console.log(i, curUser.shoppingList);
   dbUsers.doc(curUser.id).set(curUser);
   if (curUser.shoppingList.length == 0) shoppingCart.style = "";
+  getShopList();
 }
 function init() {
   shoppingCartTable.innerHTML = "";
@@ -114,7 +114,6 @@ function init() {
   for (let i = 0; i < data.length; i++) {
     document.getElementById(`btn_delete_${i}`).addEventListener("click", () => {
       deleteItem(document.getElementById(`btn_delete_${i}`).value);
-      init();
     });
     document
       .getElementById(`quantity${data[i].id}`)

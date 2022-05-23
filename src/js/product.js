@@ -79,13 +79,22 @@ const updateDescriptions = (p) => {
   }
 };
 const addToCart = () => {
+  let flag = true;
   if (+quantity.value > 0) {
-    if (!curUser.shoppingList.includes(product.id)) {
-      curUser.shoppingList.push({ id: product.id, quantity: +quantity.value });
-      dbUsers.doc(curUser.id).set(curUser);
+    for (let i = 0; i < curUser.shoppingList.length; i++) {
+      if (curUser.shoppingList[i].id === product.id) {
+        flag = false;
+        break;
+      }
     }
   } else {
     alert("Quantity must be positive");
+  }
+  if (flag) {
+    curUser.shoppingList.push({ id: product.id, quantity: +quantity.value });
+    dbUsers.doc(curUser.id).set(curUser);
+  } else {
+    alert("Product alredy in your cart");
   }
 };
 const addToWishList = () => {
