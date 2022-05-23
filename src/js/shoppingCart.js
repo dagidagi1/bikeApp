@@ -82,7 +82,6 @@ const makeRow = (d, i) => {
 function deleteItem(i) {
   totalPrice.innerText = ` Subtotal: ${price}$`;
   curUser.shoppingList.pop(i);
-  console.log(i, curUser.shoppingList);
   dbUsers.doc(curUser.id).set(curUser);
   if (curUser.shoppingList.length == 0) shoppingCart.style = "";
   getShopList();
