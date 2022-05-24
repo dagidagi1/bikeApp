@@ -17,6 +17,8 @@ const search = document.getElementById("searchgroup");
 const img = document.getElementById("product_page_image");
 const addWishBtn = document.getElementById("wish_btn");
 const addCartBtn = document.getElementById("add_to_card");
+const quantityRow = document.getElementById("quantity_row");
+const redColor = "#e74a3b";
 addCartBtn.addEventListener("click", () => {
   addToCart();
 });
@@ -88,7 +90,8 @@ const addToCart = () => {
       }
     }
   } else {
-    alert("Quantity must be positive");
+    quantityRow.style.borderColor = redColor;
+    //alert("Quantity must be positive");
   }
   if (flag) {
     curUser.shoppingList.push({ id: product.id, quantity: +quantity.value });
