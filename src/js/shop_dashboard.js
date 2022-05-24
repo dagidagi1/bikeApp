@@ -1,4 +1,4 @@
-import {dbStores, dbUsers, fbAuth} from '../firebase/data.js';
+import {dbStores, dbUsers, fbAuth, dbProducts} from '../firebase/data.js';
 var daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
 var storeId = null;
@@ -85,7 +85,7 @@ function init(data) {
   initStatistics(data);
   initTopCustomers();
   initWorkHours(data.workHours);
-  initCharts();
+  initCharts(data);
 }
 
 function initStatistics(data) {
@@ -121,14 +121,14 @@ function initWorkHours(workHours) {
   document.getElementById('work_hours_card').style.display = 'block';
 }
 
-function initCharts() {
+async function initCharts(d) {
   const ctx1 = document.getElementById('earning_chart').getContext('2d');
   new Chart(ctx1, {
     type: 'line',
     data: {
       labels: ['January', 'Fabruary', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
       datasets: [{
-        data: getChart1Data(),
+        data: getChart1Data(d),
         backgroundColor: 'rgba(78,115,223, 1)',
         borderColor: 'rgba(78,115,223, 1)',
         pointStyle: 'circle',
@@ -151,12 +151,13 @@ function initCharts() {
     },
   });
   const ctx2 = document.getElementById('sells_chart').getContext('2d');
+  const categories = await getChart2Data(d);
   new Chart(ctx2, {
     type: 'doughnut',
     data: {
       labels: ['Bicycles', 'Scooters'],
       datasets: [{
-        data: getChart2Data(),
+        data: categories,
         backgroundColor: [
           'rgb(78,115,223)',
           'rgb(28,200,138)',
@@ -174,9 +175,41 @@ function initCharts() {
 }
 
 function getChart1Data() {
-  return [1200, 1900, 300, 500, 2000, 3000, 1000, 800, 1300, 2000, 700, 1500];
+  return [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 }
 
-function getChart2Data() {
-  return [2000, 1000];
+async function getChart2Data(data) {
+  let bikes = 0;
+  let scooters = 0;
+  for(let index = 0; index < data.products.length; index++){
+    const product = data.products[index];
+    const category = await getProduct(product);
+    if (category == 0){
+      bikes++;
+    }
+    else{
+      scooters++;
+    }
+  }
+  return [bikes, scooters];
+}
+
+function getProduct(p){
+    return new Promise((resolve)=>{
+      dbProducts.doc(p).get().then((doc) => {
+      if (doc.exists) {
+        if (doc.data().category == 0){
+          resolve(0);
+        }
+        else{
+          resolve(1);
+        }
+      } else {
+        // doc.data() will be undefined in this case
+        console.log('No product with this id!\nid: ', p);
+      }
+    }).catch((error) => {
+      console.log('Error getting document:', error);
+    });
+  });
 }

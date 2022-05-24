@@ -170,6 +170,15 @@ function changeStatus(oId, oStatus) {
   dbOrders.doc(oId).update({
     status: oStatus,
   });
+  if(oStatus == "Approved"){
+    storeRef.get().then((doc)=>{
+      storeRef.update({
+        sells: doc.data().sells + 1,
+      });
+    }).catch((error)=>{
+      console.log('Error getting document:', error)
+    })
+  }
   ordersTable.removeChild(document.getElementById('row/'+oId));
   getElement(oId);
 }
