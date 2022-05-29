@@ -89,15 +89,15 @@ const addToCart = () => {
         break;
       }
     }
+    if (flag) {
+      curUser.shoppingList.push({ id: product.id, quantity: +quantity.value });
+      dbUsers.doc(curUser.id).set(curUser);
+    } else {
+      alert("Product alredy in your cart");
+    }
   } else {
     quantityRow.style.borderColor = redColor;
-    //alert("Quantity must be positive");
-  }
-  if (flag) {
-    curUser.shoppingList.push({ id: product.id, quantity: +quantity.value });
-    dbUsers.doc(curUser.id).set(curUser);
-  } else {
-    alert("Product alredy in your cart");
+    alert("Quantity must be positive");
   }
 };
 const addToWishList = () => {
