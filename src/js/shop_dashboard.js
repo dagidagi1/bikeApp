@@ -89,9 +89,11 @@ function init(data) {
 }
 
 function initStatistics(data) {
+  const d = new Date();
+  let m = d.getMonth();
   document.getElementById('shop_items').textContent = data.products.length;
-  document.getElementById('earnings').textContent = data.income;
-  document.getElementById('sells').textContent = data.sells;
+  document.getElementById('earnings').textContent = data.income[m];
+  document.getElementById('sells').textContent = data.sells[m];
   document.getElementById('orders').textContent = data.orders.length;
   document.getElementById('statistics_cards').style.display = 'flex';
 }
@@ -128,7 +130,7 @@ async function initCharts(d) {
     data: {
       labels: ['January', 'Fabruary', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
       datasets: [{
-        data: getChart1Data(d),
+        data: d.sells,
         backgroundColor: 'rgba(78,115,223, 1)',
         borderColor: 'rgba(78,115,223, 1)',
         pointStyle: 'circle',

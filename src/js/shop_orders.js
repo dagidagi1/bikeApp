@@ -167,13 +167,21 @@ function buildElement(oId, iImg, iName, oQuantity, oDelivery, oStatus, hasImg, i
 }
 
 function changeStatus(oId, oStatus) {
+  let order = await dbOrders.doc(oId).get();
   dbOrders.doc(oId).update({
     status: oStatus,
   });
   if(oStatus == "Approved"){
     storeRef.get().then((doc)=>{
+      const d = new Date();
+      let m = d.getMonth();
+      let income = doc.data().income;
+      let sells = doc.data().sells;
+      income[m] += order.data().quantity;
+      sells[m] += order.data().price;
       storeRef.update({
-        sells: doc.data().sells + 1,
+        sells: sells,
+        income: income,
       });
     }).catch((error)=>{
       console.log('Error getting document:', error)
