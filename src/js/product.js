@@ -92,6 +92,7 @@ const addToCart = () => {
     if (flag) {
       curUser.shoppingList.push({ id: product.id, quantity: +quantity.value });
       dbUsers.doc(curUser.id).set(curUser);
+      alert("Product is in your cart");
     } else {
       alert("Product alredy in your cart");
     }
