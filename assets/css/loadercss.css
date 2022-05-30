@@ -1,35 +1,57 @@
 .loader {
-    width: 8px;
-    height: 40px;
-    border-radius: 4px;
+    width: 221px;
+    height: 56px;
     display: block;
-    margin: 20px auto;
+    margin: 30px auto;
+    background-image: linear-gradient(#4e73df 50px, transparent 0), linear-gradient(#4e73df 50px, transparent 0), linear-gradient(#4e73df 50px, transparent 0), linear-gradient(#4e73df 50px, transparent 0), radial-gradient(circle 14px, #4e73df 100%, transparent 0);
+    background-size: 48px 15px , 15px 35px, 15px 35px, 25px 15px, 28px 28px;
+    background-position: 25px 5px, 58px 20px, 25px 17px, 2px 37px, 76px 0px;
+    background-repeat: no-repeat;
     position: relative;
-    background: currentColor;
-    color: #FFF;
+    transform: rotate(-45deg);
     box-sizing: border-box;
-    animation: animloader 0.3s 0.3s linear infinite alternate;
   }
-  
-  .loader::after, .loader::before {
-    content: '';
-    width: 8px;
-    height: 40px;
-    border-radius: 4px;
-    background: currentColor;
+  .loader::after,
+  .loader::before {
+    content: '';  
     position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    left: 20px;
+    width: 56px;
+    height: 56px;
+    border: 6px solid #4e73df;
+    border-radius: 50%;
+    left: -45px;
+    top: -10px;
+    background-repeat: no-repeat;
+    background-image: linear-gradient(#4e73df 64px, transparent 0), linear-gradient(#4e73df 66px, transparent 0), radial-gradient(circle 4px, #4e73df 100%, transparent 0);
+    background-size: 40px 1px , 1px 40px, 8px 8px;
+    background-position: center center;
     box-sizing: border-box;
-    animation: animloader 0.3s  0.45s  linear infinite alternate;
+    animation: rotation 0.3s linear infinite;
   }
   .loader::before {
-    left: -20px;
-    animation-delay: 0s;
+    left: 25px;
+    top: 60px;
   }
   
-  @keyframes animloader {
-    0%   { height: 48px} 
-    100% { height: 4px}
+  @keyframes rotation {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  } 
+  .loaderModal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: hidden; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
   }
+  

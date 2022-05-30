@@ -2,13 +2,15 @@ import { fbAuth, dbUsers, dbProducts, dbStores, dbOrders } from '../firebase/dat
 //import datepicker from datepicker;
 //import datepicker from '../../node_modules/js-datepicker/src/datepicker.js';
 var pageHtml = document.getElementById('checkout_form');
+var loader = document.getElementById('loaderDiv');
 window.onload = function exam() {
   const search = document.getElementById('searchgroup');
   search.remove();
-  //pageHtml.style.visibility = 'hidden';
+  loader.style.display = 'block';
   init();
   pageHtml.style.visibility = 'visible';
 }
+
 function findOrderObjByItemId(id) {
   let returnVal = 0;
   data.forEach((elem) => {
@@ -170,6 +172,7 @@ function init() {
       alert("There are no items inside cart");
     }
     else {
+      let loadingCounter = doc.data().shoppingList.length;
       doc.data().shoppingList.forEach((element) => {
         let orderObj = new order(element['id']);
         orderObj.quantity = parseInt(element['quantity']);
@@ -183,6 +186,8 @@ function init() {
             orderObj.workHours = doc.data().workHours;
             buildRow(orderObj);
             data.push(orderObj);
+            loadingCounter--;
+            if(loadingCounter === 0) loader.style.display = 'none';
           });
         });
       });
@@ -190,10 +195,10 @@ function init() {
   });
 }
 checkoutBtn.addEventListener('click', function () {
-  console.log(totalPrice);
   if (!inputValidity())
     return;
   else {
+    loader.style.display = 'block';
     endOperation = data.length;
     console.log(data);
     let nowTime = new Date();
@@ -201,7 +206,6 @@ checkoutBtn.addEventListener('click', function () {
     //add spinner, and add new order to db. 
     data.forEach((element) => {
       addOrderToDB(element, nowTime);
-      
     });
   }
 });
@@ -220,7 +224,6 @@ function addOrderToDB(orderObj, nowTime) {
       orderTime: nowTime,
     }).then((docRef) => {
       console.log("Document written with ID: ", docRef.id);
-      //ordersCount--;
       dbStores.doc(orderObj.shopId).update({
         orders: firebase.firestore.FieldValue.arrayUnion(docRef.id),
       }).then((d) => {
@@ -232,9 +235,12 @@ function addOrderToDB(orderObj, nowTime) {
 function finished(counter) {
   if (counter == 0) {
     console.log("finished");
-    //delete cart at the user. 
-    //dbUsers.doc(userEmail)
-    //then => redirect to home page.
+    dbUsers.doc(userEmail).update({
+      shoppingList: [],
+    }).then((r) => {
+      loader.style.display = 'none';
+      location.replace("registered_home.html");
+    });
   }
 }
 function inputValidity() {
