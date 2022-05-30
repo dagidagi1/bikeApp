@@ -166,7 +166,7 @@ function buildElement(oId, iImg, iName, oQuantity, oDelivery, oStatus, hasImg, i
   ordersTable.appendChild(row);
 }
 
-function changeStatus(oId, oStatus) {
+async function changeStatus(oId, oStatus) {
   let order = await dbOrders.doc(oId).get();
   dbOrders.doc(oId).update({
     status: oStatus,
