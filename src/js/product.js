@@ -17,6 +17,8 @@ const search = document.getElementById("searchgroup");
 const img = document.getElementById("product_page_image");
 const addWishBtn = document.getElementById("wish_btn");
 const addCartBtn = document.getElementById("add_to_card");
+const quantityRow = document.getElementById("quantity_row");
+const redColor = "#e74a3b";
 addCartBtn.addEventListener("click", () => {
   addToCart();
 });
@@ -87,14 +89,15 @@ const addToCart = () => {
         break;
       }
     }
+    if (flag) {
+      curUser.shoppingList.push({ id: product.id, quantity: +quantity.value });
+      dbUsers.doc(curUser.id).set(curUser);
+    } else {
+      alert("Product alredy in your cart");
+    }
   } else {
+    quantityRow.style.borderColor = redColor;
     alert("Quantity must be positive");
-  }
-  if (flag) {
-    curUser.shoppingList.push({ id: product.id, quantity: +quantity.value });
-    dbUsers.doc(curUser.id).set(curUser);
-  } else {
-    alert("Product alredy in your cart");
   }
 };
 const addToWishList = () => {

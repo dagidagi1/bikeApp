@@ -51,8 +51,8 @@ function saveStore() {
                   name: storeName.value,
                   workHours: wH,
                   products: [],
-                  income: 0,
-                  sells: 0,
+                  income: [0,0,0,0,0,0,0,0,0,0,0,0],
+                  sells: [0,0,0,0,0,0,0,0,0,0,0,0],
                   orders: [],
                 })
                 .then((docRef) => {

@@ -88,7 +88,7 @@ function buildElement(oId, iImg, iName, oQuantity, oDelivery, oStatus, hasImg, i
 
   var col0 = document.createElement('td');
   var orderNum = document.createElement('span');
-  orderNum.textContent = oId;
+  orderNum.textContent = oId.slice(0,6);
   col0.appendChild(orderNum);
   row.appendChild(col0);
 
@@ -166,10 +166,27 @@ function buildElement(oId, iImg, iName, oQuantity, oDelivery, oStatus, hasImg, i
   ordersTable.appendChild(row);
 }
 
-function changeStatus(oId, oStatus) {
+async function changeStatus(oId, oStatus) {
+  let order = await dbOrders.doc(oId).get();
   dbOrders.doc(oId).update({
     status: oStatus,
   });
+  if(oStatus == "Approved"){
+    storeRef.get().then((doc)=>{
+      const d = new Date();
+      let m = d.getMonth();
+      let income = doc.data().income;
+      let sells = doc.data().sells;
+      sells[m] += order.data().quantity;
+      income[m] += order.data().price;
+      storeRef.update({
+        sells: sells,
+        income: income,
+      });
+    }).catch((error)=>{
+      console.log('Error getting document:', error)
+    })
+  }
   ordersTable.removeChild(document.getElementById('row/'+oId));
   getElement(oId);
 }
