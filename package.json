@@ -27,11 +27,13 @@
     "bootstrap-star-rating": "^4.1.2",
     "chart.js": "^3.7.1",
     "colors": "^1.4.0",
+    "datepicker": "^0.0.0",
     "esm": "^3.2.25",
     "express": "^4.17.3",
     "firebase": "^8.10.1",
     "firebase-auth": "^0.1.2",
     "jade": "^1.9.2",
+    "js-datepicker": "^5.18.0",
     "nodemon": "^2.0.15"
   },
   "devDependencies": {
