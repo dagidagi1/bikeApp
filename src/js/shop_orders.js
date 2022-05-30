@@ -88,7 +88,7 @@ function buildElement(oId, iImg, iName, oQuantity, oDelivery, oStatus, hasImg, i
 
   var col0 = document.createElement('td');
   var orderNum = document.createElement('span');
-  orderNum.textContent = oId;
+  orderNum.textContent = oId.slice(0,6);
   col0.appendChild(orderNum);
   row.appendChild(col0);
 
@@ -177,8 +177,8 @@ async function changeStatus(oId, oStatus) {
       let m = d.getMonth();
       let income = doc.data().income;
       let sells = doc.data().sells;
-      income[m] += order.data().quantity;
-      sells[m] += order.data().price;
+      sells[m] += order.data().quantity;
+      income[m] += order.data().price;
       storeRef.update({
         sells: sells,
         income: income,

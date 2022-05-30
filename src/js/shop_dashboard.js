@@ -85,7 +85,7 @@ function init(data) {
   document.getElementById('subMainContainer').style.display = 'flex';
   initStatistics(data);
   getOrders(data).then((resolved) => {
-      initTopCustomers();
+    initTopCustomers();
   })
   initWorkHours(data.workHours);
   initCharts(data);
@@ -104,23 +104,23 @@ function initStatistics(data) {
 async function initTopCustomers() {
   let topOrders = [];
   let topIncome = [];
-  for(let i = 0; i < 3 && sells.size > 0; i++){
+  for (let i = 0; i < 3 && sells.size > 0; i++) {
     let tmp = Object.fromEntries(sells);
-    let maxKey = Object.keys(tmp).reduce(function(a, b){ return tmp[a] > tmp[b] ? a : b });
+    let maxKey = Object.keys(tmp).reduce(function (a, b) { return tmp[a] > tmp[b] ? a : b });
     sells.delete(maxKey);
-    topOrders.push(maxKey); 
+    topOrders.push(maxKey);
     tmp = Object.fromEntries(income);
-    maxKey = Object.keys(tmp).reduce(function(a, b){ return tmp[a] > tmp[b] ? a : b });
+    maxKey = Object.keys(tmp).reduce(function (a, b) { return tmp[a] > tmp[b] ? a : b });
     income.delete(maxKey);
-    topIncome.push(maxKey); 
+    topIncome.push(maxKey);
   }
-  for(let i = 0; i < topOrders.length; i++){
+  for (let i = 0; i < topOrders.length; i++) {
     let customer = await dbUsers.doc(topOrders[i]).get();
     let el = document.createElement("li");
     el.innerHTML = customer.data().name;
     top_orders_list.appendChild(el);
   }
-  for(let i = 0; i < topIncome.length; i++){
+  for (let i = 0; i < topIncome.length; i++) {
     let customer = await dbUsers.doc(topIncome[i]).get();
     let el = document.createElement("li");
     el.innerHTML = customer.data().name;
