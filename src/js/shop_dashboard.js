@@ -84,7 +84,7 @@ document.getElementById('ordersCard').addEventListener('click', function () {
 function init(data) {
   document.getElementById('subMainContainer').style.display = 'flex';
   initStatistics(data);
-  func(data).then((resolved) => {
+  getOrders(data).then((resolved) => {
       initTopCustomers();
   })
   initWorkHours(data.workHours);
@@ -129,7 +129,7 @@ async function initTopCustomers() {
   document.getElementById('top_customers_card').style.display = 'block';
 }
 
-function func(data) {
+function getOrders(data) {
   return new Promise(async (resolve) => {
     for (let i = 0; i < data.orders.length; ++i) {
       let order = await dbOrders.doc(data.orders[i]).get();
@@ -142,7 +142,6 @@ function func(data) {
         income.set(order.data().buyer, order.data().price);
       }
     }
-    console.log("Func finished", sells, income, (new Date).getMilliseconds());
     resolve(1);
   })
 }
