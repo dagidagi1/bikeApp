@@ -1,5 +1,10 @@
 import { dbProducts, dbUsers, storageRef } from "../firebase/data.js";
 const search = document.getElementById("searchgroup");
+const modal1 = new bootstrap.Modal(document.getElementById("modal-1"));
+const closeShip = document.getElementById("close_ship");
+closeShip.addEventListener("click", () => {
+  modal1.hide();
+});
 search.remove();
 let col;
 var data = [];

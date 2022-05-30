@@ -13,6 +13,11 @@ const categoryBtn = document.getElementById("btn_category");
 const priceBtn = document.getElementById("btn_price");
 const searchInput = document.getElementById("navbar_search_field");
 const searchBtn = document.getElementById("navbar_search_button");
+const modal1 = new bootstrap.Modal(document.getElementById("modal-1"));
+const closeShip = document.getElementById("close_ship");
+closeShip.addEventListener("click", () => {
+  modal1.hide();
+});
 function Search(input) {
   return data.filter((d) => {
     if (d.description.toLocaleLowerCase().includes(input.toLocaleLowerCase())) {
