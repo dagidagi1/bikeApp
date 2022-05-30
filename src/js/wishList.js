@@ -5,6 +5,11 @@ let wishListIcon = document.getElementById("wish_list");
 var data = [];
 var curUser;
 const wishListTable = document.getElementById("wish_list_table");
+const modal1 = new bootstrap.Modal(document.getElementById("modal-1"));
+const closeShip = document.getElementById("close_ship");
+closeShip.addEventListener("click", () => {
+  modal1.hide();
+});
 const getUser = () => {
   fbAuth.onAuthStateChanged((user) => {
     if (user) {

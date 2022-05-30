@@ -5,9 +5,15 @@ import {
   dbProducts,
   storageRef,
 } from "../firebase/data.js";
-const rateOrderText = document.getElementById("rateOrderText");
-const rateOrder = document.getElementById("rateOrder");
+const rateOrderText = document.getElementById("rate_order_text");
+const rateOrder = document.getElementById("rate_order");
 const submitReviewBtn = document.getElementById("submit_review");
+const modal = new bootstrap.Modal(document.getElementById("modal-2"));
+const modal1 = new bootstrap.Modal(document.getElementById("modal-1"));
+const closeShip = document.getElementById("close_ship");
+closeShip.addEventListener("click", () => {
+  modal1.hide();
+});
 const search = document.getElementById("searchgroup");
 const orderList = document.getElementById("orderList");
 search.remove();
@@ -155,7 +161,6 @@ const makeRowOrder = (ord, da) => {
   }
 };
 const CancelOrder = (e) => {
-  console.log("!@#$");
   orders.map((o) => {
     if (o.prodId === e) {
       o.status = "Cancelled";
@@ -170,9 +175,10 @@ const feedBack = (e) => {
       o.rate = rateOrder.value;
       o.rateOrderText = rateOrderText.value;
       o.review = true;
-      dbOrders.doc(o.prodId).set(o);
+      dbOrders.doc(o.id).set(o);
     }
   });
+  modal.hide();
 };
 submitReviewBtn.addEventListener("click", () => {
   feedBack(document.getElementById("BtnfeedBack").value);
