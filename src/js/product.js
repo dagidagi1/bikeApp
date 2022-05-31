@@ -18,6 +18,12 @@ const img = document.getElementById("product_page_image");
 const addWishBtn = document.getElementById("wish_btn");
 const addCartBtn = document.getElementById("add_to_card");
 const quantityRow = document.getElementById("quantity_row");
+const modal1 = new bootstrap.Modal(document.getElementById("modal-1"));
+const closePopUp = document.getElementById("close_ship");
+const textM = document.getElementById("text_m");
+closePopUp.addEventListener("click", () => {
+  modal1.hide();
+});
 const redColor = "#e74a3b";
 addCartBtn.addEventListener("click", () => {
   addToCart();
@@ -92,17 +98,26 @@ const addToCart = () => {
     if (flag) {
       curUser.shoppingList.push({ id: product.id, quantity: +quantity.value });
       dbUsers.doc(curUser.id).set(curUser);
+      modal1.show();
+      textM.innerText = "Product add to your shopping cart";
     } else {
-      alert("Product alredy in your cart");
+      modal1.show();
+      textM.innerText = "Product alredy in your cart";
     }
   } else {
     quantityRow.style.borderColor = redColor;
-    alert("Quantity must be positive");
+    modal1.show();
+    textM.innerText = "Quantity must be positive";
   }
 };
 const addToWishList = () => {
   if (!curUser.wishList.includes(product.id)) {
     curUser.wishList.push(product.id);
     dbUsers.doc(curUser.id).set(curUser);
+    modal1.show();
+    textM.innerText = "Product add to your wish cart";
+  } else {
+    modal1.show();
+    textM.innerText = "Product alredy in your wish cart";
   }
 };
