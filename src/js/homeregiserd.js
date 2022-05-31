@@ -1,10 +1,10 @@
-import { dbProducts, dbUsers, storageRef } from "../firebase/data.js";
-const search = document.getElementById("searchgroup");
-const modal1 = new bootstrap.Modal(document.getElementById("modal-1"));
-const closeShip = document.getElementById("close_ship");
-var loader = document.getElementById("loaderDiv");
-loader.style.display = "block";
-closeShip.addEventListener("click", () => {
+import {dbProducts, dbUsers, storageRef} from '../firebase/data.js';
+const search = document.getElementById('searchgroup');
+const modal1 = new bootstrap.Modal(document.getElementById('modal-1'));
+const closeShip = document.getElementById('close_ship');
+var loader = document.getElementById('loaderDiv');
+loader.style.display = 'block';
+closeShip.addEventListener('click', () => {
   modal1.hide();
 });
 search.remove();
@@ -24,27 +24,27 @@ function productElment(d, i) {
 }
 const init = () => {
   let d = data
-    .filter((a) => a.category === 0)
-    .sort((a, b) => {
-      b.price - a.price;
-    });
-  col = document.getElementById("col_0");
-  col.innerHTML = "";
+      .filter((a) => a.category === 0)
+      .sort((a, b) => {
+        b.price - a.price;
+      });
+  col = document.getElementById('col_0');
+  col.innerHTML = '';
   for (let i = 0; i < 5 && i < d.length; i++) {
     if (!d[i].deleted && +d[i].quantity > 0) {
       col.innerHTML += productElment(d[i], i);
       if (d[i].hasImg) {
         storageRef
-          .child(d[i].id)
-          .getDownloadURL()
-          .then((url) => {
+            .child(d[i].id)
+            .getDownloadURL()
+            .then((url) => {
             // Or inserted into an <img> element
-            const img = document.getElementById(`img${i}`);
-            img.src = url;
-          })
-          .catch((error) => {
-            console.log(error);
-          });
+              const img = document.getElementById(`img${i}`);
+              img.src = url;
+            })
+            .catch((error) => {
+              console.log(error);
+            });
       } else {
         const img = document.getElementById(`img${i}`);
         img.src = d[i].src;
@@ -52,34 +52,34 @@ const init = () => {
     }
   }
   d = data
-    .filter((a) => a.category === 1)
-    .sort((a, b) => {
-      b.price - a.price;
-    });
-  col = document.getElementById("col_1");
+      .filter((a) => a.category === 1)
+      .sort((a, b) => {
+        b.price - a.price;
+      });
+  col = document.getElementById('col_1');
   for (let i = 0; i < 5 && i < d.length; i++) {
     if (!d[i].deleted && +d[i].quantity > 0) {
       col.innerHTML += productElment(d[i], i + 5);
 
       if (d[i].hasImg) {
         storageRef
-          .child(d[i].id)
-          .getDownloadURL()
-          .then((url) => {
+            .child(d[i].id)
+            .getDownloadURL()
+            .then((url) => {
             // Or inserted into an <img> element
-            const img = document.getElementById(`img${i + 5}`);
-            img.src = url;
-          })
-          .catch((error) => {
-            console.log(error);
-          });
+              const img = document.getElementById(`img${i + 5}`);
+              img.src = url;
+            })
+            .catch((error) => {
+              console.log(error);
+            });
       } else {
         const img = document.getElementById(`img${i + 5}`);
         img.src = d[i].src;
       }
     }
   }
-  loader.style.display = "none";
+  loader.style.display = 'none';
 };
 
 dbProducts.get().then((querySnapshot) => {

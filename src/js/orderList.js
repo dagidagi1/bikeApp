@@ -4,20 +4,20 @@ import {
   dbOrders,
   dbProducts,
   storageRef,
-} from "../firebase/data.js";
-const rateOrderText = document.getElementById("rate_order_text");
-const rateOrder = document.getElementById("rate_order");
-const submitReviewBtn = document.getElementById("submit_review");
-const modal = new bootstrap.Modal(document.getElementById("modal-2"));
-const modal1 = new bootstrap.Modal(document.getElementById("modal-1"));
-const closeShip = document.getElementById("close_ship");
-var loader = document.getElementById("loaderDiv");
-loader.style.display = "block";
-closeShip.addEventListener("click", () => {
+} from '../firebase/data.js';
+const rateOrderText = document.getElementById('rate_order_text');
+const rateOrder = document.getElementById('rate_order');
+const submitReviewBtn = document.getElementById('submit_review');
+const modal = new bootstrap.Modal(document.getElementById('modal-2'));
+const modal1 = new bootstrap.Modal(document.getElementById('modal-1'));
+const closeShip = document.getElementById('close_ship');
+var loader = document.getElementById('loaderDiv');
+loader.style.display = 'block';
+closeShip.addEventListener('click', () => {
   modal1.hide();
 });
-const search = document.getElementById("searchgroup");
-const orderList = document.getElementById("orderList");
+const search = document.getElementById('searchgroup');
+const orderList = document.getElementById('orderList');
 search.remove();
 var orders = [];
 var data = [];
@@ -25,44 +25,44 @@ var user;
 fbAuth.onAuthStateChanged((u) => {
   if (u) {
     dbUsers
-      .where("email", "==", u.email)
-      .get()
-      .then((snapshot) => {
-        snapshot.forEach((doc) => {
-          user = doc.data();
+        .where('email', '==', u.email)
+        .get()
+        .then((snapshot) => {
+          snapshot.forEach((doc) => {
+            user = doc.data();
+          });
+          loadorders();
         });
-        loadorders();
-      });
   }
 });
 const loadorders = () => {
   let i = 0;
   dbOrders
-    .where("buyer", "==", user.email)
-    .get()
-    .then((querySnapshot) => {
-      querySnapshot.forEach((doc) => {
-        orders.push(doc.data());
-        orders[i].id = doc.id;
-        i++;
-      });
-      dbProducts.get().then((querySnapshot) => {
-        i = 0;
+      .where('buyer', '==', user.email)
+      .get()
+      .then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
-          for (let j = 0; j < orders.length; j++) {
-            if (doc.id === orders[j].prodId) {
-              data.push(doc.data());
-              data[i].id = doc.id;
-              i++;
-            }
-          }
+          orders.push(doc.data());
+          orders[i].id = doc.id;
+          i++;
         });
-        init();
+        dbProducts.get().then((querySnapshot) => {
+          i = 0;
+          querySnapshot.forEach((doc) => {
+            for (let j = 0; j < orders.length; j++) {
+              if (doc.id === orders[j].prodId) {
+                data.push(doc.data());
+                data[i].id = doc.id;
+                i++;
+              }
+            }
+          });
+          init();
+        });
       });
-    });
 };
 const makeRowOrder = (ord, da) => {
-  if (ord.status === "Shipping") {
+  if (ord.status === 'Shipping') {
     return `<tr>
     <td>${ord.prodId}</td>
     <td>
@@ -76,7 +76,7 @@ const makeRowOrder = (ord, da) => {
     <td style="color: var(--bs-info)">${ord.status}</td>
     <td class="text-end"></td>
   </tr>`;
-  } else if (ord.status === "Waiting") {
+  } else if (ord.status === 'Waiting') {
     return `<td>${ord.prodId}</td>
     <td>
       <img
@@ -103,7 +103,7 @@ const makeRowOrder = (ord, da) => {
       </button>
     </td>
   </tr>`;
-  } else if (ord.status === "Cancelled") {
+  } else if (ord.status === 'Cancelled') {
     return `<td>${ord.prodId}</td>
     <td>
       <img
@@ -165,7 +165,7 @@ const makeRowOrder = (ord, da) => {
 const CancelOrder = (e) => {
   orders.map((o) => {
     if (o.prodId === e) {
-      o.status = "Cancelled";
+      o.status = 'Cancelled';
       dbOrders.doc(o.id).set(o);
       init();
     }
@@ -182,29 +182,29 @@ const feedBack = (e) => {
   });
   modal.hide();
 };
-submitReviewBtn.addEventListener("click", () => {
-  loader.style.display = "block";
-  feedBack(document.getElementById("BtnfeedBack").value);
+submitReviewBtn.addEventListener('click', () => {
+  loader.style.display = 'block';
+  feedBack(document.getElementById('BtnfeedBack').value);
   init();
 });
 const init = () => {
-  orderList.innerHTML = "";
+  orderList.innerHTML = '';
   for (let i = 0; i < data.length; i++) {
     for (let j = 0; j < orders.length; j++) {
       if (data[i].id === orders[j].prodId) {
         orderList.innerHTML += makeRowOrder(orders[j], data[i]);
         if (data[i].hasImg) {
           storageRef
-            .child(data[i].id)
-            .getDownloadURL()
-            .then((url) => {
+              .child(data[i].id)
+              .getDownloadURL()
+              .then((url) => {
               // Or inserted into an <img> element
-              const img = document.getElementById(`${orders[j].prodId}`);
-              img.src = url;
-            })
-            .catch((error) => {
-              console.log(error);
-            });
+                const img = document.getElementById(`${orders[j].prodId}`);
+                img.src = url;
+              })
+              .catch((error) => {
+                console.log(error);
+              });
         } else {
           const img = document.getElementById(`${orders[j].prodId}`);
           img.src = data[i].src;
@@ -213,10 +213,10 @@ const init = () => {
       }
     }
   }
-  document.getElementById("btncancel")?.addEventListener("click", () => {
-    loader.style.display = "block";
-    CancelOrder(document.getElementById("btncancel").value);
+  document.getElementById('btncancel')?.addEventListener('click', () => {
+    loader.style.display = 'block';
+    CancelOrder(document.getElementById('btncancel').value);
     init();
   });
-  loader.style.display = "none";
+  loader.style.display = 'none';
 };

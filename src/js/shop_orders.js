@@ -9,7 +9,7 @@ const ordersTable = document.getElementById('ordersTable');
 var listOfOrders = null;
 
 var loader = document.getElementById('loaderDiv');
-loader.style.display = "block";
+loader.style.display = 'block';
 
 const storeRef = dbStores.doc(storeId);
 
@@ -25,7 +25,7 @@ storeRef.get().then((doc) => {
     getElement(item);
   });
 }).then(()=>{
-  loader.style.display = "none";
+  loader.style.display = 'none';
 }).catch((error) => {
   console.log('Error getting document:', error);
 });
@@ -93,7 +93,7 @@ function buildElement(oId, iImg, iName, oQuantity, oDelivery, oStatus, hasImg, i
 
   var col0 = document.createElement('td');
   var orderNum = document.createElement('span');
-  orderNum.textContent = oId.slice(0,6);
+  orderNum.textContent = oId.slice(0, 6);
   col0.appendChild(orderNum);
   row.appendChild(col0);
 
@@ -172,16 +172,16 @@ function buildElement(oId, iImg, iName, oQuantity, oDelivery, oStatus, hasImg, i
 }
 
 async function changeStatus(oId, oStatus) {
-  let order = await dbOrders.doc(oId).get();
+  const order = await dbOrders.doc(oId).get();
   dbOrders.doc(oId).update({
     status: oStatus,
   });
-  if(oStatus == "Approved"){
+  if (oStatus == 'Approved') {
     storeRef.get().then((doc)=>{
       const d = new Date();
-      let m = d.getMonth();
-      let income = doc.data().income;
-      let sells = doc.data().sells;
+      const m = d.getMonth();
+      const income = doc.data().income;
+      const sells = doc.data().sells;
       sells[m] += order.data().quantity;
       income[m] += order.data().price;
       storeRef.update({
@@ -189,8 +189,8 @@ async function changeStatus(oId, oStatus) {
         income: income,
       });
     }).catch((error)=>{
-      console.log('Error getting document:', error)
-    })
+      console.log('Error getting document:', error);
+    });
   }
   ordersTable.removeChild(document.getElementById('row/'+oId));
   getElement(oId);

@@ -1,6 +1,6 @@
-import { fbAuth, dbUsers, dbProducts, dbStores, dbOrders } from '../firebase/data.js';
-//import datepicker from datepicker;
-//import datepicker from '../../node_modules/js-datepicker/src/datepicker.js';
+import {dbUsers, dbProducts, dbStores, dbOrders} from '../firebase/data.js';
+// import datepicker from datepicker;
+// import datepicker from '../../node_modules/js-datepicker/src/datepicker.js';
 var pageHtml = document.getElementById('checkout_form');
 var loader = document.getElementById('loaderDiv');
 window.onload = function exam() {
@@ -9,13 +9,14 @@ window.onload = function exam() {
   loader.style.display = 'block';
   init();
   pageHtml.style.visibility = 'visible';
-}
+};
 
 function findOrderObjByItemId(id) {
   let returnVal = 0;
   data.forEach((elem) => {
-    if (id === elem.prodId)
+    if (id === elem.prodId) {
       returnVal = elem;
+    }
   });
   return returnVal;
 }
@@ -24,18 +25,18 @@ var endOperation;
 document.addEventListener('change', (e) => {
   var id = e.target.id.split('/');
   if (id[0].slice(-7, -3) === 'Date') {
-    let orderRef = findOrderObjByItemId(id[0].slice(0, -7));
-    let selectedDate = orderRef.getSelectedDateByIndex(document.getElementById(orderRef.getDateSelectorId()).value).getDay();
-    let hours = orderRef.getWorkHours()[selectedDate];
+    const orderRef = findOrderObjByItemId(id[0].slice(0, -7));
+    const selectedDate = orderRef.getSelectedDateByIndex(document.getElementById(orderRef.getDateSelectorId()).value).getDay();
+    const hours = orderRef.getWorkHours()[selectedDate];
     let options = '';
     for (let i = parseInt(hours[0]); i <= parseInt(hours[1]); i++) {
       options += `<option value=${i}> ${i + ':00'}</option>`;
     }
     document.getElementById(orderRef.getTimeSelectorId()).innerHTML = options;
   }
-  if(id[0].slice(-7, -3) === 'Time'){
-    let orderRef = findOrderObjByItemId(id[0].slice(0, -7));
-    let t = document.getElementById(orderRef.getTimeSelectorId()).value;
+  if (id[0].slice(-7, -3) === 'Time') {
+    const orderRef = findOrderObjByItemId(id[0].slice(0, -7));
+    const t = document.getElementById(orderRef.getTimeSelectorId()).value;
     orderRef.setSelectedTime(t);
     console.log(orderRef.delivery.toString());
   }
@@ -45,7 +46,7 @@ var temp = parametrs[0].split('=');
 const userEmail = decodeURI(temp[1]);
 console.log(userEmail);
 var totalPrice = 0;
-class order {
+class Order {
   constructor(itemId) {
     this.prodId = itemId;
     this.quantity = 0;
@@ -62,24 +63,25 @@ class order {
   extractWorkHoursStr() {
     let str = '';
     Object.entries(this.workHours).forEach((element) => {
-      if (element[1][0])
-        str += element[0] + ' ' + element[1][1] + ' - ' + element[1][2] + '\n'
-    })
+      if (element[1][0]) {
+        str += element[0] + ' ' + element[1][1] + ' - ' + element[1][2] + '\n';
+      }
+    });
     return str;
   }
   extractAvailableDaysForDelivery() {
-    let daysArr = []
+    const daysArr = [];
     Object.entries(this.workHours).forEach((element) => {
-      if (element[1][0])
-        daysArr.push(element[0])
-      //str += element[0] + ' ' + element[1][1] + ' - ' + element[1][2] + '\n'
-    })
-    let currDate = new Date();
+      if (element[1][0]) {
+        daysArr.push(element[0]);
+      }
+      // str += element[0] + ' ' + element[1][1] + ' - ' + element[1][2] + '\n'
+    });
     return daysArr;
   }
   get3WeeksDates() {
-    let workHours = this.getWorkHours();
-    let dates = [];
+    const workHours = this.getWorkHours();
+    const dates = [];
     var sunday = this.getNextSunday(new Date());
     for (let i = 0; i < 7; i++) {
       if (workHours[i][0] != workHours[i][1]) {
@@ -91,17 +93,17 @@ class order {
     return dates;
   }
 
-  getSelectedDateByIndex(index){
+  getSelectedDateByIndex(index) {
     this.setSelectedDate(this.get3WeeksDates()[index]);
     return this.get3WeeksDates()[index];
   }
-  setSelectedDate(date){
+  setSelectedDate(date) {
     this.delivery = date;
-    let time = this.getWorkHours()[date.getDay()][0];
-    this.delivery.setHours(parseInt(time),0,0);
+    const time = this.getWorkHours()[date.getDay()][0];
+    this.delivery.setHours(parseInt(time), 0, 0);
   }
-  setSelectedTime(time){
-    this.delivery.setHours(parseInt(time),0,0);
+  setSelectedTime(time) {
+    this.delivery.setHours(parseInt(time), 0, 0);
   }
   getNextSunday(date) {
     var result = new Date(date);
@@ -115,7 +117,7 @@ class order {
     return result;
   }
   getWorkHours() {
-    let arr = [[0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0]];
+    const arr = [[0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0]];
     if (this.workHours['Sunday'][0]) {
       arr[0][0] = this.workHours['Sunday'][1];
       arr[0][1] = this.workHours['Sunday'][2];
@@ -147,14 +149,14 @@ class order {
     return arr;
   }
 }
-const country = document.getElementById("checkout_country");
-const city = document.getElementById("checkout_city");
-const address = document.getElementById("checkout_address");
+const country = document.getElementById('checkout_country');
+const city = document.getElementById('checkout_city');
+const address = document.getElementById('checkout_address');
 
-const cardName = document.getElementById("checkout_card_name");
-const cardNumber = document.getElementById("checkout_card_number");
-const cardExp = document.getElementById("checkout_card_exp");
-const cardCvv = document.getElementById("checkout_card_cvv");
+const cardName = document.getElementById('checkout_card_name');
+const cardNumber = document.getElementById('checkout_card_number');
+const cardExp = document.getElementById('checkout_card_exp');
+const cardCvv = document.getElementById('checkout_card_cvv');
 
 const checkoutBtn = document.getElementById('checkout_submit_btn');
 function init() {
@@ -162,24 +164,22 @@ function init() {
   dbUsers.doc(userEmail).get().then((doc) => {
     if (doc.exists) {
       itemsIds = doc.data().shoppingList;
-    }
-    else {
-      alert("err with find user in the collection");
+    } else {
+      alert('err with find user in the collection');
       return;
     }
     if (itemsIds.length === 0) {
-      //init empty page, with message for empty cart.
-      alert("There are no items inside cart");
-    }
-    else {
+      // init empty page, with message for empty cart.
+      alert('There are no items inside cart');
+    } else {
       let loadingCounter = doc.data().shoppingList.length;
       doc.data().shoppingList.forEach((element) => {
-        let orderObj = new order(element['id']);
+        const orderObj = new Order(element['id']);
         orderObj.quantity = parseInt(element['quantity']);
         dbProducts.doc(orderObj.prodId).get().then((doc) => {
           orderObj.price = parseInt(doc.data().price) * orderObj.quantity;
           totalPrice += orderObj.price;
-          document.getElementById("checkout_total_amount").innerHTML = totalPrice;
+          document.getElementById('checkout_total_amount').innerHTML = totalPrice;
           orderObj.shopId = doc.data().store_id;
           orderObj.name = doc.data().name;
           dbStores.doc(orderObj.shopId).get().then((doc) => {
@@ -187,23 +187,23 @@ function init() {
             buildRow(orderObj);
             data.push(orderObj);
             loadingCounter--;
-            if(loadingCounter === 0) loader.style.display = 'none';
+            if (loadingCounter === 0) loader.style.display = 'none';
           });
         });
       });
     }
   });
 }
-checkoutBtn.addEventListener('click', function () {
-  if (!inputValidity())
+checkoutBtn.addEventListener('click', function() {
+  if (!inputValidity()) {
     return;
-  else {
+  } else {
     loader.style.display = 'block';
     endOperation = data.length;
     console.log(data);
     let nowTime = new Date();
     nowTime = nowTime.toDateString();
-    //add spinner, and add new order to db. 
+    // add spinner, and add new order to db.
     data.forEach((element) => {
       addOrderToDB(element, nowTime);
     });
@@ -211,126 +211,123 @@ checkoutBtn.addEventListener('click', function () {
 });
 
 function addOrderToDB(orderObj, nowTime) {
-  let date = document.getElementById(orderObj.getDateSelectorId()).innerHTML;
-  let deliveryTime =
-    dbOrders.add({
-      prodId: orderObj.prodId,
-      quantity: orderObj.quantity,
-      status: orderObj.status,
-      delivery: orderObj.delivery.toString(),
-      store: orderObj.shopId,
-      price: orderObj.price,
-      buyer: orderObj.buyer,
-      orderTime: nowTime,
-    }).then((docRef) => {
-      console.log("Document written with ID: ", docRef.id);
-      dbStores.doc(orderObj.shopId).update({
-        orders: firebase.firestore.FieldValue.arrayUnion(docRef.id),
-      }).then((d) => {
-        endOperation--;
-        finished(endOperation);
-      });
+  dbOrders.add({
+    prodId: orderObj.prodId,
+    quantity: orderObj.quantity,
+    status: orderObj.status,
+    delivery: orderObj.delivery.toString(),
+    store: orderObj.shopId,
+    price: orderObj.price,
+    buyer: orderObj.buyer,
+    orderTime: nowTime,
+  }).then((docRef) => {
+    console.log('Document written with ID: ', docRef.id);
+    dbStores.doc(orderObj.shopId).update({
+      orders: firebase.firestore.FieldValue.arrayUnion(docRef.id),
+    }).then((d) => {
+      endOperation--;
+      finished(endOperation);
     });
+  });
 }
 function finished(counter) {
   if (counter == 0) {
-    console.log("finished");
+    console.log('finished');
     dbUsers.doc(userEmail).update({
       shoppingList: [],
     }).then((r) => {
       loader.style.display = 'none';
-      location.replace("registered_home.html");
+      location.replace('registered_home.html');
     });
   }
 }
 function inputValidity() {
-  //add delivery time check!
-  const cardNameSp = document.getElementById("checkout_card_name_sp");
-  const cardNumSp = document.getElementById("checkout_card_num_sp");
-  const cardExpSp = document.getElementById("checkout_card_exp_sp");
-  const cardCvvSp = document.getElementById("checkout_card_cvv_sp");
-  const countrySp = document.getElementById("checkout_country_sp");
-  const citySp = document.getElementById("checkout_city_sp");
-  const addressSp = document.getElementById("checkout_address_sp");
-  let today = new Date();
-  let todayM = today.getMonth() + 1;
-  let todayY = today.getFullYear();
-  let cardExpYM = cardExp.value.split('-');
+  // add delivery time check!
+  const cardNameSp = document.getElementById('checkout_card_name_sp');
+  const cardNumSp = document.getElementById('checkout_card_num_sp');
+  const cardExpSp = document.getElementById('checkout_card_exp_sp');
+  const cardCvvSp = document.getElementById('checkout_card_cvv_sp');
+  const countrySp = document.getElementById('checkout_country_sp');
+  const citySp = document.getElementById('checkout_city_sp');
+  const addressSp = document.getElementById('checkout_address_sp');
+  const today = new Date();
+  const todayM = today.getMonth() + 1;
+  const todayY = today.getFullYear();
+  const cardExpYM = cardExp.value.split('-');
   let flag = true;
   data.forEach((elem) => {
-    let dateField = document.getElementById(elem.getDateSelectorId());
+    const dateField = document.getElementById(elem.getDateSelectorId());
     if (dateField.value === '-1') {
       console.log(dateField.value);
       dateField.style.borderColor = 'red';
       flag = false;
-    }
-    else {
+    } else {
       dateField.style.borderColor = '';
     }
   });
   if (!flag) return flag;
   if (cardName.value.length === 0) {
-    //card name is not empty
-    cardName.style.borderColor = "red";
-    cardNameSp.style.display = "block";
+    // card name is not empty
+    cardName.style.borderColor = 'red';
+    cardNameSp.style.display = 'block';
     return false;
   } else {
-    cardNameSp.style.display = "none";
-    cardName.style.borderColor = "";
+    cardNameSp.style.display = 'none';
+    cardName.style.borderColor = '';
   }
   if (cardNumber.value.length === 16 && !isNaN(cardNumber.value)) {
-    //card number contains only digits and 16 digits length
-    cardNumSp.style.display = "none";
-    cardNumber.style.borderColor = "";
+    // card number contains only digits and 16 digits length
+    cardNumSp.style.display = 'none';
+    cardNumber.style.borderColor = '';
   } else {
-    cardNumber.style.borderColor = "red";
-    cardNumSp.style.display = "block";
+    cardNumber.style.borderColor = 'red';
+    cardNumSp.style.display = 'block';
     return false;
   }
   if (todayY < parseInt(cardExpYM[0]) || (todayY === parseInt(cardExpYM[0]) && todayM < parseInt(cardExpYM[1]))) {
-    //there is exp date, and card is not expired. TODO
-    cardExpSp.style.display = "none";
-    cardExp.style.borderColor = "";
+    // there is exp date, and card is not expired. TODO
+    cardExpSp.style.display = 'none';
+    cardExp.style.borderColor = '';
   } else {
-    cardExp.style.borderColor = "red";
-    cardExpSp.style.display = "block";
+    cardExp.style.borderColor = 'red';
+    cardExpSp.style.display = 'block';
     return false;
   }
   if (cardCvv.value.length === 3 && !isNaN(cardCvv.value)) {
-    //card cvv contains only digits and 3 digits length.
-    cardCvvSp.style.display = "none";
-    cardCvv.style.borderColor = "";
+    // card cvv contains only digits and 3 digits length.
+    cardCvvSp.style.display = 'none';
+    cardCvv.style.borderColor = '';
   } else {
-    cardCvv.style.borderColor = "red";
-    cardCvvSp.style.display = "block";
+    cardCvv.style.borderColor = 'red';
+    cardCvvSp.style.display = 'block';
     return false;
   }
   if (country.value.length === 0) {
-    //country is not empty.
-    country.style.borderColor = "red";
-    countrySp.style.display = "block";
+    // country is not empty.
+    country.style.borderColor = 'red';
+    countrySp.style.display = 'block';
     return false;
   } else {
-    countrySp.style.display = "none";
-    country.style.borderColor = "";
+    countrySp.style.display = 'none';
+    country.style.borderColor = '';
   }
   if (city.value.length === 0) {
-    //city is not empty.
-    city.style.borderColor = "red";
-    citySp.style.display = "block";
+    // city is not empty.
+    city.style.borderColor = 'red';
+    citySp.style.display = 'block';
     return false;
   } else {
-    citySp.style.display = "none";
-    city.style.borderColor = "";
+    citySp.style.display = 'none';
+    city.style.borderColor = '';
   }
   if (address.value.length === 0) {
-    //address is not empty.
-    address.style.borderColor = "red";
-    addressSp.style.display = "block";
+    // address is not empty.
+    address.style.borderColor = 'red';
+    addressSp.style.display = 'block';
     return false;
   } else {
-    addressSp.style.display = "none";
-    address.style.borderColor = "";
+    addressSp.style.display = 'none';
+    address.style.borderColor = '';
   }
   return true;
 }
@@ -347,10 +344,10 @@ function buildRow(orderObj) {
   <div class="col-auto">
   <select id=${orderObj.getDateSelectorId()}>
   <option value=${-1}>Date</option>`;
-  let opts = orderObj.get3WeeksDates();
-  //let index = opts.length;
-  for(let index = 0; index<opts.length; index++){
-    gavno += `<option value=${index}>${formatDate(opts[index])}</option>`
+  const opts = orderObj.get3WeeksDates();
+  // let index = opts.length;
+  for (let index = 0; index<opts.length; index++) {
+    gavno += `<option value=${index}>${formatDate(opts[index])}</option>`;
   }
   gavno += `
   </select>
@@ -364,7 +361,7 @@ function buildRow(orderObj) {
 </div>
 `;
   deliveryTable.innerHTML += gavno;
-  //orderObj.setDateSelectorEvent();
+  // orderObj.setDateSelectorEvent();
 }
 function padTo2Digits(num) {
   return num.toString().padStart(2, '0');

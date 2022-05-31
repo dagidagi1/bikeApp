@@ -29,10 +29,12 @@
         "prefer-rest-params": "off",
         "prefer-spread": "off",
         "no-invalid-this":"off",
+        "no-async-promise-executor": "off",
         "require-jsdoc": "off",
         "no-var": "off",
         "quotes": [
             "error",
             "single"]
+        
     }
 }

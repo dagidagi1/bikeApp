@@ -1,12 +1,12 @@
-import { dbStores, dbUsers, fbAuth, dbProducts, dbOrders } from '../firebase/data.js';
+import {dbStores, dbUsers, fbAuth, dbProducts, dbOrders} from '../firebase/data.js';
 var daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
 var storeId = null;
 var storeRef = null;
 var sells = new Map();
 var income = new Map();
-var top_orders_list = document.getElementById('top_orders_list');
-var top_income_list = document.getElementById('top_income_list');
+var topOrdersList = document.getElementById('top_orders_list');
+var topIncomeList = document.getElementById('top_income_list');
 var loader = document.getElementById('loaderDiv');
 const modal = new bootstrap.Modal(document.getElementById('modal-1'));
 
@@ -76,11 +76,11 @@ document.getElementById('save_btn').addEventListener('click', () => {
   modal.hide();
 });
 
-document.getElementById('items').addEventListener('click', function () {
+document.getElementById('items').addEventListener('click', function() {
   location.replace('shop_items.html' + '?id=' + storeId);
 });
 
-document.getElementById('ordersCard').addEventListener('click', function () {
+document.getElementById('ordersCard').addEventListener('click', function() {
   location.replace('shop_orders.html' + '?id=' + storeId);
 });
 
@@ -89,7 +89,7 @@ function init(data) {
   initStatistics(data);
   getOrders(data).then((resolved) => {
     initTopCustomers();
-  })
+  });
   initWorkHours(data.workHours);
   initCharts(data);
   loader.style.display = 'none';
@@ -97,7 +97,7 @@ function init(data) {
 
 function initStatistics(data) {
   const d = new Date();
-  let m = d.getMonth();
+  const m = d.getMonth();
   document.getElementById('shop_items').textContent = data.products.length;
   document.getElementById('earnings').textContent = data.income[m];
   document.getElementById('sells').textContent = data.sells[m];
@@ -106,29 +106,33 @@ function initStatistics(data) {
 }
 
 async function initTopCustomers() {
-  let topOrders = [];
-  let topIncome = [];
+  const topOrders = [];
+  const topIncome = [];
   for (let i = 0; i < 3 && sells.size > 0; i++) {
     let tmp = Object.fromEntries(sells);
-    let maxKey = Object.keys(tmp).reduce(function (a, b) { return tmp[a] > tmp[b] ? a : b });
+    let maxKey = Object.keys(tmp).reduce(function(a, b) {
+      return tmp[a] > tmp[b] ? a : b;
+    });
     sells.delete(maxKey);
     topOrders.push(maxKey);
     tmp = Object.fromEntries(income);
-    maxKey = Object.keys(tmp).reduce(function (a, b) { return tmp[a] > tmp[b] ? a : b });
+    maxKey = Object.keys(tmp).reduce(function(a, b) {
+      return tmp[a] > tmp[b] ? a : b;
+    });
     income.delete(maxKey);
     topIncome.push(maxKey);
   }
   for (let i = 0; i < topOrders.length; i++) {
-    let customer = await dbUsers.doc(topOrders[i]).get();
-    let el = document.createElement("li");
+    const customer = await dbUsers.doc(topOrders[i]).get();
+    const el = document.createElement('li');
     el.innerHTML = customer.data().name;
-    top_orders_list.appendChild(el);
+    topOrdersList.appendChild(el);
   }
   for (let i = 0; i < topIncome.length; i++) {
-    let customer = await dbUsers.doc(topIncome[i]).get();
-    let el = document.createElement("li");
+    const customer = await dbUsers.doc(topIncome[i]).get();
+    const el = document.createElement('li');
     el.innerHTML = customer.data().name;
-    top_income_list.appendChild(el);
+    topIncomeList.appendChild(el);
   }
   document.getElementById('top_customers_card').style.display = 'block';
 }
@@ -136,18 +140,17 @@ async function initTopCustomers() {
 function getOrders(data) {
   return new Promise(async (resolve) => {
     for (let i = 0; i < data.orders.length; ++i) {
-      let order = await dbOrders.doc(data.orders[i]).get();
+      const order = await dbOrders.doc(data.orders[i]).get();
       if (sells.has(order.data().buyer)) {
         sells.set(order.data().buyer, sells.get(order.data().buyer) + order.data().quantity);
         income.set(order.data().buyer, income.get(order.data().buyer) + order.data().price);
-      }
-      else {
+      } else {
         sells.set(order.data().buyer, order.data().quantity);
         income.set(order.data().buyer, order.data().price);
       }
     }
     resolve(1);
-  })
+  });
 }
 
 function initWorkHours(workHours) {
@@ -224,10 +227,6 @@ async function initCharts(d) {
   document.getElementById('charts_card').style.display = 'flex';
 }
 
-function getChart1Data() {
-  return [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-}
-
 async function getChart2Data(data) {
   let bikes = 0;
   let scooters = 0;
@@ -236,8 +235,7 @@ async function getChart2Data(data) {
     const category = await getProduct(product);
     if (category == 0) {
       bikes++;
-    }
-    else {
+    } else {
       scooters++;
     }
   }
@@ -250,8 +248,7 @@ function getProduct(p) {
       if (doc.exists) {
         if (doc.data().category == 0) {
           resolve(0);
-        }
-        else {
+        } else {
           resolve(1);
         }
       } else {

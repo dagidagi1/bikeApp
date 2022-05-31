@@ -2,7 +2,6 @@ import {fbAuth, dbUsers} from '../firebase/data.js';
 const userNameNavBar = document.getElementById('navbar_profile_name');
 const wishList = document.getElementById('wish_list');
 const shoppingCart = document.getElementById('shopping_cart');
-var checker = 0;
 function update() {
   fbAuth.onAuthStateChanged((user) => {
     if (user) {

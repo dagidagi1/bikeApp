@@ -1,22 +1,22 @@
-import { dbProducts, fbAuth, dbUsers, storageRef } from "../firebase/data.js";
-const search = document.getElementById("searchgroup");
-const modal1 = new bootstrap.Modal(document.getElementById("modal-1"));
-const closeShip = document.getElementById("close_ship");
-closeShip.addEventListener("click", () => {
+import {dbProducts, fbAuth, dbUsers, storageRef} from '../firebase/data.js';
+const search = document.getElementById('searchgroup');
+const modal1 = new bootstrap.Modal(document.getElementById('modal-1'));
+const closeShip = document.getElementById('close_ship');
+closeShip.addEventListener('click', () => {
   modal1.hide();
 });
 search.remove();
 var data = [];
 let price = 0;
 var curUser;
-const shoppingCart = document.getElementById("shopping_cart");
-const shoppingCartTable = document.getElementById("shopping_cart_table");
-const totalPrice = document.getElementById("total_price");
-const chekoutShopCartBtn = document.getElementById("chekout_shop_cart");
-var loader = document.getElementById("loaderDiv");
-loader.style.display = "block";
-chekoutShopCartBtn.addEventListener("click", () => {
-  location.replace("chekout.html" + "?email=" + curUser.email);
+const shoppingCart = document.getElementById('shopping_cart');
+const shoppingCartTable = document.getElementById('shopping_cart_table');
+const totalPrice = document.getElementById('total_price');
+const chekoutShopCartBtn = document.getElementById('chekout_shop_cart');
+var loader = document.getElementById('loaderDiv');
+loader.style.display = 'block';
+chekoutShopCartBtn.addEventListener('click', () => {
+  location.replace('chekout.html' + '?email=' + curUser.email);
 });
 const getUser = () => {
   fbAuth.onAuthStateChanged((user) => {
@@ -24,15 +24,15 @@ const getUser = () => {
       // User is signed in, see docs for a list of available properties
       // https://firebase.google.com/docs/reference/js/firebase.User
       dbUsers
-        .where("email", "==", user.email)
-        .get()
-        .then((snapshot) => {
-          snapshot.forEach((doc) => {
-            curUser = doc.data();
-            curUser.id = doc.id;
-            getShopList();
+          .where('email', '==', user.email)
+          .get()
+          .then((snapshot) => {
+            snapshot.forEach((doc) => {
+              curUser = doc.data();
+              curUser.id = doc.id;
+              getShopList();
+            });
           });
-        });
     }
   });
 };
@@ -90,27 +90,27 @@ function deleteItem(i) {
   totalPrice.innerText = ` Subtotal: ${price}$`;
   curUser.shoppingList.pop(i);
   dbUsers.doc(curUser.id).set(curUser);
-  if (curUser.shoppingList.length == 0) shoppingCart.style = "";
+  if (curUser.shoppingList.length == 0) shoppingCart.style = '';
   getShopList();
 }
 function init() {
-  shoppingCartTable.innerHTML = "";
+  shoppingCartTable.innerHTML = '';
   price = 0;
   for (let i = 0; i < data.length; i++) {
     shoppingCartTable.innerHTML += makeRow(data[i], i);
     price += +data[i].price * data[i].quantity;
     if (data[i].hasImg) {
       storageRef
-        .child(data[i].id)
-        .getDownloadURL()
-        .then((url) => {
+          .child(data[i].id)
+          .getDownloadURL()
+          .then((url) => {
           // Or inserted into an <img> element
-          const img = document.getElementById(`img${i}`);
-          img.src = url;
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+            const img = document.getElementById(`img${i}`);
+            img.src = url;
+          })
+          .catch((error) => {
+            console.log(error);
+          });
     } else {
       const img = document.getElementById(`img${i}`);
       img.src = data[i].src;
@@ -118,20 +118,20 @@ function init() {
   }
   totalPrice.innerText = ` Subtotal: ${price}$`;
   for (let i = 0; i < data.length; i++) {
-    document.getElementById(`btn_delete_${i}`).addEventListener("click", () => {
+    document.getElementById(`btn_delete_${i}`).addEventListener('click', () => {
       deleteItem(document.getElementById(`btn_delete_${i}`).value);
     });
     document
-      .getElementById(`quantity${data[i].id}`)
-      .addEventListener("change", (e) => {
-        e.preventDefault();
-        curUser.shoppingList[i].quantity = +document.getElementById(
-          `quantity${data[i].id}`
-        ).value;
-        dbUsers.doc(curUser.id).set(curUser);
-        getShopList();
-      });
+        .getElementById(`quantity${data[i].id}`)
+        .addEventListener('change', (e) => {
+          e.preventDefault();
+          curUser.shoppingList[i].quantity = +document.getElementById(
+              `quantity${data[i].id}`,
+          ).value;
+          dbUsers.doc(curUser.id).set(curUser);
+          getShopList();
+        });
   }
-  loader.style.display = "none";
+  loader.style.display = 'none';
 }
 getUser();
