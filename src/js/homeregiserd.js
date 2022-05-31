@@ -2,14 +2,14 @@ import { dbProducts, dbUsers, storageRef } from "../firebase/data.js";
 const search = document.getElementById("searchgroup");
 const modal1 = new bootstrap.Modal(document.getElementById("modal-1"));
 const closeShip = document.getElementById("close_ship");
+var loader = document.getElementById("loaderDiv");
+loader.style.display = "block";
 closeShip.addEventListener("click", () => {
   modal1.hide();
 });
 search.remove();
 let col;
 var data = [];
-// var orders = [];
-// var has_store = false;
 
 function productElment(d, i) {
   return `<div class="col">
@@ -79,6 +79,7 @@ const init = () => {
       }
     }
   }
+  loader.style.display = "none";
 };
 
 dbProducts.get().then((querySnapshot) => {

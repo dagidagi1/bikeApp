@@ -6,6 +6,8 @@ const confirmPass = document.getElementById("reg_conf_pass");
 const name = document.getElementById("reg_name");
 const phone = document.getElementById("reg_phone");
 var flag = false;
+var loader = document.getElementById("loaderDiv");
+loader.style.display = "block";
 window.onload = function example() {
   fbAuth.onAuthStateChanged((user) => {
     if (user && flag === false) {
@@ -189,6 +191,7 @@ const init = () => {
       }
     }
   }
+  loader.style.display = "none";
 };
 dbProducts.get().then((querySnapshot) => {
   let i = 0;

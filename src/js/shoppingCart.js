@@ -13,6 +13,8 @@ const shoppingCart = document.getElementById("shopping_cart");
 const shoppingCartTable = document.getElementById("shopping_cart_table");
 const totalPrice = document.getElementById("total_price");
 const chekoutShopCartBtn = document.getElementById("chekout_shop_cart");
+var loader = document.getElementById("loaderDiv");
+loader.style.display = "block";
 chekoutShopCartBtn.addEventListener("click", () => {
   location.replace("chekout.html" + "?email=" + curUser.email);
 });
@@ -130,5 +132,6 @@ function init() {
         getShopList();
       });
   }
+  loader.style.display = "none";
 }
 getUser();

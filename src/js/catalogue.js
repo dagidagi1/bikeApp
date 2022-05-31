@@ -15,6 +15,8 @@ const searchInput = document.getElementById("navbar_search_field");
 const searchBtn = document.getElementById("navbar_search_button");
 const modal1 = new bootstrap.Modal(document.getElementById("modal-1"));
 const closeShip = document.getElementById("close_ship");
+var loader = document.getElementById("loaderDiv");
+loader.style.display = "block";
 closeShip.addEventListener("click", () => {
   modal1.hide();
 });
@@ -36,6 +38,7 @@ searchInput.addEventListener("input", () => {
   });
 });
 searchBtn.addEventListener("click", () => {
+  loader.style.display = "block";
   const d = Search(searchInput.value);
   init(d);
 });
@@ -88,26 +91,32 @@ const init = (da, sort = "all") => {
       }
     }
   }
+  loader.style.display = "none";
 };
 dropdownNONE.addEventListener("click", () => {
+  loader.style.display = "block";
   priceBtn.innerText = "None";
   init(data);
 });
 dropdownHTL.addEventListener("click", () => {
+  loader.style.display = "block";
   priceBtn.innerText = "High to Low";
   const d = data.sort((a, b) => b.price - a.price);
   init(d);
 });
 dropdownLTH.addEventListener("click", () => {
+  loader.style.display = "block";
   priceBtn.innerText = "Low to High";
   const d = data.sort((a, b) => a.price - b.price);
   init(d);
 });
 dropdownChoiceAll.addEventListener("click", () => {
+  loader.style.display = "block";
   categoryBtn.innerText = "All";
   init(data);
 });
 dropdownChoiceBicycle.addEventListener("click", () => {
+  loader.style.display = "block";
   const newData = data.filter((d) => {
     return d.category === 0;
   });
@@ -115,6 +124,7 @@ dropdownChoiceBicycle.addEventListener("click", () => {
   init(newData);
 });
 dropdownChoiceScooter.addEventListener("click", () => {
+  loader.style.display = "block";
   const newData = data.filter((d) => {
     return d.category === 1;
   });

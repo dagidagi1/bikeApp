@@ -1,40 +1,41 @@
-import {fbAuth, dbUsers} from '../firebase/data.js';
-const username = document.getElementById('username');
-const phoneNumber = document.getElementById('phone_number');
-const email = document.getElementById('email');
-const passwored = document.getElementById('passwored');
-const passworedC = document.getElementById('passwored_c');
-const savePass = document.getElementById('save_password');
-const search = document.getElementById('searchgroup');
+import { fbAuth, dbUsers } from "../firebase/data.js";
+const username = document.getElementById("username");
+const phoneNumber = document.getElementById("phone_number");
+const email = document.getElementById("email");
+const passwored = document.getElementById("passwored");
+const passworedC = document.getElementById("passwored_c");
+const savePass = document.getElementById("save_password");
+const search = document.getElementById("searchgroup");
 search.remove();
+var loader = document.getElementById("loaderDiv");
+loader.style.display = "block";
 var user;
-// var orders = [];
 let curUser;
 fbAuth.onAuthStateChanged((u) => {
   curUser = u;
 });
-const editBtn = document.getElementById('edit_btn');
-const saveBtnSet = document.getElementById('save_btn');
+const editBtn = document.getElementById("edit_btn");
+const saveBtnSet = document.getElementById("save_btn");
 const getUser = () => {
   fbAuth.onAuthStateChanged((u) => {
     if (u) {
       // User is signed in, see docs for a list of available properties
       // https://firebase.google.com/docs/reference/js/firebase.User
       dbUsers
-          .where('email', '==', u.email)
-          .get()
-          .then((snapshot) => {
-            snapshot.forEach((doc) => {
-              user = doc.data();
-              user.id = doc.id;
-              console.log(user);
-              updateDetails();
-            });
+        .where("email", "==", u.email)
+        .get()
+        .then((snapshot) => {
+          snapshot.forEach((doc) => {
+            user = doc.data();
+            user.id = doc.id;
+            console.log(user);
+            updateDetails();
           });
+        });
     }
   });
 };
-editBtn.addEventListener('click', () => {
+editBtn.addEventListener("click", () => {
   saveBtnSet.disabled = false;
   email.disabled = false;
   username.disabled = false;
@@ -42,10 +43,10 @@ editBtn.addEventListener('click', () => {
   editBtn.disabled = true;
 });
 
-saveBtnSet.addEventListener('click', () => {
+saveBtnSet.addEventListener("click", () => {
   saveToFirebase();
 });
-savePass.addEventListener('click', () => {
+savePass.addEventListener("click", () => {
   changePassword();
 });
 function updateDetails() {
@@ -57,6 +58,7 @@ function updateDetails() {
   phoneNumber.disabled = true;
   saveBtnSet.disabled = true;
   dbUsers.doc(user.id).set(user);
+  loader.style.display = "none";
 }
 function saveToFirebase() {
   user.name = username.value;
@@ -70,14 +72,14 @@ function changePassword() {
     updateDetails();
     console.log(curUser);
     curUser
-        .updatePassword(passwored.value)
-        .then(() => {
-          alert('Password changed');
-        })
-        .catch((error) => {
-          alert(error);
-        });
-  } else alert('error');
+      .updatePassword(passwored.value)
+      .then(() => {
+        alert("Password changed");
+      })
+      .catch((error) => {
+        alert(error);
+      });
+  } else alert("error");
   updateDetails();
 }
 getUser();

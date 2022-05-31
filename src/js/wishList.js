@@ -7,6 +7,8 @@ var curUser;
 const wishListTable = document.getElementById("wish_list_table");
 const modal1 = new bootstrap.Modal(document.getElementById("modal-1"));
 const closeShip = document.getElementById("close_ship");
+var loader = document.getElementById("loaderDiv");
+loader.style.display = "block";
 closeShip.addEventListener("click", () => {
   modal1.hide();
 });
@@ -102,6 +104,7 @@ function init() {
       init();
     });
   }
+  loader.style.display = "none";
 }
 getUser();
 function getWishList() {

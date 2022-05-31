@@ -21,10 +21,12 @@ const quantityRow = document.getElementById("quantity_row");
 const modal1 = new bootstrap.Modal(document.getElementById("modal-1"));
 const closePopUp = document.getElementById("close_ship");
 const textM = document.getElementById("text_m");
+const redColor = "#e74a3b";
+var loader = document.getElementById("loaderDiv");
+loader.style.display = "block";
 closePopUp.addEventListener("click", () => {
   modal1.hide();
 });
-const redColor = "#e74a3b";
 addCartBtn.addEventListener("click", () => {
   addToCart();
 });
@@ -80,6 +82,7 @@ const updateDescriptions = (p) => {
       .then((url) => {
         // Or inserted into an <img> element
         img.src = url;
+        loader.style.display = "none";
       })
       .catch((error) => {
         console.log(error);

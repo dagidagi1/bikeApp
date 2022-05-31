@@ -11,6 +11,8 @@ const submitReviewBtn = document.getElementById("submit_review");
 const modal = new bootstrap.Modal(document.getElementById("modal-2"));
 const modal1 = new bootstrap.Modal(document.getElementById("modal-1"));
 const closeShip = document.getElementById("close_ship");
+var loader = document.getElementById("loaderDiv");
+loader.style.display = "block";
 closeShip.addEventListener("click", () => {
   modal1.hide();
 });
@@ -181,6 +183,7 @@ const feedBack = (e) => {
   modal.hide();
 };
 submitReviewBtn.addEventListener("click", () => {
+  loader.style.display = "block";
   feedBack(document.getElementById("BtnfeedBack").value);
   init();
 });
@@ -211,7 +214,9 @@ const init = () => {
     }
   }
   document.getElementById("btncancel")?.addEventListener("click", () => {
+    loader.style.display = "block";
     CancelOrder(document.getElementById("btncancel").value);
     init();
   });
+  loader.style.display = "none";
 };
