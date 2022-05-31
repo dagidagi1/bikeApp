@@ -20,6 +20,9 @@ const quantity = document.getElementById('quantity');
 const description = document.getElementById('description');
 const photo = document.getElementById('photo');
 
+var loader = document.getElementById('loaderDiv');
+loader.style.display = 'block';
+
 const itemRef = dbProducts.doc(prodId);
 itemRef.get().then((doc) => {
   if (doc.exists) {
@@ -35,6 +38,7 @@ itemRef.get().then((doc) => {
     quantity.value = data.quantity;
     description.value = data.description;
     hasImg = data.hasImg;
+    loader.style.display = 'none';
     document.getElementById('mainCard').style.display = 'block';
   } else {
     // doc.data() will be undefined in this case
@@ -50,7 +54,9 @@ photo.addEventListener('change', (e) => {
 });
 
 document.getElementById('add_item_btn').addEventListener('click', () => {
+  loader.style.display = 'block';
   if (formValidation() == false) {
+    loader.style.display = 'none';
     return;
   } else {
     updateItem();

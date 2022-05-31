@@ -8,6 +8,9 @@ const ordersTable = document.getElementById('ordersTable');
 
 var listOfOrders = null;
 
+var loader = document.getElementById('loaderDiv');
+loader.style.display = "block";
+
 const storeRef = dbStores.doc(storeId);
 
 storeRef.get().then((doc) => {
@@ -21,6 +24,8 @@ storeRef.get().then((doc) => {
   listOfOrders.forEach((item) => {
     getElement(item);
   });
+}).then(()=>{
+  loader.style.display = "none";
 }).catch((error) => {
   console.log('Error getting document:', error);
 });

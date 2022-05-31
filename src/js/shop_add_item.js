@@ -24,12 +24,15 @@ var shopId = null;
 var file = 0;
 var storeRef;
 var docId;
+var loader = document.getElementById('loaderDiv');
 photo.addEventListener("change", (e) => {
   file = e.target.files[0];
 });
 
 addItemBtn.addEventListener("click", function () {
+  loader.style.display = 'block';
   if (formValidation() === false) {
+    loader.style.display = 'none';
     return;
   } else {
     saveProduct();

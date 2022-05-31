@@ -11,12 +11,16 @@ const DAYS_OF_WEEK = [
   'Saturday',
 ];
 
+var loader = document.getElementById('loaderDiv');
+
 const storeName = document.getElementById('store_name');
 let userId = null;
 let shopId = null;
 
 document.getElementById('create_btn').addEventListener('click', function() {
+  loader.style.display = 'block';
   if (formValidation() == false) {
+    loader.style.display = 'none';
     return;
   } else {
     saveStore();

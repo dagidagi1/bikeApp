@@ -4,6 +4,9 @@ var parametrs = location.search.substring(1).split("&");
 var temp = parametrs[0].split("=");
 const storeId = decodeURI(temp[1]);
 
+var loader = document.getElementById('loaderDiv');
+loader.style.display = 'block';
+
 const bicycleTable = document.getElementById("bicycle_table");
 const scooterTable = document.getElementById("scooter_table");
 
@@ -24,6 +27,8 @@ storeRef
     listOfItems.forEach((item) => {
       getElement(item);
     });
+  }).then(()=>{
+    loader.style.display = 'none';
   })
   .catch((error) => {
     console.log("Error getting document:", error);
@@ -31,6 +36,7 @@ storeRef
 
 document.addEventListener("click", (e) => {
   if (e.target.id.slice(0, 9) == "deleteBtn") {
+    loader.style.display = "block";
     deleteRow(e.target.id.slice(9));
   }
 });
@@ -164,5 +170,7 @@ function deleteRow(num) {
       dbProducts.doc(num).update({
         deleted: true,
       });
-    });
+    }).then(()=>{
+      loader.style.display = "none";
+    })
 }

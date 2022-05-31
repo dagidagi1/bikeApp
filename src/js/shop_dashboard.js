@@ -7,10 +7,12 @@ var sells = new Map();
 var income = new Map();
 var top_orders_list = document.getElementById('top_orders_list');
 var top_income_list = document.getElementById('top_income_list');
+var loader = document.getElementById('loaderDiv');
 const modal = new bootstrap.Modal(document.getElementById('modal-1'));
 
 
 window.onload = function example() {
+  loader.style.display = 'block';
   fbAuth.onAuthStateChanged((user) => {
     if (user) {
       dbUsers.doc(user.email).get().then((doc) => {
@@ -24,6 +26,7 @@ window.onload = function example() {
                   </div>
                 </div>
          `;
+          loader.style.display = 'none';
         }
       });
     } else {
@@ -89,6 +92,7 @@ function init(data) {
   })
   initWorkHours(data.workHours);
   initCharts(data);
+  loader.style.display = 'none';
 }
 
 function initStatistics(data) {
