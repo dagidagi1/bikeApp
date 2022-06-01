@@ -108,7 +108,7 @@ function login() {
       .signInWithEmailAndPassword(logEmail.value, logPass.value)
       .then((userCredential) => {
       // Signed in
-      loader.style.display = 'none';
+        loader.style.display = 'none';
         location.replace('registered_home.html');
       })
       .catch((error) => {
