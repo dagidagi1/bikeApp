@@ -30,7 +30,7 @@ window.onload = function example() {
         }
       });
     } else {
-      location.replace('registered_home.html');
+      location.replace('index.html');
     }
   });
 };
