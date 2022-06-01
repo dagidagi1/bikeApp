@@ -58,6 +58,7 @@ function checkInput() {
 function save() {
   // adds users email+password to firebase auth and then to collection with the remain user data.
   const emailSp = document.getElementById('reg_email_sp');
+  loader.style.display = 'block';
   if (checkInput() === true) {
     fbAuth
         .createUserWithEmailAndPassword(email.value, password.value)
@@ -82,6 +83,7 @@ function save() {
                     .signInWithEmailAndPassword(email.value, password.value)
                     .then((userCredential) => {
                       // Signed in
+                      loader.style.display = 'none';
                       location.replace('registered_home.html');
                     });
               })
@@ -99,12 +101,14 @@ function save() {
 }
 
 function login() {
+  loader.style.display = 'block';
   const logEmail = document.getElementById('login_email');
   const logPass = document.getElementById('login_pass');
   fbAuth
       .signInWithEmailAndPassword(logEmail.value, logPass.value)
       .then((userCredential) => {
       // Signed in
+      loader.style.display = 'none';
         location.replace('registered_home.html');
       })
       .catch((error) => {
